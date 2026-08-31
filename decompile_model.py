@@ -1,21 +1,32 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-decompile_model.py — декомпиляция нативного кода модели COSIM.m2630opt.Jul1599
-==============================================================================
-Модель — скомпилированная логика процессора GKO (PowerPC). Её исполняемый код —
-линейные «ячейки» оценки логики:
-  * комбинационные конусы:  lbz (входы) -> and/or/nor (SOP) -> stb (выход);
-  * упаковка битов:         slwi/rlwimi собирают 32-битные векторы из проводов;
-  * приоритетные декодеры:  cmplw/cmplwi + bne/b — каскады if/else-if,
-                            выставляющие управляющие провода и константы;
-  * защёлки/состояние:      stw/sth/stb 32/16/8-битных значений.
+decompile_model.py -- decompilation of the native code of COSIM.m2630opt.Jul1599
+================================================================================
+The model is compiled logic of the GKO processor (PowerPC). Its executable
+code is a flat sequence of linear "evaluation cells":
 
-Декомпилятор исполняет код символически: регистры -> выражения над проводами
-w(банк, смещение), константы и булевы операции; на инструкциях сохранения
-выдаёт псевдокод в стиле Verilog.
+  * combinational cones:  lbz (inputs) -> and/or/nor (SOP) -> stb (output);
+  * bit packing:          slwi/rlwimi assemble 32-bit vectors from wires;
+  * priority decoders:    cmplw/cmplwi + bne/b -- cascades of if/else-if
+                          that set control wires and constants;
+  * latches / state:      stw/sth/stb 32/16/8-bit values.
 
-Банки состояния (базовые регистры бутстрапа): r13..r20 = 8 банков по 0x10000.
+The decompiler executes the code symbolically: registers -> expressions over
+wires w(bank, offset), constants and boolean operations; on store
+instructions it emits Verilog-style pseudocode.
+
+State banks (bootstrap base registers): r13..r20 = 8 banks of 0x10000 bytes.
+
+Patch slots: the code region is divided into 0x80-byte cells; the first word
+of every cell is a patch-list node. MVLSIM patches 'ppc'-type models by
+overwriting every node with 0x60000000 (nop), so those words decode as a
+`nop` and are printed as "[patch slot] nop".
+
+Usage:
+    python3 decompile_model.py                 # built-in demo regions
+    python3 decompile_model.py 0xSTART 0xEND   # one custom region
+    python3 decompile_model.py 0xS 0xE "label" # custom region with a label
 """
 import struct
 import sys
@@ -30,11 +41,11 @@ md.detail = False
 BANKS = {13: 0, 14: 1, 15: 2, 16: 3, 17: 4, 18: 5, 19: 6, 20: 7}
 
 # ---------------------------------------------------------------------------
-# Символические значения
-# ('W', bank, off)        — 1-битный провод
-# ('C', int)              — константа
+# Symbolic values
+# ('W', bank, off)        -- 1-bit wire
+# ('C', int)              -- constant
 # ('NOT', e), ('AND',a,b), ('OR',a,b), ('XOR',a,b)
-# ('PACK', [(bit, expr),...]) — 32-битное значение с известными битами
+# ('PACK', [(bit, expr),...]) -- 32-bit value with known bits
 # ('UNK',)
 # ---------------------------------------------------------------------------
 
@@ -79,9 +90,9 @@ def simpl(e):
 import pickle as _pickle
 
 def _load_slotmap():
-    """Строит карту слот->имя прямо из файла модели (таблица символов).
-    Класс 0x70050000: слот = word1_lo; класс 0x02040000: слот = (байт8<<8)|word1_lo.
-    Имена реконструируются по префиксному сжатию (keep)."""
+    """Build the slot->name map directly from the model file (symbol table).
+    Class 0x70050000: slot = word1_lo; class 0x02040000: slot = (byte8<<8)|word1_lo.
+    Names are reconstructed by prefix compression (keep)."""
     try:
         data = open(MODEL, 'rb').read()
     except Exception:
@@ -100,18 +111,23 @@ def _load_slotmap():
         else:
             i += 1; continue
         j = ns
-        while j < len(sec) and 32 <= sec[j] < 127: j += 1
+        while j < len(sec) and 32 <= sec[j] < 127:
+            j += 1
         if j < len(sec) and sec[j] == 0 and 1 <= j-ns <= 48:
-            recs.append((w0, w1, sec[i+8] if kind == 'B' else None, keep, sec[ns:j].decode('latin1'), kind))
+            recs.append((w0, w1, sec[i+8] if kind == 'B' else None, keep,
+                         sec[ns:j].decode('latin1'), kind))
             i = j+1
         else:
             i += 1
     full = None
     slotmap = {}
     for w0, w1, b8, keep, nm, kind in recs:
-        if keep == 0: full = nm
-        elif full and keep <= len(full): full = full[:keep] + nm
-        else: full = (full + '.' + nm) if full else None
+        if keep == 0:
+            full = nm
+        elif full and keep <= len(full):
+            full = full[:keep] + nm
+        else:
+            full = (full + '.' + nm) if full else None
         slot = (w1 & 0xFFFF) if kind == 'A' else ((b8 << 8) | (w1 & 0xFF))
         slotmap.setdefault(slot, full)
     return slotmap
@@ -119,12 +135,12 @@ def _load_slotmap():
 _SLOTMAP = _load_slotmap()
 
 def slot_name(bank, off):
-    """Имя провода по (банк, смещение): слот = off (>=0) или off+0x10000."""
+    """Name of the wire at (bank, offset): slot = off (>=0) or off+0x10000."""
     s = off if off >= 0 else off + 0x10000
     return _SLOTMAP.get(s)
 
 def fmt(e, names=None):
-    """Форматирует выражение в читаемый вид."""
+    """Format an expression into a readable form."""
     t = e[0]
     if t == 'W':
         b, o = e[1], e[2]
@@ -163,12 +179,12 @@ def fmt(e, names=None):
 
 
 def fmt_off(o):
-    """Смещение в состоянии (для адресата сохранения)."""
+    """State offset (for a store destination)."""
     return ("%04x" % (o & 0xFFFF)) if o >= 0 else ("-%04x" % (-o & 0xFFFF))
 
 
 # ---------------------------------------------------------------------------
-# Декомпилятор
+# Decompiler
 # ---------------------------------------------------------------------------
 class Decomp:
     def __init__(self, data, names=None):
@@ -200,8 +216,8 @@ class Decomp:
             return None
 
     def close_done_ifs(self, ip):
-        """Закрывает if, чья цель bne уже пройдена (else-ветка завершена
-        «проваливанием», без явного перехода)."""
+        """Close ifs whose bne target has already been passed (the else
+        branch ended by falling through, without an explicit jump)."""
         while self.if_stack:
             tgt, if_ind, else_open = self.if_stack[-1][:3]
             if ip > tgt or (ip == tgt and not else_open):
@@ -213,8 +229,8 @@ class Decomp:
                 break
 
     def next_ins(self, addr):
-        """Следующая декодируемая инструкция (пропуская патч-слоты).
-        Возвращает (адрес, mnemonic, op_str)."""
+        """Next decodable instruction (skipping patch slots).
+        Returns (address, mnemonic, op_str)."""
         for off in range(0, 0x200, 4):
             ins = self.decode(addr + off)
             if ins is not None:
@@ -226,14 +242,20 @@ class Decomp:
         addr = start
         while addr < end:
             self.close_done_ifs(addr)
+            # patch-list nodes are NOP'd at load time (0x60000000) for
+            # 'ppc'-type models -- they are the seams between cells
+            if self.data[addr:addr+4] == b'\x60\x00\x00\x00':
+                self.wr("// @%08x: [patch slot] nop" % addr)
+                addr += 4
+                continue
             ins = self.decode(addr)
             if ins is None:
-                self.wr("// @%08x: [патч-слот / данные]" % addr)
+                self.wr("// @%08x: [non-instruction word / data]" % addr)
                 addr += 4
                 continue
             m, ops = ins.mnemonic, ins.op_str
             a = addr
-            if m == 'lbz' or m == 'lbzu' or m == 'lhz' or m == 'lhz' or m == 'lwz' or m == 'lwzu' or m == 'lha':
+            if m in ('lbz', 'lbzu', 'lhz', 'lwz', 'lwzu', 'lha'):
                 rd, rest = ops.split(',', 1)
                 rest = rest.strip()
                 try:
@@ -251,12 +273,12 @@ class Decomp:
                         self.regs[ri] = ('W', bank, d)
                 else:
                     self.regs[ri] = ('UNK',)
-            elif m == 'li' or m == 'lis' or m == 'addi' or m == 'addis' or m == 'ori' or m == 'oris' or m == 'xori' or m == 'xoris':
+            elif m in ('li', 'lis', 'addi', 'addis', 'ori', 'oris', 'xori', 'xoris'):
                 parts = [x.strip() for x in ops.split(',')]
                 rd = parts[0]
                 ri = int(rd[1:])
                 if m in ('ori', 'oris', 'xori', 'xoris'):
-                    # формат: rD, rS, imm — сворачиваем только константы
+                    # format: rD, rS, imm -- fold only constants
                     try:
                         v = int(parts[2], 0)
                     except Exception:
@@ -284,7 +306,7 @@ class Decomp:
                             self.regs[ri] = ('UNK',)
                     else:
                         self.regs[ri] = ('C', v & 0xFFFFFFFF)
-            elif m == 'and' or m == 'andc' or m == 'or' or m == 'orc' or m == 'nor' or m == 'nand' or m == 'xor' or m == 'eqv':
+            elif m in ('and', 'andc', 'or', 'orc', 'nor', 'nand', 'xor', 'eqv'):
                 rd, rest = ops.split(',', 1)
                 r1, r2 = [x.strip() for x in rest.split(',')]
                 a1, a2 = self.reg(int(r1[1:])), self.reg(int(r2[1:]))
@@ -300,8 +322,8 @@ class Decomp:
             elif m == 'not':
                 rd, r1 = ops.split(',')
                 self.regs[int(rd[1:])] = simpl(('NOT', self.reg(int(r1.strip()[1:]))))
-            elif m == 'slwi' or m == 'srwi' or m == 'srawi' or m == 'slli' or m == 'rlwinm':
-                # сдвиги/маски: сохраняем как PACK/UNK
+            elif m in ('slwi', 'srwi', 'srawi', 'slli', 'rlwinm'):
+                # shifts/masks: keep as PACK/UNK
                 rd, rest = ops.split(',', 1)
                 try:
                     parts = [x.strip() for x in rest.split(',')]
@@ -311,13 +333,13 @@ class Decomp:
                     rs, sh = 0, 0
                 ri = int(rd[1:])
                 if m == 'slwi' and self.reg(rs)[0] in ('W', 'NOT', 'AND', 'OR', 'C'):
-                    # rD = rS << sh: MSB бит (31-sh) <- бит 0 источника
+                    # rD = rS << sh: MSB bit (31-sh) <- source bit 0
                     self.regs[ri] = ('PACK', [(31 - sh, self.reg(rs))])
                 else:
                     self.regs[ri] = ('UNK',)
             elif m == 'rlwimi':
-                # rA = (rotl(rS,SH) & mask) | (rA & ~mask); при MB==ME==b и SH=31-b:
-                # бит b регистра rA <- бит 0 источника (упаковка провода в вектор)
+                # rA = (rotl(rS,SH) & mask) | (rA & ~mask); with MB==ME==b and
+                # SH=31-b: bit b of rA <- source bit 0 (wire into a vector)
                 rd, rest = ops.split(',', 1)
                 rs, sh, mb, me = [x.strip() for x in rest.split(',')]
                 ri = int(rd[1:])
@@ -336,7 +358,7 @@ class Decomp:
                     self.regs[ri] = ('PACK', bits)
                 else:
                     self.regs[ri] = ('UNK',)
-            elif m == 'stb' or m == 'stbu' or m == 'sth' or m == 'sth' or m == 'stw' or m == 'stwu':
+            elif m in ('stb', 'stbu', 'sth', 'stw', 'stwu'):
                 rs, rest = ops.split(',', 1)
                 rest = rest.strip()
                 try:
@@ -357,8 +379,8 @@ class Decomp:
                         self.wr("// @%08x:  w[%d][%s]    <= %s;%s" % (a, bank, fmt_off(d), fmt(v, self.names), suffix))
                         self.ev(('STORE', bank, d, fmt(v, self.names), 1, a))
                 else:
-                    self.wr("// @%08x:  store %s -> %s(%s)  [база вне банков]" % (a, rs, d, ra))
-            elif m == 'cmplw' or m == 'cmplwi' or m == 'cmpw' or m == 'cmpwi':
+                    self.wr("// @%08x:  store %s -> %s(%s)  [base outside the banks]" % (a, rs, d, ra))
+            elif m in ('cmplw', 'cmplwi', 'cmpw', 'cmpwi'):
                 r1, r2 = [x.strip() for x in ops.split(',')]
                 try:
                     lhs = self.reg(int(r1[1:]))
@@ -369,17 +391,17 @@ class Decomp:
                 else:
                     rhs = ('C', int(r2, 0) & 0xFFFFFFFF)
                 self.pending_cmp = (lhs, rhs)
-            elif m == 'bne' or m == 'beq':
+            elif m in ('bne', 'beq'):
                 tgt = int(ops, 0)
                 if tgt < a:
-                    self.wr("// @%08x: %s 0x%x  [цикл назад]" % (a, m, tgt))
+                    self.wr("// @%08x: %s 0x%x  [backward loop]" % (a, m, tgt))
                     continue
                 if self.pending_cmp is not None:
                     lhs, rhs = self.pending_cmp
                     self.pending_cmp = None
                     cond_s = "(%s == %s)" % (fmt(lhs, self.names), fmt(rhs, self.names))
                     if self.if_stack and self.if_stack[-1][2] is True:
-                        # мы в else-ветке: склеиваем "} else {" + "if (" -> "} else if ("
+                        # we are in the else branch: merge "} else {" + "if (" -> "} else if ("
                         if_ind = self.if_stack[-1][1]
                         self.out[-1] = "  " * if_ind + "else if %s {" % cond_s
                         self.ev(('ELSEIF', cond_s))
@@ -397,12 +419,12 @@ class Decomp:
             elif m == 'b' and ops.startswith('0x'):
                 tgt = int(ops, 0)
                 if tgt < a:
-                    self.wr("// @%08x: goto 0x%x  [цикл назад]" % (a, tgt))
+                    self.wr("// @%08x: goto 0x%x  [backward loop]" % (a, tgt))
                     continue
                 if self.if_stack:
                     if_ind = self.if_stack[-1][1]
-                    # цепочка продолжается (else), только если следующая
-                    # инструкция стоит ровно по адресу цели bne
+                    # the chain continues (else) only if the next instruction
+                    # is exactly at the bne target
                     nx = self.next_ins(a + 4)
                     if nx and nx[0] == self.if_stack[-1][0]:
                         self.wr("} else {")
@@ -417,77 +439,99 @@ class Decomp:
                 else:
                     self.wr("// @%08x: goto 0x%x" % (a, tgt))
             elif m.startswith('b') or m.startswith('bc'):
-                self.wr("// @%08x: %s %s  [условный/иной переход]" % (a, m, ops))
-            elif m == 'rlwimi':
-                pass
+                self.wr("// @%08x: %s %s  [conditional/other branch]" % (a, m, ops))
             addr += 4
         while self.if_stack:
             self.indent -= 1
             self.wr("}")
             self.ev(('ENDIF',))
             self.if_stack.pop()
-        self.wr("// конец региона")
+        self.wr("// end of region")
 
 
-HEADER = """ПСЕВДОДЕКОМПИЛЯЦИЯ НАТИВНОГО КОДА МОДЕЛИ COSIM.m2630opt.Jul1599
+HEADER = """PSEUDO-DECOMPILATION OF THE NATIVE CODE OF COSIM.m2630opt.Jul1599
 ============================================================================
-Код модели — линейные «ячейки» скомпилированной логики процессора GKO:
-  * комбинационные конусы:  w[б][смещ] <= (терм1) | (терм2) | ...  (SOP),
-    терм = (произведение проводов) & разрешение;
-  * упаковка битов:         slwi/rlwimi собирают 32-битный вектор из проводов
-    {бит:провод, ...};  семантика rlwimi: SH=31-b => бит b <- провод;
-  * приоритетные декодеры:  if (вектор == конст) {...} else if (...) {...}
-    (биты вектора = запросы, цепочка тестов = приоритетный выбор);
-  * многобитные поля:       mem32[б][смещ] <= константа (stw 32 бита).
+The model code is a flat sequence of linear "evaluation cells" of the
+compiled GKO processor logic:
 
-НОТАЦИЯ:
-  w[б][смещ]   — 1-битный провод в банке состояния б (r13..r20 -> 0..7)
-                 по смещению 'смещ' (hex, отрицательные — относительно
-                 начала банка, т.е. 0x28000-|смещ| для банка 2);
-  ИМЕНА: слот провода = смещ (>=0) или смещ+0x10000; имена взяты из
-  таблицы символов модели: класс 0x7005 -> слот = word1_lo;
-  класс 0x0204 -> слот = (байт8 << 8) | word1_lo.
-  Именованные провода печатаются как GKO.<блок>...; безымянные — w[б][смещ].
-  Один провод может читаться/писаться из нескольких банков-плоскостей
-  (двухфазная двухзначная симуляция: L1/L2-копии) — в Verilog это одна
-  переменная.
-  mem32[б][смещ] — 32-битное слово состояния (stw);
-  rN           — регистр, значение которого не отслежено (вход блока);
-  {31:w[..], 0:w[..]} — 32-битный вектор, собранный из проводов;
-  [патч-слот]  — слово списка патчей (после загрузки — инструкция
-                 ветвления; ячейки кода идут с шагом 0x80).
+  * combinational cones:  w[b][off] <= (term1) | (term2) | ...  (SOP),
+    where term = (product of wires) & enable;
+  * bit packing:          slwi/rlwimi assemble a 32-bit vector from wires
+    {bit:wire, ...};  rlwimi semantics: SH=31-b => bit b <- wire;
+  * priority decoders:    if (vector == const) {...} else if (...) {...}
+    (vector bits = requests, the test chain = priority selection);
+  * multi-bit fields:     mem32[b][off] <= constant (stw 32 bits).
 
-СООТВЕТСТВИЕ VERILOG (руководство):
-  1. Каждый провод w[б][смещ] -> одна 1-битная wire/reg переменная;
-  2. w[б][X] <= expr без обратной связи на себя -> assign;
-  3. w[б][X] <= expr, где expr зависит от w[б][X] (или сохраняется
-     между тактами) -> always @(posedge clk) / защёлка;
-  4. {биты:провода} == конст -> casez/case (приоритетный декодер);
-  5. mem32[б][смещ] -> reg [31:0];
-  6. rN (неотслеженные) — входы блока: назовите их сами по смыслу
-     (сигналы такта/сброса/разрешения), сверяясь с таблицей символов.
+NOTATION:
+  w[b][off]     -- 1-bit wire in state bank b (r13..r20 -> 0..7) at offset
+                   'off' (hex; negative offsets are relative to the start
+                   of the bank, i.e. 0x10000-|off|);
+  NAMES: the wire slot = off (>=0) or off+0x10000; names come from the
+  model symbol table: class 0x7005 -> slot = word1_lo;
+  class 0x0204 -> slot = (byte8 << 8) | word1_lo.
+  Named wires print as GKO.<block>...; unnamed ones as w[b][off].
+  One wire can be read/written from several banks-planes (two-phase
+  two-value simulation: L1/L2 copies) -- in Verilog this is one variable.
+  mem32[b][off] -- 32-bit state word (stw);
+  rN            -- a register whose value is not tracked (block input);
+  {31:w[..], 0:w[..]} -- 32-bit vector assembled from wires;
+  [patch slot]  -- a word of the patch list (0x60000000 = nop after load;
+                   the code cells step by 0x80 bytes).
+
+VERILOG CORRESPONDENCE (guide):
+  1. each wire w[b][off] -> one 1-bit wire/reg variable;
+  2. w[b][X] <= expr without self-feedback -> assign;
+  3. w[b][X] <= expr that depends on w[b][X] (or is kept between cycles)
+     -> always @(posedge clk) / latch;
+  4. {bits:wires} == const -> casez/case (priority decoder);
+  5. mem32[b][off] -> reg [31:0];
+  6. rN (untracked) -- block inputs: name them by meaning (clock/reset/
+     enable signals), cross-checking the symbol table.
 """
 
+PATCH_HEAD = 0x4BA800  # head of the patch list (embedded in the code)
+
+
+def patch_model(raw):
+    """Return the runnable code: every patch-list node is overwritten with
+    0x60000000 (nop), exactly as MVLSIM patches 'ppc'-type models."""
+    code = bytearray(raw)
+    h = PATCH_HEAD
+    while h >= 4 and h < len(code):
+        w = struct.unpack(">I", code[h:h + 4])[0]
+        tag = w & 3
+        if tag == 0:
+            break
+        nxt = w & ~3
+        code[h:h + 4] = b"\x60\x00\x00\x00"
+        if nxt >= h:
+            break
+        h = nxt
+    return bytes(code)
+
+
 def main():
-    data = open(MODEL, "rb").read()
+    data = patch_model(open(MODEL, "rb").read())
     names = {}
     dec = Decomp(data, names)
     out = [HEADER]
     dec.out = out
     regions = [
-        (0x40B6AC, 0x40C200, "SOP-регион 0x40B6AC (комбинационная логика)"),
-        (0x58000, 0x58900, "0x58000: SOP + упаковка битов (вектор запросов)"),
-        (0x58900, 0x59200, "0x58900: приоритетный декодер if/else-if"),
+        (0x40B6AC, 0x40C200, "SOP region 0x40B6AC (combinational logic)"),
+        (0x58000, 0x58900, "0x58000: SOP + bit packing (request vector)"),
+        (0x58900, 0x59200, "0x58900: priority decoder if/else-if"),
     ]
     if len(sys.argv) >= 3:
         regions = [(int(sys.argv[1], 0), int(sys.argv[2], 0),
-                    "регион %s..%s" % (sys.argv[1], sys.argv[2]))]
+                    "region %s..%s" % (sys.argv[1], sys.argv[2]))]
+    if len(sys.argv) >= 4:
+        regions = [(int(sys.argv[1], 0), int(sys.argv[2], 0), sys.argv[3])]
     for s, e, lab in regions:
         dec.run(s, e, lab)
     text = "\n".join(dec.out)
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(text + "\n")
-    print("written:", OUT, "(%d строк)" % len(dec.out))
+    print("written:", OUT, "(%d lines)" % len(dec.out))
 
 
 if __name__ == "__main__":

@@ -1,3 +1,5 @@
 sim.dump
 sim.log
 *.pdf
+__pycache__/
+*.pyc
