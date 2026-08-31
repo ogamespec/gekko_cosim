@@ -15,12 +15,15 @@ python3 cosim.py -m model/COSIM.m2630opt.Jul1599 \
 
 1. Applies the input pins from the per-cycle input map to the state banks
    (each pin bit is written to both of its table slots, in all 8 banks).
-2. Runs the model code from its per-cycle entry `0x1BCD60` (bootstrap #2) down
-   to the final `blr` at `0x4BA83C` (return to the caller):
+2. Runs the model code from its per-cycle entry `0x1BCD60` (bootstrap #2):
    * register setup (r13–r20 = 8 state banks, call block at address 0),
-   * cell evaluation: `lbz`/`and`/`or`/`andc`/`nor`/`stb` … combinational cones,
-   * priority decoders (`cmplwi`/`cmplw` + `bne`/`b`), bit packing
-     (`slwi`/`rlwimi`), jump-table dispatches (`mtlr`/`blr`),
+   * fast idle path: returns early at `0x1DE3A4` unless the simulator's
+     activity flag (call-block +0x48, slot `0x8048`) is set; if set, runs
+     an assert/report tail and returns at `0x2341C8`,
+   * then runs bootstrap #3 (`0x2341CC`, `ENTRY_STAGE3`) — the **full
+     netlist** evaluation down to the final `blr` at `0x4BA83C`
+     (combinational cones, priority decoders `cmplwi`/`cmplw` + `bne`/`b`,
+     bit packing `slwi`/`rlwimi`, jump-table dispatches `mtlr`/`blr`),
    * assert cells: they write the **message offset** into slot `0x8040`
      (call-block +0x40) and call the MVLSIM assert printer (descriptor in
      call-block +0x5C / slot `0x805C`) via `mtlr`+`blrl`. `cosim.py` decodes
@@ -29,6 +32,10 @@ python3 cosim.py -m model/COSIM.m2630opt.Jul1599 \
 3. Reads the output pins (monitoring) and dumps all named signals.
 
 At load time bootstrap #1 (`0x2C`) is run once (init pass, sets constant wires).
+
+Note on branches: the model emits only `bc 12,BI` (beq: branch if
+`CR[BI]==1`) and `bc 4,BI` (bne: branch if `CR[BI]==0`); the interpreter
+implements exactly these two encodings.
 
 ## Input file format (per-cycle pin map)
 
@@ -94,5 +101,13 @@ At load time bootstrap #1 (`0x2C`) is run once (init pass, sets constant wires).
   initial-state list is not applied);
 * the exact mvlsim assert line prefix is not reproduced; text and path come
   from the model;
-* ~30–40k instructions per cycle ⇒ ~0.1 s/cycle in CPython (usable for
-  hundreds of cycles; the full 8548-cycle original run would take hours).
+* L1/L2 phase copies: many signals exist as an L1 slot and an L2 slot; the
+  cells write one copy and the simulator maintains the other at the cycle
+  boundary, so the interpreter updates only the written copy (reads of the
+  unwritten copy return its last stored value);
+* `TWC.PTE_MATCH` and a few other wires are external (simulator-provided)
+  inputs — they have no writer in the model code and must be injected if
+  needed;
+* instructions per cycle: idle entry #2 ≈ 15k + entry #3 ≈ 155k (≈ 0.4 s
+  per cycle in CPython); usable for hundreds of cycles, the full 8548-cycle
+  original run would take ~1 hour.

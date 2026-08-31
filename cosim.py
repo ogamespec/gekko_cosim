@@ -1095,6 +1095,7 @@ def main():
         r = cpu.run(m.entry, max_steps=args.maxsteps or 10000000)
         eval_steps += cpu.steps
         total_asserts += cpu.assert_count
+        stage1_asserts = list(cpu.assert_log)
         if r != "done" and r != "end_of_range":
             log("CYCLE %d: model ended abnormally: %s (%d steps)" % (cyc, r, cpu.steps))
         if cpu.faults:
@@ -1116,9 +1117,10 @@ def main():
         log("== cycle %d ==" % cyc)
         if applied:
             log("  inputs: " + " ".join(applied))
-        if cpu.assert_log:
-            for off, line in cpu.assert_log:
-                log("  ASSERT #%d: " % total_asserts + line)
+        all_asserts = stage1_asserts + cpu.assert_log
+        if all_asserts:
+            for off, line in all_asserts:
+                log("  ASSERT: " + line)
         # output pins (monitoring)
         outs = []
         for nm, msb, lsb in (m.pinlist or []):
