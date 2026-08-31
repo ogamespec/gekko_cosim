@@ -1,0 +1,1 @@
+python3 cosim.py -m model/COSIM.m2630opt.Jul1599 -p model/pin.list -i inputs_demo.txt -n 20 --verbose --verbose-max 100 -o sim.log -d sim.dump

@@ -1,0 +1,40 @@
+# Demo input map for cosim.py: reset + a few cycles
+# Format: <cycle>[:<end>] <PIN>=<value> ...
+# '-' = keep previous; '*' = repeat the previous line; '#' = comment
+# All pins start at 0.
+
+# --- reset (active low): HRESET_=0 held for 4 cycles, then 1 ---
+0 SYSCLK=0 HRESET_=0 SRESET_=0 A=0x00000000 DH=0x00000000 DL=0x00000000 TS_=0 TT=0x00 TSIZ=0x0 CI_=0 WT_=1 GBL_=1 AP=0x0 DP=0x00 ARTRY_=1 BR_=0 BG_=1 QREQ_=0 DRTRY_=1 TEA_=1 TLBISYNC_=1 MCP_=1 INT_=1 CKSTP_=1 CHECKSTOP_=1 LSSD_MODE_=1 TRST_=1 TMS=0 TCK=0 TDI=0 L1_TSTCLK=0 L2_TSTCLK=0
+1 SYSCLK=1
+2 SYSCLK=0
+3 SYSCLK=1
+# --- reset deasserted ---
+4 SYSCLK=0 HRESET_=1 SRESET_=1
+5 SYSCLK=1
+# --- instruction fetch attempt at 0x00001000 (TS_=1, address on A) ---
+6 SYSCLK=0 TS_=1 A=0x00001000 TT=0x0F TSIZ=0x2 CI_=0 WT_=1 GBL_=1 AP=0x0
+7 SYSCLK=1
+8 SYSCLK=0 TS_=0 DH=0x7c0802a6 DL=0x00000000
+9 SYSCLK=1
+10 SYSCLK=0
+11 SYSCLK=1
+12 SYSCLK=0
+13 SYSCLK=1
+14 SYSCLK=0
+15 SYSCLK=1
+16 SYSCLK=0
+17 SYSCLK=1
+18 SYSCLK=0
+19 SYSCLK=1
+20 SYSCLK=0
+21 SYSCLK=1
+22 SYSCLK=0
+23 SYSCLK=1
+24 SYSCLK=0
+25 SYSCLK=1
+26 SYSCLK=0
+27 SYSCLK=1
+28 SYSCLK=0
+29 SYSCLK=1
+30 SYSCLK=0
+31 SYSCLK=1
