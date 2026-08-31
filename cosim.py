@@ -70,6 +70,9 @@ import time
 # ---------------------------------------------------------------------------
 HDR_SIZE = 0x9C
 ENTRY_EVAL = 0x1BCD60          # per-cycle entry (bootstrap #2)
+ENTRY_STAGE3 = 0x2341CC        # per-cycle entry #3: full netlist evaluation
+                               # (the real per-cycle flow calls 0x1BCD60 first,
+                               #  then 0x2341CC; 0x1BCD60 fast-paths idle cycles)
 ENTRY_INIT = 0x2C              # init entry (bootstrap #1)
 FINAL_BLR = 0x4BA83C           # last model instruction (return)
 CODE_END = 0x4BA840            # end of code (start of the patch list)
@@ -818,10 +821,14 @@ class CPU:
                 continue
             elif k == K_BC:
                 bo, bi, tgt = ins[2], ins[3], ins[4]
-                # beq: BO=12, bne: BO=4 (tests a CR bit; cr0 EQ = bi 2)
-                if (bo & 16) and (bo & 8):
-                    self.ctr = (self.ctr - 1) & 0xFFFFFFFF
-                take = (self._cr_bit(bi) == 1) if (bo & 4) else (self._cr_bit(bi) == 0)
+                # PPC BO field: the model only emits BO=12 (beq) and BO=4 (bne).
+                #   BO=12 (0b01100): branch if CR[BI] == 1  (beq/blt/bgt/bso)
+                #   BO=4  (0b00100): branch if CR[BI] == 0  (bne/bge/ble/bns)
+                # (the CR-test polarity is bit3 of BO, not bit2)
+                if bo == 12:
+                    take = self._cr_bit(bi) == 1
+                else:
+                    take = self._cr_bit(bi) == 0
                 if take:
                     i = self.addr_idx.get(tgt)
                     if i is None:
@@ -1082,7 +1089,7 @@ def main():
                     applied.append("%s=%s" % (pn, v))
                 else:
                     log("WARN: pin '%s' not found in the pin table" % pn)
-        # one model pass
+        # one model pass: entry #2 (fast path) + entry #3 (full netlist)
         cpu.assert_seen = set()
         cpu.assert_log = []
         r = cpu.run(m.entry, max_steps=args.maxsteps or 10000000)
@@ -1090,6 +1097,16 @@ def main():
         total_asserts += cpu.assert_count
         if r != "done" and r != "end_of_range":
             log("CYCLE %d: model ended abnormally: %s (%d steps)" % (cyc, r, cpu.steps))
+        if cpu.faults:
+            log("  mem-faults: %d (first: %s)"
+                % (len(cpu.faults), ", ".join("0x%x@0x%x" % (f[1] & 0xFFFFFFFF, f[0]) for f in cpu.faults[:4])))
+            cpu.faults = []
+        cpu.assert_log = []
+        r3 = cpu.run(ENTRY_STAGE3, max_steps=args.maxsteps or 100000000)
+        eval_steps += cpu.steps
+        total_asserts += cpu.assert_count
+        if r3 != "done" and r3 != "end_of_range":
+            log("CYCLE %d: model stage3 ended abnormally: %s (%d steps)" % (cyc, r3, cpu.steps))
         if cpu.faults:
             log("  mem-faults: %d (first: %s)"
                 % (len(cpu.faults), ", ".join("0x%x@0x%x" % (f[1] & 0xFFFFFFFF, f[0]) for f in cpu.faults[:4])))

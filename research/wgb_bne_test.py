@@ -69,6 +69,7 @@ def main():
     changed = 0
     for cyc in range(CYCLES):
         cpu.run(cosim.ENTRY_EVAL, max_steps=10000000)
+        cpu.run(cosim.ENTRY_STAGE3, max_steps=100000000)
         w = sum(rd(s) << i for i, s in enumerate(WPCA))
         bne = rd(0x6980)
         ts = cpu.get_pin('TS_', 1)
