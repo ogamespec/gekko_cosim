@@ -1,0 +1,1751 @@
+==============================================================================
+DECOMPILE OF THE GKO WRITE-GATHER PIPE LOGIC (GE0/LAS)
+source: model/COSIM.m2630opt.Jul1599, interpreter: decompile_model.py
+notation: w[b][off] = state wire; slot = off (off>=0) or off+0x10000 (off<0);
+          NAN/NBN/PCN = logic cones; .L1/.L2 = latch phase;
+          GKO.GE0.WPAR* = write-pipe address reg; GKO.GE0.WPC* = counters;
+          GKO.GE0.QNTR* = queue/status counters; LAS.*ST_GATHER = gather flags
+==============================================================================
+
+##############################################################################
+# REGION 0x104700..0x105100 — GE0: WPAR/QNTR register file update (event latches)
+##############################################################################
+// ========== GE0: WPAR/QNTR register file update (event latches): 0x104700..0x105100 ==========
+// @00104700: [патч-слот / данные]
+// @00104708:  w[2][-2e26]    <= 0;
+// @0010470c: goto 0x104748
+if (r22 == 0x9) {
+  // @0010471c:  w[1][74fc]    <= 1;
+  // @00104724:  w[2][-2e26]    <= 0;
+else if (?? == 0x1f) {
+  // @0010473c:  w[1][74fc]    <= 1;
+  // @00104744:  w[2][-2e26]    <= 1;
+}
+}
+// @00104764:  w[1][6ad6]    <= ((w[1][69de] | (w[1][694b] & ~(w[1][694a]))) & ~(w[1][69dd]));
+// @00104780: [патч-слот / данные]
+// @00104788:  w[1][6ad7]    <= ((GKO.GE0.WPAR.NAN0.L1 | (w[1][6947] & ~(w[1][6946]))) & ~(w[1][69df]));
+// @001047a8:  w[1][6ad8]    <= ((w[1][69e2] | (w[1][68aa] & ~(w[1][68a9]))) & ~(w[1][69e1]));  // GKO.GE0.QNTR6.NAN6.L2
+// @001047c8:  w[1][6ad9]    <= ((GKO.GE0.QNTR0.NAN0.L1 | (GKO.GE0.QNTR7.NAN2.L1 & ~(w[1][68a7]))) & ~(w[1][69e3]));
+// @001047e8:  w[1][6ada]    <= ((w[1][69e6] | (w[1][68a2] & ~(w[1][68a1]))) & ~(w[1][69e5]));
+// @00104800: [патч-слот / данные]
+// @0010480c:  w[1][6adb]    <= ((GKO.GE0.QNTR0.NAN1.L1 | (w[1][694d] & ~(GKO.GE0.QNTR6.NAN4.L1))) & ~(w[1][69e7]));
+// @0010482c:  w[1][6adc]    <= ((w[1][69ea] | (GKO.GE0.QNTR1.NAN6.L1 & ~(w[1][689f]))) & ~(w[1][69e9]));  // GKO.GE0.QNTR6.NAN7.L2
+// @0010484c:  w[1][6add]    <= ((GKO.GE0.QNTR0.NAN2.L1 | (w[1][694f] & ~(w[1][694e]))) & ~(GKO.QSR.TSCG.ABCD.L2));
+// @0010486c:  w[1][6ade]    <= ((w[1][69ee] | (w[1][6886] & ~(GKO.GE0.QNTR0.NAN7.L2))) & ~(GKO.TWC.TWCZ.BIT2.L2));
+// @00104880: [патч-слот / данные]
+// @00104890:  w[1][6adf]    <= ((GKO.GE0.QNTR0.NAN3.L1 | (w[1][68ae] & ~(w[1][68ad]))) & ~(w[1][69ef]));
+// @001048b0:  w[1][6ae0]    <= ((w[1][69f2] | (GKO.DMM.BIST_RW.BIT0.L1 & ~(w[1][693f]))) & ~(w[1][69f1]));
+// @001048d0:  w[1][6ae1]    <= ((GKO.GE0.QNTR0.NAN4.L1 | (GKO.GE0.QNTR2.NAN0.L1 & ~(w[1][68ab]))) & ~(w[1][69f3]));
+// @001048f0:  w[1][6ae2]    <= ((w[1][69f6] | (w[1][6943] & ~(w[1][6941]))) & ~(w[1][69f5]));
+// @00104900: [патч-слот / данные]
+// @00104914:  w[1][6ae3]    <= ((GKO.GE0.QNTR0.NAN5.L1 | (w[1][69c5] & ~(GKO.GE0.HID_G_REG.NAN1.L1))) & ~(w[1][69f7]));
+// @00104934:  w[1][6ae4]    <= ((w[1][69fa] | (w[1][69c3] & ~(w[1][69c2]))) & ~(w[1][69f9]));  // GKO.GE0.QNTR7.NAN7.L2
+// @00104954:  w[1][6ae5]    <= ((GKO.GE0.QNTR0.NAN6.L1 | (w[1][69c1] & ~(GKO.GE0.HID_G_REG.NAN0.L1))) & ~(w[1][69fb]));
+// @00104974:  w[1][6ae6]    <= ((w[1][69fe] | (w[1][696b] & ~(w[1][696a]))) & ~(w[1][69fd]));
+// @00104980: [патч-слот / данные]
+// @00104998:  w[1][6ae7]    <= ((GKO.GE0.QNTR0.NAN7.L1 | (w[1][6963] & ~(w[1][6962]))) & ~(w[1][69ff]));
+// @001049b8:  w[1][6ae8]    <= ((w[1][6a02] | (w[1][6961] & ~(GKO.GE0.DMAL.NAN0.L1))) & ~(w[1][6a01]));  // GKO.GE0.QNTR7.NAN1.L2
+// @001049d8:  w[1][6ae9]    <= ((GKO.BAC.L2CST2_LAT.BIT1.L2 | (GKO.DQC.DQ3_RPTR.BIT1.L2 & ~(GKO.GE0.QNTR6.NAN3.L1))) & ~(w[1][6a03]));
+// @001049f8:  w[1][6aea]    <= ((w[1][6a06] | (w[1][6945] & ~(GKO.GE0.QNTR6.NAN2.L1))) & ~(w[1][6a05]));
+// @00104a00: [патч-слот / данные]
+// @00104a1c:  w[1][6aeb]    <= ((GKO.GE0.QNTR1.NAN0.L1 | (w[1][68a6] & ~(w[1][68a5]))) & ~(w[1][6a07]));  // GKO.QSR.TSCE.ABCD.L2
+// @00104a3c:  w[1][6aec]    <= ((w[1][6a0a] | (GKO.GE0.QNTR1.NAN7.L1 & ~(w[1][68a3]))) & ~(w[1][6a09]));  // GKO.GE0.QNTR7.NAN6.L2
+// @00104a5c:  w[1][6aed]    <= ((GKO.GE0.QNTR1.NAN3.L2 | (w[1][689a] & ~(w[1][6899]))) & ~(w[1][6a0b]));  // GKO.TWC.NO_ENTRY_D.BIT0.L2
+// @00104a7c:  w[1][6aee]    <= ((GKO.BDT.ARTRY_LAT1.BIT0.L2 | (w[1][6955] & ~(GKO.GE0.QNTR6.NAN6.L1))) & ~(GKO.BDR.RUNQ_LAT3.BIT5.L1));
+// @00104a80: [патч-слот / данные]
+// @00104aa0:  w[1][6aef]    <= ((GKO.GE0.QNTR1.NAN5.L2 | (w[1][6957] & ~(w[1][6956]))) & ~(w[1][6a0f]));
+// @00104ac0:  w[1][6af0]    <= ((w[1][6a12] | (w[1][6959] & ~(GKO.GE0.QNTR6.NAN7.L1))) & ~(w[1][6a11]));  // GKO.GE0.QNTR7.NAN2.L2
+// @00104ae0:  w[1][6af1]    <= ((GKO.BP0.BBFV.L1 | (GKO.GE0.QNTR1.NAN3.L1 & ~(GKO.WA0.WA0_L1ST.NAN2.CR.L1))) & ~(GKO.BP0.BIAE.L2));
+// @00104b00: [патч-слот / данные]
+// @00104b04:  w[1][6af2]    <= ((w[1][6a16] | (w[1][695f] & ~(GKO.FIC.FIB2.BIT0.L1))) & ~(GKO.BTC.BIST_DATA_L.BIT7.L1));
+// @00104b24:  w[1][6af3]    <= ((GKO.GE0.QNTR1.NAN2.L2 | (GKO.GE0.QNTR1.NAN2.L1 & ~(w[1][688f]))) & ~(GKO.CBB.UBR1_CR_NIB_SEL.BIT5.L2));
+// @00104b44:  w[1][6af4]    <= ((w[1][6a1a] | (GKO.FIC.FIR9.BIT2.L2 & ~(GKO.GE0.QNTR7.NAN5.L1))) & ~(w[1][6a19]));  // GKO.GE0.QNTR7.NAN5.L2
+// @00104b64:  w[1][6af5]    <= ((GKO.GE0.QNTR1.NAN0.L2 | (w[1][695b] & ~(w[1][695a]))) & ~(w[1][6a1b]));
+// @00104b80: [патч-слот / данные]
+// @00104b88:  w[1][6af6]    <= ((w[1][6a1e] | (w[1][6892] & ~(w[1][6891]))) & ~(w[1][6a1d]));
+// @00104ba8:  w[1][6af7]    <= ((GKO.GE0.QNTR1.NAN6.L2 | (w[1][69b6] & ~(GKO.LAS.HQ_ACTIVE3.BIT0.L1))) & ~(w[1][6a1f]));
+// @00104bc8:  w[1][6af8]    <= ((w[1][6a22] | (GKO.JTC.REPAIR0.BIT0.L1 & ~(GKO.LAS.CSQ_IDN.BIT0.L2))) & ~(w[1][6a21]));  // GKO.GE0.QNTR7.NAN3.L2
+// @00104be8:  w[1][6af9]    <= ((GKO.CCC.FINISHED5.BIT0.L1 | (GKO.GE0.QNTR1.NAN1.L1 & ~(w[1][688b]))) & ~(w[1][6a23]));
+// @00104c00: [патч-слот / данные]
+// @00104c0c:  w[1][6afa]    <= ((GKO.CCC.CA5.BIT0.L2 | (w[1][688a] & ~(w[1][6889]))) & ~(GKO.CCC.RNBUFF1.BIT4.L1));
+// @00104c2c:  w[1][6afb]    <= ((GKO.GE0.QNTR1.NAN7.L2 | (w[1][6888] & ~(w[1][6887]))) & ~(GKO.CDC.REGOP_3.BIT4.L1));
+// @00104c4c:  w[1][6afc]    <= ((w[1][6a2a] | (w[1][69bf] & ~(w[1][69be]))) & ~(GKO.CSC.CREB.BIT0.L1));  // GKO.GE0.QNTR7.NAN4.L2
+// @00104c6c:  w[1][6afd]    <= ((w[1][6a2c] | (w[1][69b7] & ~(w[1][69b5]))) & ~(w[1][6a2b]));
+// @00104c80: [патч-слот / данные]
+// @00104c90:  w[1][6afe]    <= ((w[1][6a2e] | (w[1][69bd] & ~(GKO.GE0.WPAR.NAN1.L1))) & ~(w[1][6a2d]));
+// @00104cb0:  w[1][6aff]    <= ((GKO.GE0.QNTR2.NAN5.L2 | (w[1][69bb] & ~(w[1][69ba]))) & ~(w[1][6a2f]));
+// @00104cd0:  w[1][6b00]    <= ((w[1][6a32] | (GKO.LLC.PS_ROT_SPLICE_M.BIT2.L2 & ~(w[1][688d]))) & ~(w[1][6a31]));  // GKO.GE0.QNTR7.NAN0.L2
+// @00104cf0:  w[1][6b01]    <= ((GKO.GE0.QNTR2.NAN0.L2 | (w[1][6969] & ~(GKO.GE0.DMAL.NAN2.L1))) & ~(w[1][6a33]));
+// @00104d00: [патч-слот / данные]
+// @00104d14:  w[1][6b02]    <= ((w[1][6a36] | (w[1][6967] & ~(w[1][6966]))) & ~(w[1][6a35]));
+// @00104d34:  w[1][6b03]    <= ((GKO.GE0.QNTR2.NAN6.L2 | (w[1][6965] & ~(GKO.FWN.FWSU.BIT12.L1))) & ~(w[1][6a37]));
+// @00104d54:  w[1][6b04]    <= ((GKO.DLS.SBR_LF_CW.BIT0.L2 | (w[1][6951] & ~(GKO.GE0.QNTR6.NAN5.L1))) & ~(w[1][6a39]));  // GKO.BAC.DLD_LAT1.BIT1.L2
+// @00104d74:  w[1][6b05]    <= ((GKO.GE0.QNTR2.NAN1.L2 | (w[1][689e] & ~(w[1][689d]))) & ~(w[1][6a3b]));
+// @00104d80: [патч-слот / данные]
+// @00104d98:  w[1][6b06]    <= ((w[1][6a3e] | (w[1][6953] & ~(w[1][6952]))) & ~(w[1][6a3d]));
+// @00104db8:  w[1][6b07]    <= ((GKO.DMM.BIST_RW.BIT1.L1 | (GKO.GE0.QNTR1.NAN5.L1 & ~(w[1][689b]))) & ~(w[1][6a3f]));
+// @00104dd8:  w[1][6b08]    <= ((w[1][6a42] | (GKO.GE0.QNTR1.NAN4.L1 & ~(GKO.L20.L2DCACHEL.I43.I1.I1.I14.L1))) & ~(w[1][6a41]));  // GKO.GE0.WPAR.NAN7.L2
+// @00104df8:  w[1][6b09]    <= ((GKO.GE0.QNTR2.NAN4.L2 | (w[1][6896] & ~(w[1][6895]))) & ~(w[1][6a43]));
+// @00104e00: [патч-слот / данные]
+// @00104e1c:  w[1][6b0a]    <= ((w[1][6a46] | (GKO.GE0.QNTR3.NAN0.L1 & ~(w[1][68cf]))) & ~(w[1][6a45]));
+// @00104e3c:  w[1][6b0b]    <= ((GKO.GE0.QNTR2.NAN7.L2 | (w[1][68ce] & ~(w[1][68cd]))) & ~(w[1][6a47]));
+// @00104e5c:  w[1][6b0c]    <= ((w[1][6a4a] | (GKO.GE0.QNTR7.NAN7.L1 & ~(w[1][68cb]))) & ~(GKO.DQC.LD_CB1.BIT0.L2));  // GKO.GE0.WPAR.NAN0.L2
+// @00104e7c:  w[1][6b0d]    <= ((GKO.GE0.QNTR2.NAN3.L2 | (w[1][693e] & ~(w[1][693d]))) & ~(w[1][6a4b]));  // GKO.BDR.RUNQ_LAT4.BIT0.L1
+// @00104e80: [патч-слот / данные]
+// @00104ea0:  w[1][6b0e]    <= ((w[1][6a4e] | (GKO.GE0.QNTR6.NAN0.L1 & ~(w[1][693b]))) & ~(w[1][6a4d]));  // GKO.BDT.OLAT2.BIT0.L2
+// @00104ec0:  w[1][6b0f]    <= ((w[1][6a50] | (GKO.DLS.DCBZ_L_L1.BIT0.L2 & ~(w[1][6939]))) & ~(w[1][6a4f]));
+// @00104ee0:  w[1][6b10]    <= ((w[1][6a52] | (GKO.GE0.QNTR7.NAN4.L1 & ~(w[1][6937]))) & ~(w[1][6a51]));  // GKO.GE0.WPAR.NAN1.L2
+// @00104f00: [патч-слот / данные]
+// @00104f04:  w[1][6b11]    <= ((GKO.GE0.QNTR3.NAN6.L2 | (GKO.GE0.QNTR2.NAN3.L1 & ~(w[1][68b7]))) & ~(w[1][6a53]));
+// @00104f24:  w[1][6b12]    <= ((w[1][6a56] | (w[1][6936] & ~(w[1][6935]))) & ~(w[1][6a55]));
+// @00104f44:  w[1][6b13]    <= ((GKO.GE0.QNTR3.NAN5.L2 | (GKO.GE0.QNTR5.NAN7.L1 & ~(w[1][6933]))) & ~(w[1][6a57]));  // GKO.BP0.BOBB.L2
+// @00104f64:  w[1][6b14]    <= ((w[1][6a5a] | (w[1][6932] & ~(w[1][6931]))) & ~(w[1][6a59]));  // GKO.BP0.BBBQ.L1
+// @00104f80: [патч-слот / данные]
+// @00104f88:  w[1][6b15]    <= ((GKO.GE0.QNTR3.NAN7.L2 | (GKO.GE0.QNTR5.NAN6.L1 & ~(w[1][692f]))) & ~(w[1][6a5b]));  // GKO.BTC.BIST_DATA_L.BIT8.L1
+// @00104fa8:  w[1][6b16]    <= ((GKO.FIC.FIB2.BIT1.L1 | (w[1][692e] & ~(w[1][692d]))) & ~(GKO.FIC.FIR9.BIT3.L2));
+// @00104fc8:  w[1][6b17]    <= ((GKO.GE0.QNTR3.NAN4.L2 | (GKO.GE0.QNTR5.NAN5.L1 & ~(w[1][692b]))) & ~(w[1][6a5f]));  // GKO.CBB.CBB_BHT_WEN1.BIT0.L2
+// @00104fe8:  w[1][6b18]    <= ((w[1][6a62] | (w[1][692a] & ~(GKO.CSC.FREEZE0.BIT0.L1))) & ~(w[1][6a61]));  // GKO.GE0.WPAR.NAN3.L2
+// @00105000: [патч-слот / данные]
+// @0010500c:  w[1][6b19]    <= ((GKO.FWN.FWSU.BIT11.L1 | (GKO.GE0.QNTR5.NAN4.L1 & ~(GKO.CDC.FRENV1.BIT0.L1))) & ~(w[1][6a63]));
+// @0010502c:  w[1][6b1a]    <= ((w[1][6a66] | (GKO.CCC.RNBUFF5.BIT12.L2 & ~(GKO.CCC.OV_WE0.BIT0.L1))) & ~(w[1][6a65]));
+// @0010504c:  w[1][6b1b]    <= ((GKO.GE0.QNTR3.NAN3.L2 | (w[1][68ba] & ~(w[1][68b9]))) & ~(w[1][6a67]));
+// @0010506c:  w[1][6b1c]    <= ((w[1][6a6a] | (GKO.CCC.RNBUFF5.BIT0.L1 & ~(w[1][6923]))) & ~(w[1][6a69]));  // GKO.GE0.WPAR.NAN4.L2
+// @00105080: [патч-слот / данные]
+// @00105090:  w[1][6b1d]    <= ((GKO.GE0.QNTR3.NAN2.L2 | (w[1][6922] & ~(w[1][6921]))) & ~(w[1][6a6b]));
+// @001050b0:  w[1][6b1e]    <= ((GKO.HIC.HI36.BIT0.L2 | (GKO.GE0.QNTR5.NAN2.L1 & ~(w[1][691f]))) & ~(w[1][6a6d]));
+// @001050d0:  w[1][6b1f]    <= ((GKO.GE0.QNTR3.NAN1.L2 | (w[1][691e] & ~(w[1][691d]))) & ~(w[1][6a6f]));
+// @001050f0:  w[1][6b20]    <= ((w[1][6a72] | (GKO.GE0.QNTR4.NAN7.L1 & ~(w[1][690f]))) & ~(GKO.ICC.ACW_LF_L2_.BIT0.L2));  // GKO.GE0.WPAR.NAN5.L2
+// конец региона
+
+##############################################################################
+# REGION 0x12a9c0..0x12d600 — GE0: WPC counter bit-slice cells (latch-with-hold)
+##############################################################################
+// ========== GE0: WPC counter bit-slice cells (latch-with-hold): 0x12a9c0..0x12d600 ==========
+// @0012a9c8:  w[2][-172a]    <= ((r9 & ~(r25)) | r29);
+// @0012a9e8:  w[2][-1729]    <= (((w[0][-4075] & w[2][-2a92]) & ~(w[2][-27b5])) | (w[0][-4075] & w[2][-27b5]));
+// @0012aa00: [патч-слот / данные]
+// @0012aa0c:  w[2][-1728]    <= (((w[0][-4074] & w[2][-2a92]) & ~(w[2][-27b5])) | (w[0][-4074] & w[2][-27b5]));  // GKO.GE0.WPCA.NAN0.L2
+// @0012aa2c:  w[2][-1727]    <= (((GKO.LLC.FX_DTAG_H.BIT1.L2 & w[2][-2a92]) & ~(w[2][-27b5])) | (GKO.LLC.FX_DTAG_H.BIT1.L2 & w[2][-27b5]));
+// @0012aa4c:  w[2][-1726]    <= (((GKO.LLC.LOAD_H.BIT0.L1 & w[2][-2a92]) & ~(w[2][-27b5])) | (GKO.LLC.LOAD_H.BIT0.L1 & w[2][-27b5]));
+// @0012aa6c:  w[2][-1725]    <= (((w[0][-4071] & w[2][-2a92]) & ~(w[2][-27b5])) | (w[0][-4071] & w[2][-27b5]));
+// @0012aa80: [патч-слот / данные]
+// @0012aa90:  w[2][-1724]    <= (((w[0][-4078] & GKO.LLC.LLC_FXU_SEL_SREAL2_H.BIT7.L1) & ~(w[2][-27b4])) | (w[0][-4078] & w[2][-27b4]));  // GKO.QSR.TSCC.NBN1.L2
+// @0012aaa4:  w[2][-5a4e]    <= ((GKO.BP0.BBAO.L2 & r22) | w[2][-27b4]);
+// @0012aac0:  w[2][-1723]    <= (((w[0][-4077] & GKO.LLC.LLC_FXU_SEL_SREAL2_H.BIT7.L1) & ~(w[2][-27b4])) | (w[0][-4077] & w[2][-27b4]));
+// @0012aae0:  w[2][-1722]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.LLC.LLC_FXU_SEL_SREAL2_H.BIT7.L1) & ~(w[2][-27b4])) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27b4]));
+// @0012ab00: [патч-слот / данные]
+// @0012ab04:  w[2][-1721]    <= (((w[0][-4075] & GKO.LLC.LLC_FXU_SEL_SREAL2_H.BIT7.L1) & ~(w[2][-27b4])) | (w[0][-4075] & w[2][-27b4]));
+// @0012ab24:  w[2][-1720]    <= (((w[0][-4074] & GKO.LLC.LLC_FXU_SEL_SREAL2_H.BIT7.L1) & ~(w[2][-27b4])) | (w[0][-4074] & w[2][-27b4]));  // GKO.GE0.WPCA.NAN1.L2
+// @0012ab44:  w[2][-171f]    <= (((GKO.LLC.FX_DTAG_H.BIT1.L2 & GKO.LLC.LLC_FXU_SEL_SREAL2_H.BIT7.L1) & ~(w[2][-27b4])) | (GKO.LLC.FX_DTAG_H.BIT1.L2 & w[2][-27b4]));
+// @0012ab64:  w[2][-171e]    <= (((GKO.LLC.LOAD_H.BIT0.L1 & GKO.LLC.LLC_FXU_SEL_SREAL2_H.BIT7.L1) & ~(w[2][-27b4])) | (GKO.LLC.LOAD_H.BIT0.L1 & w[2][-27b4]));
+// @0012ab80: [патч-слот / данные]
+// @0012ab88:  w[2][-171d]    <= (((w[0][-4071] & GKO.LLC.LLC_FXU_SEL_SREAL2_H.BIT7.L1) & ~(w[2][-27b4])) | (w[0][-4071] & w[2][-27b4]));
+// @0012aba8:  w[2][-171c]    <= (((w[0][-4078] & w[2][-2a52]) & ~(w[2][-27b3])) | (w[0][-4078] & w[2][-27b3]));  // GKO.QSR.TSCC.NBN0.L2
+// @0012abbc:  w[1][6fee]    <= ((w[1][6fee] & r22) | w[2][-27b3]);
+// @0012abd8:  w[2][-171b]    <= (((w[0][-4077] & w[2][-2a52]) & ~(w[2][-27b3])) | (w[0][-4077] & w[2][-27b3]));
+// @0012abf8:  w[2][-171a]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-2a52]) & ~(w[2][-27b3])) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27b3]));
+// @0012ac00: [патч-слот / данные]
+// @0012ac1c:  w[2][-1719]    <= (((w[0][-4075] & w[2][-2a52]) & ~(w[2][-27b3])) | (w[0][-4075] & w[2][-27b3]));
+// @0012ac3c:  w[2][-1718]    <= (((w[0][-4074] & w[2][-2a52]) & ~(w[2][-27b3])) | (w[0][-4074] & w[2][-27b3]));  // GKO.GE0.WPCA.NAN2.L2
+// @0012ac5c:  w[2][-1717]    <= (((GKO.LLC.FX_DTAG_H.BIT1.L2 & w[2][-2a52]) & ~(w[2][-27b3])) | (GKO.LLC.FX_DTAG_H.BIT1.L2 & w[2][-27b3]));
+// @0012ac7c:  w[2][-1716]    <= (((GKO.LLC.LOAD_H.BIT0.L1 & w[2][-2a52]) & ~(w[2][-27b3])) | (GKO.LLC.LOAD_H.BIT0.L1 & w[2][-27b3]));
+// @0012ac80: [патч-слот / данные]
+// @0012aca0:  w[2][-1715]    <= (((w[0][-4071] & w[2][-2a52]) & ~(w[2][-27b3])) | (w[0][-4071] & w[2][-27b3]));
+// @0012acc0:  w[2][-1714]    <= (((w[0][-4070] & w[2][-7bbf]) & ~(w[2][-27b2])) | (w[0][-4070] & w[2][-27b2]));  // GKO.QSR.TSCC.NAN7.L2
+// @0012acd4:  w[1][7701]    <= ((w[1][7701] & r22) | w[2][-27b2]);
+// @0012acf0:  w[2][-1713]    <= (((GKO.LA0.LAAN.PCN5.L1 & w[2][-7bbf]) & ~(w[2][-27b2])) | (GKO.LA0.LAAN.PCN5.L1 & w[2][-27b2]));
+// @0012ad00: [патч-слот / данные]
+// @0012ad14:  w[2][-1712]    <= (((w[0][-406e] & w[2][-7bbf]) & ~(w[2][-27b2])) | (w[0][-406e] & w[2][-27b2]));
+// @0012ad34:  w[2][-1711]    <= (((GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-7bbf]) & ~(w[2][-27b2])) | (GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-27b2]));
+// @0012ad54:  w[2][-1710]    <= (((w[0][-4068] & w[2][-7bbf]) & ~(w[2][-27b2])) | (w[0][-4068] & w[2][-27b2]));  // GKO.GE0.WPCA.NAN3.L2
+// @0012ad74:  w[2][-170f]    <= (((w[0][-4067] & w[2][-7bbf]) & ~(w[2][-27b2])) | (w[0][-4067] & w[2][-27b2]));  // GKO.XEA.XEAB.BIT1.L2
+// @0012ad80: [патч-слот / данные]
+// @0012ad98:  w[2][-170e]    <= (((w[0][-4066] & w[2][-7bbf]) & ~(w[2][-27b2])) | (w[0][-4066] & w[2][-27b2]));  // GKO.XEB.XEBB.BIT1.L2
+// @0012adb8:  w[2][-170d]    <= (((w[0][-4065] & w[2][-7bbf]) & ~(w[2][-27b2])) | (w[0][-4065] & w[2][-27b2]));  // GKO.XM0.XMOT.PAN4.L2
+// @0012add8:  w[2][-170c]    <= (((w[0][-4070] & w[2][-5995]) & ~(w[2][-27b1])) | (w[0][-4070] & w[2][-27b1]));  // GKO.QSR.TSCC.NAN6.L2
+// @0012adec:  w[1][7738]    <= ((w[1][7738] & r22) | w[2][-27b1]);
+// @0012ae00: [патч-слот / данные]
+// @0012ae0c:  w[2][-170b]    <= (((GKO.LA0.LAAN.PCN5.L1 & w[2][-5995]) & ~(w[2][-27b1])) | (GKO.LA0.LAAN.PCN5.L1 & w[2][-27b1]));
+// @0012ae2c:  w[2][-170a]    <= (((w[0][-406e] & w[2][-5995]) & ~(w[2][-27b1])) | (w[0][-406e] & w[2][-27b1]));
+// @0012ae4c:  w[2][-1709]    <= (((GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-5995]) & ~(w[2][-27b1])) | (GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-27b1]));
+// @0012ae6c:  w[2][-1708]    <= (((w[0][-4068] & w[2][-5995]) & ~(w[2][-27b1])) | (w[0][-4068] & w[2][-27b1]));  // GKO.GE0.WPCA.NAN4.L2
+// @0012ae80: [патч-слот / данные]
+// @0012ae90:  w[2][-1707]    <= (((w[0][-4067] & w[2][-5995]) & ~(w[2][-27b1])) | (w[0][-4067] & w[2][-27b1]));
+// @0012aeb0:  w[2][-1706]    <= (((w[0][-4066] & w[2][-5995]) & ~(w[2][-27b1])) | (w[0][-4066] & w[2][-27b1]));
+// @0012aed0:  w[2][-1705]    <= (((w[0][-4065] & w[2][-5995]) & ~(w[2][-27b1])) | (w[0][-4065] & w[2][-27b1]));
+// @0012aef0:  w[2][-1704]    <= (((w[0][-4070] & w[2][-54dd]) & ~(w[2][-27b0])) | (w[0][-4070] & w[2][-27b0]));  // GKO.QSR.TSCC.NAN5.L2
+// @0012af00: [патч-слот / данные]
+// @0012af08:  w[1][7765]    <= ((w[1][7765] & r22) | w[2][-27b0]);
+// @0012af24:  w[2][-1703]    <= (((GKO.LA0.LAAN.PCN5.L1 & w[2][-54dd]) & ~(w[2][-27b0])) | (GKO.LA0.LAAN.PCN5.L1 & w[2][-27b0]));
+// @0012af44:  w[2][-1702]    <= (((w[0][-406e] & w[2][-54dd]) & ~(w[2][-27b0])) | (w[0][-406e] & w[2][-27b0]));
+// @0012af64:  w[2][-1701]    <= (((GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-54dd]) & ~(w[2][-27b0])) | (GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-27b0]));
+// @0012af80: [патч-слот / данные]
+// @0012af88:  w[2][-1700]    <= (((w[0][-4068] & w[2][-54dd]) & ~(w[2][-27b0])) | (w[0][-4068] & w[2][-27b0]));  // GKO.GE0.WPCA.NAN5.L2
+// @0012afa8:  w[2][-16ff]    <= (((w[0][-4067] & w[2][-54dd]) & ~(w[2][-27b0])) | (w[0][-4067] & w[2][-27b0]));
+// @0012afc8:  w[2][-16fe]    <= (((w[0][-4066] & w[2][-54dd]) & ~(w[2][-27b0])) | (w[0][-4066] & w[2][-27b0]));
+// @0012afe8:  w[2][-16fd]    <= (((w[0][-4065] & w[2][-54dd]) & ~(w[2][-27b0])) | (w[0][-4065] & w[2][-27b0]));
+// @0012b000: [патч-слот / данные]
+// @0012b00c:  w[2][-16fc]    <= (((w[0][-4070] & w[2][-4ee5]) & ~(w[2][-27af])) | (w[0][-4070] & w[2][-27af]));  // GKO.BAC.DLD_LAT1.BIT1.L1
+// @0012b020:  w[1][7cf6]    <= ((w[1][7cf6] & r22) | w[2][-27af]);
+// @0012b03c:  w[2][-16fb]    <= (((GKO.LA0.LAAN.PCN5.L1 & w[2][-4ee5]) & ~(w[2][-27af])) | (GKO.LA0.LAAN.PCN5.L1 & w[2][-27af]));
+// @0012b05c:  w[2][-16fa]    <= (((w[0][-406e] & w[2][-4ee5]) & ~(w[2][-27af])) | (w[0][-406e] & w[2][-27af]));
+// @0012b07c:  w[2][-16f9]    <= (((GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-4ee5]) & ~(w[2][-27af])) | (GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-27af]));
+// @0012b080: [патч-слот / данные]
+// @0012b0a0:  w[2][-16f8]    <= (((w[0][-4068] & w[2][-4ee5]) & ~(w[2][-27af])) | (w[0][-4068] & w[2][-27af]));  // GKO.GE0.WPCA.NAN6.L2
+// @0012b0c0:  w[2][-16f7]    <= (((w[0][-4067] & w[2][-4ee5]) & ~(w[2][-27af])) | (w[0][-4067] & w[2][-27af]));
+// @0012b0e0:  w[2][-16f6]    <= (((w[0][-4066] & w[2][-4ee5]) & ~(w[2][-27af])) | (w[0][-4066] & w[2][-27af]));
+// @0012b100: [патч-слот / данные]
+// @0012b104:  w[2][-16f5]    <= (((w[0][-4065] & w[2][-4ee5]) & ~(w[2][-27af])) | (w[0][-4065] & w[2][-27af]));
+// @0012b124:  w[2][-16f4]    <= (((w[0][-4070] & w[2][-2dfe]) & ~(w[2][-27ae])) | (w[0][-4070] & w[2][-27ae]));  // GKO.BDR.RUNQ_LAT3.BIT3.L2
+// @0012b138:  w[2][-7bbf]    <= ((w[2][-7b75] & r22) | w[2][-27ae]);
+// @0012b154:  w[2][-16f3]    <= (((GKO.LA0.LAAN.PCN5.L1 & w[2][-2dfe]) & ~(w[2][-27ae])) | (GKO.LA0.LAAN.PCN5.L1 & w[2][-27ae]));  // GKO.BDT.LAT11.BIT1.L1
+// @0012b174:  w[2][-16f2]    <= (((w[0][-406e] & w[2][-2dfe]) & ~(w[2][-27ae])) | (w[0][-406e] & w[2][-27ae]));
+// @0012b180: [патч-слот / данные]
+// @0012b198:  w[2][-16f1]    <= (((GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-2dfe]) & ~(w[2][-27ae])) | (GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-27ae]));
+// @0012b1b8:  w[2][-16f0]    <= (((w[0][-4068] & w[2][-2dfe]) & ~(w[2][-27ae])) | (w[0][-4068] & w[2][-27ae]));  // GKO.GE0.WPCA.NAN7.L2
+// @0012b1d8:  w[2][-16ef]    <= (((w[0][-4067] & w[2][-2dfe]) & ~(w[2][-27ae])) | (w[0][-4067] & w[2][-27ae]));
+// @0012b1f8:  w[2][-16ee]    <= (((w[0][-4066] & w[2][-2dfe]) & ~(w[2][-27ae])) | (w[0][-4066] & w[2][-27ae]));  // GKO.BP0.BBCM.L4
+// @0012b200: [патч-слот / данные]
+// @0012b21c:  w[2][-16ed]    <= (((w[0][-4065] & w[2][-2dfe]) & ~(w[2][-27ae])) | (w[0][-4065] & w[2][-27ae]));  // GKO.BP0.BBES.L2
+// @0012b23c:  w[2][-16ec]    <= (((w[0][-4070] & w[2][-2a91]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4070] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.BTC.READ_CAPTURE.BIT10.L2
+// @0012b250:  w[2][-7b75]    <= ((w[2][-58ce] & r22) | GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH);
+// @0012b26c:  w[2][-16eb]    <= (((GKO.LA0.LAAN.PCN5.L1 & w[2][-2a91]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (GKO.LA0.LAAN.PCN5.L1 & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012b280: [патч-слот / данные]
+// @0012b290:  w[2][-16ea]    <= (((w[0][-406e] & w[2][-2a91]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-406e] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.CBB.CBB_BHT_WR1_DATA.BIT1.L2
+// @0012b2b0:  w[2][-16e9]    <= (((GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-2a91]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (GKO.CB3.CBQL.NBN1.CR.L1 & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.CBB.BHT_LINE1.BIT3.L1
+// @0012b2d0:  w[2][-16e8]    <= (((w[0][-4068] & w[2][-2a91]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4068] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.GE0.WPCB.NAN0.L2
+// @0012b2f0:  w[2][-16e7]    <= (((w[0][-4067] & w[2][-2a91]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4067] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012b300: [патч-слот / данные]
+// @0012b314:  w[2][-16e6]    <= (((w[0][-4066] & w[2][-2a91]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4066] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012b334:  w[2][-16e5]    <= (((w[0][-4065] & w[2][-2a91]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4065] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012b354:  w[2][-16e4]    <= (((w[0][-4070] & w[2][-2a71]) & ~(w[2][-27ac])) | (w[0][-4070] & w[2][-27ac]));  // GKO.QSR.TSCC.NAN1.L2
+// @0012b368:  w[2][-5996]    <= ((w[2][-57e6] & r22) | w[2][-27ac]);
+// @0012b380: [патч-слот / данные]
+// @0012b388:  w[2][-16e3]    <= (((GKO.LA0.LAAN.PCN5.L1 & w[2][-2a71]) & ~(w[2][-27ac])) | (GKO.LA0.LAAN.PCN5.L1 & w[2][-27ac]));
+// @0012b3a8:  w[2][-16e2]    <= (((w[0][-406e] & w[2][-2a71]) & ~(w[2][-27ac])) | (w[0][-406e] & w[2][-27ac]));
+// @0012b3c8:  w[2][-16e1]    <= (((GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-2a71]) & ~(w[2][-27ac])) | (GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-27ac]));
+// @0012b3e8:  w[2][-16e0]    <= (((w[0][-4068] & w[2][-2a71]) & ~(w[2][-27ac])) | (w[0][-4068] & w[2][-27ac]));  // GKO.GE0.WPCB.NAN1.L2
+// @0012b400: [патч-слот / данные]
+// @0012b40c:  w[2][-16df]    <= (((w[0][-4067] & w[2][-2a71]) & ~(w[2][-27ac])) | (w[0][-4067] & w[2][-27ac]));
+// @0012b42c:  w[2][-16de]    <= (((w[0][-4066] & w[2][-2a71]) & ~(w[2][-27ac])) | (w[0][-4066] & w[2][-27ac]));
+// @0012b44c:  w[2][-16dd]    <= (((w[0][-4065] & w[2][-2a71]) & ~(w[2][-27ac])) | (w[0][-4065] & w[2][-27ac]));  // GKO.CCC.RNBUFF2.BIT2.L2
+// @0012b46c:  w[2][-16dc]    <= (((w[0][-4070] & w[2][-2a51]) & ~(w[2][-27ab])) | (w[0][-4070] & w[2][-27ab]));  // GKO.CCC.CBB_UBR_LATCH.BIT1.L1
+// @0012b480: [патч-слот / данные]
+// @0012b484:  w[1][6ff2]    <= ((w[1][6ff2] & r22) | w[2][-27ab]);
+// @0012b4a0:  w[2][-16db]    <= (((GKO.LA0.LAAN.PCN5.L1 & w[2][-2a51]) & ~(w[2][-27ab])) | (GKO.LA0.LAAN.PCN5.L1 & w[2][-27ab]));  // GKO.CCC.TYPE5.BIT1.L2
+// @0012b4c0:  w[2][-16da]    <= (((w[0][-406e] & w[2][-2a51]) & ~(w[2][-27ab])) | (w[0][-406e] & w[2][-27ab]));  // GKO.CDC.GRNM0.BIT4.L2
+// @0012b4e0:  w[2][-16d9]    <= (((GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-2a51]) & ~(w[2][-27ab])) | (GKO.CB3.CBQL.NBN1.CR.L1 & w[2][-27ab]));  // GKO.CDC.FALLOC_0.BIT0.L1
+// @0012b500: [патч-слот / данные]
+// @0012b504:  w[2][-16d8]    <= (((w[0][-4068] & w[2][-2a51]) & ~(w[2][-27ab])) | (w[0][-4068] & w[2][-27ab]));  // GKO.CSC.DECTRAN2.BIT0.L2
+// @0012b524:  w[2][-16d7]    <= (((w[0][-4067] & w[2][-2a51]) & ~(w[2][-27ab])) | (w[0][-4067] & w[2][-27ab]));
+// @0012b544:  w[2][-16d6]    <= (((w[0][-4066] & w[2][-2a51]) & ~(w[2][-27ab])) | (w[0][-4066] & w[2][-27ab]));
+// @0012b564:  w[2][-16d5]    <= (((w[0][-4065] & w[2][-2a51]) & ~(w[2][-27ab])) | (w[0][-4065] & w[2][-27ab]));
+// @0012b580: [патч-слот / данные]
+// @0012b588:  w[2][-16d4]    <= (((w[0][-4060] & w[2][-7bbb]) & ~(w[2][-27aa])) | (w[0][-4060] & w[2][-27aa]));  // GKO.QSR.TSCB.NBN1.L2
+// @0012b59c:  w[1][7705]    <= ((w[1][7705] & r22) | w[2][-27aa]);
+// @0012b5b8:  w[2][-16d3]    <= (((w[0][-405f] & w[2][-7bbb]) & ~(w[2][-27aa])) | (w[0][-405f] & w[2][-27aa]));
+// @0012b5d8:  w[2][-16d2]    <= (((w[0][-405e] & w[2][-7bbb]) & ~(w[2][-27aa])) | (w[0][-405e] & w[2][-27aa]));  // GKO.DAE.SIZE_WIM.BIT3.L1
+// @0012b5f8:  w[2][-16d1]    <= (((w[0][-405d] & w[2][-7bbb]) & ~(w[2][-27aa])) | (w[0][-405d] & w[2][-27aa]));
+// @0012b600: [патч-слот / данные]
+// @0012b61c:  w[2][-16d0]    <= (((GKO.FWN.FWN9.BIT2.L2 & w[2][-7bbb]) & ~(w[2][-27aa])) | (GKO.FWN.FWN9.BIT2.L2 & w[2][-27aa]));  // GKO.GE0.WPCB.NAN3.L2
+// @0012b63c:  w[2][-16cf]    <= (((w[0][-409b] & w[2][-7bbb]) & ~(w[2][-27aa])) | (w[0][-409b] & w[2][-27aa]));
+// @0012b65c:  w[2][-16ce]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-7bbb]) & ~(w[2][-27aa])) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27aa]));
+// @0012b67c:  w[2][-16cd]    <= (((w[0][-4099] & w[2][-7bbb]) & ~(w[2][-27aa])) | (w[0][-4099] & w[2][-27aa]));
+// @0012b680: [патч-слот / данные]
+// @0012b6a0:  w[2][-16cc]    <= (((w[0][-4060] & GKO.ICC.TEA.BIT0.L2) & ~(w[2][-27a9])) | (w[0][-4060] & w[2][-27a9]));  // GKO.QSR.TSCB.NBN0.L2
+// @0012b6b4:  w[1][7739]    <= ((GKO.DC0.DCAA.WL3_EN_LAT.L1 & r22) | w[2][-27a9]);  // GKO.DC0.DCAA.WL3_EN_LAT.L1
+// @0012b6d0:  w[2][-16cb]    <= (((w[0][-405f] & GKO.ICC.TEA.BIT0.L2) & ~(w[2][-27a9])) | (w[0][-405f] & w[2][-27a9]));
+// @0012b6f0:  w[2][-16ca]    <= (((w[0][-405e] & GKO.ICC.TEA.BIT0.L2) & ~(w[2][-27a9])) | (w[0][-405e] & w[2][-27a9]));
+// @0012b700: [патч-слот / данные]
+// @0012b714:  w[2][-16c9]    <= (((w[0][-405d] & GKO.ICC.TEA.BIT0.L2) & ~(w[2][-27a9])) | (w[0][-405d] & w[2][-27a9]));
+// @0012b734:  w[2][-16c8]    <= (((GKO.FWN.FWN9.BIT2.L2 & GKO.ICC.TEA.BIT0.L2) & ~(w[2][-27a9])) | (GKO.FWN.FWN9.BIT2.L2 & w[2][-27a9]));  // GKO.GE0.WPCB.NAN4.L2
+// @0012b754:  w[2][-16c7]    <= (((w[0][-409b] & GKO.ICC.TEA.BIT0.L2) & ~(w[2][-27a9])) | (w[0][-409b] & w[2][-27a9]));
+// @0012b774:  w[2][-16c6]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.ICC.TEA.BIT0.L2) & ~(w[2][-27a9])) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27a9]));  // GKO.DLS.TLD_REQ.BIT0.L1
+// @0012b780: [патч-слот / данные]
+// @0012b798:  w[2][-16c5]    <= (((w[0][-4099] & GKO.ICC.TEA.BIT0.L2) & ~(w[2][-27a9])) | (w[0][-4099] & w[2][-27a9]));
+// @0012b7b8:  w[2][-16c4]    <= (((w[0][-4060] & w[2][-54d5]) & ~(w[2][-27a8])) | (w[0][-4060] & w[2][-27a8]));  // GKO.QSR.TSCB.NAN7.L2
+// @0012b7cc:  w[1][777b]    <= ((GKO.CB1.CBD_LINE.NAN4.CR.L1 & r22) | w[2][-27a8]);  // GKO.CB1.CBD_LINE.NAN4.CR.L1
+// @0012b7e8:  w[2][-16c3]    <= (((w[0][-405f] & w[2][-54d5]) & ~(w[2][-27a8])) | (w[0][-405f] & w[2][-27a8]));
+// @0012b800: [патч-слот / данные]
+// @0012b80c:  w[2][-16c2]    <= (((w[0][-405e] & w[2][-54d5]) & ~(w[2][-27a8])) | (w[0][-405e] & w[2][-27a8]));
+// @0012b82c:  w[2][-16c1]    <= (((w[0][-405d] & w[2][-54d5]) & ~(w[2][-27a8])) | (w[0][-405d] & w[2][-27a8]));  // GKO.DQ0.ST_PIPE_SHIFT_REG.NCN1.CR.L1
+// @0012b84c:  w[2][-16c0]    <= (((GKO.FWN.FWN9.BIT2.L2 & w[2][-54d5]) & ~(w[2][-27a8])) | (GKO.FWN.FWN9.BIT2.L2 & w[2][-27a8]));  // GKO.DMM.TLB_BIST_PAT_COMPLETE.BIT0.L2
+// @0012b86c:  w[2][-16bf]    <= (((w[0][-409b] & w[2][-54d5]) & ~(w[2][-27a8])) | (w[0][-409b] & w[2][-27a8]));
+// @0012b880: [патч-слот / данные]
+// @0012b890:  w[2][-16be]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-54d5]) & ~(w[2][-27a8])) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27a8]));
+// @0012b8b0:  w[2][-16bd]    <= (((w[0][-4099] & w[2][-54d5]) & ~(w[2][-27a8])) | (w[0][-4099] & w[2][-27a8]));
+// @0012b8d0:  w[2][-16bc]    <= (((w[0][-4060] & w[2][-4eb5]) & ~(w[2][-27a7])) | (w[0][-4060] & w[2][-27a7]));  // GKO.QSR.TSCB.NAN6.L2
+// @0012b8e4:  w[1][7cf7]    <= ((w[1][7cf7] & r22) | w[2][-27a7]);
+// @0012b900: [патч-слот / данные]
+// @0012b904:  w[2][-16bb]    <= (((w[0][-405f] & w[2][-4eb5]) & ~(w[2][-27a7])) | (w[0][-405f] & w[2][-27a7]));
+// @0012b924:  w[2][-16ba]    <= (((w[0][-405e] & w[2][-4eb5]) & ~(w[2][-27a7])) | (w[0][-405e] & w[2][-27a7]));
+// @0012b944:  w[2][-16b9]    <= (((w[0][-405d] & w[2][-4eb5]) & ~(w[2][-27a7])) | (w[0][-405d] & w[2][-27a7]));
+// @0012b964:  w[2][-16b8]    <= (((GKO.FWN.FWN9.BIT2.L2 & w[2][-4eb5]) & ~(w[2][-27a7])) | (GKO.FWN.FWN9.BIT2.L2 & w[2][-27a7]));  // GKO.GE0.WPCB.NAN6.L2
+// @0012b980: [патч-слот / данные]
+// @0012b988:  w[2][-16b7]    <= (((w[0][-409b] & w[2][-4eb5]) & ~(w[2][-27a7])) | (w[0][-409b] & w[2][-27a7]));
+// @0012b9a8:  w[2][-16b6]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-4eb5]) & ~(w[2][-27a7])) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27a7]));
+// @0012b9c8:  w[2][-16b5]    <= (((w[0][-4099] & w[2][-4eb5]) & ~(w[2][-27a7])) | (w[0][-4099] & w[2][-27a7]));
+// @0012b9e8:  w[2][-16b4]    <= (((w[0][-4060] & w[2][-2dfd]) & ~(w[2][-27a6])) | (w[0][-4060] & w[2][-27a6]));  // GKO.QSR.TSCB.NAN5.L2
+// @0012b9fc:  w[2][-7bbb]    <= ((w[2][-7b74] & r22) | w[2][-27a6]);
+// @0012ba00: [патч-слот / данные]
+// @0012ba1c:  w[2][-16b3]    <= (((w[0][-405f] & w[2][-2dfd]) & ~(w[2][-27a6])) | (w[0][-405f] & w[2][-27a6]));
+// @0012ba3c:  w[2][-16b2]    <= (((w[0][-405e] & w[2][-2dfd]) & ~(w[2][-27a6])) | (w[0][-405e] & w[2][-27a6]));
+// @0012ba5c:  w[2][-16b1]    <= (((w[0][-405d] & w[2][-2dfd]) & ~(w[2][-27a6])) | (w[0][-405d] & w[2][-27a6]));
+// @0012ba7c:  w[2][-16b0]    <= (((GKO.FWN.FWN9.BIT2.L2 & w[2][-2dfd]) & ~(w[2][-27a6])) | (GKO.FWN.FWN9.BIT2.L2 & w[2][-27a6]));  // GKO.GE0.WPCB.NAN7.L2
+// @0012ba80: [патч-слот / данные]
+// @0012baa0:  w[2][-16af]    <= (((w[0][-409b] & w[2][-2dfd]) & ~(w[2][-27a6])) | (w[0][-409b] & w[2][-27a6]));
+// @0012bac0:  w[2][-16ae]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-2dfd]) & ~(w[2][-27a6])) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27a6]));
+// @0012bae0:  w[2][-16ad]    <= (((w[0][-4099] & w[2][-2dfd]) & ~(w[2][-27a6])) | (w[0][-4099] & w[2][-27a6]));
+// @0012bb00: [патч-слот / данные]
+// @0012bb04:  w[2][-16ac]    <= (((w[0][-4060] & w[2][-2a90]) & ~(w[2][-27a5])) | (w[0][-4060] & w[2][-27a5]));  // GKO.QSR.TSCB.NAN4.L2
+// @0012bb18:  w[2][-7b74]    <= ((w[2][-58cd] & r22) | w[2][-27a5]);
+// @0012bb34:  w[2][-16ab]    <= (((w[0][-405f] & w[2][-2a90]) & ~(w[2][-27a5])) | (w[0][-405f] & w[2][-27a5]));
+// @0012bb54:  w[2][-16aa]    <= (((w[0][-405e] & w[2][-2a90]) & ~(w[2][-27a5])) | (w[0][-405e] & w[2][-27a5]));
+// @0012bb74:  w[2][-16a9]    <= (((w[0][-405d] & w[2][-2a90]) & ~(w[2][-27a5])) | (w[0][-405d] & w[2][-27a5]));
+// @0012bb80: [патч-слот / данные]
+// @0012bb98:  w[2][-16a8]    <= (((GKO.FWN.FWN9.BIT2.L2 & w[2][-2a90]) & ~(w[2][-27a5])) | (GKO.FWN.FWN9.BIT2.L2 & w[2][-27a5]));  // GKO.GE0.WPCC.NAN0.L2
+// @0012bbb8:  w[2][-16a7]    <= (((w[0][-409b] & w[2][-2a90]) & ~(w[2][-27a5])) | (w[0][-409b] & w[2][-27a5]));
+// @0012bbd8:  w[2][-16a6]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-2a90]) & ~(w[2][-27a5])) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27a5]));
+// @0012bbf8:  w[2][-16a5]    <= (((w[0][-4099] & w[2][-2a90]) & ~(w[2][-27a5])) | (w[0][-4099] & w[2][-27a5]));
+// @0012bc00: [патч-слот / данные]
+// @0012bc1c:  w[2][-16a4]    <= (((w[0][-4060] & w[2][-2a70]) & ~(GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4060] & GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.QSR.TSCB.NAN3.L2
+// @0012bc30:  w[2][-5995]    <= ((w[2][-57e5] & r22) | GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH);
+// @0012bc4c:  w[2][-16a3]    <= (((w[0][-405f] & w[2][-2a70]) & ~(GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-405f] & GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.FIC.FIJ4.BIT0.L2
+// @0012bc6c:  w[2][-16a2]    <= (((w[0][-405e] & w[2][-2a70]) & ~(GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-405e] & GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.HIC.HIB1.BIT0.L1
+// @0012bc80: [патч-слот / данные]
+// @0012bc90:  w[2][-16a1]    <= (((w[0][-405d] & w[2][-2a70]) & ~(GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-405d] & GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012bcb0:  w[2][-16a0]    <= (((GKO.FWN.FWN9.BIT2.L2 & w[2][-2a70]) & ~(GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH)) | (GKO.FWN.FWN9.BIT2.L2 & GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.GE0.WPCC.NAN1.L2
+// @0012bcd0:  w[2][-169f]    <= (((w[0][-409b] & w[2][-2a70]) & ~(GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-409b] & GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012bcf0:  w[2][-169e]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-2a70]) & ~(GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH)) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012bd00: [патч-слот / данные]
+// @0012bd14:  w[2][-169d]    <= (((w[0][-4099] & w[2][-2a70]) & ~(GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4099] & GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.HWC.HWCW.BIT0.L1
+// @0012bd34:  w[2][-169c]    <= (((w[0][-4060] & GKO.L20.L2DCACHEL.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.FIC.FICL.BIT0.L2)) | (w[0][-4060] & GKO.FIC.FICL.BIT0.L2));  // GKO.FWN.FWSX.BIT4.L2
+// @0012bd48:  w[1][6ff6]    <= ((w[1][6ff6] & r22) | GKO.FIC.FICL.BIT0.L2);
+// @0012bd64:  w[2][-169b]    <= (((w[0][-405f] & GKO.L20.L2DCACHEL.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.FIC.FICL.BIT0.L2)) | (w[0][-405f] & GKO.FIC.FICL.BIT0.L2));
+// @0012bd80: [патч-слот / данные]
+// @0012bd88:  w[2][-169a]    <= (((w[0][-405e] & GKO.L20.L2DCACHEL.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.FIC.FICL.BIT0.L2)) | (w[0][-405e] & GKO.FIC.FICL.BIT0.L2));
+// @0012bda8:  w[2][-1699]    <= (((w[0][-405d] & GKO.L20.L2DCACHEL.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.FIC.FICL.BIT0.L2)) | (w[0][-405d] & GKO.FIC.FICL.BIT0.L2));
+// @0012bdc8:  w[2][-1698]    <= (((GKO.FWN.FWN9.BIT2.L2 & GKO.L20.L2DCACHEL.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.FIC.FICL.BIT0.L2)) | (GKO.FWN.FWN9.BIT2.L2 & GKO.FIC.FICL.BIT0.L2));  // GKO.GE0.WPCC.NAN2.L2
+// @0012bde8:  w[2][-1697]    <= (((w[0][-409b] & GKO.L20.L2DCACHEL.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.FIC.FICL.BIT0.L2)) | (w[0][-409b] & GKO.FIC.FICL.BIT0.L2));
+// @0012be00: [патч-слот / данные]
+// @0012be0c:  w[2][-1696]    <= (((GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.L20.L2DCACHEL.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.FIC.FICL.BIT0.L2)) | (GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.FIC.FICL.BIT0.L2));
+// @0012be2c:  w[2][-1695]    <= (((w[0][-4099] & GKO.L20.L2DCACHEL.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.FIC.FICL.BIT0.L2)) | (w[0][-4099] & GKO.FIC.FICL.BIT0.L2));
+// @0012be4c:  w[2][-1694]    <= (((w[0][-4098] & w[2][-7b70]) & ~(GKO.HIC.HI21.BIT0.L1)) | (w[0][-4098] & GKO.HIC.HI21.BIT0.L1));  // GKO.QSR.TSCB.NAN1.L2
+// @0012be60:  w[1][7709]    <= ((w[1][7709] & r22) | GKO.HIC.HI21.BIT0.L1);
+// @0012be7c:  w[2][-1693]    <= (((w[0][-4097] & w[2][-7b70]) & ~(GKO.HIC.HI21.BIT0.L1)) | (w[0][-4097] & GKO.HIC.HI21.BIT0.L1));
+// @0012be80: [патч-слот / данные]
+// @0012bea0:  w[2][-1692]    <= (((w[0][-4096] & w[2][-7b70]) & ~(GKO.HIC.HI21.BIT0.L1)) | (w[0][-4096] & GKO.HIC.HI21.BIT0.L1));
+// @0012bec0:  w[2][-1691]    <= (((w[0][-4095] & w[2][-7b70]) & ~(GKO.HIC.HI21.BIT0.L1)) | (w[0][-4095] & GKO.HIC.HI21.BIT0.L1));  // GKO.HWC.HWEX.BIT4.L2
+// @0012bee0:  w[2][-1690]    <= (((w[0][-4094] & w[2][-7b70]) & ~(GKO.HIC.HI21.BIT0.L1)) | (w[0][-4094] & GKO.HIC.HI21.BIT0.L1));  // GKO.GE0.WPCC.NAN3.L2
+// @0012bf00: [патч-слот / данные]
+// @0012bf04:  w[2][-168f]    <= (((w[0][-4093] & w[2][-7b70]) & ~(GKO.HIC.HI21.BIT0.L1)) | (w[0][-4093] & GKO.HIC.HI21.BIT0.L1));  // GKO.ICC.EA_SEL_L1.BIT0.L1
+// @0012bf24:  w[2][-168e]    <= (((w[0][-4092] & w[2][-7b70]) & ~(GKO.HIC.HI21.BIT0.L1)) | (w[0][-4092] & GKO.HIC.HI21.BIT0.L1));
+// @0012bf44:  w[2][-168d]    <= (((GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-7b70]) & ~(GKO.HIC.HI21.BIT0.L1)) | (GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.HIC.HI21.BIT0.L1));
+// @0012bf64:  w[2][-168c]    <= (((w[0][-4098] & w[2][-598e]) & ~(w[2][-27a1])) | (w[0][-4098] & w[2][-27a1]));  // GKO.QSR.TSCB.NAN0.L2
+// @0012bf78:  w[1][773a]    <= ((GKO.DLS.WP_REQ_QUAL.BIT0.L2 & r22) | w[2][-27a1]);  // GKO.DLS.WP_REQ_QUAL.BIT0.L2
+// @0012bf80: [патч-слот / данные]
+// @0012bf98:  w[2][-168b]    <= (((w[0][-4097] & w[2][-598e]) & ~(w[2][-27a1])) | (w[0][-4097] & w[2][-27a1]));
+// @0012bfb8:  w[2][-168a]    <= (((w[0][-4096] & w[2][-598e]) & ~(w[2][-27a1])) | (w[0][-4096] & w[2][-27a1]));
+// @0012bfd8:  w[2][-1689]    <= (((w[0][-4095] & w[2][-598e]) & ~(w[2][-27a1])) | (w[0][-4095] & w[2][-27a1]));
+// @0012bff8:  w[2][-1688]    <= (((w[0][-4094] & w[2][-598e]) & ~(w[2][-27a1])) | (w[0][-4094] & w[2][-27a1]));  // GKO.GE0.WPCC.NAN4.L2
+// @0012c000: [патч-слот / данные]
+// @0012c01c:  w[2][-1687]    <= (((w[0][-4093] & w[2][-598e]) & ~(w[2][-27a1])) | (w[0][-4093] & w[2][-27a1]));
+// @0012c03c:  w[2][-1686]    <= (((w[0][-4092] & w[2][-598e]) & ~(w[2][-27a1])) | (w[0][-4092] & w[2][-27a1]));
+// @0012c05c:  w[2][-1685]    <= (((GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-598e]) & ~(w[2][-27a1])) | (GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27a1]));
+// @0012c07c:  w[2][-1684]    <= (((w[0][-4098] & w[2][-54c5]) & ~(w[2][-27a0])) | (w[0][-4098] & w[2][-27a0]));  // GKO.DL0.DLAG.NCN0.CR.L2
+// @0012c080: [патч-слот / данные]
+// @0012c094:  w[1][777c]    <= ((GKO.IC0.ICAA.FWD_LAT.L2.RRAM_0_HOLDL2 & r22) | w[2][-27a0]);  // GKO.IC0.ICAA.FWD_LAT.L2.RRAM_0_HOLDL2
+// @0012c0b0:  w[2][-1683]    <= (((w[0][-4097] & w[2][-54c5]) & ~(w[2][-27a0])) | (w[0][-4097] & w[2][-27a0]));
+// @0012c0d0:  w[2][-1682]    <= (((w[0][-4096] & w[2][-54c5]) & ~(w[2][-27a0])) | (w[0][-4096] & w[2][-27a0]));  // GKO.JAB.BIST_COMP_TEMP_TAG.BIT0.L1
+// @0012c0f0:  w[2][-1681]    <= (((w[0][-4095] & w[2][-54c5]) & ~(w[2][-27a0])) | (w[0][-4095] & w[2][-27a0]));  // GKO.JTC.GCLK_SYNC1.BIT9.L2
+// @0012c100: [патч-слот / данные]
+// @0012c114:  w[2][-1680]    <= (((w[0][-4094] & w[2][-54c5]) & ~(w[2][-27a0])) | (w[0][-4094] & w[2][-27a0]));  // GKO.GE0.WPCC.NAN5.L2
+// @0012c134:  w[2][-167f]    <= (((w[0][-4093] & w[2][-54c5]) & ~(w[2][-27a0])) | (w[0][-4093] & w[2][-27a0]));  // GKO.LAS.HQ_ST_BEN.BIT4.L2
+// @0012c154:  w[2][-167e]    <= (((w[0][-4092] & w[2][-54c5]) & ~(w[2][-27a0])) | (w[0][-4092] & w[2][-27a0]));  // GKO.LAS.LADC.BIT15.L2
+// @0012c174:  w[2][-167d]    <= (((GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-54c5]) & ~(w[2][-27a0])) | (GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-27a0]));  // GKO.LAS.SRC_LXS0_OUT.BIT0.L1
+// @0012c180: [патч-слот / данные]
+// @0012c198:  w[2][-167c]    <= (((w[0][-4098] & GKO.FWC.FWEX.BIT1.L2) & ~(w[2][-279f])) | (w[0][-4098] & w[2][-279f]));  // GKO.LAS.FDQ_PQA.BIT5.L1
+// @0012c1ac:  w[1][7cf8]    <= ((w[1][7cf8] & r22) | w[2][-279f]);
+// @0012c1c8:  w[2][-167b]    <= (((w[0][-4097] & GKO.FWC.FWEX.BIT1.L2) & ~(w[2][-279f])) | (w[0][-4097] & w[2][-279f]));
+// @0012c1e8:  w[2][-167a]    <= (((w[0][-4096] & GKO.FWC.FWEX.BIT1.L2) & ~(w[2][-279f])) | (w[0][-4096] & w[2][-279f]));
+// @0012c200: [патч-слот / данные]
+// @0012c20c:  w[2][-1679]    <= (((w[0][-4095] & GKO.FWC.FWEX.BIT1.L2) & ~(w[2][-279f])) | (w[0][-4095] & w[2][-279f]));
+// @0012c22c:  w[2][-1678]    <= (((w[0][-4094] & GKO.FWC.FWEX.BIT1.L2) & ~(w[2][-279f])) | (w[0][-4094] & w[2][-279f]));  // GKO.GE0.WPCC.NAN6.L2
+// @0012c24c:  w[2][-1677]    <= (((w[0][-4093] & GKO.FWC.FWEX.BIT1.L2) & ~(w[2][-279f])) | (w[0][-4093] & w[2][-279f]));
+// @0012c26c:  w[2][-1676]    <= (((w[0][-4092] & GKO.FWC.FWEX.BIT1.L2) & ~(w[2][-279f])) | (w[0][-4092] & w[2][-279f]));
+// @0012c280: [патч-слот / данные]
+// @0012c290:  w[2][-1675]    <= (((GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.FWC.FWEX.BIT1.L2) & ~(w[2][-279f])) | (GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-279f]));
+// @0012c2b0:  w[2][-1674]    <= (((w[0][-4098] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-279e])) | (w[0][-4098] & w[2][-279e]));  // GKO.QSR.TSCA.NAN7.L2
+// @0012c2c4:  w[2][-7b73]    <= ((GKO.LFN.LFN0.BIT1.L2 & r22) | w[2][-279e]);  // GKO.LFN.LFN0.BIT1.L2
+// @0012c2e0:  w[2][-1673]    <= (((w[0][-4097] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-279e])) | (w[0][-4097] & w[2][-279e]));  // GKO.LLC.LAC_MULTS_GPR_M.BIT3.L2
+// @0012c300: [патч-слот / данные]
+// @0012c304:  w[2][-1672]    <= (((w[0][-4096] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-279e])) | (w[0][-4096] & w[2][-279e]));  // GKO.LLC.LLC_FXU_SEL_CLEAN_H.BIT3.L1
+// @0012c324:  w[2][-1671]    <= (((w[0][-4095] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-279e])) | (w[0][-4095] & w[2][-279e]));
+// @0012c344:  w[2][-1670]    <= (((w[0][-4094] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-279e])) | (w[0][-4094] & w[2][-279e]));  // GKO.GE0.WPCC.NAN7.L2
+// @0012c364:  w[2][-166f]    <= (((w[0][-4093] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-279e])) | (w[0][-4093] & w[2][-279e]));
+// @0012c380: [патч-слот / данные]
+// @0012c388:  w[2][-166e]    <= (((w[0][-4092] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-279e])) | (w[0][-4092] & w[2][-279e]));
+// @0012c3a8:  w[2][-166d]    <= (((GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-279e])) | (GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-279e]));
+// @0012c3c8:  w[2][-166c]    <= (((w[0][-4098] & GKO.ICC.INT_BUSY.BIT0.L1) & ~(GKO.FWC.FWEX.BIT0.L1)) | (w[0][-4098] & GKO.FWC.FWEX.BIT0.L1));  // GKO.QSR.TSCA.NAN6.L2
+// @0012c3dc:  w[2][-7b70]    <= ((GKO.DC0.DCAA.INH_LAT.L2 & r22) | GKO.FWC.FWEX.BIT0.L1);
+// @0012c3f8:  w[2][-166b]    <= (((w[0][-4097] & GKO.ICC.INT_BUSY.BIT0.L1) & ~(GKO.FWC.FWEX.BIT0.L1)) | (w[0][-4097] & GKO.FWC.FWEX.BIT0.L1));
+// @0012c400: [патч-слот / данные]
+// @0012c41c:  w[2][-166a]    <= (((w[0][-4096] & GKO.ICC.INT_BUSY.BIT0.L1) & ~(GKO.FWC.FWEX.BIT0.L1)) | (w[0][-4096] & GKO.FWC.FWEX.BIT0.L1));  // GKO.L20.L2DCACHEL.I43.I3.I1.L2
+// @0012c43c:  w[2][-1669]    <= (((w[0][-4095] & GKO.ICC.INT_BUSY.BIT0.L1) & ~(GKO.FWC.FWEX.BIT0.L1)) | (w[0][-4095] & GKO.FWC.FWEX.BIT0.L1));
+// @0012c45c:  w[2][-1668]    <= (((w[0][-4094] & GKO.ICC.INT_BUSY.BIT0.L1) & ~(GKO.FWC.FWEX.BIT0.L1)) | (w[0][-4094] & GKO.FWC.FWEX.BIT0.L1));  // GKO.GE0.WPCD.NAN0.L2
+// @0012c47c:  w[2][-1667]    <= (((w[0][-4093] & GKO.ICC.INT_BUSY.BIT0.L1) & ~(GKO.FWC.FWEX.BIT0.L1)) | (w[0][-4093] & GKO.FWC.FWEX.BIT0.L1));
+// @0012c480: [патч-слот / данные]
+// @0012c4a0:  w[2][-1666]    <= (((w[0][-4092] & GKO.ICC.INT_BUSY.BIT0.L1) & ~(GKO.FWC.FWEX.BIT0.L1)) | (w[0][-4092] & GKO.FWC.FWEX.BIT0.L1));
+// @0012c4c0:  w[2][-1665]    <= (((GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.ICC.INT_BUSY.BIT0.L1) & ~(GKO.FWC.FWEX.BIT0.L1)) | (GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.FWC.FWEX.BIT0.L1));
+// @0012c4e0:  w[2][-1664]    <= (((w[0][-4098] & w[2][-2a6f]) & ~(GKO.FWN.FWSX.BIT10.L2)) | (w[0][-4098] & GKO.FWN.FWSX.BIT10.L2));  // GKO.QSR.TSCA.NAN5.L2
+// @0012c4f4:  w[2][-598f]    <= ((w[2][-57de] & r22) | GKO.FWN.FWSX.BIT10.L2);  // GKO.ICC.TEA.BIT0.L2
+// @0012c500: [патч-слот / данные]
+// @0012c514:  w[2][-1663]    <= (((w[0][-4097] & w[2][-2a6f]) & ~(GKO.FWN.FWSX.BIT10.L2)) | (w[0][-4097] & GKO.FWN.FWSX.BIT10.L2));
+// @0012c534:  w[2][-1662]    <= (((w[0][-4096] & w[2][-2a6f]) & ~(GKO.FWN.FWSX.BIT10.L2)) | (w[0][-4096] & GKO.FWN.FWSX.BIT10.L2));
+// @0012c554:  w[2][-1661]    <= (((w[0][-4095] & w[2][-2a6f]) & ~(GKO.FWN.FWSX.BIT10.L2)) | (w[0][-4095] & GKO.FWN.FWSX.BIT10.L2));
+// @0012c574:  w[2][-1660]    <= (((w[0][-4094] & w[2][-2a6f]) & ~(GKO.FWN.FWSX.BIT10.L2)) | (w[0][-4094] & GKO.FWN.FWSX.BIT10.L2));  // GKO.GE0.WPCD.NAN1.L2
+// @0012c580: [патч-слот / данные]
+// @0012c598:  w[2][-165f]    <= (((w[0][-4093] & w[2][-2a6f]) & ~(GKO.FWN.FWSX.BIT10.L2)) | (w[0][-4093] & GKO.FWN.FWSX.BIT10.L2));
+// @0012c5b8:  w[2][-165e]    <= (((w[0][-4092] & w[2][-2a6f]) & ~(GKO.FWN.FWSX.BIT10.L2)) | (w[0][-4092] & GKO.FWN.FWSX.BIT10.L2));
+// @0012c5d8:  w[2][-165d]    <= (((GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-2a6f]) & ~(GKO.FWN.FWSX.BIT10.L2)) | (GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.FWN.FWSX.BIT10.L2));
+// @0012c5f8:  w[2][-165c]    <= (((w[0][-4098] & w[2][-2a4f]) & ~(GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4098] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.QSR.TSCA.NAN4.L2
+// @0012c600: [патч-слот / данные]
+// @0012c610:  w[1][6ffa]    <= ((w[1][6ffa] & r22) | GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH);
+// @0012c62c:  w[2][-165b]    <= (((w[0][-4097] & w[2][-2a4f]) & ~(GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4097] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012c64c:  w[2][-165a]    <= (((w[0][-4096] & w[2][-2a4f]) & ~(GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4096] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012c66c:  w[2][-1659]    <= (((w[0][-4095] & w[2][-2a4f]) & ~(GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4095] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012c680: [патч-слот / данные]
+// @0012c690:  w[2][-1658]    <= (((w[0][-4094] & w[2][-2a4f]) & ~(GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4094] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.QSR.TSCD.NAN6.L2
+// @0012c6b0:  w[2][-1657]    <= (((w[0][-4093] & w[2][-2a4f]) & ~(GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4093] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012c6d0:  w[2][-1656]    <= (((w[0][-4092] & w[2][-2a4f]) & ~(GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4092] & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012c6f0:  w[2][-1655]    <= (((GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-2a4f]) & ~(GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH)) | (GKO.L20.L2DCACHEL.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012c700: [патч-слот / данные]
+// @0012c714:  w[2][-1654]    <= (((w[0][-4090] & w[2][-7b5d]) & ~(w[2][-279a])) | (w[0][-4090] & w[2][-279a]));  // GKO.GE0.WPCD.NAN2.L2
+// @0012c728:  w[1][770a]    <= ((w[1][770a] & r22) | w[2][-279a]);
+// @0012c744:  w[2][-1653]    <= (((w[0][-408f] & w[2][-7b5d]) & ~(w[2][-279a])) | (w[0][-408f] & w[2][-279a]));
+// @0012c764:  w[2][-1652]    <= (((w[0][-408e] & w[2][-7b5d]) & ~(w[2][-279a])) | (w[0][-408e] & w[2][-279a]));
+// @0012c780: [патч-слот / данные]
+// @0012c788:  w[2][-1651]    <= (((w[0][-408d] & w[2][-7b5d]) & ~(w[2][-279a])) | (w[0][-408d] & w[2][-279a]));
+// @0012c7a8:  w[2][-1650]    <= (((w[0][-408c] & w[2][-7b5d]) & ~(w[2][-279a])) | (w[0][-408c] & w[2][-279a]));  // GKO.QSR.TSCA.NAN3.L2
+// @0012c7c8:  w[2][-164f]    <= (((w[0][-408b] & w[2][-7b5d]) & ~(w[2][-279a])) | (w[0][-408b] & w[2][-279a]));
+// @0012c7e8:  w[2][-164e]    <= (((w[0][-408a] & w[2][-7b5d]) & ~(w[2][-279a])) | (w[0][-408a] & w[2][-279a]));
+// @0012c800: [патч-слот / данные]
+// @0012c80c:  w[2][-164d]    <= (((w[0][-4089] & w[2][-7b5d]) & ~(w[2][-279a])) | (w[0][-4089] & w[2][-279a]));
+// @0012c82c:  w[2][-164c]    <= (((w[0][-4090] & w[2][-598d]) & ~(w[2][-2799])) | (w[0][-4090] & w[2][-2799]));  // GKO.GE0.WPCD.NAN3.L2
+// @0012c840:  w[1][773b]    <= ((w[1][773b] & r22) | w[2][-2799]);
+// @0012c85c:  w[2][-164b]    <= (((w[0][-408f] & w[2][-598d]) & ~(w[2][-2799])) | (w[0][-408f] & w[2][-2799]));
+// @0012c87c:  w[2][-164a]    <= (((w[0][-408e] & w[2][-598d]) & ~(w[2][-2799])) | (w[0][-408e] & w[2][-2799]));
+// @0012c880: [патч-слот / данные]
+// @0012c8a0:  w[2][-1649]    <= (((w[0][-408d] & w[2][-598d]) & ~(w[2][-2799])) | (w[0][-408d] & w[2][-2799]));
+// @0012c8c0:  w[2][-1648]    <= (((w[0][-408c] & w[2][-598d]) & ~(w[2][-2799])) | (w[0][-408c] & w[2][-2799]));  // GKO.QSR.TSCA.NAN2.L2
+// @0012c8e0:  w[2][-1647]    <= (((w[0][-408b] & w[2][-598d]) & ~(w[2][-2799])) | (w[0][-408b] & w[2][-2799]));
+// @0012c900: [патч-слот / данные]
+// @0012c904:  w[2][-1646]    <= (((w[0][-408a] & w[2][-598d]) & ~(w[2][-2799])) | (w[0][-408a] & w[2][-2799]));
+// @0012c924:  w[2][-1645]    <= (((w[0][-4089] & w[2][-598d]) & ~(w[2][-2799])) | (w[0][-4089] & w[2][-2799]));
+// @0012c944:  w[2][-1644]    <= (((w[0][-4090] & w[2][-504d]) & ~(w[2][-2798])) | (w[0][-4090] & w[2][-2798]));  // GKO.GE0.WPCD.NAN4.L2
+// @0012c958:  w[1][7782]    <= ((GKO.LAS.CDQ_PQA.BIT9.L2 & r22) | w[2][-2798]);  // GKO.LAS.CDQ_PQA.BIT9.L2
+// @0012c974:  w[2][-1643]    <= (((w[0][-408f] & w[2][-504d]) & ~(w[2][-2798])) | (w[0][-408f] & w[2][-2798]));
+// @0012c980: [патч-слот / данные]
+// @0012c998:  w[2][-1642]    <= (((w[0][-408e] & w[2][-504d]) & ~(w[2][-2798])) | (w[0][-408e] & w[2][-2798]));
+// @0012c9b8:  w[2][-1641]    <= (((w[0][-408d] & w[2][-504d]) & ~(w[2][-2798])) | (w[0][-408d] & w[2][-2798]));
+// @0012c9d8:  w[2][-1640]    <= (((w[0][-408c] & w[2][-504d]) & ~(w[2][-2798])) | (w[0][-408c] & w[2][-2798]));  // GKO.QSR.TSCA.NAN1.L2
+// @0012c9f8:  w[2][-163f]    <= (((w[0][-408b] & w[2][-504d]) & ~(w[2][-2798])) | (w[0][-408b] & w[2][-2798]));
+// @0012ca00: [патч-слот / данные]
+// @0012ca1c:  w[2][-163e]    <= (((w[0][-408a] & w[2][-504d]) & ~(w[2][-2798])) | (w[0][-408a] & w[2][-2798]));
+// @0012ca3c:  w[2][-163d]    <= (((w[0][-4089] & w[2][-504d]) & ~(w[2][-2798])) | (w[0][-4089] & w[2][-2798]));
+// @0012ca5c:  w[2][-163c]    <= (((w[0][-4090] & GKO.L20.L2DCACHEH.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-2797])) | (w[0][-4090] & w[2][-2797]));  // GKO.GE0.WPCD.NAN5.L2
+// @0012ca70:  w[1][7cf9]    <= ((w[1][7cf9] & r22) | w[2][-2797]);
+// @0012ca80: [патч-слот / данные]
+// @0012ca90:  w[2][-163b]    <= (((w[0][-408f] & GKO.L20.L2DCACHEH.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-2797])) | (w[0][-408f] & w[2][-2797]));
+// @0012cab0:  w[2][-163a]    <= (((w[0][-408e] & GKO.L20.L2DCACHEH.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-2797])) | (w[0][-408e] & w[2][-2797]));
+// @0012cad0:  w[2][-1639]    <= (((w[0][-408d] & GKO.L20.L2DCACHEH.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-2797])) | (w[0][-408d] & w[2][-2797]));
+// @0012caf0:  w[2][-1638]    <= (((w[0][-408c] & GKO.L20.L2DCACHEH.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-2797])) | (w[0][-408c] & w[2][-2797]));  // GKO.QSR.TSCA.NAN0.L2
+// @0012cb00: [патч-слот / данные]
+// @0012cb14:  w[2][-1637]    <= (((w[0][-408b] & GKO.L20.L2DCACHEH.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-2797])) | (w[0][-408b] & w[2][-2797]));
+// @0012cb34:  w[2][-1636]    <= (((w[0][-408a] & GKO.L20.L2DCACHEH.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-2797])) | (w[0][-408a] & w[2][-2797]));
+// @0012cb54:  w[2][-1635]    <= (((w[0][-4089] & GKO.L20.L2DCACHEH.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(w[2][-2797])) | (w[0][-4089] & w[2][-2797]));
+// @0012cb74:  w[2][-1634]    <= (((w[0][-4090] & w[2][-2de5]) & ~(w[2][-2796])) | (w[0][-4090] & w[2][-2796]));  // GKO.GE0.WPCD.NAN6.L2
+// @0012cb80: [патч-слот / данные]
+// @0012cb8c:  w[2][-7b72]    <= ((GKO.LLC.SPLICE_REAL_2.BIT0.L1 & r22) | w[2][-2796]);  // GKO.LLC.SPLICE_REAL_2.BIT0.L1
+// @0012cba8:  w[2][-1633]    <= (((w[0][-408f] & w[2][-2de5]) & ~(w[2][-2796])) | (w[0][-408f] & w[2][-2796]));
+// @0012cbc8:  w[2][-1632]    <= (((w[0][-408e] & w[2][-2de5]) & ~(w[2][-2796])) | (w[0][-408e] & w[2][-2796]));
+// @0012cbe8:  w[2][-1631]    <= (((w[0][-408d] & w[2][-2de5]) & ~(w[2][-2796])) | (w[0][-408d] & w[2][-2796]));
+// @0012cc00: [патч-слот / данные]
+// @0012cc0c:  w[2][-1630]    <= (((w[0][-408c] & w[2][-2de5]) & ~(w[2][-2796])) | (w[0][-408c] & w[2][-2796]));  // GKO.GE0.WPCD.NAN7.L2
+// @0012cc2c:  w[2][-162f]    <= (((w[0][-408b] & w[2][-2de5]) & ~(w[2][-2796])) | (w[0][-408b] & w[2][-2796]));
+// @0012cc4c:  w[2][-162e]    <= (((w[0][-408a] & w[2][-2de5]) & ~(w[2][-2796])) | (w[0][-408a] & w[2][-2796]));
+// @0012cc6c:  w[2][-162d]    <= (((w[0][-4089] & w[2][-2de5]) & ~(w[2][-2796])) | (w[0][-4089] & w[2][-2796]));
+// @0012cc80: [патч-слот / данные]
+// @0012cc90:  w[2][-162c]    <= (((w[0][-4090] & w[2][-2a8e]) & ~(w[2][-2795])) | (w[0][-4090] & w[2][-2795]));  // GKO.GE0.WPCE.NAN0.L2
+// @0012cca4:  w[2][-7b5d]    <= ((GKO.DLS.SNP_FAST_SBW.BIT0.L2 & r22) | w[2][-2795]);
+// @0012ccc0:  w[2][-162b]    <= (((w[0][-408f] & w[2][-2a8e]) & ~(w[2][-2795])) | (w[0][-408f] & w[2][-2795]));
+// @0012cce0:  w[2][-162a]    <= (((w[0][-408e] & w[2][-2a8e]) & ~(w[2][-2795])) | (w[0][-408e] & w[2][-2795]));
+// @0012cd00: [патч-слот / данные]
+// @0012cd04:  w[2][-1629]    <= (((w[0][-408d] & w[2][-2a8e]) & ~(w[2][-2795])) | (w[0][-408d] & w[2][-2795]));
+// @0012cd24:  w[2][-1628]    <= (((w[0][-408c] & w[2][-2a8e]) & ~(w[2][-2795])) | (w[0][-408c] & w[2][-2795]));  // GKO.GE0.WPCE.NAN1.L2
+// @0012cd44:  w[2][-1627]    <= (((w[0][-408b] & w[2][-2a8e]) & ~(w[2][-2795])) | (w[0][-408b] & w[2][-2795]));
+// @0012cd64:  w[2][-1626]    <= (((w[0][-408a] & w[2][-2a8e]) & ~(w[2][-2795])) | (w[0][-408a] & w[2][-2795]));
+// @0012cd80: [патч-слот / данные]
+// @0012cd88:  w[2][-1625]    <= (((w[0][-4089] & w[2][-2a8e]) & ~(w[2][-2795])) | (w[0][-4089] & w[2][-2795]));
+// @0012cda8:  w[2][-1624]    <= (((w[0][-4090] & w[2][-2a6e]) & ~(w[2][-2794])) | (w[0][-4090] & w[2][-2794]));  // GKO.GE0.WPCE.NAN2.L2
+// @0012cdbc:  w[2][-598e]    <= ((w[2][-57dd] & r22) | w[2][-2794]);
+// @0012cdd8:  w[2][-1623]    <= (((w[0][-408f] & w[2][-2a6e]) & ~(w[2][-2794])) | (w[0][-408f] & w[2][-2794]));
+// @0012cdf8:  w[2][-1622]    <= (((w[0][-408e] & w[2][-2a6e]) & ~(w[2][-2794])) | (w[0][-408e] & w[2][-2794]));
+// @0012ce00: [патч-слот / данные]
+// @0012ce1c:  w[2][-1621]    <= (((w[0][-408d] & w[2][-2a6e]) & ~(w[2][-2794])) | (w[0][-408d] & w[2][-2794]));
+// @0012ce3c:  w[2][-1620]    <= (((w[0][-408c] & w[2][-2a6e]) & ~(w[2][-2794])) | (w[0][-408c] & w[2][-2794]));  // GKO.GE0.WPCE.NAN3.L2
+// @0012ce5c:  w[2][-161f]    <= (((w[0][-408b] & w[2][-2a6e]) & ~(w[2][-2794])) | (w[0][-408b] & w[2][-2794]));
+// @0012ce7c:  w[2][-161e]    <= (((w[0][-408a] & w[2][-2a6e]) & ~(w[2][-2794])) | (w[0][-408a] & w[2][-2794]));
+// @0012ce80: [патч-слот / данные]
+// @0012cea0:  w[2][-161d]    <= (((w[0][-4089] & w[2][-2a6e]) & ~(w[2][-2794])) | (w[0][-4089] & w[2][-2794]));
+// @0012cec0:  w[2][-161c]    <= (((w[0][-4090] & w[2][-2a4e]) & ~(w[2][-2793])) | (w[0][-4090] & w[2][-2793]));  // GKO.GE0.WPCE.NAN4.L2
+// @0012ced4:  w[1][6ffe]    <= ((w[1][6ffe] & r22) | w[2][-2793]);
+// @0012cef0:  w[2][-161b]    <= (((w[0][-408f] & w[2][-2a4e]) & ~(w[2][-2793])) | (w[0][-408f] & w[2][-2793]));
+// @0012cf00: [патч-слот / данные]
+// @0012cf14:  w[2][-161a]    <= (((w[0][-408e] & w[2][-2a4e]) & ~(w[2][-2793])) | (w[0][-408e] & w[2][-2793]));
+// @0012cf34:  w[2][-1619]    <= (((w[0][-408d] & w[2][-2a4e]) & ~(w[2][-2793])) | (w[0][-408d] & w[2][-2793]));
+// @0012cf54:  w[2][-1618]    <= (((w[0][-408c] & w[2][-2a4e]) & ~(w[2][-2793])) | (w[0][-408c] & w[2][-2793]));  // GKO.QSR.TSCR.NCN0.L2
+// @0012cf74:  w[2][-1617]    <= (((w[0][-408b] & w[2][-2a4e]) & ~(w[2][-2793])) | (w[0][-408b] & w[2][-2793]));
+// @0012cf80: [патч-слот / данные]
+// @0012cf98:  w[2][-1616]    <= (((w[0][-408a] & w[2][-2a4e]) & ~(w[2][-2793])) | (w[0][-408a] & w[2][-2793]));
+// @0012cfb8:  w[2][-1615]    <= (((w[0][-4089] & w[2][-2a4e]) & ~(w[2][-2793])) | (w[0][-4089] & w[2][-2793]));
+// @0012cfd8:  w[2][-1614]    <= (((w[0][-406c] & w[2][-7aca]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-406c] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.GE0.WPCE.NAN5.L2
+// @0012cfec:  w[1][770b]    <= ((w[1][770b] & r22) | GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH);
+// @0012d000: [патч-слот / данные]
+// @0012d00c:  w[2][-1613]    <= (((GKO.L20.L2BF.NAN3.CR.L1 & w[2][-7aca]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (GKO.L20.L2BF.NAN3.CR.L1 & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012d02c:  w[2][-1612]    <= (((GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & w[2][-7aca]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012d04c:  w[2][-1611]    <= (((w[0][-4069] & w[2][-7aca]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4069] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012d06c:  w[2][-1610]    <= (((GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-7aca]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.QSR.TSCR.NBN7.L2
+// @0012d080: [патч-слот / данные]
+// @0012d090:  w[2][-160f]    <= (((w[0][-4063] & w[2][-7aca]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4063] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.XEA.XEFG.BIT3.L2
+// @0012d0b0:  w[2][-160e]    <= (((w[0][-4062] & w[2][-7aca]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4062] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));  // GKO.XEB.XECA2.BIT4.L2
+// @0012d0d0:  w[2][-160d]    <= (((w[0][-4061] & w[2][-7aca]) & ~(GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH)) | (w[0][-4061] & GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH));
+// @0012d0f0:  w[2][-160c]    <= (((w[0][-406c] & GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.HWC.HEWX.BIT0.L2)) | (w[0][-406c] & GKO.HWC.HEWX.BIT0.L2));  // GKO.GE0.WPCE.NAN6.L2
+// @0012d100: [патч-слот / данные]
+// @0012d108:  w[1][773c]    <= ((w[1][773c] & r22) | GKO.HWC.HEWX.BIT0.L2);
+// @0012d124:  w[2][-160b]    <= (((GKO.L20.L2BF.NAN3.CR.L1 & GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.HWC.HEWX.BIT0.L2)) | (GKO.L20.L2BF.NAN3.CR.L1 & GKO.HWC.HEWX.BIT0.L2));
+// @0012d144:  w[2][-160a]    <= (((GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.HWC.HEWX.BIT0.L2)) | (GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & GKO.HWC.HEWX.BIT0.L2));
+// @0012d164:  w[2][-1609]    <= (((w[0][-4069] & GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.HWC.HEWX.BIT0.L2)) | (w[0][-4069] & GKO.HWC.HEWX.BIT0.L2));
+// @0012d180: [патч-слот / данные]
+// @0012d188:  w[2][-1608]    <= (((GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.HWC.HEWX.BIT0.L2)) | (GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.HWC.HEWX.BIT0.L2));  // GKO.QSR.TSCR.NBN6.L2
+// @0012d1a8:  w[2][-1607]    <= (((w[0][-4063] & GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.HWC.HEWX.BIT0.L2)) | (w[0][-4063] & GKO.HWC.HEWX.BIT0.L2));
+// @0012d1c8:  w[2][-1606]    <= (((w[0][-4062] & GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.HWC.HEWX.BIT0.L2)) | (w[0][-4062] & GKO.HWC.HEWX.BIT0.L2));
+// @0012d1e8:  w[2][-1605]    <= (((w[0][-4061] & GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH) & ~(GKO.HWC.HEWX.BIT0.L2)) | (w[0][-4061] & GKO.HWC.HEWX.BIT0.L2));
+// @0012d200: [патч-слот / данные]
+// @0012d20c:  w[2][-1604]    <= (((w[0][-406c] & w[2][-5042]) & ~(w[2][-2790])) | (w[0][-406c] & w[2][-2790]));  // GKO.GE0.WPCE.NAN7.L2
+// @0012d220:  w[1][7783]    <= ((GKO.LAS.LXFA.BIT1.L2 & r22) | w[2][-2790]);  // GKO.LAS.LXFA.BIT1.L2
+// @0012d23c:  w[2][-1603]    <= (((GKO.L20.L2BF.NAN3.CR.L1 & w[2][-5042]) & ~(w[2][-2790])) | (GKO.L20.L2BF.NAN3.CR.L1 & w[2][-2790]));
+// @0012d25c:  w[2][-1602]    <= (((GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & w[2][-5042]) & ~(w[2][-2790])) | (GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & w[2][-2790]));
+// @0012d27c:  w[2][-1601]    <= (((w[0][-4069] & w[2][-5042]) & ~(w[2][-2790])) | (w[0][-4069] & w[2][-2790]));
+// @0012d280: [патч-слот / данные]
+// @0012d2a0:  w[2][-1600]    <= (((GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-5042]) & ~(w[2][-2790])) | (GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-2790]));  // GKO.QSR.TSCR.NBN5.L2
+// @0012d2c0:  w[2][-15ff]    <= (((w[0][-4063] & w[2][-5042]) & ~(w[2][-2790])) | (w[0][-4063] & w[2][-2790]));
+// @0012d2e0:  w[2][-15fe]    <= (((w[0][-4062] & w[2][-5042]) & ~(w[2][-2790])) | (w[0][-4062] & w[2][-2790]));
+// @0012d300: [патч-слот / данные]
+// @0012d304:  w[2][-15fd]    <= (((w[0][-4061] & w[2][-5042]) & ~(w[2][-2790])) | (w[0][-4061] & w[2][-2790]));
+// @0012d324:  w[2][-15fc]    <= (((w[0][-406c] & w[2][-4df5]) & ~(GKO.ICC.IC_BISTMAP.BIT1.L1)) | (w[0][-406c] & GKO.ICC.IC_BISTMAP.BIT1.L1));  // GKO.BAC.SNPI_LAT9.BIT2.L1
+// @0012d338:  w[1][7d04]    <= ((GKO.BAC.L2CST0_LAT.BIT1.L2 & r22) | GKO.ICC.IC_BISTMAP.BIT1.L1);  // GKO.BAC.L2CST0_LAT.BIT1.L2
+// @0012d354:  w[2][-15fb]    <= (((GKO.L20.L2BF.NAN3.CR.L1 & w[2][-4df5]) & ~(GKO.ICC.IC_BISTMAP.BIT1.L1)) | (GKO.L20.L2BF.NAN3.CR.L1 & GKO.ICC.IC_BISTMAP.BIT1.L1));
+// @0012d374:  w[2][-15fa]    <= (((GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & w[2][-4df5]) & ~(GKO.ICC.IC_BISTMAP.BIT1.L1)) | (GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & GKO.ICC.IC_BISTMAP.BIT1.L1));
+// @0012d380: [патч-слот / данные]
+// @0012d398:  w[2][-15f9]    <= (((w[0][-4069] & w[2][-4df5]) & ~(GKO.ICC.IC_BISTMAP.BIT1.L1)) | (w[0][-4069] & GKO.ICC.IC_BISTMAP.BIT1.L1));
+// @0012d3b8:  w[2][-15f8]    <= (((GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-4df5]) & ~(GKO.ICC.IC_BISTMAP.BIT1.L1)) | (GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.ICC.IC_BISTMAP.BIT1.L1));  // GKO.QSR.TSCR.NBN3.L2
+// @0012d3d8:  w[2][-15f7]    <= (((w[0][-4063] & w[2][-4df5]) & ~(GKO.ICC.IC_BISTMAP.BIT1.L1)) | (w[0][-4063] & GKO.ICC.IC_BISTMAP.BIT1.L1));
+// @0012d3f8:  w[2][-15f6]    <= (((w[0][-4062] & w[2][-4df5]) & ~(GKO.ICC.IC_BISTMAP.BIT1.L1)) | (w[0][-4062] & GKO.ICC.IC_BISTMAP.BIT1.L1));
+// @0012d400: [патч-слот / данные]
+// @0012d41c:  w[2][-15f5]    <= (((w[0][-4061] & w[2][-4df5]) & ~(GKO.ICC.IC_BISTMAP.BIT1.L1)) | (w[0][-4061] & GKO.ICC.IC_BISTMAP.BIT1.L1));
+// @0012d43c:  w[2][-15f4]    <= (((w[0][-406c] & w[2][-2dde]) & ~(w[2][-278e])) | (w[0][-406c] & w[2][-278e]));  // GKO.BDR.RLD_LAT4.BIT3.L2
+// @0012d450:  w[2][-7b71]    <= ((w[2][-7b71] & r22) | w[2][-278e]);
+// @0012d46c:  w[2][-15f3]    <= (((GKO.L20.L2BF.NAN3.CR.L1 & w[2][-2dde]) & ~(w[2][-278e])) | (GKO.L20.L2BF.NAN3.CR.L1 & w[2][-278e]));  // GKO.BDT.LAT5A.BIT0.L1
+// @0012d480: [патч-слот / данные]
+// @0012d490:  w[2][-15f2]    <= (((GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & w[2][-2dde]) & ~(w[2][-278e])) | (GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & w[2][-278e]));
+// @0012d4b0:  w[2][-15f1]    <= (((w[0][-4069] & w[2][-2dde]) & ~(w[2][-278e])) | (w[0][-4069] & w[2][-278e]));
+// @0012d4d0:  w[2][-15f0]    <= (((GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-2dde]) & ~(w[2][-278e])) | (GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-278e]));  // GKO.QSR.TSCR.NBN1.L2
+// @0012d4f0:  w[2][-15ef]    <= (((w[0][-4063] & w[2][-2dde]) & ~(w[2][-278e])) | (w[0][-4063] & w[2][-278e]));
+// @0012d500: [патч-слот / данные]
+// @0012d514:  w[2][-15ee]    <= (((w[0][-4062] & w[2][-2dde]) & ~(w[2][-278e])) | (w[0][-4062] & w[2][-278e]));  // GKO.BP0.BBCG.L4
+// @0012d534:  w[2][-15ed]    <= (((w[0][-4061] & w[2][-2dde]) & ~(w[2][-278e])) | (w[0][-4061] & w[2][-278e]));  // GKO.BP0.BBET.L2
+// @0012d554:  w[2][-15ec]    <= (((w[0][-406c] & w[2][-2a8d]) & ~(w[2][-278d])) | (w[0][-406c] & w[2][-278d]));  // GKO.BTC.READ_CAPTURE.BIT1.L2
+// @0012d568:  w[2][-7aca]    <= ((w[2][-58c5] & r22) | w[2][-278d]);
+// @0012d580: [патч-слот / данные]
+// @0012d588:  w[2][-15eb]    <= (((GKO.L20.L2BF.NAN3.CR.L1 & w[2][-2a8d]) & ~(w[2][-278d])) | (GKO.L20.L2BF.NAN3.CR.L1 & w[2][-278d]));
+// @0012d5a8:  w[2][-15ea]    <= (((GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & w[2][-2a8d]) & ~(w[2][-278d])) | (GKO.L20.L2DCACHEH.I43.I1.I1.I0.L2 & w[2][-278d]));  // GKO.CBB.PROT.BIT0.L2
+// @0012d5c8:  w[2][-15e9]    <= (((w[0][-4069] & w[2][-2a8d]) & ~(w[2][-278d])) | (w[0][-4069] & w[2][-278d]));  // GKO.CBB.BHT_LINE1.BIT2.L1
+// @0012d5e8:  w[2][-15e8]    <= (((GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-2a8d]) & ~(w[2][-278d])) | (GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-278d]));  // GKO.GE0.WPCK.NAN0.L2
+// конец региона
+
+##############################################################################
+# REGION 0x15f230..0x15fb00 — GE0/LAS: WGB control cluster (biggest)
+##############################################################################
+// ========== GE0/LAS: WGB control cluster (biggest): 0x15f230..0x15fb00 ==========
+// @0015f238:  store r30 -> -32768(r24)  [база вне банков]
+// @0015f23c:  store r23 -> -32764(r24)  [база вне банков]
+if (w[2][-5a4e] == 0) {
+  // @0015f264:  store r9 -> -32768(r12)  [база вне банков]
+  // @0015f268:  store r21 -> -32764(r12)  [база вне банков]
+}
+if (w[1][6fee] == 0) {
+  // @0015f280: [патч-слот / данные]
+  // @0015f294:  store r31 -> -32768(r27)  [база вне банков]
+  // @0015f298:  store r28 -> -32764(r27)  [база вне банков]
+}
+if (w[1][7701] == 0) {
+  // @0015f2c0:  store r23 -> -32768(r30)  [база вне банков]
+  // @0015f2c4:  store r24 -> -32764(r30)  [база вне банков]
+}
+if (w[1][7738] == 0) {
+  // @0015f2ec:  store r21 -> -32768(r9)  [база вне банков]
+  // @0015f2f0:  store r12 -> -32764(r9)  [база вне банков]
+}
+// @0015f300: [патч-слот / данные]
+if (w[1][7765] == 0) {
+  // @0015f31c:  store r28 -> -32768(r31)  [база вне банков]
+  // @0015f320:  store r27 -> -32764(r31)  [база вне банков]
+}
+if (w[1][7cf6] == 0) {
+  // @0015f348:  store r24 -> -32768(r23)  [база вне банков]
+  // @0015f34c:  store r30 -> -32764(r23)  [база вне банков]
+}
+if (w[2][-7bbf] == 0) {
+  // @0015f374:  store r12 -> -32768(r21)  [база вне банков]
+  // @0015f378:  store r9 -> -32764(r21)  [база вне банков]
+}
+// @0015f380: [патч-слот / данные]
+if (w[2][-7b75] == 0) {
+  // @0015f3a4:  store r27 -> -32768(r28)  [база вне банков]
+  // @0015f3a8:  store r31 -> -32764(r28)  [база вне банков]
+}
+if (w[2][-5996] == 0) {
+  // @0015f3d0:  store r30 -> -32768(r24)  [база вне банков]
+  // @0015f3d4:  store r23 -> -32764(r24)  [база вне банков]
+}
+if (w[1][6ff2] == 0) {
+  // @0015f3fc:  store r9 -> -32768(r12)  [база вне банков]
+  // @0015f400: [патч-слот / данные]
+  // @0015f404:  store r21 -> -32764(r12)  [база вне банков]
+}
+if (w[1][7705] == 0) {
+  // @0015f42c:  store r31 -> -32768(r27)  [база вне банков]
+  // @0015f430:  store r28 -> -32764(r27)  [база вне банков]
+}
+if (GKO.DC0.DCAA.WL3_EN_LAT.L1 == 0) {
+  // @0015f458:  store r23 -> -32768(r30)  [база вне банков]
+  // @0015f45c:  store r24 -> -32764(r30)  [база вне банков]
+}
+if (GKO.CB1.CBD_LINE.NAN4.CR.L1 == 0) {
+  // @0015f480: [патч-слот / данные]
+  // @0015f488:  store r21 -> -32768(r9)  [база вне банков]
+  // @0015f48c:  store r12 -> -32764(r9)  [база вне банков]
+}
+if (w[1][7cf7] == 0) {
+  // @0015f4b4:  store r28 -> -32768(r31)  [база вне банков]
+  // @0015f4b8:  store r27 -> -32764(r31)  [база вне банков]
+}
+if (w[2][-7bbb] == 0) {
+  // @0015f4e0:  store r24 -> -32768(r23)  [база вне банков]
+  // @0015f4e4:  store r30 -> -32764(r23)  [база вне банков]
+}
+if (w[2][-7b74] == 0) {
+  // @0015f500: [патч-слот / данные]
+  // @0015f510:  store r12 -> -32768(r21)  [база вне банков]
+  // @0015f514:  store r9 -> -32764(r21)  [база вне банков]
+}
+if (w[2][-5995] == 0) {
+  // @0015f53c:  store r27 -> -32768(r28)  [база вне банков]
+  // @0015f540:  store r31 -> -32764(r28)  [база вне банков]
+}
+if (w[1][6ff6] == 0) {
+  // @0015f568:  store r30 -> -32768(r24)  [база вне банков]
+  // @0015f56c:  store r23 -> -32764(r24)  [база вне банков]
+}
+if (w[1][7709] == 0) {
+  // @0015f580: [патч-слот / данные]
+  // @0015f598:  store r9 -> -32768(r12)  [база вне банков]
+  // @0015f59c:  store r21 -> -32764(r12)  [база вне банков]
+}
+if (GKO.DLS.WP_REQ_QUAL.BIT0.L2 == 0) {
+  // @0015f5c4:  store r31 -> -32768(r27)  [база вне банков]
+  // @0015f5c8:  store r28 -> -32764(r27)  [база вне банков]
+}
+if (GKO.IC0.ICAA.FWD_LAT.L2.RRAM_0_HOLDL2 == 0) {
+  // @0015f5f0:  store r23 -> -32768(r30)  [база вне банков]
+  // @0015f5f4:  store r24 -> -32764(r30)  [база вне банков]
+}
+// @0015f600: [патч-слот / данные]
+if (w[1][7cf8] == 0) {
+  // @0015f620:  store r21 -> -32768(r9)  [база вне банков]
+  // @0015f624:  store r12 -> -32764(r9)  [база вне банков]
+}
+if (GKO.LFN.LFN0.BIT1.L2 == 0) {
+  // @0015f64c:  store r28 -> -32768(r31)  [база вне банков]
+  // @0015f650:  store r27 -> -32764(r31)  [база вне банков]
+}
+if (w[2][-7b70] == 0) {
+  // @0015f678:  store r24 -> -32768(r23)  [база вне банков]
+  // @0015f67c:  store r30 -> -32764(r23)  [база вне банков]
+  // @0015f680: [патч-слот / данные]
+}
+if (GKO.ICC.TEA.BIT0.L2 == 0) {
+  // @0015f6a8:  store r12 -> -32768(r21)  [база вне банков]
+  // @0015f6ac:  store r9 -> -32764(r21)  [база вне банков]
+}
+if (w[1][6ffa] == 0) {
+  // @0015f6d4:  store r27 -> -32768(r28)  [база вне банков]
+  // @0015f6d8:  store r31 -> -32764(r28)  [база вне банков]
+}
+if (w[1][770a] == 0) {
+  // @0015f700: [патч-слот / данные]
+  // @0015f704:  store r30 -> -32768(r24)  [база вне банков]
+  // @0015f708:  store r23 -> -32764(r24)  [база вне банков]
+}
+if (w[1][773b] == 0) {
+  // @0015f730:  store r9 -> -32768(r12)  [база вне банков]
+  // @0015f734:  store r21 -> -32764(r12)  [база вне банков]
+}
+if (GKO.LAS.CDQ_PQA.BIT9.L2 == 0) {
+  // @0015f75c:  store r31 -> -32768(r27)  [база вне банков]
+  // @0015f760:  store r28 -> -32764(r27)  [база вне банков]
+}
+if (w[1][7cf9] == 0) {
+  // @0015f780: [патч-слот / данные]
+  // @0015f78c:  store r23 -> -32768(r30)  [база вне банков]
+  // @0015f790:  store r24 -> -32764(r30)  [база вне банков]
+}
+if (GKO.LLC.SPLICE_REAL_2.BIT0.L1 == 0) {
+  // @0015f7b8:  store r21 -> -32768(r9)  [база вне банков]
+  // @0015f7bc:  store r12 -> -32764(r9)  [база вне банков]
+}
+if (w[2][-7b5d] == 0) {
+  // @0015f7e4:  store r28 -> -32768(r31)  [база вне банков]
+  // @0015f7e8:  store r27 -> -32764(r31)  [база вне банков]
+}
+if (w[2][-598e] == 0) {
+  // @0015f800: [патч-слот / данные]
+  // @0015f814:  store r24 -> -32768(r23)  [база вне банков]
+  // @0015f818:  store r30 -> -32764(r23)  [база вне банков]
+}
+if (w[1][6ffe] == 0) {
+  // @0015f840:  store r12 -> -32768(r21)  [база вне банков]
+  // @0015f844:  store r9 -> -32764(r21)  [база вне банков]
+}
+if (w[1][770b] == 0) {
+  // @0015f86c:  store r27 -> -32768(r28)  [база вне банков]
+  // @0015f870:  store r31 -> -32764(r28)  [база вне банков]
+}
+// @0015f880: [патч-слот / данные]
+if (w[1][773c] == 0) {
+  // @0015f89c:  store r30 -> -32768(r24)  [база вне банков]
+  // @0015f8a0:  store r23 -> -32764(r24)  [база вне банков]
+}
+if (GKO.LAS.LXFA.BIT1.L2 == 0) {
+  // @0015f8c8:  store r9 -> -32768(r12)  [база вне банков]
+  // @0015f8cc:  store r21 -> -32764(r12)  [база вне банков]
+}
+if (GKO.BAC.L2CST0_LAT.BIT1.L2 == 0) {
+  // @0015f8f4:  store r31 -> -32768(r27)  [база вне банков]
+  // @0015f8f8:  store r28 -> -32764(r27)  [база вне банков]
+}
+// @0015f900: [патч-слот / данные]
+if (w[2][-7b71] == 0) {
+  // @0015f924:  store r23 -> -32768(r30)  [база вне банков]
+  // @0015f928:  store r24 -> -32764(r30)  [база вне банков]
+}
+if (w[2][-7aca] == 0) {
+  // @0015f950:  store r21 -> -32768(r9)  [база вне банков]
+  // @0015f954:  store r12 -> -32764(r9)  [база вне банков]
+}
+if (w[2][-598d] == 0) {
+  // @0015f97c:  store r28 -> -32768(r31)  [база вне банков]
+  // @0015f980: [патч-слот / данные]
+  // @0015f984:  store r27 -> -32764(r31)  [база вне банков]
+}
+if (w[1][7002] == 0) {
+  // @0015f9ac:  store r24 -> -32768(r23)  [база вне банков]
+  // @0015f9b0:  store r30 -> -32764(r23)  [база вне банков]
+}
+if (GKO.BP0.OEAI.L2 == 0) {
+  // @0015f9d8:  store r12 -> -32768(r21)  [база вне банков]
+  // @0015f9dc:  store r9 -> -32764(r21)  [база вне банков]
+}
+if (GKO.IC0.ICAA.FWD_LAT.L2.RRAM_0_HOLDL2 == 0) {
+  // @0015fa00: [патч-слот / данные]
+  // @0015fa08:  store r27 -> -32768(r28)  [база вне банков]
+  // @0015fa0c:  store r31 -> -32764(r28)  [база вне банков]
+}
+if (w[1][79dc] == 0) {
+  // @0015fa34:  store r30 -> -32768(r24)  [база вне банков]
+  // @0015fa38:  store r23 -> -32764(r24)  [база вне банков]
+}
+if (w[1][7d05] == 0) {
+  // @0015fa60:  store r9 -> -32768(r12)  [база вне банков]
+  // @0015fa64:  store r21 -> -32764(r12)  [база вне банков]
+}
+if (w[2][-7ac9] == 0) {
+  // @0015fa80: [патч-слот / данные]
+  // @0015fa90:  store r31 -> -32768(r27)  [база вне банков]
+  // @0015fa94:  store r28 -> -32764(r27)  [база вне банков]
+}
+if (w[2][-7a4d] == 0) {
+  // @0015fabc:  store r23 -> -32768(r30)  [база вне банков]
+  // @0015fac0:  store r24 -> -32764(r30)  [база вне банков]
+}
+if (w[2][-591e] == 0) {
+  // @0015fae8:  store r21 -> -32768(r9)  [база вне банков]
+  // @0015faec:  store r12 -> -32764(r9)  [база вне банков]
+}
+if (w[1][6fe7] == 0) {
+}
+// конец региона
+
+##############################################################################
+# REGION 0x16cfa4..0x16d300 — GE0/LAS: WGB control cluster 2
+##############################################################################
+// ========== GE0/LAS: WGB control cluster 2: 0x16cfa4..0x16d300 ==========
+// @0016cfa4:  mem32[2][-16c0] <= r26;  // GKO.DMM.TLB_BIST_PAT_COMPLETE.BIT0.L2
+// @0016cfa8:  mem32[2][-1a7c] <= r9;  // GKO.LAS.FDQ_PQA.BIT3.L1
+// @0016cfb4:  mem32[1][7b2c] <= r21;
+// @0016cfbc:  mem32[1][7b30] <= r24;
+// @0016cfc4:  mem32[1][7f24] <= r22;  // GKO.CCC.RNBUFF5.BIT7.L1
+// @0016cfcc:  mem32[1][7fec] <= r29;
+// @0016cfdc:  mem32[1][7b28] <= r10;
+// @0016cfe8:  mem32[2][-1ac0] <= ??;  // GKO.DMM.SDR1_RD.BIT0.L2
+// @0016cfec:  mem32[2][-1a80] <= ??;  // GKO.JTC.RUNNCOUNTER2.BIT4.L2
+// @0016cff4:  mem32[2][-28ac] <= ??;
+// @0016cff8:  mem32[2][-28b0] <= ??;
+// @0016cffc:  mem32[2][-7ad4] <= ??;
+// @0016d000: [патч-слот / данные]
+// @0016d008:  mem32[2][-7d78] <= ??;
+// @0016d010:  mem32[1][7ff4] <= ??;
+// @0016d014:  mem32[1][7ff0] <= ??;
+// @0016d01c:  mem32[2][-1680] <= mem32[3][-2b58];  // GKO.GE0.WPCC.NAN5.L2
+// @0016d020:  mem32[2][-16d0] <= mem32[3][-2ba8];  // GKO.GE0.WPCB.NAN3.L2
+// @0016d02c:  mem32[2][-1700] <= ??;  // GKO.GE0.WPCA.NAN5.L2
+// @0016d038:  mem32[1][7e7c] <= mem32[3][-2bd4];
+// @0016d044:  mem32[2][-16f8] <= mem32[3][-2bd0];  // GKO.GE0.WPCA.NAN6.L2
+// @0016d054:  mem32[2][-1abc] <= ??;  // GKO.MM0.BIST_ADDR.NAN3.L1
+// @0016d060:  mem32[2][-16dc] <= mem32[3][-2bb4];  // GKO.CCC.CBB_UBR_LATCH.BIT1.L1
+// @0016d064:  mem32[2][-16d4] <= mem32[3][-2bac];  // GKO.QSR.TSCB.NBN1.L2
+// @0016d06c:  mem32[2][-16e0] <= mem32[3][-2bb8];  // GKO.GE0.WPCB.NAN1.L2
+// @0016d070:  mem32[2][-16e4] <= mem32[3][-2bbc];  // GKO.QSR.TSCC.NAN1.L2
+// @0016d074:  mem32[2][-16e8] <= mem32[3][-2bc0];  // GKO.GE0.WPCB.NAN0.L2
+// @0016d07c:  mem32[2][-16ec] <= mem32[3][-2bc4];  // GKO.BTC.READ_CAPTURE.BIT10.L2
+// @0016d080: [патч-слот / данные]
+// @0016d084:  mem32[2][-16f0] <= mem32[3][-2bc8];  // GKO.GE0.WPCA.NAN7.L2
+// @0016d08c:  mem32[2][-16f4] <= mem32[3][-2bcc];  // GKO.BDR.RUNQ_LAT3.BIT3.L2
+// @0016d090:  mem32[2][-16fc] <= ??;  // GKO.BAC.DLD_LAT1.BIT1.L1
+// @0016d09c:  mem32[2][-1640] <= mem32[3][-2b18];  // GKO.QSR.TSCA.NAN1.L2
+// @0016d0a0:  mem32[2][-1690] <= mem32[3][-2b68];  // GKO.GE0.WPCC.NAN3.L2
+// @0016d0a8:  mem32[2][-16cc] <= mem32[3][-2ba4];  // GKO.QSR.TSCB.NBN0.L2
+// @0016d0ac:  mem32[2][-16c4] <= mem32[3][-2b9c];  // GKO.QSR.TSCB.NAN7.L2
+// @0016d0b8:  mem32[2][-16bc] <= mem32[3][-2b94];  // GKO.QSR.TSCB.NAN6.L2
+// @0016d0c4:  mem32[2][-16b8] <= mem32[3][-2b90];  // GKO.GE0.WPCB.NAN6.L2
+// @0016d0d4:  mem32[2][-16d8] <= mem32[3][-2bb0];  // GKO.CSC.DECTRAN2.BIT0.L2
+// @0016d0e0:  mem32[2][-169c] <= mem32[3][-2b74];  // GKO.FWN.FWSX.BIT4.L2
+// @0016d0e4:  mem32[2][-1694] <= mem32[3][-2b6c];  // GKO.QSR.TSCB.NAN1.L2
+// @0016d0ec:  mem32[2][-16a0] <= mem32[3][-2b78];  // GKO.GE0.WPCC.NAN1.L2
+// @0016d0f0:  mem32[2][-16a4] <= mem32[3][-2b7c];  // GKO.QSR.TSCB.NAN3.L2
+// @0016d0f4:  mem32[2][-16a8] <= mem32[3][-2b80];  // GKO.GE0.WPCC.NAN0.L2
+// @0016d0fc:  mem32[2][-16ac] <= mem32[3][-2b84];  // GKO.QSR.TSCB.NAN4.L2
+// @0016d100: [патч-слот / данные]
+// @0016d104:  mem32[2][-16b0] <= mem32[3][-2b88];  // GKO.GE0.WPCB.NAN7.L2
+// @0016d10c:  mem32[2][-16b4] <= mem32[3][-2b8c];  // GKO.QSR.TSCB.NAN5.L2
+// @0016d110:  mem32[2][-16c8] <= mem32[3][-2ba0];  // GKO.GE0.WPCB.NAN4.L2
+// @0016d11c:  mem32[2][-1650] <= mem32[3][-2b28];  // GKO.QSR.TSCA.NAN3.L2
+// @0016d124:  mem32[2][-168c] <= mem32[3][-2b64];  // GKO.QSR.TSCB.NAN0.L2
+// @0016d128:  mem32[2][-1684] <= mem32[3][-2b5c];  // GKO.DL0.DLAG.NCN0.CR.L2
+// @0016d134:  mem32[2][-167c] <= mem32[3][-2b54];  // GKO.LAS.FDQ_PQA.BIT5.L1
+// @0016d140:  mem32[2][-1678] <= mem32[3][-2b50];  // GKO.GE0.WPCC.NAN6.L2
+// @0016d150:  mem32[2][-1698] <= mem32[3][-2b70];  // GKO.GE0.WPCC.NAN2.L2
+// @0016d15c:  mem32[2][-165c] <= mem32[3][-2b34];  // GKO.QSR.TSCA.NAN4.L2
+// @0016d160:  mem32[2][-1654] <= mem32[3][-2b2c];  // GKO.GE0.WPCD.NAN2.L2
+// @0016d168:  mem32[2][-1660] <= mem32[3][-2b38];  // GKO.GE0.WPCD.NAN1.L2
+// @0016d16c:  mem32[2][-1664] <= mem32[3][-2b3c];  // GKO.QSR.TSCA.NAN5.L2
+// @0016d170:  mem32[2][-1668] <= mem32[3][-2b40];  // GKO.GE0.WPCD.NAN0.L2
+// @0016d178:  mem32[2][-166c] <= mem32[3][-2b44];  // GKO.QSR.TSCA.NAN6.L2
+// @0016d17c:  mem32[2][-1670] <= mem32[3][-2b48];  // GKO.GE0.WPCC.NAN7.L2
+// @0016d180: [патч-слот / данные]
+// @0016d188:  mem32[2][-1674] <= mem32[3][-2b4c];  // GKO.QSR.TSCA.NAN7.L2
+// @0016d18c:  mem32[2][-1688] <= mem32[3][-2b60];  // GKO.GE0.WPCC.NAN4.L2
+// @0016d198:  mem32[2][-1610] <= mem32[3][-2ae8];  // GKO.QSR.TSCR.NBN7.L2
+// @0016d19c:  mem32[2][-164c] <= mem32[3][-2b24];  // GKO.GE0.WPCD.NAN3.L2
+// @0016d1a0:  mem32[2][-1644] <= mem32[3][-2b1c];  // GKO.GE0.WPCD.NAN4.L2
+// @0016d1ac:  mem32[2][-163c] <= mem32[3][-2b14];  // GKO.GE0.WPCD.NAN5.L2
+// @0016d1b8:  mem32[2][-1638] <= mem32[3][-2b10];  // GKO.QSR.TSCA.NAN0.L2
+// @0016d1c8:  mem32[2][-1658] <= mem32[3][-2b30];  // GKO.QSR.TSCD.NAN6.L2
+// @0016d1d4:  mem32[2][-161c] <= mem32[3][-2af4];  // GKO.GE0.WPCE.NAN4.L2
+// @0016d1d8:  mem32[2][-1614] <= mem32[3][-2aec];  // GKO.GE0.WPCE.NAN5.L2
+// @0016d1e0:  mem32[2][-1620] <= mem32[3][-2af8];  // GKO.GE0.WPCE.NAN3.L2
+// @0016d1e4:  mem32[2][-1624] <= mem32[3][-2afc];  // GKO.GE0.WPCE.NAN2.L2
+// @0016d1e8:  mem32[2][-1628] <= mem32[3][-2b00];  // GKO.GE0.WPCE.NAN1.L2
+// @0016d1ec:  mem32[2][-162c] <= mem32[3][-2b04];  // GKO.GE0.WPCE.NAN0.L2
+// @0016d1f0:  mem32[2][-1630] <= mem32[3][-2b08];  // GKO.GE0.WPCD.NAN7.L2
+// @0016d1f4:  mem32[2][-1634] <= mem32[3][-2b0c];  // GKO.GE0.WPCD.NAN6.L2
+// @0016d1f8:  mem32[2][-1648] <= mem32[3][-2b20];  // GKO.QSR.TSCA.NAN2.L2
+// @0016d200: [патч-слот / данные]
+// @0016d208:  mem32[2][-160c] <= mem32[3][-2ae4];  // GKO.GE0.WPCE.NAN6.L2
+// @0016d20c:  mem32[2][-1604] <= mem32[3][-2adc];  // GKO.GE0.WPCE.NAN7.L2
+// @0016d214:  mem32[2][-1618] <= mem32[3][-2af0];  // GKO.QSR.TSCR.NCN0.L2
+// @0016d218:  mem32[2][-1608] <= mem32[3][-2ae0];  // GKO.QSR.TSCR.NBN6.L2
+// @0016d220:  mem32[2][-1600] <= mem32[3][-2ad8];  // GKO.QSR.TSCR.NBN5.L2
+if (w[2][-7d9e] == 0) {
+  // @0016d234:  w[3][-3054]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d244:  w[3][-3053]    <= 0;  // GKO.L20.L2DCACHEL.IQUAD1.OUTDC_L.HOLD_LATHOLD_LATCH
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d254:  w[3][-3052]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d264:  w[3][-3051]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d274:  w[3][-3050]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d280: [патч-слот / данные]
+  // @0016d288:  w[3][-304f]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d298:  w[3][-304e]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d2a8:  w[3][-304d]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d2b8:  w[3][-304c]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d2c8:  w[3][-304b]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d2d8:  w[3][-304a]    <= 0;  // GKO.L20.L2DCACHEL.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d2e8:  w[3][-3049]    <= 0;
+}
+if (w[2][-7d9e] == 0) {
+  // @0016d2f8:  w[3][-3048]    <= 0;
+}
+// конец региона
+
+##############################################################################
+# REGION 0x185504..0x187500 — GE0: WPC shift-register / pointer rotation
+##############################################################################
+// ========== GE0: WPC shift-register / pointer rotation: 0x185504..0x187500 ==========
+// @00185518:  w[1][76a6]    <= ((GKO.GE0.WPCA.NAN6.L2 & ~(r30)) | (w[1][7b30] & r30));
+// @00185530:  w[1][76a7]    <= ((w[2][-16f7] & ~(r30)) | (w[1][7b31] & r30));
+// @00185548:  w[1][76a8]    <= ((w[2][-16f6] & ~(r30)) | (w[1][7b32] & r30));
+// @00185560:  w[1][76ab]    <= ((w[2][-16f5] & ~(r30)) | (w[1][7b33] & r30));
+// @00185578:  w[1][76ac]    <= ((GKO.BDR.RUNQ_LAT3.BIT3.L2 & ~(r30)) | (w[1][7ca7] & r30));
+// @00185580: [патч-слот / данные]
+// @00185594:  w[1][76ad]    <= ((GKO.BDT.LAT11.BIT1.L1 & ~(r30)) | (GKO.IQ0.IQWE.NAN2.L1 & r30));  // GKO.IC0.ICAA.FWD_LAT.L2.RRAM_0_HOLDL2
+// @001855ac:  w[1][76b6]    <= ((w[2][-16f2] & ~(r30)) | (w[1][7cab] & r30));  // GKO.IC0.ICAA.FWD_LAT.L2.RRAM_0_HOLDL2
+// @001855c4:  w[1][76b7]    <= ((w[2][-16f1] & ~(r30)) | (GKO.IQ0.IQWF.NBN0.L1 & r30));
+// @001855dc:  w[1][76b8]    <= ((GKO.GE0.WPCA.NAN7.L2 & ~(r30)) | (w[1][7cb1] & r30));
+// @001855f4:  w[1][7b2c]    <= ((w[2][-16ef] & ~(r30)) | (w[1][7cb2] & r30));
+// @00185600: [патч-слот / данные]
+// @00185610:  w[1][7b2d]    <= ((GKO.BP0.BBCM.L4 & ~(r30)) | (w[1][7cba] & r30));  // GKO.IC0.ICAA.FWD_LAT.L2.RAM_0_HOLDL2
+// @00185628:  w[1][7b2e]    <= ((GKO.BP0.BBES.L2 & ~(r30)) | (w[1][7cbb] & r30));
+// @00185640:  w[1][7b2f]    <= ((GKO.BTC.READ_CAPTURE.BIT10.L2 & ~(r30)) | (GKO.IT0.ITAA.IMIDDLE.IHIT_BLK.IHITLX_X8.HIT_LX.L1 & r30));
+// @00185658:  w[1][7b30]    <= ((w[2][-16eb] & ~(r30)) | (w[1][7cbf] & r30));
+// @00185670:  w[1][7b31]    <= ((GKO.CBB.CBB_BHT_WR1_DATA.BIT1.L2 & ~(r30)) | (GKO.IT0.ITAA.RMW_LRU0.L1 & r30));
+// @00185680: [патч-слот / данные]
+// @0018568c:  w[1][7b32]    <= ((GKO.CBB.BHT_LINE1.BIT3.L1 & ~(r30)) | (w[1][7cc5] & r30));
+// @001856a4:  w[1][7b33]    <= ((GKO.GE0.WPCB.NAN0.L2 & ~(r30)) | (w[1][7cc6] & r30));
+// @001856bc:  w[1][7b52]    <= ((w[2][-16e7] & ~(r30)) | (w[1][7cc9] & r30));
+// @001856d4:  w[1][7b54]    <= ((w[2][-16e6] & ~(r30)) | (w[1][7ccb] & r30));
+// @001856ec:  w[1][7b56]    <= ((w[2][-16e5] & ~(r30)) | (w[1][7ccc] & r30));
+// @00185700: [патч-слот / данные]
+// @00185708:  w[1][7b58]    <= ((GKO.QSR.TSCC.NAN1.L2 & ~(r30)) | (GKO.IT0.ITAA.RMW_LRU1.L1 & r30));
+// @00185720:  w[1][7b5a]    <= ((w[2][-16e3] & ~(r30)) | (w[1][7ccf] & r30));  // GKO.IC0.ICAA.FWD_LAT.L2.RAM_0_HOLDL2
+// @00185738:  w[1][7ca7]    <= ((w[2][-16e2] & ~(r30)) | (w[1][7cd0] & r30));
+// @00185750:  w[1][7ca8]    <= ((w[2][-16e1] & ~(r30)) | (w[1][7cd1] & r30));  // GKO.IQ0.IQWE.NAN2.L1
+// @00185768:  w[1][7cab]    <= ((GKO.GE0.WPCB.NAN1.L2 & ~(r30)) | (w[1][7cd3] & r30));
+// @00185780: [патч-слот / данные]
+// @00185784:  w[1][7cb0]    <= ((w[2][-16df] & ~(r30)) | (GKO.IT0.ITAA.RMW_LRU0.L2 & r30));  // GKO.IQ0.IQWF.NBN0.L1
+// @0018579c:  w[1][7cb1]    <= ((w[2][-16de] & ~(r30)) | (w[1][7cdd] & r30));
+// @001857b4:  w[1][7cb2]    <= ((GKO.CCC.RNBUFF2.BIT2.L2 & ~(r30)) | (w[1][7cde] & r30));
+// @001857dc:  w[1][7cba]    <= ((((GKO.CCC.CBB_UBR_LATCH.BIT1.L1 & ~(w[2][-5726])) | (w[1][7ce0] & w[2][-5726])) & ~(r30)) | (GKO.CCC.CBB_UBR_LATCH.BIT1.L1 & r30));
+// @00185800: [патч-слот / данные]
+// @00185804:  w[1][7cbb]    <= ((((GKO.CCC.TYPE5.BIT1.L2 & ~(w[2][-5726])) | (w[1][7ce1] & w[2][-5726])) & ~(r30)) | (GKO.CCC.TYPE5.BIT1.L2 & r30));
+// @00185828:  w[1][7cbc]    <= ((((GKO.CDC.GRNM0.BIT4.L2 & ~(w[2][-5726])) | (w[1][7ce2] & w[2][-5726])) & ~(r30)) | (GKO.CDC.GRNM0.BIT4.L2 & r30));  // GKO.IT0.ITAA.IMIDDLE.IHIT_BLK.IHITLX_X8.HIT_LX.L1
+// @0018584c:  w[1][7cbf]    <= ((((GKO.CDC.FALLOC_0.BIT0.L1 & ~(w[2][-5726])) | (w[1][7ce4] & w[2][-5726])) & ~(r30)) | (GKO.CDC.FALLOC_0.BIT0.L1 & r30));
+// @00185870:  w[1][7cc4]    <= ((((GKO.CSC.DECTRAN2.BIT0.L2 & ~(w[2][-5726])) | (w[1][7ce5] & w[2][-5726])) & ~(r30)) | (GKO.CSC.DECTRAN2.BIT0.L2 & r30));  // GKO.IT0.ITAA.RMW_LRU0.L1
+// @00185880: [патч-слот / данные]
+// @00185898:  w[1][7cc5]    <= ((((w[2][-16d7] & ~(w[2][-5726])) | (GKO.QAB.QUAL_LAT1.BIT0.L2 & w[2][-5726])) & ~(r30)) | (w[2][-16d7] & r30));
+// @001858bc:  w[1][7cc6]    <= ((((w[2][-16d6] & ~(w[2][-5726])) | (GKO.QSR.TSCO.ABCD.L2 & w[2][-5726])) & ~(r30)) | (w[2][-16d6] & r30));
+// @001858e0:  w[1][7cc9]    <= ((((w[2][-16d5] & ~(w[2][-5726])) | (w[1][7cec] & w[2][-5726])) & ~(r30)) | (w[2][-16d5] & r30));
+// @00185900: [патч-слот / данные]
+// @00185908:  w[1][7ccb]    <= ((((GKO.QSR.TSCB.NBN1.L2 & ~(w[2][-5726])) | (GKO.XXA.XXAA.BIT1.L2 & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCB.NBN1.L2 & r30));
+// @0018592c:  w[1][7ccc]    <= ((((w[2][-16d3] & ~(w[2][-5726])) | (w[1][7cf6] & w[2][-5726])) & ~(r30)) | (w[2][-16d3] & r30));
+// @00185950:  w[1][7ccd]    <= ((((GKO.DAE.SIZE_WIM.BIT3.L1 & ~(w[2][-5726])) | (w[1][7cf7] & w[2][-5726])) & ~(r30)) | (GKO.DAE.SIZE_WIM.BIT3.L1 & r30));  // GKO.IT0.ITAA.RMW_LRU1.L1
+// @00185974:  w[1][7ccf]    <= ((((w[2][-16d1] & ~(w[2][-5726])) | (w[1][7cf8] & w[2][-5726])) & ~(r30)) | (w[2][-16d1] & r30));
+// @00185980: [патч-слот / данные]
+// @0018599c:  w[1][7cd0]    <= ((((GKO.GE0.WPCB.NAN3.L2 & ~(w[2][-5726])) | (w[1][7cf9] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCB.NAN3.L2 & r30));
+// @001859c0:  w[1][7cd1]    <= ((((w[2][-16cf] & ~(w[2][-5726])) | (w[1][7d08] & w[2][-5726])) & ~(r30)) | (w[2][-16cf] & r30));
+// @001859e4:  w[1][7cd3]    <= ((((w[2][-16ce] & ~(w[2][-5726])) | (w[1][7d1d] & w[2][-5726])) & ~(r30)) | (w[2][-16ce] & r30));
+// @00185a00: [патч-слот / данные]
+// @00185a0c:  w[1][7cdc]    <= ((((w[2][-16cd] & ~(w[2][-5726])) | (w[1][7d57] & w[2][-5726])) & ~(r30)) | (w[2][-16cd] & r30));  // GKO.IT0.ITAA.RMW_LRU0.L2
+// @00185a30:  w[1][7cdd]    <= ((((GKO.QSR.TSCB.NBN0.L2 & ~(w[2][-5726])) | (w[1][7df0] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCB.NBN0.L2 & r30));
+// @00185a54:  w[1][7cde]    <= ((((w[2][-16cb] & ~(w[2][-5726])) | (GKO.XXA.XXAA.BIT0.L2 & w[2][-5726])) & ~(r30)) | (w[2][-16cb] & r30));
+// @00185a78:  w[1][7ce0]    <= ((((w[2][-16ca] & ~(w[2][-5726])) | (w[1][7e42] & w[2][-5726])) & ~(r30)) | (w[2][-16ca] & r30));
+// @00185a80: [патч-слот / данные]
+// @00185aa0:  w[1][7ce1]    <= ((((w[2][-16c9] & ~(w[2][-5726])) | (w[1][7e43] & w[2][-5726])) & ~(r30)) | (w[2][-16c9] & r30));
+// @00185ac4:  w[1][7ce2]    <= ((((GKO.GE0.WPCB.NAN4.L2 & ~(w[2][-5726])) | (GKO.LAS.HQ_ST_BEN.BIT2.L1 & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCB.NAN4.L2 & r30));
+// @00185ae8:  w[1][7ce4]    <= ((((w[2][-16c7] & ~(w[2][-5726])) | (w[1][7e8a] & w[2][-5726])) & ~(r30)) | (w[2][-16c7] & r30));
+// @00185b00: [патч-слот / данные]
+// @00185b10:  w[1][7ce5]    <= ((((GKO.DLS.TLD_REQ.BIT0.L1 & ~(w[2][-5726])) | (w[1][7e8b] & w[2][-5726])) & ~(r30)) | (GKO.DLS.TLD_REQ.BIT0.L1 & r30));
+// @00185b34:  w[1][7ce7]    <= ((((w[2][-16c5] & ~(w[2][-5726])) | (w[1][7e8c] & w[2][-5726])) & ~(r30)) | (w[2][-16c5] & r30));  // GKO.QAB.QUAL_LAT1.BIT0.L2
+// @00185b58:  w[1][7ceb]    <= ((((GKO.QSR.TSCB.NAN7.L2 & ~(w[2][-5726])) | (GKO.LFN.LFN0.BIT1.L1 & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCB.NAN7.L2 & r30));  // GKO.QSR.TSCO.ABCD.L2
+// @00185b7c:  w[1][7cec]    <= ((((w[2][-16c3] & ~(w[2][-5726])) | (w[1][7ed3] & w[2][-5726])) & ~(r30)) | (w[2][-16c3] & r30));
+// @00185b80: [патч-слот / данные]
+// @00185ba4:  w[1][7cf5]    <= ((((w[2][-16c2] & ~(w[2][-5726])) | (w[1][7edb] & w[2][-5726])) & ~(r30)) | (w[2][-16c2] & r30));  // GKO.XXA.XXAA.BIT1.L2
+// @00185bc8:  w[1][7cf6]    <= ((((GKO.DQ0.ST_PIPE_SHIFT_REG.NCN1.CR.L1 & ~(w[2][-5726])) | (w[1][7ee8] & w[2][-5726])) & ~(r30)) | (GKO.DQ0.ST_PIPE_SHIFT_REG.NCN1.CR.L1 & r30));
+// @00185bec:  w[1][7cf7]    <= ((((GKO.DMM.TLB_BIST_PAT_COMPLETE.BIT0.L2 & ~(w[2][-5726])) | (w[1][7ee9] & w[2][-5726])) & ~(r30)) | (GKO.DMM.TLB_BIST_PAT_COMPLETE.BIT0.L2 & r30));
+// @00185c00: [патч-слот / данные]
+// @00185c14:  w[1][7cf8]    <= ((((w[2][-16bf] & ~(w[2][-5726])) | (GKO.QSR.TSCM.ABCD.L2 & w[2][-5726])) & ~(r30)) | (w[2][-16bf] & r30));
+// @00185c38:  w[1][7cf9]    <= ((((w[2][-16be] & ~(w[2][-5726])) | (w[1][7eec] & w[2][-5726])) & ~(r30)) | (w[2][-16be] & r30));
+// @00185c5c:  w[1][7d08]    <= ((((w[2][-16bd] & ~(w[2][-5726])) | (w[1][7ef8] & w[2][-5726])) & ~(r30)) | (w[2][-16bd] & r30));
+// @00185c74:  w[1][7d1d]    <= ((GKO.QSR.TSCB.NAN6.L2 & ~(r30)) | (w[1][7f01] & r30));
+// @00185c80: [патч-слот / данные]
+// @00185c90:  w[1][7d57]    <= ((w[2][-16bb] & ~(r30)) | (w[1][7f02] & r30));
+// @00185ca8:  w[1][7df0]    <= ((w[2][-16ba] & ~(r30)) | (w[1][7f03] & r30));
+// @00185cc0:  w[1][7df5]    <= ((w[2][-16b9] & ~(r30)) | (GKO.BAC.L2CST0_LAT.BIT0.L2 & r30));  // GKO.XXA.XXAA.BIT0.L2
+// @00185cd8:  w[1][7e42]    <= ((GKO.GE0.WPCB.NAN6.L2 & ~(r30)) | (w[1][7f0f] & r30));
+// @00185cf0:  w[1][7e43]    <= ((w[2][-16b7] & ~(r30)) | (GKO.CCC.RNBUFF5.BIT7.L1 & r30));
+// @00185d00: [патч-слот / данные]
+// @00185d0c:  w[1][7e7c]    <= ((w[2][-16b6] & ~(r30)) | (GKO.CCC.CRVAL4.BIT3.L1 & r30));
+// @00185d24:  w[1][7e7d]    <= ((w[2][-16b5] & ~(r30)) | (GKO.CCC.PFMIBKM1.BIT0.L2 & r30));
+// @00185d3c:  w[1][7e7e]    <= ((GKO.QSR.TSCB.NAN5.L2 & ~(r30)) | (GKO.CDC.FRNM0.BIT2.L1 & r30));  // GKO.JAB.BIST_COMP2.BIT0.L2
+// @00185d54:  w[1][7e7f]    <= ((w[2][-16b3] & ~(r30)) | (w[1][7f2a] & r30));  // GKO.JTC.DIAGLAT4.BIT0.L1
+// @00185d6c:  w[1][7e85]    <= ((w[2][-16b2] & ~(r30)) | (w[1][7f31] & r30));  // GKO.LAS.HQ_ST_BEN.BIT2.L1
+// @00185d80: [патч-слот / данные]
+// @00185d88:  w[1][7e8a]    <= ((w[2][-16b1] & ~(r30)) | (w[1][7f48] & r30));
+// @00185da0:  w[1][7e8b]    <= ((GKO.GE0.WPCB.NAN7.L2 & ~(r30)) | (w[1][7f4c] & r30));
+// @00185db8:  w[1][7e8c]    <= ((w[2][-16af] & ~(r30)) | (w[1][7f51] & r30));
+// @00185dd0:  w[1][7e8d]    <= ((w[2][-16ae] & ~(r30)) | (w[1][7f55] & r30));  // GKO.LFN.LFN0.BIT1.L1
+// @00185de8:  w[1][7ed3]    <= ((w[2][-16ad] & ~(r30)) | (w[1][7f56] & r30));
+// @00185e00: [патч-слот / данные]
+// @00185e04:  w[1][7edb]    <= ((GKO.QSR.TSCB.NAN4.L2 & ~(r30)) | (w[1][7f9d] & r30));
+// @00185e1c:  w[1][7ee8]    <= ((w[2][-16ab] & ~(r30)) | (w[1][7fa5] & r30));
+// @00185e34:  w[1][7ee9]    <= ((w[2][-16aa] & ~(r30)) | (w[1][7fdb] & r30));
+// @00185e4c:  w[1][7eeb]    <= ((w[2][-16a9] & ~(r30)) | (w[1][7fdc] & r30));  // GKO.QSR.TSCM.ABCD.L2
+// @00185e64:  w[1][7eec]    <= ((GKO.GE0.WPCC.NAN0.L2 & ~(r30)) | (w[1][7fea] & r30));
+// @00185e7c:  w[1][7ef8]    <= ((w[2][-16a7] & ~(r30)) | (GKO.QSR.TSCL.ABCD.L2 & r30));
+// @00185e80: [патч-слот / данные]
+// @00185e98:  w[1][7f01]    <= ((w[2][-16a6] & ~(r30)) | (w[1][7fec] & r30));
+// @00185eb0:  w[1][7f02]    <= ((w[2][-16a5] & ~(r30)) | (GKO.TWC.TWCH.BIT0.L2 & r30));
+// @00185ec8:  w[1][7f03]    <= ((GKO.QSR.TSCB.NAN3.L2 & ~(r30)) | (w[1][7fee] & r30));
+// @00185ee0:  w[1][7f04]    <= ((GKO.FIC.FIJ4.BIT0.L2 & ~(r30)) | (w[1][7fef] & r30));  // GKO.BAC.L2CST0_LAT.BIT0.L2
+// @00185ef8:  w[1][7f0f]    <= ((GKO.HIC.HIB1.BIT0.L1 & ~(r30)) | (w[1][7ff0] & r30));
+// @00185f00: [патч-слот / данные]
+// @00185f14:  w[1][7f24]    <= ((w[2][-16a1] & ~(r30)) | (w[1][7ff1] & r30));  // GKO.CCC.RNBUFF5.BIT7.L1
+// @00185f2c:  w[1][7f25]    <= ((GKO.GE0.WPCC.NAN1.L2 & ~(r30)) | (GKO.XEB.XECA2.BIT0.L1 & r30));  // GKO.CCC.CRVAL4.BIT3.L1
+// @00185f44:  w[1][7f26]    <= ((w[2][-169f] & ~(r30)) | (w[1][7ff3] & r30));  // GKO.CCC.PFMIBKM1.BIT0.L2
+// @00185f5c:  w[1][7f27]    <= ((w[2][-169e] & ~(r30)) | (w[1][7ff4] & r30));  // GKO.CDC.FRNM0.BIT2.L1
+// @00185f74:  w[1][7f28]    <= ((GKO.HWC.HWCW.BIT0.L1 & ~(r30)) | (GKO.XXA.XDCB.BIT0.L2 & r30));
+// @00185f80: [патч-слот / данные]
+// @00185f9c:  w[1][7f29]    <= ((((GKO.FWN.FWSX.BIT4.L2 & ~(w[2][-5726])) | (w[1][7ff6] & w[2][-5726])) & ~(r30)) | (GKO.FWN.FWSX.BIT4.L2 & r30));
+// @00185fc0:  w[1][7f2a]    <= ((((w[2][-169b] & ~(w[2][-5726])) | (w[1][7ff7] & w[2][-5726])) & ~(r30)) | (w[2][-169b] & r30));
+// @00185fe4:  w[1][7f2b]    <= ((((w[2][-169a] & ~(w[2][-5726])) | (w[1][7ffc] & w[2][-5726])) & ~(r30)) | (w[2][-169a] & r30));
+// @00186000: [патч-слот / данные]
+// @0018600c:  w[1][7f2c]    <= ((((w[2][-1699] & ~(w[2][-5726])) | (w[2][-7f95] & w[2][-5726])) & ~(r30)) | (w[2][-1699] & r30));
+// @00186030:  w[1][7f31]    <= ((((GKO.GE0.WPCC.NAN2.L2 & ~(w[2][-5726])) | (w[2][-7f94] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCC.NAN2.L2 & r30));
+// @00186054:  w[1][7f48]    <= ((((w[2][-1697] & ~(w[2][-5726])) | (w[2][-7f93] & w[2][-5726])) & ~(r30)) | (w[2][-1697] & r30));
+// @00186078:  w[1][7f4c]    <= ((((w[2][-1696] & ~(w[2][-5726])) | (w[2][-7f71] & w[2][-5726])) & ~(r30)) | (w[2][-1696] & r30));
+// @00186080: [патч-слот / данные]
+// @001860a0:  w[1][7f51]    <= ((((w[2][-1695] & ~(w[2][-5726])) | (GKO.XXA.XXCA.BIT0.L2 & w[2][-5726])) & ~(r30)) | (w[2][-1695] & r30));
+// @001860c4:  w[1][7f55]    <= ((((GKO.QSR.TSCB.NAN1.L2 & ~(w[2][-5726])) | (GKO.CCC.RNBUFF1.BIT0.L1 & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCB.NAN1.L2 & r30));
+// @001860e8:  w[1][7f56]    <= ((((w[2][-1693] & ~(w[2][-5726])) | (w[2][-7ed5] & w[2][-5726])) & ~(r30)) | (w[2][-1693] & r30));
+// @00186100: [патч-слот / данные]
+// @00186110:  w[1][7f59]    <= ((((w[2][-1692] & ~(w[2][-5726])) | (w[2][-7ed3] & w[2][-5726])) & ~(r30)) | (w[2][-1692] & r30));
+// @00186134:  w[1][7f9d]    <= ((((GKO.HWC.HWEX.BIT4.L2 & ~(w[2][-5726])) | (w[2][-7ed1] & w[2][-5726])) & ~(r30)) | (GKO.HWC.HWEX.BIT4.L2 & r30));
+// @00186158:  w[1][7fa5]    <= ((((GKO.GE0.WPCC.NAN3.L2 & ~(w[2][-5726])) | (w[2][-7ed0] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCC.NAN3.L2 & r30));
+// @0018617c:  w[1][7fdb]    <= ((((GKO.ICC.EA_SEL_L1.BIT0.L1 & ~(w[2][-5726])) | (w[2][-7ecc] & w[2][-5726])) & ~(r30)) | (GKO.ICC.EA_SEL_L1.BIT0.L1 & r30));
+// @00186180: [патч-слот / данные]
+// @001861a4:  w[1][7fdc]    <= ((((w[2][-168e] & ~(w[2][-5726])) | (w[2][-7ec3] & w[2][-5726])) & ~(r30)) | (w[2][-168e] & r30));
+// @001861c8:  w[1][7fea]    <= ((((w[2][-168d] & ~(w[2][-5726])) | (w[2][-7ec2] & w[2][-5726])) & ~(r30)) | (w[2][-168d] & r30));
+// @001861ec:  w[1][7feb]    <= ((((GKO.QSR.TSCB.NAN0.L2 & ~(w[2][-5726])) | (w[2][-7ec1] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCB.NAN0.L2 & r30));  // GKO.QSR.TSCL.ABCD.L2
+// @00186200: [патч-слот / данные]
+// @00186214:  w[1][7fec]    <= ((((w[2][-168b] & ~(w[2][-5726])) | (w[2][-7ebc] & w[2][-5726])) & ~(r30)) | (w[2][-168b] & r30));
+// @00186238:  w[1][7fed]    <= ((((w[2][-168a] & ~(w[2][-5726])) | (w[2][-7e52] & w[2][-5726])) & ~(r30)) | (w[2][-168a] & r30));  // GKO.TWC.TWCH.BIT0.L2
+// @0018625c:  w[1][7fee]    <= ((((w[2][-1689] & ~(w[2][-5726])) | (w[2][-7e51] & w[2][-5726])) & ~(r30)) | (w[2][-1689] & r30));
+// @00186280: [патч-слот / данные]
+// @00186284:  w[1][7fef]    <= ((((GKO.GE0.WPCC.NAN4.L2 & ~(w[2][-5726])) | (w[2][-7e16] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCC.NAN4.L2 & r30));
+// @001862a8:  w[1][7ff0]    <= ((((w[2][-1687] & ~(w[2][-5726])) | (w[2][-7dd6] & w[2][-5726])) & ~(r30)) | (w[2][-1687] & r30));
+// @001862cc:  w[1][7ff1]    <= ((((w[2][-1686] & ~(w[2][-5726])) | (w[2][-7dcc] & w[2][-5726])) & ~(r30)) | (w[2][-1686] & r30));
+// @001862f0:  w[1][7ff2]    <= ((((w[2][-1685] & ~(w[2][-5726])) | (w[2][-7dc5] & w[2][-5726])) & ~(r30)) | (w[2][-1685] & r30));  // GKO.XEB.XECA2.BIT0.L1
+// @00186300: [патч-слот / данные]
+// @00186318:  w[1][7ff3]    <= ((((GKO.DL0.DLAG.NCN0.CR.L2 & ~(w[2][-5726])) | (w[2][-7dbe] & w[2][-5726])) & ~(r30)) | (GKO.DL0.DLAG.NCN0.CR.L2 & r30));
+// @0018633c:  w[1][7ff4]    <= ((((w[2][-1683] & ~(w[2][-5726])) | (w[2][-7dba] & w[2][-5726])) & ~(r30)) | (w[2][-1683] & r30));
+// @00186360:  w[1][7ff5]    <= ((((GKO.JAB.BIST_COMP_TEMP_TAG.BIT0.L1 & ~(w[2][-5726])) | (w[2][-7d9e] & w[2][-5726])) & ~(r30)) | (GKO.JAB.BIST_COMP_TEMP_TAG.BIT0.L1 & r30));  // GKO.XXA.XDCB.BIT0.L2
+// @00186380: [патч-слот / данные]
+// @00186388:  w[1][7ff6]    <= ((((GKO.JTC.GCLK_SYNC1.BIT9.L2 & ~(w[2][-5726])) | (GKO.LAS.LTLD.BIT0.L1 & w[2][-5726])) & ~(r30)) | (GKO.JTC.GCLK_SYNC1.BIT9.L2 & r30));
+// @001863ac:  w[1][7ff7]    <= ((((GKO.GE0.WPCC.NAN5.L2 & ~(w[2][-5726])) | (GKO.LAS.HQ_ST_BEN.BIT4.L1 & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCC.NAN5.L2 & r30));
+// @001863d0:  w[1][7ffc]    <= ((((GKO.LAS.HQ_ST_BEN.BIT4.L2 & ~(w[2][-5726])) | (w[2][-7d7a] & w[2][-5726])) & ~(r30)) | (GKO.LAS.HQ_ST_BEN.BIT4.L2 & r30));
+// @001863f4:  w[2][-7f95]    <= ((((GKO.LAS.LADC.BIT15.L2 & ~(w[2][-5726])) | (w[2][-7d78] & w[2][-5726])) & ~(r30)) | (GKO.LAS.LADC.BIT15.L2 & r30));
+// @00186400: [патч-слот / данные]
+// @0018641c:  w[2][-7f94]    <= ((((GKO.LAS.SRC_LXS0_OUT.BIT0.L1 & ~(w[2][-5726])) | (w[2][-7d77] & w[2][-5726])) & ~(r30)) | (GKO.LAS.SRC_LXS0_OUT.BIT0.L1 & r30));
+// @00186434:  w[2][-7f93]    <= ((GKO.LAS.FDQ_PQA.BIT5.L1 & ~(r30)) | (w[2][-7d76] & r30));
+// @0018644c:  w[2][-7f71]    <= ((w[2][-167b] & ~(r30)) | (w[2][-7d75] & r30));
+// @00186464:  w[2][-7f0b]    <= ((w[2][-167a] & ~(r30)) | (w[2][-7d74] & r30));  // GKO.XXA.XXCA.BIT0.L2
+// @0018647c:  w[2][-7edb]    <= ((w[2][-1679] & ~(r30)) | (w[2][-7d12] & r30));  // GKO.CCC.RNBUFF1.BIT0.L1
+// @00186480: [патч-слот / данные]
+// @00186498:  w[2][-7ed5]    <= ((GKO.GE0.WPCC.NAN6.L2 & ~(r30)) | (w[2][-7d0f] & r30));
+// @001864b0:  w[2][-7ed3]    <= ((w[2][-1677] & ~(r30)) | (w[2][-7ce7] & r30));
+// @001864c8:  w[2][-7ed1]    <= ((w[2][-1676] & ~(r30)) | (w[2][-7cd2] & r30));
+// @001864e0:  w[2][-7ed0]    <= ((w[2][-1675] & ~(r30)) | (w[2][-7bb8] & r30));
+// @001864f8:  w[2][-7ecc]    <= ((GKO.QSR.TSCA.NAN7.L2 & ~(r30)) | (GKO.DQC.LFQ.BIT1.L2 & r30));
+// @00186500: [патч-слот / данные]
+// @00186514:  w[2][-7ec3]    <= ((GKO.LLC.LAC_MULTS_GPR_M.BIT3.L2 & ~(r30)) | (w[2][-7bb4] & r30));
+// @0018652c:  w[2][-7ec2]    <= ((GKO.LLC.LLC_FXU_SEL_CLEAN_H.BIT3.L1 & ~(r30)) | (w[2][-7bb3] & r30));
+// @00186544:  w[2][-7ec1]    <= ((w[2][-1671] & ~(r30)) | (w[2][-7bb2] & r30));
+// @0018655c:  w[2][-7ebc]    <= ((GKO.GE0.WPCC.NAN7.L2 & ~(r30)) | (w[2][-7bae] & r30));
+// @00186574:  w[2][-7ea9]    <= ((w[2][-166f] & ~(r30)) | (w[2][-7bad] & r30));
+// @00186580: [патч-слот / данные]
+// @00186590:  w[2][-7e52]    <= ((w[2][-166e] & ~(r30)) | (w[2][-7bac] & r30));
+// @001865a8:  w[2][-7e51]    <= ((w[2][-166d] & ~(r30)) | (w[2][-7b70] & r30));
+// @001865c0:  w[2][-7e17]    <= ((GKO.QSR.TSCA.NAN6.L2 & ~(r30)) | (w[2][-7b5d] & r30));
+// @001865d8:  w[2][-7e16]    <= ((w[2][-166b] & ~(r30)) | (w[2][-7ad4] & r30));
+// @001865f0:  w[2][-7dda]    <= ((GKO.L20.L2DCACHEL.I43.I3.I1.L2 & ~(r30)) | (w[2][-7ad3] & r30));  // GKO.CCC.PFMFX1.BIT0.L2
+// @00186600: [патч-слот / данные]
+// @0018660c:  w[2][-7dd6]    <= ((w[2][-1669] & ~(r30)) | (w[2][-7ad2] & r30));
+// @00186624:  w[2][-7dcc]    <= ((GKO.GE0.WPCD.NAN0.L2 & ~(r30)) | (w[2][-7ad1] & r30));
+// @0018663c:  w[2][-7dc5]    <= ((w[2][-1667] & ~(r30)) | (w[2][-7aa7] & r30));
+// @00186654:  w[2][-7dbe]    <= ((w[2][-1666] & ~(r30)) | (w[2][-7aa5] & r30));
+// @0018666c:  w[2][-7dba]    <= ((w[2][-1665] & ~(r30)) | (w[2][-7a94] & r30));
+// @00186680: [патч-слот / данные]
+// @00186688:  w[2][-7d9e]    <= ((GKO.QSR.TSCA.NAN5.L2 & ~(r30)) | (w[2][-7a93] & r30));
+// @001866a0:  w[2][-7d7c]    <= ((w[2][-1663] & ~(r30)) | (w[2][-7a6c] & r30));  // GKO.LAS.LTLD.BIT0.L1
+// @001866b8:  w[2][-7d7b]    <= ((w[2][-1662] & ~(r30)) | (w[2][-7a67] & r30));  // GKO.LAS.HQ_ST_BEN.BIT4.L1
+// @001866d0:  w[2][-7d7a]    <= ((w[2][-1661] & ~(r30)) | (w[2][-7a4f] & r30));
+// @001866e8:  w[2][-7d78]    <= ((GKO.GE0.WPCD.NAN1.L2 & ~(r30)) | (w[2][-7a4d] & r30));
+// @00186700: [патч-слот / данные]
+// @00186704:  w[2][-7d77]    <= ((w[2][-165f] & ~(r30)) | (w[2][-7a36] & r30));
+// @0018671c:  w[2][-7d76]    <= ((w[2][-165e] & ~(r30)) | (w[2][-7a35] & r30));
+// @00186734:  w[2][-7d75]    <= ((w[2][-165d] & ~(r30)) | (w[2][-7a2d] & r30));
+// @00186758:  w[2][-7d74]    <= ((((GKO.QSR.TSCA.NAN4.L2 & ~(w[2][-5726])) | (w[2][-7a25] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCA.NAN4.L2 & r30));
+// @0018677c:  w[2][-7d12]    <= ((((w[2][-165b] & ~(w[2][-5726])) | (GKO.LA0.LAAE.NAN5.L2 & w[2][-5726])) & ~(r30)) | (w[2][-165b] & r30));
+// @00186780: [патч-слот / данные]
+// @001867a4:  w[2][-7d0f]    <= ((((w[2][-165a] & ~(w[2][-5726])) | (w[2][-7a21] & w[2][-5726])) & ~(r30)) | (w[2][-165a] & r30));
+// @001867c8:  w[2][-7cf1]    <= ((((w[2][-1659] & ~(w[2][-5726])) | (w[2][-7a1a] & w[2][-5726])) & ~(r30)) | (w[2][-1659] & r30));
+// @001867ec:  w[2][-7ce7]    <= ((((GKO.QSR.TSCD.NAN6.L2 & ~(w[2][-5726])) | (w[2][-7a07] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCD.NAN6.L2 & r30));
+// @00186800: [патч-слот / данные]
+// @00186814:  w[2][-7cd2]    <= ((((w[2][-1657] & ~(w[2][-5726])) | (w[2][-7a06] & w[2][-5726])) & ~(r30)) | (w[2][-1657] & r30));
+// @00186838:  w[2][-7bb8]    <= ((((w[2][-1656] & ~(w[2][-5726])) | (w[2][-7a05] & w[2][-5726])) & ~(r30)) | (w[2][-1656] & r30));
+// @0018685c:  w[2][-7bb7]    <= ((((w[2][-1655] & ~(w[2][-5726])) | (GKO.LA0.LAAJ.NAN2.L1 & w[2][-5726])) & ~(r30)) | (w[2][-1655] & r30));  // GKO.DQC.LFQ.BIT1.L2
+// @00186880: [патч-слот / данные]
+// @00186884:  w[2][-7bb4]    <= ((((GKO.GE0.WPCD.NAN2.L2 & ~(w[2][-5726])) | (w[2][-79ff] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCD.NAN2.L2 & r30));
+// @001868a8:  w[2][-7bb3]    <= ((((w[2][-1653] & ~(w[2][-5726])) | (GKO.LA0.LAAI.NAN4.L1 & w[2][-5726])) & ~(r30)) | (w[2][-1653] & r30));
+// @001868cc:  w[2][-7bb2]    <= ((((w[2][-1652] & ~(w[2][-5726])) | (w[2][-634e] & w[2][-5726])) & ~(r30)) | (w[2][-1652] & r30));
+// @001868f0:  w[2][-7bae]    <= ((((w[2][-1651] & ~(w[2][-5726])) | (w[2][-6322] & w[2][-5726])) & ~(r30)) | (w[2][-1651] & r30));
+// @00186900: [патч-слот / данные]
+// @00186918:  w[2][-7bad]    <= ((((GKO.QSR.TSCA.NAN3.L2 & ~(w[2][-5726])) | (w[2][-62d1] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCA.NAN3.L2 & r30));
+// @0018693c:  w[2][-7bac]    <= ((((w[2][-164f] & ~(w[2][-5726])) | (w[2][-62be] & w[2][-5726])) & ~(r30)) | (w[2][-164f] & r30));
+// @00186960:  w[2][-7b70]    <= ((((w[2][-164e] & ~(w[2][-5726])) | (w[2][-6265] & w[2][-5726])) & ~(r30)) | (w[2][-164e] & r30));
+// @00186980: [патч-слот / данные]
+// @00186988:  w[2][-7b5d]    <= ((((w[2][-164d] & ~(w[2][-5726])) | (w[2][-616e] & w[2][-5726])) & ~(r30)) | (w[2][-164d] & r30));
+// @001869ac:  w[2][-7ad4]    <= ((((GKO.GE0.WPCD.NAN3.L2 & ~(w[2][-5726])) | (w[2][-5c05] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCD.NAN3.L2 & r30));
+// @001869d0:  w[2][-7ad3]    <= ((((w[2][-164b] & ~(w[2][-5726])) | (w[2][-5bff] & w[2][-5726])) & ~(r30)) | (w[2][-164b] & r30));
+// @001869f4:  w[2][-7ad2]    <= ((((w[2][-164a] & ~(w[2][-5726])) | (w[2][-5bfe] & w[2][-5726])) & ~(r30)) | (w[2][-164a] & r30));
+// @00186a00: [патч-слот / данные]
+// @00186a1c:  w[2][-7ad1]    <= ((((w[2][-1649] & ~(w[2][-5726])) | (w[2][-5b3e] & w[2][-5726])) & ~(r30)) | (w[2][-1649] & r30));
+// @00186a40:  w[2][-7aa7]    <= ((((GKO.QSR.TSCA.NAN2.L2 & ~(w[2][-5726])) | (w[2][-5b3d] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCA.NAN2.L2 & r30));
+// @00186a64:  w[2][-7aa5]    <= ((((w[2][-1647] & ~(w[2][-5726])) | (GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-5726])) & ~(r30)) | (w[2][-1647] & r30));
+// @00186a80: [патч-слот / данные]
+// @00186a8c:  w[2][-7a94]    <= ((((w[2][-1646] & ~(w[2][-5726])) | (w[2][-5b36] & w[2][-5726])) & ~(r30)) | (w[2][-1646] & r30));
+// @00186ab0:  w[2][-7a93]    <= ((((w[2][-1645] & ~(w[2][-5726])) | (w[2][-5b35] & w[2][-5726])) & ~(r30)) | (w[2][-1645] & r30));
+// @00186ad4:  w[2][-7a6c]    <= ((((GKO.GE0.WPCD.NAN4.L2 & ~(w[2][-5726])) | (w[2][-5b1f] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCD.NAN4.L2 & r30));
+// @00186af8:  w[2][-7a67]    <= ((((w[2][-1643] & ~(w[2][-5726])) | (w[2][-5b1e] & w[2][-5726])) & ~(r30)) | (w[2][-1643] & r30));
+// @00186b00: [патч-слот / данные]
+// @00186b20:  w[2][-7a4f]    <= ((((w[2][-1642] & ~(w[2][-5726])) | (w[2][-5b1d] & w[2][-5726])) & ~(r30)) | (w[2][-1642] & r30));
+// @00186b44:  w[2][-7a4d]    <= ((((w[2][-1641] & ~(w[2][-5726])) | (w[2][-5b17] & w[2][-5726])) & ~(r30)) | (w[2][-1641] & r30));
+// @00186b68:  w[2][-7a36]    <= ((((GKO.QSR.TSCA.NAN1.L2 & ~(w[2][-5726])) | (w[2][-5b16] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCA.NAN1.L2 & r30));
+// @00186b80: [патч-слот / данные]
+// @00186b90:  w[2][-7a35]    <= ((((w[2][-163f] & ~(w[2][-5726])) | (GKO.TMC.SPARE0_REG_0.L2 & w[2][-5726])) & ~(r30)) | (w[2][-163f] & r30));
+// @00186bb4:  w[2][-7a2d]    <= ((((w[2][-163e] & ~(w[2][-5726])) | (w[2][-5b07] & w[2][-5726])) & ~(r30)) | (w[2][-163e] & r30));
+// @00186bd8:  w[2][-7a25]    <= ((((w[2][-163d] & ~(w[2][-5726])) | (w[2][-5b06] & w[2][-5726])) & ~(r30)) | (w[2][-163d] & r30));
+// @00186bf0:  w[2][-7a24]    <= ((GKO.GE0.WPCD.NAN5.L2 & ~(r30)) | (w[2][-5b05] & r30));  // GKO.LA0.LAAE.NAN5.L2
+// @00186c00: [патч-слот / данные]
+// @00186c0c:  w[2][-7a21]    <= ((w[2][-163b] & ~(r30)) | (w[2][-5afe] & r30));
+// @00186c24:  w[2][-7a1a]    <= ((w[2][-163a] & ~(r30)) | (w[2][-5afd] & r30));
+// @00186c3c:  w[2][-7a07]    <= ((w[2][-1639] & ~(r30)) | (w[2][-5aee] & r30));
+// @00186c54:  w[2][-7a06]    <= ((GKO.QSR.TSCA.NAN0.L2 & ~(r30)) | (GKO.BP0.OEFG.L2 & r30));
+// @00186c6c:  w[2][-7a05]    <= ((w[2][-1637] & ~(r30)) | (w[2][-5adf] & r30));
+// @00186c80: [патч-слот / данные]
+// @00186c88:  w[2][-7a00]    <= ((w[2][-1636] & ~(r30)) | (w[2][-5ade] & r30));  // GKO.LA0.LAAJ.NAN2.L1
+// @00186ca0:  w[2][-79ff]    <= ((w[2][-1635] & ~(r30)) | (GKO.L20.L2DCACHEH.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & r30));
+// @00186cb8:  w[2][-79e8]    <= ((GKO.GE0.WPCD.NAN6.L2 & ~(r30)) | (w[2][-5abf] & r30));  // GKO.LA0.LAAI.NAN4.L1
+// @00186cd0:  w[2][-634e]    <= ((w[2][-1633] & ~(r30)) | (w[2][-5abe] & r30));
+// @00186ce8:  w[2][-6322]    <= ((w[2][-1632] & ~(r30)) | (w[2][-5abd] & r30));
+// @00186d00: [патч-слот / данные]
+// @00186d04:  w[2][-62d1]    <= ((w[2][-1631] & ~(r30)) | (w[2][-5ab7] & r30));
+// @00186d1c:  w[2][-62be]    <= ((GKO.GE0.WPCD.NAN7.L2 & ~(r30)) | (w[2][-5ab6] & r30));
+// @00186d34:  w[2][-6265]    <= ((w[2][-162f] & ~(r30)) | (w[2][-5ab5] & r30));
+// @00186d4c:  w[2][-616e]    <= ((w[2][-162e] & ~(r30)) | (w[2][-5a96] & r30));
+// @00186d64:  w[2][-5c05]    <= ((w[2][-162d] & ~(r30)) | (GKO.L20.L2DCACHEH.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & r30));
+// @00186d7c:  w[2][-5bff]    <= ((GKO.GE0.WPCE.NAN0.L2 & ~(r30)) | (w[2][-5a87] & r30));
+// @00186d80: [патч-слот / данные]
+// @00186d98:  w[2][-5bfe]    <= ((w[2][-162b] & ~(r30)) | (w[2][-5a85] & r30));
+// @00186db0:  w[2][-5b3e]    <= ((w[2][-162a] & ~(r30)) | (GKO.LAS.HSQ_MBIT.BIT0.L2 & r30));
+// @00186dc8:  w[2][-5b3d]    <= ((w[2][-1629] & ~(r30)) | (GKO.LAS.Q_BUSY_WO_ACCPT0.BIT0.L2 & r30));
+// @00186de0:  w[2][-5b37]    <= ((GKO.GE0.WPCE.NAN1.L2 & ~(r30)) | (w[2][-5a57] & r30));  // GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH
+// @00186df8:  w[2][-5b36]    <= ((w[2][-1627] & ~(r30)) | (GKO.L20.L2DCACHEH.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH & r30));
+// @00186e00: [патч-слот / данные]
+// @00186e14:  w[2][-5b35]    <= ((w[2][-1626] & ~(r30)) | (w[2][-5a55] & r30));
+// @00186e2c:  w[2][-5b1f]    <= ((w[2][-1625] & ~(r30)) | (w[2][-5a4e] & r30));
+// @00186e44:  w[2][-5b1e]    <= ((GKO.GE0.WPCE.NAN2.L2 & ~(r30)) | (GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH & r30));
+// @00186e5c:  w[2][-5b1d]    <= ((w[2][-1623] & ~(r30)) | (w[2][-5a47] & r30));
+// @00186e74:  w[2][-5b17]    <= ((w[2][-1622] & ~(r30)) | (w[2][-5a46] & r30));
+// @00186e80: [патч-слот / данные]
+// @00186e90:  w[2][-5b16]    <= ((w[2][-1621] & ~(r30)) | (w[2][-5a45] & r30));
+// @00186ea8:  w[2][-5b15]    <= ((GKO.GE0.WPCE.NAN3.L2 & ~(r30)) | (w[2][-5a2f] & r30));  // GKO.TMC.SPARE0_REG_0.L2
+// @00186ec0:  w[2][-5b07]    <= ((w[2][-161f] & ~(r30)) | (w[2][-5a2e] & r30));
+// @00186ed8:  w[2][-5b06]    <= ((w[2][-161e] & ~(r30)) | (w[2][-5a2d] & r30));
+// @00186ef0:  w[2][-5b05]    <= ((w[2][-161d] & ~(r30)) | (w[2][-59df] & r30));
+// @00186f00: [патч-слот / данные]
+// @00186f18:  w[2][-5afe]    <= ((((GKO.GE0.WPCE.NAN4.L2 & ~(w[2][-5726])) | (w[2][-59dd] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCE.NAN4.L2 & r30));
+// @00186f3c:  w[2][-5afd]    <= ((((w[2][-161b] & ~(w[2][-5726])) | (w[2][-59d7] & w[2][-5726])) & ~(r30)) | (w[2][-161b] & r30));
+// @00186f60:  w[2][-5aee]    <= ((((w[2][-161a] & ~(w[2][-5726])) | (w[2][-59d6] & w[2][-5726])) & ~(r30)) | (w[2][-161a] & r30));
+// @00186f80: [патч-слот / данные]
+// @00186f88:  w[2][-5aed]    <= ((((w[2][-1619] & ~(w[2][-5726])) | (w[2][-59d5] & w[2][-5726])) & ~(r30)) | (w[2][-1619] & r30));  // GKO.BP0.OEFG.L2
+// @00186fac:  w[2][-5adf]    <= ((((GKO.QSR.TSCR.NCN0.L2 & ~(w[2][-5726])) | (w[2][-59bf] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCR.NCN0.L2 & r30));
+// @00186fd0:  w[2][-5ade]    <= ((((w[2][-1617] & ~(w[2][-5726])) | (w[2][-59be] & w[2][-5726])) & ~(r30)) | (w[2][-1617] & r30));
+// @00186ff4:  w[2][-5add]    <= ((((w[2][-1616] & ~(w[2][-5726])) | (GKO.L20.L2DCACHEH.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-5726])) & ~(r30)) | (w[2][-1616] & r30));  // GKO.L20.L2DCACHEH.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH
+// @00187000: [патч-слот / данные]
+// @0018701c:  w[2][-5abf]    <= ((((w[2][-1615] & ~(w[2][-5726])) | (w[2][-59b7] & w[2][-5726])) & ~(r30)) | (w[2][-1615] & r30));
+// @00187040:  w[2][-5abe]    <= ((((GKO.GE0.WPCE.NAN5.L2 & ~(w[2][-5726])) | (w[2][-59b6] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCE.NAN5.L2 & r30));
+// @00187064:  w[2][-5abd]    <= ((((w[2][-1613] & ~(w[2][-5726])) | (w[2][-59b5] & w[2][-5726])) & ~(r30)) | (w[2][-1613] & r30));
+// @00187080: [патч-слот / данные]
+// @0018708c:  w[2][-5ab7]    <= ((((w[2][-1612] & ~(w[2][-5726])) | (w[2][-59a7] & w[2][-5726])) & ~(r30)) | (w[2][-1612] & r30));
+// @001870b0:  w[2][-5ab6]    <= ((((w[2][-1611] & ~(w[2][-5726])) | (w[2][-59a5] & w[2][-5726])) & ~(r30)) | (w[2][-1611] & r30));
+// @001870d4:  w[2][-5ab5]    <= ((((GKO.QSR.TSCR.NBN7.L2 & ~(w[2][-5726])) | (w[2][-5996] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCR.NBN7.L2 & r30));
+// @001870f8:  w[2][-5a96]    <= ((((GKO.XEA.XEFG.BIT3.L2 & ~(w[2][-5726])) | (w[2][-5995] & w[2][-5726])) & ~(r30)) | (GKO.XEA.XEFG.BIT3.L2 & r30));
+// @00187100: [патч-слот / данные]
+// @00187120:  w[2][-5a95]    <= ((((GKO.XEB.XECA2.BIT4.L2 & ~(w[2][-5726])) | (GKO.ICC.TEA.BIT0.L2 & w[2][-5726])) & ~(r30)) | (GKO.XEB.XECA2.BIT4.L2 & r30));  // GKO.L20.L2DCACHEH.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH
+// @00187144:  w[2][-5a87]    <= ((((w[2][-160d] & ~(w[2][-5726])) | (w[2][-598e] & w[2][-5726])) & ~(r30)) | (w[2][-160d] & r30));
+// @00187168:  w[2][-5a85]    <= ((((GKO.GE0.WPCE.NAN6.L2 & ~(w[2][-5726])) | (w[2][-598d] & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCE.NAN6.L2 & r30));
+// @00187180: [патч-слот / данные]
+// @00187190:  w[2][-5a7e]    <= ((((w[2][-160b] & ~(w[2][-5726])) | (w[2][-591e] & w[2][-5726])) & ~(r30)) | (w[2][-160b] & r30));  // GKO.LAS.HSQ_MBIT.BIT0.L2
+// @001871b4:  w[2][-5a7d]    <= ((((w[2][-160a] & ~(w[2][-5726])) | (w[2][-591d] & w[2][-5726])) & ~(r30)) | (w[2][-160a] & r30));  // GKO.LAS.Q_BUSY_WO_ACCPT0.BIT0.L2
+// @001871d8:  w[2][-5a57]    <= ((((w[2][-1609] & ~(w[2][-5726])) | (w[2][-5916] & w[2][-5726])) & ~(r30)) | (w[2][-1609] & r30));
+// @001871fc:  w[2][-5a56]    <= ((((GKO.QSR.TSCR.NBN6.L2 & ~(w[2][-5726])) | (GKO.TMC.THM_STM.BIT0.L2 & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCR.NBN6.L2 & r30));  // GKO.L20.L2DCACHEH.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH
+// @00187200: [патч-слот / данные]
+// @00187224:  w[2][-5a55]    <= ((((w[2][-1607] & ~(w[2][-5726])) | (w[2][-58cf] & w[2][-5726])) & ~(r30)) | (w[2][-1607] & r30));
+// @00187248:  w[2][-5a4e]    <= ((((w[2][-1606] & ~(w[2][-5726])) | (w[2][-58ce] & w[2][-5726])) & ~(r30)) | (w[2][-1606] & r30));
+// @0018726c:  w[2][-5a4d]    <= ((((w[2][-1605] & ~(w[2][-5726])) | (w[2][-58cd] & w[2][-5726])) & ~(r30)) | (w[2][-1605] & r30));  // GKO.L20.L2DCACHEH.IQUAD2.OUTDC_L.HOLD_LATHOLD_LATCH
+// @00187280: [патч-слот / данные]
+// @00187294:  w[2][-5a47]    <= ((((GKO.GE0.WPCE.NAN7.L2 & ~(w[2][-5726])) | (GKO.DC0.DCAA.INH_LAT.L2 & w[2][-5726])) & ~(r30)) | (GKO.GE0.WPCE.NAN7.L2 & r30));
+// @001872b8:  w[2][-5a46]    <= ((((w[2][-1603] & ~(w[2][-5726])) | (GKO.DLS.SNP_FAST_SBW.BIT0.L2 & w[2][-5726])) & ~(r30)) | (w[2][-1603] & r30));
+// @001872dc:  w[2][-5a45]    <= ((((w[2][-1602] & ~(w[2][-5726])) | (w[2][-58c5] & w[2][-5726])) & ~(r30)) | (w[2][-1602] & r30));
+// @00187300: [патч-слот / данные]
+// @00187304:  w[2][-5a2f]    <= ((((w[2][-1601] & ~(w[2][-5726])) | (w[2][-58be] & w[2][-5726])) & ~(r30)) | (w[2][-1601] & r30));
+// @00187328:  w[2][-5a2e]    <= ((((GKO.QSR.TSCR.NBN5.L2 & ~(w[2][-5726])) | (w[2][-58bd] & w[2][-5726])) & ~(r30)) | (GKO.QSR.TSCR.NBN5.L2 & r30));
+// @0018734c:  w[2][-5a2d]    <= ((((w[2][-15ff] & ~(w[2][-5726])) | (w[2][-58ae] & w[2][-5726])) & ~(r30)) | (w[2][-15ff] & r30));
+// @00187370:  w[2][-59df]    <= ((((w[2][-15fe] & ~(w[2][-5726])) | (w[2][-58ad] & w[2][-5726])) & ~(r30)) | (w[2][-15fe] & r30));
+// @00187380: [патч-слот / данные]
+// @00187398:  w[1][7e84]    <= ((((w[2][-15fd] & ~(w[2][-5726])) | (GKO.L20.L2DCACHEH.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & w[2][-5726])) & ~(r30)) | (w[2][-15fd] & r30));  // GKO.LAS.LTLS.BIT0.L1
+if (GKO.HW0.HWAB.NBN5.L2 == 0) {
+  // @001873d8:  store r21 -> -32768(r23)  [база вне банков]
+  // @001873dc:  store r31 -> -32764(r23)  [база вне банков]
+  // @001873e0:  store r28 -> -32760(r23)  [база вне банков]
+  // @001873e4:  store r22 -> -32756(r23)  [база вне банков]
+  // @001873e8:  store r11 -> -32752(r23)  [база вне банков]
+  // @001873ec:  store r24 -> -32748(r23)  [база вне банков]
+  // @001873f0:  store r27 -> -32744(r23)  [база вне банков]
+  // @001873f4:  store r9 -> -32740(r23)  [база вне банков]
+}
+// @00187400: [патч-слот / данные]
+if (w[1][706a] == 0) {
+  // @00187434:  store r30 -> -32768(r26)  [база вне банков]
+  // @00187438:  store r12 -> -32764(r26)  [база вне банков]
+  // @0018743c:  store r29 -> -32760(r26)  [база вне банков]
+  // @00187440:  store r10 -> -32756(r26)  [база вне банков]
+  // @00187444:  store r21 -> -32752(r26)  [база вне банков]
+  // @00187448:  store r31 -> -32748(r26)  [база вне банков]
+  // @0018744c:  store r28 -> -32744(r26)  [база вне банков]
+  // @00187450:  store r22 -> -32740(r26)  [база вне банков]
+}
+if (w[1][6f4a] == 0) {
+  // @00187480: [патч-слот / данные]
+  // @001874a0:  store r31 -> -32736(r27)  [база вне банков]
+  // @001874a8:  store r21 -> -32740(r27)  [база вне банков]
+  // @001874ac:  store r10 -> -32744(r27)  [база вне банков]
+  // @001874b0:  store r29 -> -32748(r27)  [база вне банков]
+  // @001874b4:  store r12 -> -32752(r27)  [база вне банков]
+  // @001874b8:  store r30 -> -32756(r27)  [база вне банков]
+  // @001874bc:  store r25 -> -32760(r27)  [база вне банков]
+  // @001874c0:  store r23 -> -32764(r27)  [база вне банков]
+  // @001874c4:  store r9 -> -32768(r27)  [база вне банков]
+  // @001874cc:  store r28 -> -32732(r27)  [база вне банков]
+  // @001874d0:  store r22 -> -32728(r27)  [база вне банков]
+}
+if (GKO.HI1.HIRA.NAN1.L2 == 0) {
+}
+// конец региона
+
+##############################################################################
+# REGION 0x2345f0..0x234a00 — GE0: WPAR write path (mtspr WPAR)
+##############################################################################
+// ========== GE0: WPAR write path (mtspr WPAR): 0x2345f0..0x234a00 ==========
+// @002345fc:  mem32[0][6994] <= mem32[1][7cd4];  // GKO.GE0.DMAU.NAN2.L1
+// @00234600: [патч-слот / данные]
+// @00234604:  mem32[0][6990] <= mem32[2][-2850];  // GKO.GE0.DMAU.NAN1.L1
+// @00234608:  mem32[0][698c] <= mem32[1][7bf4];  // GKO.GE0.DMAU.NAN0.L1
+// @0023460c:  mem32[0][6988] <= r23;  // GKO.GE0.WPAR.NAN6.L1
+// @00234610:  mem32[0][6984] <= r30;  // GKO.GE0.DMAL.NAN7.L1
+// @00234614:  mem32[0][6980] <= r12;  // GKO.GE0.WPAR.NAN7.L1
+// @00234618:  mem32[0][697c] <= r11;  // GKO.GE0.DMAL.NAN6.L1
+// @0023461c:  mem32[0][6978] <= r10;  // GKO.GE0.QNTR7.NAN0.L1
+// @00234620:  mem32[0][6974] <= r9;  // GKO.GE0.DMAL.NAN5.L1
+// @00234624:  mem32[0][6970] <= r8;  // GKO.GE0.DMAL.NAN4.L1
+// @00234628:  mem32[0][696c] <= r31;  // GKO.GE0.DMAL.NAN3.L1
+// @0023462c:  mem32[0][6968] <= r25;  // GKO.GE0.DMAL.NAN2.L1
+// @00234630:  mem32[0][6964] <= r26;  // GKO.FWN.FWSU.BIT12.L1
+// @00234634:  mem32[0][6960] <= r29;  // GKO.GE0.DMAL.NAN0.L1
+// @00234638:  mem32[0][695c] <= r24;  // GKO.GE0.QNTR7.NAN5.L1
+// @00234640:  mem32[0][6998] <= mem32[2][-0bf8];  // GKO.GE0.DMAU.NAN3.L1
+// @00234680: [патч-слот / данные]
+// @00234684:  mem32[0][69d4] <= mem32[2][-0bd8];  // GKO.GE0.HID_G_REG.NAN5.L1
+// @00234688:  mem32[0][69d0] <= mem32[2][-0c14];  // GKO.GE0.HID_G_REG.NAN4.L1
+// @0023468c:  mem32[0][69cc] <= mem32[2][-0c10];  // GKO.GE0.HID_G_REG.NAN3.L1
+// @00234690:  mem32[0][69c8] <= mem32[2][-0b4c];  // GKO.GE0.HID_G_REG.NAN2.L1
+// @00234694:  mem32[0][69c4] <= mem32[2][-0c0c];  // GKO.GE0.HID_G_REG.NAN1.L1
+// @00234698:  mem32[0][69c0] <= mem32[2][-0b50];  // GKO.GE0.HID_G_REG.NAN0.L1
+// @0023469c:  mem32[0][69bc] <= mem32[2][-0c08];  // GKO.GE0.WPAR.NAN1.L1
+// @002346a0:  mem32[0][69b8] <= mem32[2][-0b54];  // GKO.GE0.WPAR.NAN2.L1
+// @002346a4:  mem32[0][69b4] <= mem32[2][-0c04];  // GKO.GE0.WPAR.NAN3.L1
+// @002346a8:  mem32[0][69b0] <= mem32[2][-0b58];  // GKO.GE0.WPAR.NAN4.L1
+// @002346ac:  mem32[0][69ac] <= mem32[2][-0c00];  // GKO.GE0.WPAR.NAN5.L1
+// @002346b0:  mem32[0][69a8] <= mem32[2][-0994];  // GKO.GE0.DMAU.NAN7.L1
+// @002346b4:  mem32[0][69a4] <= mem32[2][-0b5c];  // GKO.GE0.DMAU.NAN6.L1
+// @002346b8:  mem32[0][69a0] <= mem32[2][-0bfc];  // GKO.GE0.DMAU.NAN5.L1
+// @002346bc:  mem32[0][699c] <= mem32[2][-7ad0];  // GKO.GE0.DMAU.NAN4.L1
+// @002346c4:  mem32[0][69d8] <= mem32[2][-0bdc];  // GKO.GE0.HID_G_REG.NAN6.L1
+// @00234700: [патч-слот / данные]
+// @00234708:  mem32[0][6a14] <= mem32[1][75c4];  // GKO.BP0.BBFV.L1
+// @0023470c:  mem32[0][6a10] <= mem32[2][-091c];  // GKO.GE0.QNTR1.NAN5.L2
+// @00234710:  mem32[0][6a0c] <= mem32[2][-0920];  // GKO.GE0.QNTR1.NAN3.L2
+// @00234714:  mem32[0][6a08] <= mem32[2][-0924];  // GKO.GE0.QNTR1.NAN0.L1
+// @00234718:  mem32[0][6a04] <= mem32[1][7ff8];  // GKO.BAC.L2CST2_LAT.BIT1.L2
+// @0023471c:  mem32[0][6a00] <= mem32[2][-0928];  // GKO.GE0.QNTR0.NAN7.L1
+// @00234720:  mem32[0][69fc] <= mem32[2][-0bf4];  // GKO.GE0.QNTR0.NAN6.L1
+// @00234724:  mem32[0][69f8] <= mem32[2][-092c];  // GKO.GE0.QNTR0.NAN5.L1
+// @00234728:  mem32[0][69f4] <= mem32[2][-0bf0];  // GKO.GE0.QNTR0.NAN4.L1
+// @0023472c:  mem32[0][69f0] <= mem32[2][-0930];  // GKO.GE0.QNTR0.NAN3.L1
+// @00234730:  mem32[0][69ec] <= mem32[2][-0bec];  // GKO.GE0.QNTR0.NAN2.L1
+// @00234734:  mem32[0][69e8] <= mem32[2][-0934];  // GKO.GE0.QNTR0.NAN1.L1
+// @00234738:  mem32[0][69e4] <= mem32[2][-0be8];  // GKO.GE0.QNTR0.NAN0.L1
+// @0023473c:  mem32[0][69e0] <= mem32[2][-0be4];  // GKO.GE0.WPAR.NAN0.L1
+// @00234740:  mem32[0][69dc] <= mem32[2][-0be0];  // GKO.GE0.HID_G_REG.NAN7.L1
+// @00234748:  mem32[0][6a18] <= mem32[2][-0bb8];  // GKO.GE0.QNTR1.NAN2.L2
+// @00234780: [патч-слот / данные]
+// @0023478c:  mem32[0][6a54] <= mem32[1][75b4];  // GKO.GE0.QNTR3.NAN6.L2
+// @00234790:  mem32[0][6a50] <= mem32[2][-0bd4];
+// @00234794:  mem32[0][6a4c] <= mem32[1][75b0];  // GKO.GE0.QNTR2.NAN3.L2
+// @00234798:  mem32[0][6a48] <= mem32[2][-0bd0];  // GKO.GE0.QNTR2.NAN7.L2
+// @0023479c:  mem32[0][6a44] <= mem32[1][75a8];  // GKO.GE0.QNTR2.NAN4.L2
+// @002347a0:  mem32[0][6a40] <= mem32[2][-0bcc];  // GKO.DMM.BIST_RW.BIT1.L1
+// @002347a4:  mem32[0][6a3c] <= mem32[1][75a4];  // GKO.GE0.QNTR2.NAN1.L2
+// @002347a8:  mem32[0][6a38] <= mem32[2][-0bc8];  // GKO.GE0.QNTR2.NAN6.L2
+// @002347ac:  mem32[0][6a34] <= mem32[1][75a0];  // GKO.GE0.QNTR2.NAN0.L2
+// @002347b0:  mem32[0][6a30] <= mem32[2][-0bc4];  // GKO.GE0.QNTR2.NAN5.L2
+// @002347b4:  mem32[0][6a2c] <= mem32[1][759c];
+// @002347b8:  mem32[0][6a28] <= mem32[2][-0bc0];  // GKO.GE0.QNTR1.NAN7.L2
+// @002347bc:  mem32[0][6a24] <= mem32[1][75ac];  // GKO.CCC.FINISHED5.BIT0.L1
+// @002347c0:  mem32[0][6a20] <= mem32[2][-0bbc];  // GKO.GE0.QNTR1.NAN6.L2
+// @002347c4:  mem32[0][6a1c] <= mem32[1][75c8];  // GKO.GE0.QNTR1.NAN0.L2
+// @002347cc:  mem32[0][6a58] <= mem32[2][-2a08];  // GKO.GE0.QNTR3.NAN5.L2
+// @00234800: [патч-слот / данные]
+// @00234810:  mem32[0][6a94] <= mem32[2][-095c];  // GKO.GE0.QNTR4.NAN6.L2
+// @00234814:  mem32[0][6a90] <= mem32[2][-29ec];  // GKO.GE0.QNTR4.NAN4.L2
+// @00234818:  mem32[0][6a8c] <= mem32[2][-0960];  // GKO.GE0.QNTR4.NAN3.L2
+// @0023481c:  mem32[0][6a88] <= mem32[2][-29f0];  // GKO.GE0.QNTR4.NAN7.L2
+// @00234820:  mem32[0][6a84] <= mem32[2][-0964];  // GKO.GE0.QNTR4.NAN2.L2
+// @00234824:  mem32[0][6a80] <= mem32[2][-29f4];  // GKO.GE0.QNTR4.NAN1.L2
+// @00234828:  mem32[0][6a7c] <= mem32[2][-0968];  // GKO.GE0.QNTR4.NAN0.L2
+// @0023482c:  mem32[0][6a78] <= mem32[2][-29f8];  // GKO.GE0.QNTR4.NAN5.L2
+// @00234830:  mem32[0][6a74] <= mem32[2][-096c];
+// @00234834:  mem32[0][6a70] <= mem32[2][-29fc];  // GKO.GE0.QNTR3.NAN1.L2
+// @00234838:  mem32[0][6a6c] <= mem32[2][-0970];  // GKO.GE0.QNTR3.NAN2.L2
+// @0023483c:  mem32[0][6a68] <= mem32[2][-2a00];  // GKO.GE0.QNTR3.NAN3.L2
+// @00234840:  mem32[0][6a64] <= mem32[2][-0974];  // GKO.FWN.FWSU.BIT11.L1
+// @00234844:  mem32[0][6a60] <= mem32[2][-2a04];  // GKO.GE0.QNTR3.NAN4.L2
+// @00234848:  mem32[0][6a5c] <= mem32[2][-0978];  // GKO.GE0.QNTR3.NAN7.L2
+// @00234850:  mem32[0][6a98] <= mem32[2][-29e8];
+// @00234880: [патч-слот / данные]
+// @00234894:  mem32[0][6ad4] <= mem32[2][-093c];  // GKO.GE0.QNTR6.NAN0.L2
+// @00234898:  mem32[0][6ad0] <= mem32[2][-29cc];  // GKO.GE0.QNTR6.NAN1.L2
+// @0023489c:  mem32[0][6acc] <= mem32[2][-0940];  // GKO.GE0.QNTR6.NAN4.L2
+// @002348a0:  mem32[0][6ac8] <= mem32[2][-29d0];  // GKO.GE0.QNTR6.NAN5.L2
+// @002348a4:  mem32[0][6ac4] <= mem32[2][-0944];  // GKO.GE0.QNTR6.NAN2.L2
+// @002348a8:  mem32[0][6ac0] <= mem32[2][-29d4];  // GKO.GE0.QNTR6.NAN3.L2
+// @002348ac:  mem32[0][6abc] <= mem32[2][-0948];
+// @002348b0:  mem32[0][6ab8] <= mem32[2][-29d8];  // GKO.GE0.QNTR5.NAN1.L2
+// @002348b4:  mem32[0][6ab4] <= mem32[2][-094c];  // GKO.GE0.QNTR5.NAN0.L2
+// @002348b8:  mem32[0][6ab0] <= mem32[2][-29dc];  // GKO.GE0.QNTR5.NAN2.L2
+// @002348bc:  mem32[0][6aac] <= mem32[2][-0950];  // GKO.GE0.QNTR5.NAN7.L2
+// @002348c0:  mem32[0][6aa8] <= mem32[2][-29e0];  // GKO.GE0.QNTR5.NAN3.L2
+// @002348c4:  mem32[0][6aa4] <= mem32[2][-0954];  // GKO.GE0.QNTR5.NAN6.L2
+// @002348c8:  mem32[0][6aa0] <= mem32[2][-29e4];  // GKO.GE0.QNTR5.NAN4.L2
+// @002348cc:  mem32[0][6a9c] <= mem32[2][-0958];  // GKO.GE0.QNTR5.NAN5.L2
+// @002348d4:  mem32[0][6ad8] <= mem32[2][-09c0];  // GKO.GE0.QNTR6.NAN6.L2
+// @00234900: [патч-слот / данные]
+// @00234918:  mem32[0][6b14] <= mem32[2][-09bc];  // GKO.BP0.BBBQ.L1
+// @0023491c:  mem32[0][6b10] <= mem32[2][-09f4];  // GKO.GE0.WPAR.NAN1.L2
+// @00234920:  mem32[0][6b0c] <= mem32[2][-09f0];  // GKO.GE0.WPAR.NAN0.L2
+// @00234924:  mem32[0][6b08] <= mem32[2][-09ec];  // GKO.GE0.WPAR.NAN7.L2
+// @00234928:  mem32[0][6b04] <= mem32[2][-09e8];  // GKO.BAC.DLD_LAT1.BIT1.L2
+// @0023492c:  mem32[0][6b00] <= mem32[2][-09e4];  // GKO.GE0.QNTR7.NAN0.L2
+// @00234930:  mem32[0][6afc] <= mem32[2][-09e0];  // GKO.GE0.QNTR7.NAN4.L2
+// @00234934:  mem32[0][6af8] <= mem32[2][-09dc];  // GKO.GE0.QNTR7.NAN3.L2
+// @00234938:  mem32[0][6af4] <= mem32[2][-09d8];  // GKO.GE0.QNTR7.NAN5.L2
+// @0023493c:  mem32[0][6af0] <= mem32[2][-09d4];  // GKO.GE0.QNTR7.NAN2.L2
+// @00234940:  mem32[0][6aec] <= mem32[2][-09d0];  // GKO.GE0.QNTR7.NAN6.L2
+// @00234944:  mem32[0][6ae8] <= mem32[2][-09cc];  // GKO.GE0.QNTR7.NAN1.L2
+// @00234948:  mem32[0][6ae4] <= mem32[2][-09c8];  // GKO.GE0.QNTR7.NAN7.L2
+// @0023494c:  mem32[0][6ae0] <= mem32[2][-09c4];
+// @00234950:  mem32[0][6adc] <= mem32[2][-0938];  // GKO.GE0.QNTR6.NAN7.L2
+// @00234958:  mem32[0][6b18] <= mem32[2][-09f8];  // GKO.GE0.WPAR.NAN3.L2
+// @00234980: [патч-слот / данные]
+// @0023499c:  mem32[0][6b54] <= mem32[2][-099c];  // GKO.HA0.HAAA.NAN5.L2
+// @002349a0:  mem32[0][6b50] <= mem32[2][-098c];  // GKO.HA0.HAAA.NAN4.L2
+// @002349a4:  mem32[0][6b4c] <= mem32[2][-09a0];  // GKO.HA0.HAAA.NAN3.L2
+// @002349a8:  mem32[0][6b48] <= mem32[2][-0988];  // GKO.HA0.HAAA.NBN0.L2
+// @002349ac:  mem32[0][6b44] <= mem32[2][-09a4];  // GKO.HA0.HAAA.NAN2.L2
+// @002349b0:  mem32[0][6b40] <= mem32[2][-0984];  // GKO.DMM.BIST_RWI.BIT0.L1
+// @002349b4:  mem32[0][6b3c] <= mem32[2][-09a8];  // GKO.HA0.HAAA.NAN1.L2
+// @002349b8:  mem32[0][6b38] <= mem32[2][-0980];  // GKO.HA0.HAAA.NAN0.L2
+// @002349bc:  mem32[0][6b34] <= mem32[2][-09ac];  // GKO.HA0.HAAA.NBN1.L2
+// @002349c0:  mem32[0][6b30] <= mem32[2][-097c];
+// @002349c4:  mem32[0][6b2c] <= mem32[2][-09b0];
+// @002349c8:  mem32[0][6b28] <= mem32[2][-0a00];
+// @002349cc:  mem32[0][6b24] <= mem32[2][-09b4];  // GKO.CCC.CRFIELD1.BIT3.L1
+// @002349d0:  mem32[0][6b20] <= mem32[2][-09fc];  // GKO.GE0.WPAR.NAN5.L2
+// @002349d4:  mem32[0][6b1c] <= mem32[2][-09b8];  // GKO.GE0.WPAR.NAN4.L2
+// @002349dc:  mem32[0][6b58] <= mem32[2][-0990];  // GKO.HA0.HAAA.NAN6.L2
+// @002349f4:  mem32[0][6b60] <= mem32[2][-2838];
+// @002349f8:  mem32[0][6b5c] <= mem32[2][-0998];  // GKO.HA0.HAAA.NAN7.L2
+// @002349fc:  mem32[0][6b64] <= mem32[2][-288c];  // GKO.FWN.FWSU.BIT10.L1
+// конец региона
+
+##############################################################################
+# REGION 0x242298..0x242800 — LAS: store-request / gather decode
+##############################################################################
+// ========== LAS: store-request / gather decode: 0x242298..0x242800 ==========
+// @002422d4:  mem32[0][-0b98] <= mem32[2][-2b54];
+// @002422d8:  mem32[0][-0b9c] <= mem32[2][-79ec];  // GKO.FWN.FWSZ.BIT1.L2
+// @002422dc:  mem32[0][-0ba0] <= mem32[2][-0764];
+// @002422e0:  mem32[0][-0ba4] <= mem32[2][-0768];
+// @002422e4:  mem32[0][-0ba8] <= mem32[2][-15b4];
+// @002422e8:  mem32[0][-0bac] <= mem32[2][-15b8];  // GKO.DQ0.DQXD.NBN1.CR.L2
+// @002422ec:  mem32[0][-0bb0] <= mem32[2][-1600];
+// @002422f0:  mem32[0][-0bb4] <= mem32[2][-1604];
+// @002422f4:  mem32[0][-0bb8] <= mem32[2][-1640];  // GKO.DQC.STWX_BEN.BIT0.L1
+// @002422f8:  mem32[0][-0bbc] <= mem32[2][-1644];
+// @002422fc:  mem32[0][-0bc0] <= mem32[2][-1648];  // GKO.DMM.BIST_ALG.BIT1.L2
+// @00242300: [патч-слот / данные]
+// @00242304:  mem32[0][-0bc4] <= mem32[2][-1694];
+// @00242308:  mem32[0][-0bc8] <= mem32[2][-1698];
+// @0024230c:  mem32[0][-0bcc] <= mem32[2][-16d4];
+// @00242310:  mem32[0][-0bd0] <= mem32[2][-16d8];
+// @00242318:  mem32[0][-0b94] <= mem32[2][-2a9c];  // GKO.HDL.HDLE.BIT0.L1
+// @00242358:  mem32[0][-0b58] <= mem32[2][-076c];  // GKO.XM0.XMZQ.NAN4.L2
+// @0024235c:  mem32[0][-0b5c] <= mem32[2][-0770];  // GKO.XM0.XMZQ.NAN7.L2
+// @00242360:  mem32[0][-0b60] <= mem32[2][-15bc];  // GKO.XM0.XMZQ.NAN5.L2
+// @00242364:  mem32[0][-0b64] <= mem32[2][-15c0];
+// @00242368:  mem32[0][-0b68] <= mem32[2][-1608];  // GKO.XM0.XMZP.NAN1.L2
+// @0024236c:  mem32[0][-0b6c] <= mem32[2][-160c];  // GKO.XM0.XMZP.NAN0.L2
+// @00242370:  mem32[0][-0b70] <= mem32[2][-164c];  // GKO.XM0.XMZP.NAN5.L2
+// @00242374:  mem32[0][-0b74] <= mem32[2][-1650];  // GKO.XM0.XMZP.NAN7.L2
+// @00242378:  mem32[0][-0b78] <= mem32[2][-1654];  // GKO.XM0.XMZP.NAN3.L2
+// @0024237c:  mem32[0][-0b7c] <= mem32[2][-169c];  // GKO.LAS.LIDN.BIT2.L1
+// @00242380: [патч-слот / данные]
+// @00242384:  mem32[0][-0b80] <= mem32[2][-16a0];  // GKO.JTC.RUNNCOUNTER1.BIT0.L2
+// @00242388:  mem32[0][-0b84] <= mem32[2][-16dc];  // GKO.MM0.DMXV.NBN0.CR.L2
+// @0024238c:  mem32[0][-0b88] <= mem32[2][-16e0];
+// @00242390:  mem32[0][-0b8c] <= mem32[2][-2a50];
+// @00242394:  mem32[0][-0b90] <= mem32[2][-2a58];
+// @0024239c:  mem32[0][-0b54] <= mem32[2][-7ac8];  // GKO.XM0.XMZQ.NAN0.L2
+// @002423dc:  mem32[0][-0b18] <= mem32[2][-15c4];  // GKO.XM0.XMZQ.NAN4.L1
+// @002423e0:  mem32[0][-0b1c] <= mem32[2][-15c8];  // GKO.MM0.DMBF.NBN1.CR.L2
+// @002423e4:  mem32[0][-0b20] <= mem32[2][-1610];  // GKO.XM0.XMZQ.NAN2.L1
+// @002423e8:  mem32[0][-0b24] <= mem32[2][-1614];  // GKO.XM0.XMZR.NAN3.L1
+// @002423ec:  mem32[0][-0b28] <= mem32[2][-1658];
+// @002423f0:  mem32[0][-0b2c] <= mem32[2][-165c];  // GKO.XM0.XMZR.NAN4.L2
+// @002423f4:  mem32[0][-0b30] <= mem32[2][-1660];  // GKO.XM0.XMZR.NAN2.L2
+// @002423f8:  mem32[0][-0b34] <= mem32[2][-16a4];  // GKO.XM0.XMZR.NAN0.L2
+// @002423fc:  mem32[0][-0b38] <= mem32[2][-16a8];  // GKO.XM0.XMZR.NAN3.L2
+// @00242400: [патч-слот / данные]
+// @00242404:  mem32[0][-0b3c] <= mem32[2][-16e4];  // GKO.XM0.XMZR.NAN1.L2
+// @00242408:  mem32[0][-0b40] <= mem32[2][-16e8];
+// @0024240c:  mem32[0][-0b44] <= mem32[2][-2a5c];  // GKO.XM0.XMZQ.NAN1.L2
+// @00242410:  mem32[0][-0b48] <= mem32[2][-2a60];  // GKO.XM0.XMZQ.NAN3.L2
+// @00242414:  mem32[0][-0b4c] <= mem32[2][-79f0];  // GKO.XM0.XMZQ.NAN2.L2
+// @00242418:  mem32[0][-0b50] <= mem32[2][-7a04];  // GKO.XM0.XMZQ.NAN6.L2
+// @00242420:  mem32[0][-0b14] <= mem32[2][-0778];  // GKO.XM0.XMZQ.NAN5.L1
+// @00242460:  mem32[0][-0ad8] <= mem32[2][-1618];  // GKO.CSC.LSB_LAT.BIT1.L2
+// @00242464:  mem32[0][-0adc] <= mem32[2][-161c];  // GKO.CCC.CRFIELD4.BIT5.L1
+// @00242468:  mem32[0][-0ae0] <= mem32[2][-1664];  // GKO.XM0.XMZP.NAN6.L1
+// @0024246c:  mem32[0][-0ae4] <= mem32[2][-1668];  // GKO.XM0.XMZP.NAN5.L1
+// @00242470:  mem32[0][-0ae8] <= mem32[2][-166c];  // GKO.XM0.XMZP.NAN4.L1
+// @00242474:  mem32[0][-0aec] <= mem32[2][-16ac];  // GKO.BTC.Q0_LAT_HOLD.BIT1.L2
+// @00242478:  mem32[0][-0af0] <= mem32[2][-16b0];  // GKO.XM0.XMZR.NAN2.L1
+// @0024247c:  mem32[0][-0af4] <= mem32[2][-16ec];  // GKO.BDR.RUNQ_LAT4.BIT0.L2
+// @00242480: [патч-слот / данные]
+// @00242484:  mem32[0][-0af8] <= mem32[2][-16f0];  // GKO.XM0.XMZR.NAN1.L1
+// @00242488:  mem32[0][-0afc] <= mem32[2][-2a64];  // GKO.BAC.SNPO_LAT1.BIT3.L1
+// @0024248c:  mem32[0][-0b00] <= mem32[2][-2a68];  // GKO.XM0.XMZP.NAN0.L1
+// @00242490:  mem32[0][-0b04] <= mem32[2][-7acc];  // GKO.XM0.XMZR.NAN4.L1
+// @00242494:  mem32[0][-0b08] <= mem32[2][-7b74];  // GKO.XM0.XMZR.NAN0.L1
+// @00242498:  mem32[0][-0b0c] <= mem32[2][-7b78];  // GKO.XM0.XMZQ.NAN7.L1
+// @0024249c:  mem32[0][-0b10] <= mem32[2][-0774];  // GKO.XM0.XMZQ.NAN6.L1
+// @002424a4:  mem32[0][-0ad4] <= mem32[2][-15d0];  // GKO.XM0.XMZQ.NAN1.L1
+// @002424e4:  mem32[0][-0a98] <= mem32[2][-039c];  // GKO.XM0.XMZT.NAN2.L1
+// @002424e8:  mem32[0][-0a9c] <= mem32[2][-03a0];  // GKO.FWN.FWSY.BIT1.L2
+// @002424ec:  mem32[0][-0aa0] <= mem32[2][-03a4];  // GKO.XM0.XMZT.NAN0.L1
+// @002424f0:  mem32[0][-0aa4] <= mem32[2][-03e0];  // GKO.XM0.XMZT.NAN1.L1
+// @002424f4:  mem32[0][-0aa8] <= mem32[2][-03e4];  // GKO.XM0.XMZT.NAN4.L1
+// @002424f8:  mem32[0][-0aac] <= mem32[2][-0424];  // GKO.XM0.XMZT.NAN5.L1
+// @002424fc:  mem32[0][-0ab0] <= mem32[2][-0428];
+// @00242500: [патч-слот / данные]
+// @00242504:  mem32[0][-0ab4] <= mem32[2][-047c];  // GKO.XM0.XMZT.NAN0.L2
+// @00242508:  mem32[0][-0ab8] <= mem32[2][-0480];  // GKO.DQC.STWX_BEN.BIT1.L1
+// @0024250c:  mem32[0][-0abc] <= mem32[2][-04bc];  // GKO.XM0.XMZT.NAN7.L2
+// @00242510:  mem32[0][-0ac0] <= mem32[2][-04c0];  // GKO.DMM.LDM0_LRU.BIT0.L2
+// @00242514:  mem32[0][-0ac4] <= mem32[2][-04c4];  // GKO.XM0.XMZT.NAN2.L2
+// @00242518:  mem32[0][-0ac8] <= mem32[2][-077c];  // GKO.XM0.XMZT.NAN1.L2
+// @0024251c:  mem32[0][-0acc] <= mem32[2][-0780];  // GKO.XM0.XMZT.NAN4.L2
+// @00242520:  mem32[0][-0ad0] <= mem32[2][-15cc];  // GKO.XM0.XMZT.NAN3.L2
+// @00242528:  mem32[0][-0a94] <= mem32[2][-035c];  // GKO.HDL.SPARE0_REG_0.L1
+// @00242568:  mem32[0][-0a58] <= mem32[2][-1678];
+// @0024256c:  mem32[0][-0a5c] <= mem32[2][-16b4];
+// @00242570:  mem32[0][-0a60] <= mem32[2][-16b8];
+// @00242574:  mem32[0][-0a64] <= mem32[2][-16f4];
+// @00242578:  mem32[0][-0a68] <= mem32[2][-16f8];
+// @0024257c:  mem32[0][-0a6c] <= mem32[2][-2a6c];
+// @00242580: [патч-слот / данные]
+// @00242584:  mem32[0][-0a70] <= mem32[2][-2a70];
+// @00242588:  mem32[0][-0a74] <= mem32[2][-7b7c];
+// @0024258c:  mem32[0][-0a78] <= mem32[2][-7bbc];
+// @00242590:  mem32[0][-0a7c] <= mem32[2][-7e48];  // GKO.LAS.FSQ_ADDR.BIT0.L1
+// @00242594:  mem32[0][-0a80] <= mem32[2][-02c0];
+// @00242598:  mem32[0][-0a84] <= mem32[2][-02c4];  // GKO.DA0.DABI.NAN5.CR.L2
+// @0024259c:  mem32[0][-0a88] <= mem32[2][-0300];
+// @002425a0:  mem32[0][-0a8c] <= mem32[2][-0304];
+// @002425a4:  mem32[0][-0a90] <= mem32[2][-0358];  // GKO.XM0.XMZT.NAN3.L1
+// @002425ac:  mem32[0][-0a54] <= mem32[2][-1674];
+// @002425e4:  mem32[0][-0a2c] <= mem32[2][-0784];
+// @002425e8:  mem32[0][-0a30] <= mem32[2][-0788];
+// @002425ec:  mem32[0][-0a34] <= mem32[2][-1598];
+// @002425f0:  mem32[0][-0a38] <= mem32[2][-04b4];
+// @002425f4:  mem32[0][-0a3c] <= mem32[2][-04b8];
+// @002425f8:  mem32[0][-0a40] <= mem32[2][-15d4];
+// @002425fc:  mem32[0][-0a44] <= mem32[2][-15d8];
+// @00242600: [патч-слот / данные]
+// @00242604:  mem32[0][-0a48] <= mem32[2][-1620];
+// @00242608:  mem32[0][-0a4c] <= mem32[2][-1624];
+// @0024260c:  mem32[0][-0a50] <= mem32[2][-1670];
+// @00242610:  mem32[0][-0a28] <= mem32[2][-0478];
+// @00242620:  mem32[0][-0a24] <= ??;
+// @00242630:  mem32[0][-0a20] <= ??;
+// @00242674:  mem32[0][-09e4] <= mem32[2][-15dc];
+// @00242678:  mem32[0][-09e8] <= mem32[2][-15e0];
+// @0024267c:  mem32[0][-09ec] <= mem32[2][-15e4];  // GKO.BTC.Q0_LAT_HOLD.BIT0.L2
+// @00242680: [патч-слот / данные]
+// @00242684:  mem32[0][-09f0] <= mem32[2][-1628];
+// @00242688:  mem32[0][-09f4] <= mem32[2][-162c];  // GKO.BDR.RLD_LAT4.BIT9.L2
+// @0024268c:  mem32[0][-09f8] <= mem32[2][-167c];
+// @00242690:  mem32[0][-09fc] <= mem32[2][-1680];  // GKO.BAC.SYNC_LAT1.BIT1.L1
+// @00242694:  mem32[0][-0a00] <= mem32[2][-16bc];
+// @00242698:  mem32[0][-0a04] <= mem32[2][-16c0];
+// @0024269c:  mem32[0][-0a08] <= mem32[2][-1704];
+// @002426a0:  mem32[0][-0a0c] <= mem32[2][-1888];
+// @002426a4:  mem32[0][-0a10] <= mem32[2][-188c];
+// @002426a8:  mem32[0][-0a14] <= mem32[2][-2a74];
+// @002426ac:  mem32[0][-0a18] <= mem32[2][-2a78];
+// @002426b0:  mem32[0][-0a1c] <= mem32[1][7ee2];
+// @002426b8:  mem32[0][-09e0] <= mem32[2][-15a0];
+// @002426cc:  mem32[0][-09dc] <= ??;  // GKO.CCC.IDN2.BIT4.L1
+// @002426dc:  mem32[0][-09d8] <= ??;  // GKO.CSC.DEC0.BIT0.L2
+// @002426f4:  mem32[0][-09d4] <= ??;
+// @00242700: [патч-слот / данные]
+// @0024273c:  mem32[0][-099c] <= mem32[2][-15e8];  // GKO.FWN.FWSY.BIT2.L2
+// @00242740:  mem32[0][-09a0] <= mem32[2][-15ec];
+// @00242744:  mem32[0][-09a4] <= mem32[2][-15f0];
+// @00242748:  mem32[0][-09a8] <= mem32[2][-1630];
+// @0024274c:  mem32[0][-09ac] <= mem32[2][-1634];
+// @00242750:  mem32[0][-09b0] <= mem32[2][-1684];
+// @00242754:  mem32[0][-09b4] <= mem32[2][-1688];
+// @00242758:  mem32[0][-09b8] <= mem32[2][-16c4];  // GKO.DQC.STWX_BEN.BIT2.L1
+// @0024275c:  mem32[0][-09bc] <= mem32[2][-16c8];
+// @00242760:  mem32[0][-09c0] <= mem32[2][-1890];  // GKO.DMM.L1_BAT_HIT.BIT0.L2
+// @00242764:  mem32[0][-09c4] <= mem32[2][-189c];
+// @00242768:  mem32[0][-09c8] <= mem32[2][-18a0];
+// @0024276c:  mem32[0][-09cc] <= mem32[2][-2a7f];
+// @00242770:  mem32[0][-09d0] <= mem32[2][-2a83];
+// @00242778:  mem32[0][-0998] <= mem32[2][-15a8];
+// @00242780: [патч-слот / данные]
+// @0024278c:  mem32[0][-0994] <= ??;  // GKO.HDL.HDLE.BIT1.L1
+// @002427d0:  mem32[0][-0954] <= mem32[2][-15f4];
+// @002427d4:  mem32[0][-0958] <= mem32[2][-15f8];
+// @002427d8:  mem32[0][-095c] <= mem32[2][-15fc];
+// @002427dc:  mem32[0][-0960] <= mem32[2][-1638];
+// @002427e0:  mem32[0][-0964] <= mem32[2][-163c];
+// @002427e4:  mem32[0][-0968] <= mem32[2][-168c];
+// @002427e8:  mem32[0][-096c] <= mem32[2][-1690];
+// @002427ec:  mem32[0][-0970] <= mem32[2][-16cc];
+// @002427f0:  mem32[0][-0974] <= mem32[2][-16d0];
+// @002427f4:  mem32[0][-0978] <= mem32[2][-27f4];
+// @002427f8:  mem32[0][-097c] <= mem32[2][-2a40];  // GKO.LAS.LIDN.BIT1.L1
+// @002427fc:  mem32[0][-0980] <= mem32[2][-2a44];
+// конец региона
+
+##############################################################################
+# REGION 0x3a3ed8..0x3a4900 — GE0: WGB control cluster 3
+##############################################################################
+// ========== GE0: WGB control cluster 3: 0x3a3ed8..0x3a4900 ==========
+// @003a3ed8:  mem32[0][-1728] <= r12;  // GKO.GE0.WPCA.NAN0.L2
+// @003a3ef8:  mem32[0][-1724] <= ((r29 & r21) | (?? & r28));  // GKO.QSR.TSCC.NBN1.L2
+// @003a3f00: [патч-слот / данные]
+// @003a3f1c:  mem32[0][-1720] <= ((mem32[2][-29fc] & r21) | (?? & r28));  // GKO.GE0.WPCA.NAN1.L2
+// @003a3f3c:  mem32[0][-171c] <= ((mem32[2][-2a00] & r21) | (?? & r28));  // GKO.QSR.TSCC.NBN0.L2
+// @003a3f5c:  mem32[0][-1718] <= ((mem32[2][-2a04] & r21) | (?? & r28));  // GKO.GE0.WPCA.NAN2.L2
+// @003a3f7c:  mem32[0][-1714] <= ((mem32[2][-2a08] & r21) | (?? & r28));  // GKO.QSR.TSCC.NAN7.L2
+// @003a3f80: [патч-слот / данные]
+// @003a3fa0:  mem32[0][-1710] <= ((mem32[2][-29f8] & r21) | (?? & r28));  // GKO.GE0.WPCA.NAN3.L2
+// @003a3fcc:  mem32[0][-170c] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.QSR.TSCC.NAN6.L2
+// @003a3ff0:  mem32[0][-1708] <= ((mem32[2][-29f0] & r21) | (mem32[1][-2381] & r28));  // GKO.GE0.WPCA.NAN4.L2
+// @003a3ff8:  mem32[0][-1704] <= ((mem32[2][-29f4] & r21) | (mem32[1][-237d] & r28));  // GKO.QSR.TSCC.NAN5.L2
+// @003a4000: [патч-слот / данные]
+// @003a4018:  mem32[0][-1700] <= ((mem32[2][-29f8] & r21) | (?? & r28));  // GKO.GE0.WPCA.NAN5.L2
+// @003a4034:  mem32[0][-16fc] <= ((mem32[2][-29fc] & r21) | (mem32[1][-2371] & r28));  // GKO.BAC.DLD_LAT1.BIT1.L1
+// @003a404c:  mem32[0][-16f8] <= ((mem32[2][-2a00] & r21) | (?? & r28));  // GKO.GE0.WPCA.NAN6.L2
+// @003a406c:  mem32[0][-16f4] <= ((mem32[2][-2a04] & r21) | (?? & r28));  // GKO.BDR.RUNQ_LAT3.BIT3.L2
+// @003a4080: [патч-слот / данные]
+// @003a4090:  mem32[0][-16f0] <= ((mem32[2][-2a08] & r21) | (?? & r28));  // GKO.GE0.WPCA.NAN7.L2
+// @003a40b0:  mem32[0][-16ec] <= ((mem32[2][-2a04] & r21) | (?? & r28));  // GKO.BTC.READ_CAPTURE.BIT10.L2
+// @003a40d4:  mem32[0][-16e8] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.GE0.WPCB.NAN0.L2
+// @003a40f0:  mem32[0][-16e4] <= ((mem32[2][-29f0] & r21) | (mem32[1][-2349] & r28));  // GKO.QSR.TSCC.NAN1.L2
+// @003a4100: [патч-слот / данные]
+// @003a410c:  mem32[0][-16e0] <= ((mem32[2][-29f4] & r21) | (?? & r28));  // GKO.GE0.WPCB.NAN1.L2
+// @003a412c:  mem32[0][-16dc] <= ((mem32[2][-29f8] & r21) | (?? & r28));  // GKO.CCC.CBB_UBR_LATCH.BIT1.L1
+// @003a414c:  mem32[0][-16d8] <= ((mem32[2][-29fc] & r21) | (?? & r28));  // GKO.CSC.DECTRAN2.BIT0.L2
+// @003a416c:  mem32[0][-16d4] <= ((mem32[2][-2a00] & r21) | (?? & r28));  // GKO.QSR.TSCB.NBN1.L2
+// @003a4180: [патч-слот / данные]
+// @003a4190:  mem32[0][-16d0] <= ((mem32[2][-2a04] & r21) | (?? & r28));  // GKO.GE0.WPCB.NAN3.L2
+// @003a41b4:  mem32[0][-16cc] <= ((mem32[2][-2a08] & r21) | (?? & r28));  // GKO.QSR.TSCB.NBN0.L2
+// @003a41d0:  mem32[0][-16c8] <= ((mem32[2][-29fc] & r21) | (mem32[1][-2305] & r28));  // GKO.GE0.WPCB.NAN4.L2
+// @003a41e8:  mem32[0][-16c4] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.QSR.TSCB.NAN7.L2
+// @003a4200: [патч-слот / данные]
+// @003a420c:  mem32[0][-16c0] <= ((mem32[2][-29f0] & r21) | (?? & r28));  // GKO.DMM.TLB_BIST_PAT_COMPLETE.BIT0.L2
+// @003a422c:  mem32[0][-16bc] <= ((mem32[2][-29f4] & r21) | (?? & r28));  // GKO.QSR.TSCB.NAN6.L2
+// @003a424c:  mem32[0][-16b8] <= ((mem32[2][-29f8] & r21) | (?? & r28));  // GKO.GE0.WPCB.NAN6.L2
+// @003a426c:  mem32[0][-16b4] <= ((mem32[2][-29fc] & r21) | (?? & r28));  // GKO.QSR.TSCB.NAN5.L2
+// @003a4280: [патч-слот / данные]
+// @003a4290:  mem32[0][-16b0] <= ((mem32[2][-2a00] & r21) | (?? & r28));  // GKO.GE0.WPCB.NAN7.L2
+// @003a42b4:  mem32[0][-16ac] <= ((mem32[2][-2a04] & r21) | (?? & r28));  // GKO.QSR.TSCB.NAN4.L2
+// @003a42d0:  mem32[0][-16a8] <= ((mem32[2][-2a08] & r21) | (mem32[1][-2325] & r28));  // GKO.GE0.WPCC.NAN0.L2
+// @003a42e8:  mem32[0][-16a4] <= ((mem32[2][-2a00] & r21) | (?? & r28));  // GKO.QSR.TSCB.NAN3.L2
+// @003a4300: [патч-слот / данные]
+// @003a430c:  mem32[0][-16a0] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.GE0.WPCC.NAN1.L2
+// @003a432c:  mem32[0][-169c] <= ((mem32[2][-29f0] & r21) | (?? & r28));  // GKO.FWN.FWSX.BIT4.L2
+// @003a434c:  mem32[0][-1698] <= ((mem32[2][-29f4] & r21) | (?? & r28));  // GKO.GE0.WPCC.NAN2.L2
+// @003a436c:  mem32[0][-1694] <= ((mem32[2][-29f8] & r21) | (?? & r28));  // GKO.QSR.TSCB.NAN1.L2
+// @003a4380: [патч-слот / данные]
+// @003a4394:  mem32[0][-1690] <= ((mem32[2][-29fc] & r21) | (?? & r28));  // GKO.GE0.WPCC.NAN3.L2
+// @003a43b0:  mem32[0][-168c] <= ((mem32[2][-2a00] & r21) | (mem32[1][-2619] & r28));  // GKO.QSR.TSCB.NAN0.L2
+// @003a43c8:  mem32[0][-1688] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.GE0.WPCC.NAN4.L2
+// @003a43e4:  mem32[0][-1684] <= ((mem32[2][-2a04] & r21) | (?? & r28));  // GKO.DL0.DLAG.NCN0.CR.L2
+// @003a43f4:  mem32[0][-1680] <= (?? & r28);  // GKO.GE0.WPCC.NAN5.L2
+// @003a4400: [патч-слот / данные]
+// @003a4424:  mem32[0][-167c] <= ((mem32[2][-2a08] & r21) | (?? & r28));  // GKO.LAS.FDQ_PQA.BIT5.L1
+// @003a4444:  mem32[0][-1678] <= ((?? & r21) | (mem32[1][-22dd] & r28));  // GKO.GE0.WPCC.NAN6.L2
+// @003a445c:  mem32[0][-1674] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.QSR.TSCA.NAN7.L2
+// @003a447c:  mem32[0][-1670] <= ((mem32[2][-29f0] & r21) | (?? & r28));  // GKO.GE0.WPCC.NAN7.L2
+// @003a4480: [патч-слот / данные]
+// @003a44a0:  mem32[0][-166c] <= ((mem32[2][-29f4] & r21) | (?? & r28));  // GKO.QSR.TSCA.NAN6.L2
+// @003a44c0:  mem32[0][-1668] <= ((mem32[2][-29f8] & r21) | (?? & r28));  // GKO.GE0.WPCD.NAN0.L2
+// @003a44e0:  mem32[0][-1664] <= ((mem32[2][-29fc] & r21) | (?? & r28));  // GKO.QSR.TSCA.NAN5.L2
+// @003a4500: [патч-слот / данные]
+// @003a4504:  mem32[0][-1660] <= ((mem32[2][-2a00] & r21) | (?? & r28));  // GKO.GE0.WPCD.NAN1.L2
+// @003a4524:  mem32[0][-165c] <= ((mem32[2][-2a04] & r21) | (?? & r28));  // GKO.QSR.TSCA.NAN4.L2
+// @003a4574:  mem32[0][-1658] <= ((mem32[2][-2a08] & r21) | (?? & r28));  // GKO.QSR.TSCD.NAN6.L2
+// @003a4580: [патч-слот / данные]
+// @003a45b4:  mem32[0][-1648] <= ((mem32[2][-29f4] & r21) | (mem32[1][-22ed] & r28));  // GKO.QSR.TSCA.NAN2.L2
+// @003a45b8:  mem32[0][-164c] <= ((mem32[2][-29f8] & r21) | (mem32[1][-22e9] & r28));  // GKO.GE0.WPCD.NAN3.L2
+// @003a45bc:  mem32[0][-1650] <= ((mem32[2][-29fc] & r21) | (mem32[1][-22e5] & r28));  // GKO.QSR.TSCA.NAN3.L2
+// @003a45c0:  mem32[0][-1654] <= ((mem32[2][-2a00] & r21) | (mem32[1][-22e1] & r28));  // GKO.GE0.WPCD.NAN2.L2
+// @003a45c8:  mem32[0][-1644] <= ((mem32[2][-29f0] & r21) | (mem32[1][-22f1] & r28));  // GKO.GE0.WPCD.NAN4.L2
+// @003a45e0:  mem32[0][-1640] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.QSR.TSCA.NAN1.L2
+// @003a4600: [патч-слот / данные]
+// @003a4604:  mem32[0][-163c] <= ((mem32[2][-29f0] & r21) | (?? & r28));  // GKO.GE0.WPCD.NAN5.L2
+// @003a4624:  mem32[0][-1638] <= ((mem32[2][-29f4] & r21) | (?? & r28));  // GKO.QSR.TSCA.NAN0.L2
+// @003a4644:  mem32[0][-1634] <= ((mem32[2][-29f8] & r21) | (?? & r28));  // GKO.GE0.WPCD.NAN6.L2
+// @003a4664:  mem32[0][-1630] <= ((mem32[2][-29fc] & r21) | (?? & r28));  // GKO.GE0.WPCD.NAN7.L2
+// @003a4680: [патч-слот / данные]
+// @003a4688:  mem32[0][-162c] <= ((mem32[2][-2a00] & r21) | (?? & r28));  // GKO.GE0.WPCE.NAN0.L2
+// @003a46a8:  mem32[0][-1628] <= ((mem32[2][-2a04] & r21) | (?? & r28));  // GKO.GE0.WPCE.NAN1.L2
+// @003a46c8:  mem32[0][-1624] <= ((mem32[2][-2a08] & r21) | (?? & r28));  // GKO.GE0.WPCE.NAN2.L2
+// @003a46e8:  mem32[0][-1620] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.GE0.WPCE.NAN3.L2
+// @003a4700: [патч-слот / данные]
+// @003a470c:  mem32[0][-161c] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.GE0.WPCE.NAN4.L2
+// @003a472c:  mem32[0][-1618] <= ((mem32[2][-29f0] & r21) | (?? & r28));  // GKO.QSR.TSCR.NCN0.L2
+// @003a474c:  mem32[0][-1614] <= ((mem32[2][-29f4] & r21) | (?? & r28));  // GKO.GE0.WPCE.NAN5.L2
+// @003a476c:  mem32[0][-1610] <= ((mem32[2][-29f8] & r21) | (?? & r28));  // GKO.QSR.TSCR.NBN7.L2
+// @003a4780: [патч-слот / данные]
+// @003a4790:  mem32[0][-160c] <= ((mem32[2][-29fc] & r21) | (?? & r28));  // GKO.GE0.WPCE.NAN6.L2
+// @003a47b0:  mem32[0][-1608] <= ((mem32[2][-2a00] & r21) | (?? & r28));  // GKO.QSR.TSCR.NBN6.L2
+// @003a47d0:  mem32[0][-1604] <= ((mem32[2][-2a04] & r21) | (?? & r28));  // GKO.GE0.WPCE.NAN7.L2
+// @003a47f0:  mem32[0][-1600] <= ((mem32[2][-2a08] & r21) | (?? & r28));  // GKO.QSR.TSCR.NBN5.L2
+// @003a4800: [патч-слот / данные]
+// @003a4814:  mem32[0][-15fc] <= ((mem32[2][-29f0] & r21) | (?? & r28));  // GKO.BAC.SNPI_LAT9.BIT2.L1
+// @003a482c:  mem32[0][-15f8] <= ((mem32[2][-29ec] & r21) | (?? & r28));  // GKO.QSR.TSCR.NBN3.L2
+if ((w[2][-30e6] | w[2][-2305]) == 0) {
+  // @003a4850:  w[1][6c88]    <= ??;  // GKO.HA0.HAAI.NAN0.L2
+  // @003a4878:  w[1][6c89]    <= ~((~(~(GKO.L20.L2DCACHEH.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH & GKO.FIC.FIM5.BIT0.L1) | w[1][-60b8]) & w[1][7905]) & w[2][-7ecb]);
+  // @003a4880: [патч-слот / данные]
+  // @003a4894:  w[1][6c8a]    <= ~((~(~(w[1][-60b8] & GKO.FIC.FIM5.BIT0.L1) | GKO.L20.L2DCACHEH.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH) & w[1][7905]) & w[2][-7ecb]);
+  // @003a48ac:  w[1][6c8b]    <= ~((~((w[1][-60b8] | ~(GKO.FIC.FIM5.BIT0.L1)) | GKO.L20.L2DCACHEH.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH) & w[1][7905]) & w[2][-7ecb]);
+  // @003a48c4:  w[1][6c8c]    <= ~((~(~(w[1][-60b8] & GKO.L20.L2DCACHEH.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH) | GKO.FIC.FIM5.BIT0.L1) & w[1][7905]) & w[2][-7ecb]);  // GKO.HA0.HAAI.NAN1.L2
+  // @003a48d4:  w[1][6c8d]    <= ~(GKO.IC0.ICAA.FWD_LAT.L2.RRAM_0_HOLDL2 & w[2][-7ecb]);
+  // @003a48ec:  w[1][6c8e]    <= ~((~((w[1][-60b8] | ~(GKO.L20.L2DCACHEH.IQUAD3.OUTDC_L.HOLD_LATHOLD_LATCH)) | GKO.FIC.FIM5.BIT0.L1) & w[1][7905]) & w[2][-7ecb]);  // GKO.LLC.LSCALE_M.BIT1.L2
+}
+// конец региона
+
+##############################################################################
+# REGION 0x1e017c..0x1e0700 — LAS: store queues / gather flags
+##############################################################################
+// ========== LAS: store queues / gather flags: 0x1e017c..0x1e0700 ==========
+// @001e0180: [патч-слот / данные]
+// @001e01a8:  w[1][7d2d]    <= (((r28 & ((r8 | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-5968]);
+// @001e01fc:  w[1][7d2e]    <= ((((((w[0][-5953] | w[0][-594f]) | w[0][-594e]) | w[0][-594c]) & ((((r26 | w[1][6eca]) | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-5971]);
+// @001e0200: [патч-слот / данные]
+// @001e024c:  w[1][7d2f]    <= (((((w[0][-5953] | w[0][-594f]) | w[0][-594e]) & ((((r26 | w[1][6eca]) | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-594c]);
+// @001e0280: [патч-слот / данные]
+// @001e0294:  w[1][7d30]    <= ((((w[0][-5953] | w[0][-594f]) & ((((r26 | w[1][6eca]) | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-594e]);  // GKO.IT0.ITAA.LATB2
+// @001e02cc:  w[1][7d31]    <= (((((((r26 | w[1][6eca]) | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb]) & r29) & w[0][-5953]) & w[0][-594f]);
+// @001e0300: [патч-слот / данные]
+// @001e032c:  w[1][7d32]    <= (((((((w[0][-595b] | GKO.L20.L2DCACHEH.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) | w[0][-5957]) | w[0][-5974]) | GKO.LLC.MULTS.BIT0.L1) & ((((r26 | w[1][6eca]) | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-5955]);
+// @001e0380: [патч-слот / данные]
+// @001e0384:  w[1][7d33]    <= ((((((w[0][-595b] | GKO.L20.L2DCACHEH.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH) | w[0][-5974]) | GKO.LLC.MULTS.BIT0.L1) & ((((r26 | w[1][6eca]) | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-5957]);
+// @001e03d0:  w[1][7d34]    <= (((((w[0][-595b] | w[0][-5974]) | GKO.LLC.MULTS.BIT0.L1) & ((((r26 | w[1][6eca]) | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & GKO.L20.L2DCACHEH.IQUAD0.OUTDC_L.HOLD_LATHOLD_LATCH);
+// @001e0400: [патч-слот / данные]
+// @001e0418:  w[1][7d35]    <= ((((w[0][-5974] | GKO.LLC.MULTS.BIT0.L1) & ((((r26 | w[1][6eca]) | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-595b]);
+// @001e0450:  w[1][7d36]    <= (((((((r26 | w[1][6eca]) | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb]) & r29) & w[0][-5974]) & GKO.LLC.MULTS.BIT0.L1);
+// @001e0480: [патч-слот / данные]
+// @001e04bc:  w[1][7d37]    <= (((((((((w[0][-595d] | w[0][-5958]) | w[0][-594d]) | GKO.LLC.FP_DTAG_H.BIT0.L2) | GKO.XM0.XMOT.PDN3.L1) | w[0][-5960]) | w[0][-5959]) & (((w[1][6eca] | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-5952]);
+// @001e0500: [патч-слот / данные]
+// @001e051c:  w[1][7d38]    <= ((((((((w[0][-595d] | w[0][-5958]) | w[0][-594d]) | GKO.LLC.FP_DTAG_H.BIT0.L2) | GKO.XM0.XMOT.PDN3.L1) | w[0][-5960]) & (((w[1][6eca] | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-5959]);
+// @001e0570:  w[1][7d39]    <= (((((((w[0][-595d] | w[0][-5958]) | w[0][-594d]) | GKO.LLC.FP_DTAG_H.BIT0.L2) | GKO.XM0.XMOT.PDN3.L1) & (((w[1][6eca] | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-5960]);
+// @001e0580: [патч-слот / данные]
+// @001e05c0:  w[1][7d3a]    <= ((((((w[0][-595d] | w[0][-5958]) | w[0][-594d]) | GKO.LLC.FP_DTAG_H.BIT0.L2) & (((w[1][6eca] | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & GKO.XM0.XMOT.PDN3.L1);  // GKO.DLS.INT_PEND.BIT0.L2
+// @001e0600: [патч-слот / данные]
+// @001e0608:  w[1][7d3b]    <= (((((w[0][-595d] | w[0][-5958]) | w[0][-594d]) & (((w[1][6eca] | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & GKO.LLC.FP_DTAG_H.BIT0.L2);
+// @001e0644:  w[1][7d3c]    <= ((((w[0][-595d] | w[0][-5958]) & (((w[1][6eca] | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb])) & r29) & w[0][-594d]);
+// @001e0674:  w[1][6eca]    <= ((((((w[1][6eca] | w[1][6ec9]) | GKO.GE0.WPCL.ABCD.L2) | w[1][6ecb]) & r29) & w[0][-595d]) & w[0][-5958]);
+// @001e0680: [патч-слот / данные]
+// @001e06cc:  w[1][7d3d]    <= (~((((((r29 & w[1][6efe]) | (r23 & w[1][6ea2])) | (r22 & w[1][6e6b])) | (r21 & w[1][6ece])) | (r31 & GKO.IC0.ICAB.CR.L1)) | (w[0][-5991] & w[1][6ecf])) & w[1][7221]);
+// конец региона
