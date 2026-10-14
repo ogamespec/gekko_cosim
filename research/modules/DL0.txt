@@ -1,0 +1,46 @@
+# GKO module DL0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 30 (init pass 22, per-cycle pass 8)
+#   of which 30 drive a named wire, 15 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00007eb4  b1.703d  GKO.DL0.DLAE.NCN1.CR.L2                      <= (~w0_b9f0 & w0_ba48 & ~(w0_ba44<HOLD_LATHOLD_LATCH> & w0_ba46 & (w0_b9f0 | w0_ba48)))
+@0009cd04  b2.a43c  GKO.DL0.DLAB.NCN1.CR.L2                      <= f2_642300
+@000c921c  b2.d33f  GKO.DL0.DLAJ.NCN1.CR.L1                      <= (~w0_06bc & ~w0_6385<L1> & (w1_7df6 | f2_823188))
+@000df598  b2.bc3e  GKO.DL0.DLAJ.NCN1.CR.L2                      <= f2_914836
+@000df5b0  b2.bc3f  GKO.DL0.DLCA.NAN7.CR.L2                      <= f2_914860
+@000f4944  b2.bc3e  GKO.DL0.DLAJ.NCN1.CR.L2                      <= (w1_7f7a & w2_80f0)
+@000f4984  b2.bc3f  GKO.DL0.DLCA.NAN7.CR.L2                      <= (w1_7f7a & w2_d413<L2>)
+@000f80a8  b2.d53f  GKO.DL0.DLAG.NCN0.CR.L1                      <= (~w1_7df1 & ~w2_85e6 & w2_d323<L2>)
+@00102290  b2.bc3e  GKO.DL0.DLAJ.NCN1.CR.L2                      <= (w0_d1b5 & w0_d1bb & w1_7092 & w1_7743 & (w0_d1b7<HOLD_LATHOLD_LATCH> | (w0_d1b5 & w0_d1b6 & w0_d1b7<HOLD_LATHOLD_LATCH>)) & (w0_d1b6 | w0_d1b7<HOLD_LATHOLD_LATCH>) & (w0_d1b5 | (w0_d1b5 & w0_d1bb & w1_7092 & w1_7743 & (w0_d1b7<HOLD_LATHOLD_LATCH> | (w0_d1b5 & w0_d1b6 & w0_d1b7<HOLD_LATHOLD_LATCH>)) & (w0_d1b6 | w0_d1b7<HOLD_LATHOLD_LATCH>))))
+@001022a4  b2.bc3f  GKO.DL0.DLCA.NAN7.CR.L2                      <= (w0_d1b5 & w0_d1bb & w1_7092 & w1_7743 & (w0_d1b5 | (w0_d1b5 & w0_d1bb & w1_7092 & w1_7743 & (w0_d1b7<HOLD_LATHOLD_LATCH> | (w0_d1b5 & w0_d1b6 & w0_d1b7<HOLD_LATHOLD_LATCH>)) & (w0_d1b6 | w0_d1b7<HOLD_LATHOLD_LATCH>) & (w0_d1b5 | (w0_d1b5 & w0_d1bb & w1_7092 & w1_7743 & (w0_d1b7<HOLD_LATHOLD_LATCH> | (w0_d1b5 & w0_d1b6 & w0_d1b7<HOLD_LATHOLD_LATCH>)) & (w0_d1b6 | w0_d1b7<HOLD_LATHOLD_LATCH>))))) & (w0_d1b7<HOLD_LATHOLD_LATCH> | (w0_d1b5 & w0_d1b6 & w0_d1b7<HOLD_LATHOLD_LATCH>)) & (w0_d1b6 | w0_d1b7<HOLD_LATHOLD_LATCH>))
+@001089f0  b2.d83f  GKO.DL0.DLAC.NCN1.CR.L1                      <= (w0_9f63 & w2_bff2<L2>)
+@0011bfec  b2.d83f  GKO.DL0.DLAC.NCN1.CR.L1                      <= 0
+@001220e8  b2.e83c  GKO.DL0.DLAC.NCN1.CR.L2                      <= <whole-word copy>
+@0012c07c  b2.e97c  GKO.DL0.DLAG.NCN0.CR.L2                      <= (w2_ab3b | (w2_a672 & ~w2_d860))
+@0013222c  b2.ec3f  GKO.DL0.DLEA.NAN3.CR.L1                      <= w2_d57b
+@0014fe5c  b2.f83f  GKO.DL0.DLEA.NAN3.CR.L2                      <= w2_d7ec
+@0016d128  b2.e97c  GKO.DL0.DLAG.NCN0.CR.L2                      <= <whole-word copy>
+@001764cc  b7.e83c  GKO.DL0.DLAC.NCN1.CR.L2                      <= <whole-word copy>
+@0017ca78  b3.d33f  GKO.DL0.DLAJ.NCN1.CR.L1                      <= <whole-word copy>
+@0017db38  b3.d23f  GKO.DL0.DLAE.NCN1.CR.L1                      <= <whole-word copy>
+@0017ebf4  b3.d13f  GKO.DL0.DLAD.NCN1.CR.L1                      <= <whole-word copy>
+@0017fcb4  b3.d03f  GKO.DL0.DLAB.NCN1.CR.L1                      <= <whole-word copy>
+@002f6220  b0.3f9c  GKO.DL0.DLAS.NBN7.L1                         <= <whole-word copy>
+@002f6240  b0.3fb8  GKO.DL0.DLCA.NAN3.L2                         <= <whole-word copy>
+@002f6248  b0.3fb4  GKO.DL0.DLCA.NAN4.L2                         <= <whole-word copy>
+@002f624c  b0.3fb0  GKO.DL0.DLCA.NAN0.L2                         <= <whole-word copy>
+@002f6250  b0.3fac  GKO.DL0.DLCA.NAN1.L2                         <= <whole-word copy>
+@002f6254  b0.3fa8  GKO.DL0.DLCA.NAN5.L2                         <= <whole-word copy>
+@002f6258  b0.3fa4  GKO.DL0.DLCA.NAN2.L2                         <= <whole-word copy>
+@002f625c  b0.3fa0  GKO.DL0.DLAS.NBN0.L1                         <= <whole-word copy>

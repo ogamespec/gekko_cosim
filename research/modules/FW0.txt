@@ -1,0 +1,52 @@
+# GKO module FW0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 36 (init pass 1, per-cycle pass 35)
+#   of which 22 drive a named wire, 16 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@0004634c  b2.8467  GKO.FW0.FWAC.NBN7.CR.L2                      <= f2_287560
+@002fa6d0  b0.66f9                                               <= <whole-word copy>
+@002fa724  b0.671c  GKO.FW0.FWAB.NAN4.L2                         <= <whole-word copy>
+@002fa72c  b0.6718  GKO.FW0.FWAB.NAN3.L2                         <= <whole-word copy>
+@002fa734  b0.6710  GKO.FW0.FWAB.NAN1.L2                         <= <whole-word copy>
+@002fa744  b0.6720  GKO.FW0.FWAB.NAN5.L2                         <= <whole-word copy>
+@002fa910  b0.6758  GKO.FW0.FWAC.NAN4.L2                         <= <whole-word copy>
+@002fa924  b0.6768  GKO.FW0.FWAC.NAN7.L2                         <= <whole-word copy>
+@002fa92c  b0.6764  GKO.FW0.FWAC.NAN0.L2                         <= <whole-word copy>
+@002fa930  b0.6760  GKO.FW0.FWAC.NAN6.L2                         <= <whole-word copy>
+@002fa934  b0.675c  GKO.FW0.FWAC.NAN5.L2                         <= <whole-word copy>
+@002fa938  b0.676c  GKO.FW0.FWAC.NBN0.L2                         <= <whole-word copy>
+@002fa98c  b0.6778  GKO.FW0.FWAC.NBN3.L2                         <= <whole-word copy>
+@002fa994  b0.677c  GKO.FW0.FWAC.NBN4.L2                         <= <whole-word copy>
+@002faab0  b0.67cc                                               <= <whole-word copy>
+@002faad0  b0.67d0                                               <= <whole-word copy>
+@00481014  b1.6c86                                               <= f2_4722704
+@00481028  b1.6c87                                               <= <whole-word copy>
+@004810a0  b0.6770  GKO.FW0.FWAC.NBN1.L2                         <= ((w1_597c<L1> & f2_4722764) | (w1_6c81<L1> & f2_4722752))
+@004810b8  b0.6774  GKO.FW0.FWAC.NBN2.L2                         <= ((w1_5979 & f2_4722764) | (w1_6c86 & f2_4722752))
+@004811c0  b0.6780  GKO.FW0.FWAC.NBN5.L2                         <= ((w1_5991 & f2_4723064) | (w1_6c81<L1> & f2_4723052))
+@00481220  b0.6788  GKO.FW0.FWAD.NAN6.L2                         <= ((w1_6c82<L2> & f2_4723052) | (w1_5995 & f2_4723064))
+@0048136c  b1.6c86                                               <= (w1_7d16 | (~w1_7fa3 & (w1_7d0a<L2> | (((w1_6c82<L2> & f2_4723052) | (w1_5995 & f2_4723064)) & (w1_77b1 | w1_77b5 | w1_7d0a<L2> | w1_7d14<L1> | w1_7d16 | w1_7d17<L2> | w1_7d1b | w1_7d1c<LATB1>)))))
+@00481388  b1.6c87                                               <= (w1_7d16 | (w1_7d0a<L2> & ~w1_7fa3) | (~w1_7fa3 & (w1_7d0a<L2> | (((w1_6c82<L2> & f2_4723052) | (w1_5995 & f2_4723064)) & (w1_77b1 | w1_77b5 | w1_7d0a<L2> | w1_7d14<L1> | w1_7d16 | w1_7d17<L2> | w1_7d1b | w1_7d1c<LATB1>)))))
+@00481418  b1.6c89                                               <= (w1_59ba & w1_7fa3)
+@0048142c  b1.6c8a                                               <= (w1_59b7 & w1_77b1 & ~(~w1_59b7 & ~(w1_59ac<L1> & w1_7fa3)) & ~((~w1_7d16 | ~w1_7fa3) & (w1_7d16 | (w1_7d0a<L2> & ~w1_7fa3) | (~w1_7fa3 & (w1_7d0a<L2> | (((w1_6c82<L2> & f2_4723052) | (w1_5995 & f2_4723064)) & (w1_77b1 | w1_77b5 | w1_7d0a<L2> | w1_7d14<L1> | w1_7d16 | w1_7d17<L2> | w1_7d1b | w1_7d1c<LATB1>)))))))
+@00481444  b1.6c8b                                               <= ((w1_7664<L1> & ~w1_7fa3) | (w1_59b7 & w1_77b1 & ~(~w1_59b7 & ~(w1_59ac<L1> & w1_7fa3)) & ~((~w1_7d16 | ~w1_7fa3) & (w1_7d16 | (w1_7d0a<L2> & ~w1_7fa3) | (~w1_7fa3 & (w1_7d0a<L2> | (((w1_6c82<L2> & f2_4723052) | (w1_5995 & f2_4723064)) & (w1_77b1 | w1_77b5 | w1_7d0a<L2> | w1_7d14<L1> | w1_7d16 | w1_7d17<L2> | w1_7d1b | w1_7d1c<LATB1>))))))))
+@0048146c  b1.6c8d                                               <= f2_4723816
+@004814a8  b1.6c8f                                               <= ((w1_59ae & w1_7fa3) | (w1_764e & ~w1_7fa3))
+@00481518  b1.6c92                                               <= ((w1_59b8<L1> & ~w1_7fa3) | (w1_59af & w1_7fa3))
+@0048159c  b0.6798  GKO.FW0.FWAD.NAN1.L2                         <= ((w1_59b7 & f2_4724064) | (w1_6c84<L2> & f2_4724052))
+@004815c4  b0.679c  GKO.FW0.FWAD.NBN4.L2                         <= ((w1_6c88<L2> & f2_4724052) | (w1_59b1 & f2_4724064))
+@004815f4  b0.67a0  GKO.FW0.FWAD.NBN3.L2                         <= ((w1_6c8c<L2> & f2_4724052) | (w1_59b8<L1> & f2_4724064))
+@00481624  b0.67a4  GKO.FW0.FWAD.NAN2.L2                         <= ((w1_6c90<L2> & f2_4724052) | (w1_59b2 & f2_4724064))
+@00481648  b0.67a9                                               <= ((w1_59b4<L1> & f2_4724064) | (w1_59b2 & f2_4724052))
+@00481650  b0.67a8  GKO.FW0.FWAD.NBN2.L2                         <= f2_4724300

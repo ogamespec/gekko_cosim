@@ -1,0 +1,68 @@
+# GKO module TMC -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 52 (init pass 52, per-cycle pass 0)
+#   of which 22 drive a named wire, 6 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@000971b4  b2.9aeb  GKO.TMC.SPR2_TI.BIT0.L1                      <= f2_618920
+@00098df8  b2.9deb  GKO.TMC.SPR1_TI.BIT0.L1                      <= <whole-word copy>
+@0009df98  b2.a5eb  GKO.TMC.INT_HOLD.BIT0.L2                     <= <whole-word copy>
+@000a01d8  b2.a8eb  GKO.TMC.SYNC1.BIT0.L2                        <= <whole-word copy>
+@000a0f8c  b2.a1eb  GKO.TMC.SPR2_RD.BIT0.L2                      <= <whole-word copy>
+@000a17a0  b2.99eb  GKO.TMC.THM_STM.BIT1.L1                      <= f2_661404
+@000adf10  b2.90eb  GKO.TMC.INT_HOLD.BIT0.L1                     <= <whole-word copy>
+@000baa1c  b2.a3eb  GKO.TMC.THM_STM.BIT2.L2                      <= (~w0_9815 & ~w0_982e & ~w0_992f<HOLD_LATHOLD_LATCH> & ~w1_6d64<L1> & w1_73e8 & (w0_9e40<L1> | w1_6e1e | w1_6e3c<L2> | ~w1_7df6))
+@000bc110  b2.a4e1                                               <= 0
+@000bc29c  b2.a4e2                                               <= 0
+@000bc430  b2.a4e3                                               <= 0
+@000bc5c4  b2.a4e9                                               <= 0
+@000bc750  b2.a4ea                                               <= 0
+@000bc8dc  b2.a4eb  GKO.TMC.SPARE0_REG_0.L2                      <= 0
+@000bca68  b2.a4f9                                               <= 0
+@000bcbec  b2.a4fa                                               <= 0
+@000bcd78  b2.a4fb                                               <= 0
+@000bcf08  b2.a502                                               <= 0
+@000c9418  b2.a6eb  GKO.TMC.THM_STM.BIT0.L2                      <= 0
+@000df2ac  b2.a6eb  GKO.TMC.THM_STM.BIT0.L2                      <= f2_914088
+@000ee488  b2.a6eb  GKO.TMC.THM_STM.BIT0.L2                      <= (w0_a730 & w2_d0f2<L2>)
+@000f0ca4  b2.a3eb  GKO.TMC.THM_STM.BIT2.L2                      <= 0
+@0010206c  b2.a3eb  GKO.TMC.THM_STM.BIT2.L2                      <= (w0_d1b5 & w0_d1bb & w1_7092 & w1_7743 & (w0_d1b7<HOLD_LATHOLD_LATCH> | (w0_d1b5 & w0_d1b6 & w0_d1b7<HOLD_LATHOLD_LATCH>)) & (w0_d1b6 | w0_d1b7<HOLD_LATHOLD_LATCH>) & (w0_d1b5 | (w0_d1b5 & w0_d1bb & w1_7092 & w1_7743 & (w0_d1b7<HOLD_LATHOLD_LATCH> | (w0_d1b5 & w0_d1b6 & w0_d1b7<HOLD_LATHOLD_LATCH>)) & (w0_d1b6 | w0_d1b7<HOLD_LATHOLD_LATCH>))))
+@00127eb0  b2.a6eb  GKO.TMC.THM_STM.BIT0.L2                      <= (w2_d7d7 | (~(w0_0dbc & w0_0de1) & ~(~w0_0de1 & w2_826f) & ((w0_0dbc & w0_0de1) | (~w0_0de1 & w2_826f))))
+@0015a86c  b2.a4eb  GKO.TMC.SPARE0_REG_0.L2                      <= w2_e733
+@0015ca5c  b2.a6eb  GKO.TMC.THM_STM.BIT0.L2                      <= w2_e73b
+@0017b840  b2.a4eb  GKO.TMC.SPARE0_REG_0.L2                      <= <whole-word copy>
+@00186ea8  b2.a4eb  GKO.TMC.SPARE0_REG_0.L2                      <= ((w1_7e84<L1> & w2_a5d1) | (~w1_7e84<L1> & w2_e9e0<L2>))
+@0018d0a4  b2.a672                                               <= f2_1626272
+@0018d224  b2.a673                                               <= f2_1626656
+@0018d3a4  b2.a6e2                                               <= f2_1627040
+@0018d524  b2.a6e3                                               <= f2_1627424
+@0018d6a4  b2.a6ea                                               <= f2_1627808
+@0018d828  b2.a6eb  GKO.TMC.THM_STM.BIT0.L2                      <= f2_1628196
+@0018d9a4  b2.a731                                               <= f2_1628576
+@0018db24  b2.a732                                               <= f2_1628960
+@0018dca4  b2.a733                                               <= f2_1629344
+@001ab010  b2.a673                                               <= f2_1749004
+@001ab050  b2.a6e2                                               <= f2_1749068
+@001ab240  b2.a6e3                                               <= f2_1749564
+@001ab284  b2.a869                                               <= f2_1749628
+@001ab470  b2.a6ea                                               <= f2_1750124
+@001ab4b4  b2.a86b                                               <= f2_1750192
+@001ab6a4  b2.a6eb  GKO.TMC.THM_STM.BIT0.L2                      <= f2_1750688
+@001ab6e4  b2.a8f3                                               <= f2_1750752
+@001ab8d4  b2.a731                                               <= f2_1751248
+@001abb08  b2.a732                                               <= f2_1751812
+@001abb48  b2.a902                                               <= f2_1751876
+@001abd38  b2.a733                                               <= f2_1752372
+@001abd78  b2.a91a                                               <= f2_1752436
+@001abfac  b2.a91b                                               <= f2_1753000
+@001b5104  b2.a6eb  GKO.TMC.THM_STM.BIT0.L2                      <= (w1_770b | w1_771c | w1_7727<L1> | w1_7740<L1> | w1_7a3f | (~w1_70bf & (w1_6f5a | (~w2_824b & (w2_f3df | (~w1_74ee & w2_f3dd))))) | (w1_6f5a & w1_70bf & w2_824b) | (w1_6f5a & w1_70bf & w2_824b & ((~w2_f3df & ((~w2_d778 & ((~w1_7be4<L1> & ((~w2_f3df & (w2_f3de | (~w2_d778 & (w2_f3dd | ...)))) | (w2_d778 & w2_f3de & w2_f3df))) | (w1_7066 & w2_d5c7 & w2_f3dc))) | (w2_d76c & w2_f3de & ((~w2_f3dd & ((~w2_d767 & (w2_d668 | (~w1_7be1 & (... | ...)))) | (w1_7066 & w2_d5c7 & w2_f3dc))) | (w1_7066 & w2_d5c7 & w2_d767 & w2_f3dc & w2_f3dd))))) | (w2_d76c & w2_d778 & w2_f3de & w2_f3df & ((~w2_f3dd & ((~w2_d767 & (w2_d668 | (~w1_7be1 & ((~w2_f3dd & (w2_f3dc | ...)) | (w2_d767 & w2_f3dc & w2_f3dd))))) | (w1_7066 & w2_d5c7 & w2_f3dc))) | (w1_7066 & w2_d5c7 & w2_d767 & w2_f3dc & w2_f3dd))))))

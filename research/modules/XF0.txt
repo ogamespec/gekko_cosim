@@ -1,0 +1,20 @@
+# GKO module XF0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 4 (init pass 4, per-cycle pass 0)
+#   of which 4 drive a named wire, 2 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@000e3f3c  b2.d0f3  GKO.XF0.XFTC.CR.L2                           <= (w0_a88d<L2> & w0_a8ac & w1_6f4f & w1_6fc6 & w2_aa22 & (w1_6806 | (w0_a8f2<L1> & w1_6f4f & (w1_6806 | (~w0_a731 & ~w0_ee5c<L1> & ~w0_ee5e<L1> & ~w0_ee5f & ~w0_ee60<L1> & ~w0_ee61 & w1_6f48<L2>)))))
+@00104124  b2.d0f3  GKO.XF0.XFTC.CR.L2                           <= <whole-word copy>
+@00109a20  b2.d8f3  GKO.XF0.XFZB_2.CR.L2                         <= (w2_c01b & (w0_a020 & w2_c007))
+@0017f7b0  b3.d0f3  GKO.XF0.XFTC.CR.L2                           <= <whole-word copy>

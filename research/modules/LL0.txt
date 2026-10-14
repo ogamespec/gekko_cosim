@@ -1,0 +1,85 @@
+# GKO module LL0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 69 (init pass 51, per-cycle pass 18)
+#   of which 69 drive a named wire, 68 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00091dc8  b2.8f5c  GKO.LL0.LL0_DEQ_ABUF.NAN1.L1                 <= <whole-word copy>
+@00091e08  b2.8f60  GKO.LL0.LL0_DEQ_ABUF.NAN2.L1                 <= <whole-word copy>
+@00091e0c  b2.8f64  GKO.LL0.LL0_DEQ_ABUF.NAN3.L1                 <= <whole-word copy>
+@00091e10  b2.8f68  GKO.LL0.LL0_DEQ_ABUF.NAN4.L1                 <= <whole-word copy>
+@00091e4c  b2.8f6c  GKO.LL0.LL0_DEQ_ABUF.NAN5.L1                 <= <whole-word copy>
+@00091e50  b2.8f70  GKO.LL0.LL0_DEQ_ABUFL.NAN0.L1                <= <whole-word copy>
+@00091e54  b2.8f74  GKO.LL0.LL0_DEQ_ABUFL.NAN1.L1                <= <whole-word copy>
+@00091e94  b2.8f78  GKO.LL0.LL0_DEQ_ABUFL.NAN2.L1                <= <whole-word copy>
+@00091e98  b2.8f7c  GKO.LL0.LL0_DEQ_ABUFL.NAN3.L1                <= <whole-word copy>
+@00091edc  b2.8f88  GKO.LL0.LL0_DEQ_ABUFL.NAN6.L1                <= <whole-word copy>
+@00091ee0  b2.8f8c  GKO.LL0.LL0_DEQ_ABUFL.NAN7.L1                <= <whole-word copy>
+@00091f20  b2.8f90  GKO.LL0.LL0_FA_BUF_DATA.NAN0.L1              <= <whole-word copy>
+@00091f24  b2.8f94  GKO.LL0.LL0_DEQ_ABUF.NAN0.L1                 <= <whole-word copy>
+@00091f28  b2.8f98  GKO.LL0.LL0_FA_BUF_DATA.NAN1.L1              <= <whole-word copy>
+@00091f64  b2.8f9c  GKO.LL0.LL0_XREN.NAN7.L1                     <= <whole-word copy>
+@00091f68  b2.8fa0  GKO.LL0.LL0_FA_BUF_DATA.NAN2.L1              <= <whole-word copy>
+@00091f6c  b2.8fa4  GKO.LL0.LL0_FA_BUF_DATA.NAN3.L1              <= <whole-word copy>
+@00091fac  b2.8fa8  GKO.LL0.LL0_FA_BUF_DATA.NAN4.L1              <= <whole-word copy>
+@00091fb0  b2.8fac  GKO.LL0.LL0_FA_BUF_DATA.NAN5.L1              <= <whole-word copy>
+@00091fb4  b2.8fb0  GKO.LL0.LL0_FA_BUF_DATA.NAN6.L1              <= <whole-word copy>
+@00091ff0  b2.8fb4  GKO.LL0.LL0_FA_BUF_DATA.NAN7.L1              <= <whole-word copy>
+@00091ff4  b2.8fb8  GKO.LL0.LL0_XREN.NAN0.L1                     <= <whole-word copy>
+@00091ff8  b2.8fbc  GKO.LL0.LL0_XREN.NAN1.L1                     <= <whole-word copy>
+@00092038  b2.8fc0  GKO.LL0.LL0_XREN.NAN2.L1                     <= <whole-word copy>
+@0009203c  b2.8fc4  GKO.LL0.LL0_XREN.NAN3.L1                     <= <whole-word copy>
+@00092040  b2.8fc8  GKO.LL0.LL0_XREN.NAN4.L1                     <= <whole-word copy>
+@0009207c  b2.8fcc  GKO.LL0.LL0_XREN.NAN5.L1                     <= <whole-word copy>
+@00092084  b2.8fd0  GKO.LL0.LL0_XREN.NAN6.L1                     <= <whole-word copy>
+@00092088  b2.8fd4  GKO.LL0.LL0_DEQ_ABUF.NAN1.L2                 <= <whole-word copy>
+@000920c4  b2.8fd8  GKO.LL0.LL0_DEQ_ABUF.NAN2.L2                 <= <whole-word copy>
+@000920c8  b2.8fdc  GKO.LL0.LL0_DEQ_ABUF.NAN0.L2                 <= <whole-word copy>
+@000920cc  b2.8fe0  GKO.LL0.LL0_DEQ_ABUF.NAN3.L2                 <= <whole-word copy>
+@0009210c  b2.8fe4  GKO.LL0.LL0_DEQ_ABUF.NAN4.L2                 <= <whole-word copy>
+@00092110  b2.8fe8  GKO.LL0.LL0_DEQ_ABUF.NAN5.L2                 <= <whole-word copy>
+@00092150  b2.8ff0  GKO.LL0.LL0_DEQ_ABUFL.NAN0.L2                <= <whole-word copy>
+@00092154  b2.8ff4  GKO.LL0.LL0_DEQ_ABUFL.NAN1.L2                <= <whole-word copy>
+@00092158  b2.8ff8  GKO.LL0.LL0_DEQ_ABUFL.NAN2.L2                <= <whole-word copy>
+@00092198  b2.8ffc  GKO.LL0.LL0_DEQ_ABUFL.NAN3.L2                <= <whole-word copy>
+@0009219c  b2.9000  GKO.LL0.LL0_DEQ_ABUFL.NAN4.L2                <= <whole-word copy>
+@000921dc  b2.9008  GKO.LL0.LL0_DEQ_ABUFL.NAN6.L2                <= <whole-word copy>
+@00092228  b2.9018  GKO.LL0.LL0_FA_BUF_DATA.NAN2.L2              <= <whole-word copy>
+@00092268  b2.9020  GKO.LL0.LL0_FA_BUF_DATA.NAN4.L2              <= <whole-word copy>
+@000922b0  b2.902c  GKO.LL0.LL0_FA_BUF_DATA.NAN0.L2              <= <whole-word copy>
+@000922b4  b2.9030  GKO.LL0.LL0_FA_BUF_DATA.NAN7.L2              <= <whole-word copy>
+@00092414  b2.906c  GKO.LL0.LL0_XREN.NAN1.L2                     <= <whole-word copy>
+@00092418  b2.9070  GKO.LL0.LL0_XREN.NAN2.L2                     <= <whole-word copy>
+@00092454  b2.9074  GKO.LL0.LL0_XREN.NAN3.L2                     <= <whole-word copy>
+@00092458  b2.9078  GKO.LL0.LL0_XREN.NAN0.L2                     <= <whole-word copy>
+@0009245c  b2.907c  GKO.LL0.LL0_XREN.NAN4.L2                     <= <whole-word copy>
+@000924a4  b2.9088  GKO.LL0.LL0_XREN.NAN7.L2                     <= <whole-word copy>
+@00132cbc  b2.ec8f  GKO.LL0.LL0_DEQ_ABUF.NAN7.CR.L2              <= w2_a56b<HOLD_LATHOLD_LATCH>
+@002363e4  b0.8fcc  GKO.LL0.LL0_XREN.NAN5.L1                     <= <whole-word copy>
+@00236408  b0.8fe8  GKO.LL0.LL0_DEQ_ABUF.NAN5.L2                 <= <whole-word copy>
+@00236410  b0.8fe4  GKO.LL0.LL0_DEQ_ABUF.NAN4.L2                 <= <whole-word copy>
+@00236414  b0.8fe0  GKO.LL0.LL0_DEQ_ABUF.NAN3.L2                 <= <whole-word copy>
+@00236418  b0.8fdc  GKO.LL0.LL0_DEQ_ABUF.NAN0.L2                 <= <whole-word copy>
+@0023641c  b0.8fd8  GKO.LL0.LL0_DEQ_ABUF.NAN2.L2                 <= <whole-word copy>
+@00236420  b0.8fd4  GKO.LL0.LL0_DEQ_ABUF.NAN1.L2                 <= <whole-word copy>
+@00236424  b0.8fd0  GKO.LL0.LL0_XREN.NAN6.L1                     <= <whole-word copy>
+@0023643c  b0.8ff0  GKO.LL0.LL0_DEQ_ABUFL.NAN0.L2                <= <whole-word copy>
+@00236464  b0.9008  GKO.LL0.LL0_DEQ_ABUFL.NAN6.L2                <= <whole-word copy>
+@0023646c  b0.9000  GKO.LL0.LL0_DEQ_ABUFL.NAN4.L2                <= <whole-word copy>
+@00236470  b0.8ffc  GKO.LL0.LL0_DEQ_ABUFL.NAN3.L2                <= <whole-word copy>
+@00236474  b0.8ff8  GKO.LL0.LL0_DEQ_ABUFL.NAN2.L2                <= <whole-word copy>
+@00236478  b0.8ff4  GKO.LL0.LL0_DEQ_ABUFL.NAN1.L2                <= <whole-word copy>
+@002364a4  b0.9074  GKO.LL0.LL0_XREN.NAN3.L2                     <= <whole-word copy>
+@002364ac  b0.9070  GKO.LL0.LL0_XREN.NAN2.L2                     <= <whole-word copy>
+@002364b0  b0.906c  GKO.LL0.LL0_XREN.NAN1.L2                     <= <whole-word copy>
+@002364b4  b0.9078  GKO.LL0.LL0_XREN.NAN0.L2                     <= <whole-word copy>

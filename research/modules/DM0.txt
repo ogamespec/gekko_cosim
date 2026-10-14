@@ -1,0 +1,131 @@
+# GKO module DM0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 115 (init pass 18, per-cycle pass 97)
+#   of which 62 drive a named wire, 41 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00000828  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (w0_8456 & ~w0_8463 & (w0_8481<L1> | ((w0_8425<L1> | w0_8427<L1> | w0_845c) & (w0_8459 | w0_845e<L1> | w0_845f | w0_8460 | w0_8461 | w0_8462 | w0_846c | w0_8476 | w0_847f<L2>))))
+@0000468c  b1.6e93  GKO.DM0.DMA_QC.NCN1.CR.L1                    <= <whole-word copy>
+@0000d248  b1.7293  GKO.DM0.DMA_QB.NCN1.CR.L1                    <= (w0_eb45 ^ w0_eba6 ^ (w0_eb45 & w0_eba6))
+@00011ae4  b1.7493  GKO.DM0.DMA_QA.NCN1.CR.L1                    <= <whole-word copy>
+@00019e3c  b1.7845  GKO.DM0.DMA_Q1.NCN1.CR.L2                    <= (w0_9a1e | (w0_9a1e & (w0_9a1f & w0_9a3b)) | (~w0_9a1e & w1_6da5 & ~(w0_9a1d & f1_105696)))
+@0001abc0  b1.7893  GKO.DM0.DMA_Q9.NCN1.CR.L1                    <= f2_109368
+@0001b3b8  b1.6e93  GKO.DM0.DMA_QC.NCN1.CR.L1                    <= f2_111540
+@0002e8b0  b1.7c93  GKO.DM0.DMA_Q8.NCN1.CR.L1                    <= (w1_7669 | w1_7675)
+@0004266c  b2.8293  GKO.DM0.DMA_Q7.NCN1.CR.L1                    <= w1_763a<L2>
+@0009db54  b2.8893  GKO.DM0.DMA_Q6.NCN1.CR.L1                    <= <whole-word copy>
+@000be814  b1.7c93  GKO.DM0.DMA_Q8.NCN1.CR.L1                    <= 0
+@000cc8a4  b1.7493  GKO.DM0.DMA_QA.NCN1.CR.L1                    <= f2_837792
+@000fb890  b1.6a93  GKO.DM0.DMA_QE.NCN1.CR.L1                    <= <whole-word copy>
+@0010c260  b2.dc47  GKO.DM0.DMA_QA.NCN1.CR.L2                    <= (w1_7c53 & w2_c0b2 & w2_c0b3<HOLD_LATHOLD_LATCH> & w2_c0c9 & w2_c0ca & w2_c0cb & w2_c0df & w2_c0fa & w2_c0fb<HOLD_LATHOLD_LATCH>)
+@0013247c  b2.ec48  GKO.DM0.DMA_QE.NCN1.CR.L2                    <= w2_d5bb
+@00170e7c  b3.cc46  GKO.DM0.DMA_Q6.NCN1.CR.L2                    <= <whole-word copy>
+@0018313c  b2.ec48  GKO.DM0.DMA_QE.NCN1.CR.L2                    <= <whole-word copy>
+@001a15a8  b2.0046  GKO.DM0.DMA_Q3.NCN1.CR.L2                    <= w1_7697<L1>
+@002f61b0  b0.48c0  GKO.DM0.DMA_QE.NBN0.L2                       <= <whole-word copy>
+@002f61c0  b0.48c4  GKO.DM0.DMA_QE.NAN4.L2                       <= <whole-word copy>
+@002f61c8  b0.48c8  GKO.DM0.DMA_QE.NBN4.L2                       <= <whole-word copy>
+@002f61e0  b0.48d0  GKO.DM0.DMA_QE.NAN1.L2                       <= <whole-word copy>
+@002f61e4  b0.48cc  GKO.DM0.DMA_QE.NAN7.L2                       <= <whole-word copy>
+@002f61e8  b0.48d4  GKO.DM0.DMA_QE.NAN6.L2                       <= <whole-word copy>
+@002f61f8  b0.48d8  GKO.DM0.DMA_QE.NAN2.L2                       <= <whole-word copy>
+@002f6204  b0.48dc  GKO.DM0.DMA_QE.NAN3.L2                       <= <whole-word copy>
+@002f620c  b0.48e0  GKO.DM0.DMA_QE.NBN5.L2                       <= <whole-word copy>
+@002f6260  b0.3fbc                                               <= <whole-word copy>
+@002f62dc  b0.51e4                                               <= <whole-word copy>
+@002f62f4  b0.51ec                                               <= <whole-word copy>
+@002f62f8  b0.51e8                                               <= <whole-word copy>
+@002f62fc  b0.51f0                                               <= <whole-word copy>
+@002f6310  b0.51f4                                               <= <whole-word copy>
+@002f6320  b0.51f8                                               <= <whole-word copy>
+@002f6330  b0.51fc                                               <= <whole-word copy>
+@002f6338  b0.5200                                               <= <whole-word copy>
+@002f6354  b0.5208                                               <= <whole-word copy>
+@002f637c  b0.5210                                               <= <whole-word copy>
+@002f6384  b0.520c                                               <= <whole-word copy>
+@002f6388  b0.521c                                               <= <whole-word copy>
+@002f6398  b0.5220                                               <= <whole-word copy>
+@002f63a8  b0.5228                                               <= <whole-word copy>
+@002f63bc  b0.522c                                               <= <whole-word copy>
+@002f63dc  b0.523c                                               <= <whole-word copy>
+@002f63e0  b0.5238                                               <= <whole-word copy>
+@002f63e4  b0.5234                                               <= <whole-word copy>
+@002f63e8  b0.5230                                               <= <whole-word copy>
+@002f63ec  b0.5240                                               <= <whole-word copy>
+@002f63fc  b0.5244                                               <= <whole-word copy>
+@002f6408  b0.5248                                               <= <whole-word copy>
+@002f6410  b0.524c                                               <= <whole-word copy>
+@00306b10  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_6c87 & ((~w1_8051 & w1_8059 & ~(~w1_6c87 & ~w1_8046 & f2_3172860)) | (~w1_6c87 & ~w1_8046 & w1_8055<L2> & f2_3172860 & (w1_6c87 | (~w1_6c87 & f2_3172860) | (~w1_6c87 & w1_804a & f2_3172860)))))
+@00307068  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= 0
+@0030706c  b1.6c92                                               <= (~w0_7689<RRAM_0_HOLDL2> & ~w1_7f78 & ~f2_3174348 & ~(w1_6c83<L2> & (w1_6174<L1> | w2_dc92 | ((w1_8036 | w1_8038) & (~w1_6c88<L2> | ~w1_6c89 | ~w1_802f)) | ~(w1_7ba1 | w2_8023))) & (w2_8023 | w2_8101))
+@00307070  b1.6c96                                               <= 0
+@003070c0  b0.8dc4                                               <= ((w1_6ca4<L2> & f2_3174520) | (w0_7fbe & f2_3174536))
+@003070f0  b0.8dc8                                               <= ((w1_6ca8<L2> & f2_3174520) | (w1_805a & f2_3174536))
+@00307124  b0.8dcc                                               <= ((w1_6ca0<L2> & f2_3174520) | (w1_8043 & f2_3174536))
+@00307154  b0.8dd0                                               <= ((w1_803a<L2> & f2_3174536) | (w1_6cb8<L2> & f2_3174520))
+@00307188  b0.8dd4                                               <= ((w1_6cac & f2_3174520) | (w1_8031 & f2_3174536))
+@003071b8  b0.8dd8                                               <= ((w1_8048 & f2_3174536) | (w1_6cb0<L2> & f2_3174520))
+@003071e8  b0.8ddc                                               <= ((w1_6cb4<L2> & f2_3174520) | (w1_8045 & f2_3174536))
+@0030721c  b0.8de0                                               <= ((w1_6cbc<L2> & f2_3174520) | (w1_8037 & f2_3174536))
+@0030724c  b0.8de4                                               <= ((w1_6cdc<L2> & f2_3174520) | (w1_8051 & f2_3174536))
+@0030727c  b0.8de8                                               <= ((w1_6e00<L1> & f2_3174520) | (w1_8022 & f2_3174536))
+@003072ac  b0.8dec                                               <= ((w1_801c & f2_3174536) | (w1_6e84<L1> & f2_3174520))
+@003072dc  b0.8df0                                               <= ((w1_8059 & f2_3174536) | (w1_6e88 & f2_3174520))
+@00307328  b0.8df4                                               <= ((w1_6c85<L1> & f2_3174520) | (w1_8058 & f2_3174536))
+@0030736c  b0.8df8                                               <= ((w1_6c8e<L2> & f2_3174520) | (w1_8038 & f2_3174536))
+@0030739c  b0.8dfc                                               <= ((w1_6f68<L2> & f2_3174520) | (w1_8032 & f2_3174536))
+@003073e0  b0.8e00                                               <= ((w1_6c88<L2> & f2_3174520) | (w1_802d & f2_3174536))
+@00307444  b0.8e08                                               <= ((w1_8026<L2> & f2_3174536) | (w1_6f70<L2> & f2_3174520))
+@003074a4  b0.8e10                                               <= ((w1_8066 & f2_3174536) | (w1_6f6a & f2_3174520))
+@00307530  b1.6c87                                               <= f2_3175556
+@003075c0  b1.6c89                                               <= (w1_59b6 | w1_59bb)
+@003075fc  b1.6c8b                                               <= f2_3175928
+@00307624  b1.6c8d                                               <= <whole-word copy>
+@00307634  b1.6c8f                                               <= f2_3175984
+@00307668  b1.6c92                                               <= (w1_59b8<L1> & w1_59bb & w1_7d19<L2>)
+@0030766c  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (w1_59b1 & w1_7664<L1> & w1_77b5)
+@00307670  b1.6c96                                               <= (w1_7fa3 & f1_3175724)
+@0030774c  b0.8e88                                               <= ((w1_807c & f2_3176060) | (w1_807c & f2_3176076))
+@00307760  b0.8e8c                                               <= ((w1_8074 & f2_3176076) | (w1_6c91<L1> & f2_3176060))
+@00323484  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= ((w1_742f & w1_87cb & w2_d7fa) | (w1_742f & w1_87cb & w2_d7fa & ((~w1_742f & w1_87cb) | (w1_742f & w1_87cb & w2_d7fa))))
+@003288c0  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_8af6 & ~f1_3310584 & (w2_8023 | f2_3291488))
+@0033ffbc  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (w1_7b5f & ~w2_a97a & ~(w1_7b5f & ~w2_a93a<L2> & ~(w1_7b5f & ~w2_a8f3 & ~(w1_7b5f & ~w1_7cb3 & ~(w1_8aeb & f2_3316668)))))
+@003409b0  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_793a<L2> & w1_7b5f & ~w1_91cf)
+@00346b38  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= f2_3435132
+@00346da0  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= f2_3435828
+@0034a430  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= 0
+@0034b7a0  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w2_d5fb & (w1_8f90<L1> | w2_8023))
+@0035e7a8  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_9f2f & ~(w1_6c8a & f2_3527892) & ~(~w1_6e7c & ~f2_3527892) & ~(w1_9af5<L1> & f2_3527904) & ~(f2_3527892 & (w2_8137 | f2_3528080)) & (f2_3528128 | (w1_6c8a & f2_3527892) | (~w1_6e7c & ~f2_3527892) | (w1_9af5<L1> & f2_3527904)))
+@00367a6c  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_55ae & ~w1_5960<L1> & ~w1_5962 & ~w1_5969 & ~w1_75ce & ~w1_7b08 & ~w1_7b0b & ~w1_7b0d<L1> & (w2_8232 | w2_bd2f<HOLD_LATHOLD_LATCH>))
+@0036dc54  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_ae83<L2> & ~w2_a0b6 & (w1_7853 | w1_7cca))
+@00370608  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_b063<L2> & ~w1_b0ab<HOLD_LATHOLD_LATCH> & w2_8023 & ~w2_a167 & ~w2_d54b)
+@00380744  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= 0
+@00383de8  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_8377 & ~w1_c6f3 & (w2_d805 | w2_e75e<L1>))
+@003a4954  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= f2_3819712
+@003e69c0  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_ce64<L2> & ~w1_ce65 & ~w1_ce66 & ~w1_ce67 & ~w1_ce68 & ~w1_ce69<HOLD_LATHOLD_LATCH> & ~w1_ce6a & ~w1_ce6b & ~w1_ce6c & ~w1_ce6d & ~w1_ce6e & ~w1_ce6f & ~w1_ce70 & ~w1_ce71<L1> & ~w1_ce72<HOLD_LATHOLD_LATCH> & ~w1_ce73 & ~w1_ce74 & ~w1_ce75 & ~w1_ce76 & ~w1_ce77 & ~w1_ce78 & ~w1_ce79 & ~w1_ce7a & ~w1_ce7b<HOLD_LATHOLD_LATCH> & ~w1_ce7c & ~w1_ce7d & ~w1_ce7e<L1> & ~w1_ce7f<L2> & ~w1_ce80<L2> & ~w1_ce81<L2> & ~w1_ce82<L2> & ~w1_ce83<L1> & ~w1_ce84<HOLD_LATHOLD_LATCH> & ~w1_ce85 & ~w1_ce91 & ~w1_ce92 & ~w1_ce93 & (w1_ce87 | (~w1_ce64<L2> & ~w1_ce65 & ~w1_ce66 & ~w1_ce67 & ~w1_ce68 & ~w1_ce69<HOLD_LATHOLD_LATCH> & ~w1_ce6a & ~w1_ce6b & ~w1_ce6c & ~w1_ce6d & ~w1_ce6e & ~w1_ce6f & ~w1_ce70 & ~w1_ce71<L1> & ~w1_ce72<HOLD_LATHOLD_LATCH> & ~w1_ce73 & ~w1_ce74 & ~w1_ce75 & ~w1_ce76 & ~w1_ce77 & ~w1_ce78 & ~w1_ce79 & ~w1_ce7a & ~w1_ce7b<HOLD_LATHOLD_LATCH> & ~w1_ce7c & ~w1_ce7d & ~w1_ce7e<L1> & ~w1_ce7f<L2> & ~w1_ce80<L2> & ~w1_ce81<L2> & ~w1_ce82<L2> & ~w1_ce83<L1> & ~w1_ce84<HOLD_LATHOLD_LATCH> & ~w1_ce85 & ~w1_ce86 & ~w1_ce87 & ~w1_ce91 & ~w1_ce92 & ~w1_ce93 & (w1_ce89 | (~w1_ce64<L2> & ~w1_ce65 & ~w1_ce66 & ~w1_ce67 & ~w1_ce68 & ~w1_ce69<HOLD_LATHOLD_LATCH> & ~w1_ce6a & ~w1_ce6b & ~w1_ce6c & ~w1_ce6d & ~w1_ce6e & ~w1_ce6f & ~w1_ce70 & ~w1_ce71<L1> & ~w1_ce72<HOLD_LATHOLD_LATCH> & ~w1_ce73 & ~w1_ce74 & ~w1_ce75 & ~w1_ce76 & ~w1_ce77 & ~w1_ce78 & ~w1_ce79 & ~w1_ce7a & ~w1_ce7b<HOLD_LATHOLD_LATCH> & ~w1_ce7c & ~w1_ce7d & ~w1_ce7e<L1> & ~w1_ce7f<L2> & ~w1_ce80<L2> & ~w1_ce81<L2> & ~w1_ce82<L2> & ~w1_ce83<L1> & ~w1_ce84<HOLD_LATHOLD_LATCH> & ~w1_ce85 & ~w1_ce86 & ~w1_ce87 & ~w1_ce88 & ~w1_ce89 & ~w1_ce91 & ~w1_ce92 & ~w1_ce93 & (w1_ce8b | w1_ce8e<L1>) & ~(~w1_ce64<L2> & ~w1_ce65 & ~w1_ce66 & ~w1_ce67 & ~w1_ce68 & ~w1_ce69<HOLD_LATHOLD_LATCH> & ~w1_ce6a & ~w1_ce6b & ~w1_ce6c & ~w1_ce6d & ~w1_ce6e & ~w1_ce6f & ~w1_ce70 & ~w1_ce71<L1> & ~w1_ce72<HOLD_LATHOLD_LATCH> & ~w1_ce73 & ~w1_ce74 & ~w1_ce75 & ~w1_ce76 & ~w1_ce77 & ~w1_ce78 & ~w1_ce79 & ~w1_ce7a & ~w1_ce7b<HOLD_LATHOLD_LATCH> & ~w1_ce7c & ~w1_ce7d & ~w1_ce7e<L1> & ~w1_ce7f<L2> & ~w1_ce80<L2> & ~w1_ce81<L2> & ~w1_ce82<L2> & ~w1_ce83<L1> & ~w1_ce84<HOLD_LATHOLD_LATCH> & ~w1_ce85 & ~w1_ce86 & ~w1_ce87 & ~w1_ce88 & ~w1_ce89 & ~w1_ce8a & ~w1_ce8e<L1> & ~w1_ce91 & ~w1_ce92 & ~w1_ce93 & (w1_ce8c | w1_ce8f)))) & ~(~w1_ce64<L2> & ~w1_ce65 & ~w1_ce66 & ~w1_ce67 & ~w1_ce68 & ~w1_ce69<HOLD_LATHOLD_LATCH> & ~w1_ce6a & ~w1_ce6b & ~w1_ce6c & ~w1_ce6d & ~w1_ce6e & ~w1_ce6f & ~w1_ce70 & ~w1_ce71<L1> & ~w1_ce72<HOLD_LATHOLD_LATCH> & ~w1_ce73 & ~w1_ce74 & ~w1_ce75 & ~w1_ce76 & ~w1_ce77 & ~w1_ce78 & ~w1_ce79 & ~w1_ce7a & ~w1_ce7b<HOLD_LATHOLD_LATCH> & ~w1_ce7c & ~w1_ce7d & ~w1_ce7e<L1> & ~w1_ce7f<L2> & ~w1_ce80<L2> & ~w1_ce81<L2> & ~w1_ce82<L2> & ~w1_ce83<L1> & ~w1_ce84<HOLD_LATHOLD_LATCH> & ~w1_ce85 & ~w1_ce86 & ~w1_ce87 & ~w1_ce88 & ~w1_ce91 & ~w1_ce92 & ~w1_ce93 & (w1_ce8a | (~w1_ce64<L2> & ~w1_ce65 & ~w1_ce66 & ~w1_ce67 & ~w1_ce68 & ~w1_ce69<HOLD_LATHOLD_LATCH> & ~w1_ce6a & ~w1_ce6b & ~w1_ce6c & ~w1_ce6d & ~w1_ce6e & ~w1_ce6f & ~w1_ce70 & ~w1_ce71<L1> & ~w1_ce72<HOLD_LATHOLD_LATCH> & ~w1_ce73 & ~w1_ce74 & ~w1_ce75 & ~w1_ce76 & ~w1_ce77 & ~w1_ce78 & ~w1_ce79 & ~w1_ce7a & ~w1_ce7b<HOLD_LATHOLD_LATCH> & ~w1_ce7c & ~w1_ce7d & ~w1_ce7e<L1> & ~w1_ce7f<L2> & ~w1_ce80<L2> & ~w1_ce81<L2> & ~w1_ce82<L2> & ~w1_ce83<L1> & ~w1_ce84<HOLD_LATHOLD_LATCH> & ~w1_ce85 & ~w1_ce86 & ~w1_ce87 & ~w1_ce88 & ~w1_ce89 & ~w1_ce8a & ~w1_ce8e<L1> & ~w1_ce91 & ~w1_ce92 & ~w1_ce93 & (w1_ce8c | w1_ce8f))) & ~(~w1_ce64<L2> & ~w1_ce65 & ~w1_ce66 & ~w1_ce67 & ~w1_ce68 & ~w1_ce69<HOLD_LATHOLD_LATCH> & ~w1_ce6a & ~w1_ce6b & ~w1_ce6c & ~w1_ce6d & ~w1_ce6e & ~w1_ce6f & ~w1_ce70 & ~w1_ce71<L1> & ~w1_ce72<HOLD_LATHOLD_LATCH> & ~w1_ce73 & ~w1_ce74 & ~w1_ce75 & ~w1_ce76 & ~w1_ce77 & ~w1_ce78 & ~w1_ce79 & ~w1_ce7a & ~w1_ce7b<HOLD_LATHOLD_LATCH> & ~w1_ce7c & ~w1_ce7d & ~w1_ce7e<L1> & ~w1_ce7f<L2> & ~w1_ce80<L2> & ~w1_ce81<L2> & ~w1_ce82<L2> & ~w1_ce83<L1> & ~w1_ce84<HOLD_LATHOLD_LATCH> & ~w1_ce85 & ~w1_ce86 & ~w1_ce87 & ~w1_ce88 & ~w1_ce89 & ~w1_ce91 & ~w1_ce92 & ~w1_ce93 & (w1_ce8b | w1_ce8e<L1>) & ~(~w1_ce64<L2> & ~w1_ce65 & ~w1_ce66 & ~w1_ce67 & ~w1_ce68 & ~w1_ce69<HOLD_LATHOLD_LATCH> & ~w1_ce6a & ~w1_ce6b & ~w1_ce6c & ~w1_ce6d & ~w1_ce6e & ~w1_ce6f & ~w1_ce70 & ~w1_ce71<L1> & ~w1_ce72<HOLD_LATHOLD_LATCH> & ~w1_ce73 & ~w1_ce74 & ~w1_ce75 & ~w1_ce76 & ~w1_ce77 & ~w1_ce78 & ~w1_ce79 & ~w1_ce7a & ~w1_ce7b<HOLD_LATHOLD_LATCH> & ~w1_ce7c & ~w1_ce7d & ~w1_ce7e<L1> & ~w1_ce7f<L2> & ~w1_ce80<L2> & ~w1_ce81<L2> & ~w1_ce82<L2> & ~w1_ce83<L1> & ~w1_ce84<HOLD_LATHOLD_LATCH> & ~w1_ce85 & ~w1_ce86 & ~w1_ce87 & ~w1_ce88 & ~w1_ce89 & ~w1_ce8a & ~w1_ce8e<L1> & ~w1_ce91 & ~w1_ce92 & ~w1_ce93 & (w1_ce8c | w1_ce8f)))))) & ...)
+@003f03b0  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_6c8c<L2> & ~w1_6c8d & ~f2_4129636 & (w1_6d37 | w2_8023) & ~(~w1_6c94<L2> & ~w2_82a3 & ~f2_4127124 & (w1_6d4d | w1_cacb)))
+@0043a57c  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_e333 & w2_81e6 & ~(f1_4432572 & (w1_5947 | (w1_7eaa & w1_f08c<L1>) | ~(w2_8243 | w2_824d))))
+@0044a3dc  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= f2_4498392
+@0044cdac  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= f2_4508916
+@00450194  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (f2_4522316 & (f2_4521332 | (w1_fb29 & w1_fb30 & f2_4521332)))
+@004514c4  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_f7c3 & ~w1_fa5f & ~w2_a9b1 & ~w2_d5c5 & ~((w1_6c80<L2> | w2_814a) & (f1_4521260 | (~w1_f7c0 & ~f1_4521260) | ~(w1_f7c1 | w2_8023))) & (w1_6c80<L2> | w2_814a | w2_a9b1 | (w1_fc0a & (w1_fb27<L1> | (~w2_a9b1 & (w1_6c80<L2> | w2_814a))))))
+@00478cc0  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (w2_809b & (w1_7043 | w1_7044<L2> | w1_792f | w1_ac42 | (w1_77c9 & (w1_7031 | w1_7925<L1>))))
+@00479098  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w2_ba2f & f2_4690020 & (w1_7ea2 | f2_4689676) & (w2_ba2f | ~(w1_7ea2 | f2_4689676)))
+@00479724  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= f2_4691744
+@0047ad08  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= ((~w2_e76c & (~w1_6c81<L1> | w2_b1f2<L1> | (~w2_e76b & ((w2_b1f2<L1> & ~f2_4692320) | (w2_b1f2<L1> & f2_4692320 & (~w1_6ca0<L2> | ~f2_4691976)))))) | (w2_e76b & w2_e76c & (~w1_6c81<L1> | w2_b1f2<L1>)))
+@0047b4f0  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= 0
+@00481530  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (w1_7d15 | (w1_7d17<L2> & ~w1_7fa3))
+@004afc34  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= f2_4914224
+@004b1cd0  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (w1_653a<L2> & ((w1_63f3 & ((w1_63f3 & w1_653a<L2> & f2_4922456) | (w1_653b & ~w1_76aa & ~f1_4921832 & (w1_6c8b | w1_6c8c<L2> | (~w1_653c<L2> & ~w1_76e9 & w2_8253 & ((w1_6538<L2> & (w1_653f & ~(~w1_653c<L2> & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) & ~(~w1_653c<L2> & w1_653f & ~w1_76aa & ~w1_76e9 & w2_8253 & ~w2_d650 & ~f1_4921832 & (w1_6538<L2> | w1_6c82<L2>) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)))) | (w1_653f & ~(~w1_653c<L2> & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) & ~(~w1_653c<L2> & w1_653f & ~w1_76aa & ~w1_76e9 & w2_8253 & ~w2_d650 & ~f1_4921832 & (w1_6538<L2> | w1_6c82<L2>) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)))) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) | (~w1_6538<L2> & ~w1_653c<L2> & w1_653f & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & ((w1_6538<L2> & (w1_653f & ~(~w1_653c<L2> & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) & ~(~w1_653c<L2> & w1_653f & ~w1_76aa & ~w1_76e9 & w2_8253 & ~w2_d650 & ~f1_4921832 & (w1_6538<L2> | w1_6c82<L2>) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)))) | (~w1_6538<L2> & w1_653f & ~(~w1_653c<L2> & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) & ~(~w1_653c<L2> & w1_653f & ~w1_76aa & ~w1_76e9 & w2_8253 & ~w2_d650 & ~f1_4921832 & (w1_6538<L2> | w1_6c82<L2>) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)))) & (w1_7f4f | w2_8253) & ~(~w1_653c<L2> & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) & ~(~w1_653c<L2> & w1_653f & ~w1_76aa & ~w1_76e9 & w2_8253 & ~w2_d650 & ~f1_4921832 & (w1_6538<L2> | w1_6c82<L2>) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253))))))) | (w1_653b & ~w1_76aa & ~f1_4921832 & (w1_6c8b | w1_6c8c<L2> | (~w1_653c<L2> & ~w1_76e9 & w2_8253 & ((w1_6538<L2> & (w1_653f & ~(~w1_653c<L2> & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) & ~(~w1_653c<L2> & w1_653f & ~w1_76aa & ~w1_76e9 & w2_8253 & ~w2_d650 & ~f1_4921832 & (w1_6538<L2> | w1_6c82<L2>) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)))) | (w1_653f & ~(~w1_653c<L2> & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) & ~(~w1_653c<L2> & w1_653f & ~w1_76aa & ~w1_76e9 & w2_8253 & ~w2_d650 & ~f1_4921832 & (w1_6538<L2> | w1_6c82<L2>) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)))) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) | (~w1_6538<L2> & ~w1_653c<L2> & w1_653f & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & ((w1_6538<L2> & (w1_653f & ~(~w1_653c<L2> & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) & ~(~w1_653c<L2> & w1_653f & ~w1_76aa & ~w1_76e9 & w2_8253 & ~w2_d650 & ~f1_4921832 & (w1_6538<L2> | w1_6c82<L2>) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)))) | (~w1_6538<L2> & w1_653f & ~(~w1_653c<L2> & ~w1_76e9 & w2_8253 & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)) & ~(~w1_653c<L2> & w1_653f & ~w1_76aa & ~w1_76e9 & w2_8253 & ~w2_d650 & ~f1_4921832 & (w1_6538<L2> | w1_6c82<L2>) & (w1_653c<L2> | w1_76e9) & (w1_7f4f | w2_8253)))) & ...)))))
+@004b6b08  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= (~w1_668b & w1_6c9d & ~(w1_7698 & ~(w1_6cc8<L2> ^ w1_6cc9 ^ w1_6cd0<L2>)))
+@004b7648  b1.6c93  GKO.DM0.DMA_QD.NCN1.CR.L1                    <= <whole-word copy>

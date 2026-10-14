@@ -1,0 +1,76 @@
+# GKO module XE0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 60 (init pass 42, per-cycle pass 18)
+#   of which 60 drive a named wire, 40 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@0013a4fc  b2.f05c  GKO.XE0.XEZC.NAN5.L1                         <= <whole-word copy>
+@0013a614  b2.f0b4  GKO.XE0.XEZF.NAN7.L1                         <= <whole-word copy>
+@0013a61c  b2.f0ac  GKO.XE0.XEZF.NAN0.L1                         <= <whole-word copy>
+@0013a654  b2.f0d4  GKO.XE0.XEZF.NAN1.L1                         <= <whole-word copy>
+@0013a6a0  b2.f0ec  GKO.XE0.XEZF.NAN3.L1                         <= <whole-word copy>
+@0013a6b0  b2.f0dc  GKO.XE0.XEZF.NAN2.L1                         <= <whole-word copy>
+@0013a714  b2.f120  GKO.XE0.XEZC.NAN4.L1                         <= <whole-word copy>
+@0013a718  b2.f11c  GKO.XE0.XEZC.NAN3.L1                         <= <whole-word copy>
+@0013a71c  b2.f118  GKO.XE0.XEZC.NAN2.L1                         <= <whole-word copy>
+@0013a724  b2.f110  GKO.XE0.XEZC.NAN1.L1                         <= <whole-word copy>
+@0013a72c  b2.f108  GKO.XE0.XEZC.NAN0.L1                         <= <whole-word copy>
+@0013a734  b2.f100  GKO.XE0.XEZF.NAN4.L1                         <= <whole-word copy>
+@0013a738  b2.f0fc  GKO.XE0.XEZF.NAN5.L1                         <= <whole-word copy>
+@0013a73c  b2.f0f8  GKO.XE0.XEZF.NAN6.L1                         <= <whole-word copy>
+@0013cfb0  b2.f300  GKO.XE0.XEZC.NAN1.L2                         <= <whole-word copy>
+@0013d060  b2.f308  GKO.XE0.XEZC.NAN3.L2                         <= (~w2_e5b8<L1> & (w2_d746 | w2_e577))
+@0013d0e4  b2.f310  GKO.XE0.XEZC.NAN4.L2                         <= w2_e539
+@0013d170  b2.f318  GKO.XE0.XEZC.NAN6.L2                         <= <whole-word copy>
+@0013d1c4  b2.f31c  GKO.XE0.XEZC.NAN7.L2                         <= <whole-word copy>
+@0013d2e4  b2.f32c  GKO.XE0.XEZF.NAN1.L2                         <= w2_e53d
+@0013d338  b2.f330  GKO.XE0.XEZF.NAN2.L2                         <= (w2_d74c | w2_e53d | w2_e57d)
+@0013d370  b2.f334  GKO.XE0.XEZF.NAN0.L2                         <= <whole-word copy>
+@0013d3c0  b2.f338  GKO.XE0.XEZF.NAN7.L2                         <= <whole-word copy>
+@0013d404  b2.f33c  GKO.XE0.XEZF.NAN6.L2                         <= <whole-word copy>
+@0013e6c0  b2.f0dc  GKO.XE0.XEZF.NAN2.L1                         <= f2_1304252
+@0013e970  b2.f0ec  GKO.XE0.XEZF.NAN3.L1                         <= f2_1304940
+@00181104  b7.f05c  GKO.XE0.XEZC.NAN5.L1                         <= <whole-word copy>
+@0018124c  b7.f0ac  GKO.XE0.XEZF.NAN0.L1                         <= <whole-word copy>
+@0018126c  b7.f0b4  GKO.XE0.XEZF.NAN7.L1                         <= <whole-word copy>
+@001812f0  b7.f0d4  GKO.XE0.XEZF.NAN1.L1                         <= <whole-word copy>
+@00181314  b7.f0dc  GKO.XE0.XEZF.NAN2.L1                         <= <whole-word copy>
+@00181354  b7.f0ec  GKO.XE0.XEZF.NAN3.L1                         <= <whole-word copy>
+@00181388  b7.f0f8  GKO.XE0.XEZF.NAN6.L1                         <= f2_1577860
+@00181398  b7.f0fc  GKO.XE0.XEZF.NAN5.L1                         <= <whole-word copy>
+@001813a8  b7.f100  GKO.XE0.XEZF.NAN4.L1                         <= f2_1577892
+@001813c8  b7.f108  GKO.XE0.XEZC.NAN0.L1                         <= f2_1577924
+@001813e8  b7.f110  GKO.XE0.XEZC.NAN1.L1                         <= f2_1577956
+@0018140c  b7.f118  GKO.XE0.XEZC.NAN2.L1                         <= f2_1577992
+@0018141c  b7.f11c  GKO.XE0.XEZC.NAN3.L1                         <= <whole-word copy>
+@0018142c  b7.f120  GKO.XE0.XEZC.NAN4.L1                         <= f2_1578024
+@00183fec  b2.f338  GKO.XE0.XEZF.NAN7.L2                         <= <whole-word copy>
+@00183ff4  b2.f33c  GKO.XE0.XEZF.NAN6.L2                         <= <whole-word copy>
+@0024204c  b0.f31c  GKO.XE0.XEZC.NAN7.L2                         <= <whole-word copy>
+@00242050  b0.f318  GKO.XE0.XEZC.NAN6.L2                         <= <whole-word copy>
+@00242058  b0.f310  GKO.XE0.XEZC.NAN4.L2                         <= <whole-word copy>
+@00242060  b0.f308  GKO.XE0.XEZC.NAN3.L2                         <= <whole-word copy>
+@00242068  b0.f300  GKO.XE0.XEZC.NAN1.L2                         <= <whole-word copy>
+@00242084  b0.f32c  GKO.XE0.XEZF.NAN1.L2                         <= <whole-word copy>
+@002420f0  b0.f33c  GKO.XE0.XEZF.NAN6.L2                         <= <whole-word copy>
+@002420f4  b0.f338  GKO.XE0.XEZF.NAN7.L2                         <= <whole-word copy>
+@002420f8  b0.f334  GKO.XE0.XEZF.NAN0.L2                         <= <whole-word copy>
+@002420fc  b0.f330  GKO.XE0.XEZF.NAN2.L2                         <= <whole-word copy>
+@0043ab50  b0.f0f8  GKO.XE0.XEZF.NAN6.L1                         <= ((w1_e32b & f2_4434676) | (w1_6c8c<L2> & f2_4434664))
+@0043ab58  b0.f0fc  GKO.XE0.XEZF.NAN5.L1                         <= ((w1_e32f & f2_4434676) | (w1_6c90<L2> & f2_4434664))
+@0043ab90  b0.f100  GKO.XE0.XEZF.NAN4.L1                         <= ((w1_6c94<L2> & f2_4434664) | (w1_e333 & f2_4434676))
+@0043abb8  b0.f108  GKO.XE0.XEZC.NAN0.L1                         <= ((w1_e33f<L1> & f2_4434676) | (w1_6ca0<L2> & f2_4434664))
+@0043abdc  b0.f110  GKO.XE0.XEZC.NAN1.L1                         <= ((w1_6ca8<L2> & f2_4434664) | (w1_e364<L2> & f2_4434676))
+@0043ac34  b0.f118  GKO.XE0.XEZC.NAN2.L1                         <= ((w1_e345 & f2_4434664) | (w1_e35c<L2> & f2_4434676))
+@0043ac68  b0.f11c  GKO.XE0.XEZC.NAN3.L1                         <= ((w1_e357 & f2_4434676) | (w1_6c87 & f2_4434664))
+@0043ac84  b0.f120  GKO.XE0.XEZC.NAN4.L1                         <= ((w1_6cb4<L2> & f2_4434664) | (w1_e34f & f2_4434676))

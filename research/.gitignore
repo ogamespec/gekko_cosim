@@ -1,0 +1,12 @@
+# Large intermediate artifacts produced by the macroblock tooling.
+# They are fully reproducible from the model, see Readme.md:
+#   python netlist_extract.py
+#   python gt_dump.py --cycles 2
+#   python gt_regs.py --cycles 1
+netlist_ins.bin
+gt_exec.json
+gt_regs.json
+gt_state/
+coverage_probe.json
+# the very large single-bit compile intermediates (kept out of the repo)
+_*.txt

@@ -1,0 +1,20 @@
+# GKO module JAC -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 4 (init pass 4, per-cycle pass 0)
+#   of which 4 drive a named wire, 0 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@0013d874  b2.f37e  GKO.JAC.GCLK_USE_PLL_L1_.BIT0.L2             <= (w2_d759 | w2_d75a | w2_d75b | w2_d75c | w2_e54a | w2_e54b | w2_e54c<L1> | w2_e578<L1> | w2_e58b | w2_e58c<L1> | (w0_9e22 & (w2_d747 | w2_e578<L1>)) | (~w2_d747 & ~w2_e578<L1> & ((w0_9e20 & w2_e5b6) | (w2_d744 & ~w2_e5b6))))
+@0013e260  b2.f07e  GKO.JAC.GCLK_USE_PLL_L1.BIT0.L2              <= f2_1303132
+@0014e234  b2.f77e  GKO.JAC.GCLK_USE_PLL_L2.BIT0.L2              <= w2_d7e6
+@00159844  b2.fc7e  GKO.JAC.GCLK_USE_PLL_L2.BIT0.L1              <= w2_e72f

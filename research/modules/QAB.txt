@@ -1,0 +1,34 @@
+# GKO module QAB -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 18 (init pass 18, per-cycle pass 0)
+#   of which 18 drive a named wire, 3 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00008ee8  b1.70e7  GKO.QAB.QUAL_LAT2.BIT0.L1                    <= (w0_d767 | (w0_d767 & (w0_d766 ^ w0_d7cf ^ (w0_d766 & w0_d7cf))) | (w0_d766 ^ w0_d7cf ^ (w0_d766 & w0_d7cf)))
+@0000b264  b1.71e7  GKO.QAB.QUAL_LAT3.BIT0.L1                    <= <whole-word copy>
+@0000dbc4  b1.72e7  GKO.QAB.QUAL_LAT1.BIT0.L1                    <= (w0_eb6b ^ w0_ebd0 ^ (w0_eb6b & w0_ebd0))
+@000103a8  b1.73e7  GKO.QAB.QUAL_LAT4.BIT0.L1                    <= f2_66468
+@0001b668  b1.78e7  GKO.QAB.QUAL_LAT6.BIT0.L2                    <= ((w0_a74c & w1_6f16) | (w0_a6d6 & w1_6f0d<L1>) | (w0_a756 & w1_6f13<L2>) | (w0_a738 & w1_6f1b) | (w0_a742 & w1_6f18<L2>) | (w0_a6c2 & w1_6f10<L2>))
+@00020390  b1.79e7  GKO.QAB.QUAL_LAT5.BIT0.L2                    <= w0_ddac
+@00029094  b1.7ae7  GKO.QAB.QUAL_LAT3.BIT0.L2                    <= (w0_ec17<L1> ^ w1_73ba)
+@0002ac78  b1.7be7  GKO.QAB.QUAL_LAT2.BIT0.L2                    <= (w0_0223 & w0_0243)
+@00030c98  b1.7ce7  GKO.QAB.QUAL_LAT1.BIT0.L2                    <= ((w0_720a & f1_199744) | (w0_720b & w0_720d<L1>) | (w0_720a & w0_720b) | (w0_720a & w0_720b & w0_720e<L2> & w0_731d & f1_199744))
+@00032b34  b1.7de7  GKO.QAB.QUAL_LAT4.BIT0.L2                    <= f2_207556
+@00054f54  b1.7be7  GKO.QAB.QUAL_LAT2.BIT0.L2                    <= (~w0_0305<L1> & ~w0_0335 & ~w1_7be6 & ~w1_7be8<L1> & w1_7fc4)
+@000c61a4  b1.73e7  GKO.QAB.QUAL_LAT4.BIT0.L1                    <= f2_811424
+@000f3770  b1.7ce7  GKO.QAB.QUAL_LAT1.BIT0.L2                    <= (w1_6fe5 & w1_6fe6 & w1_6fe7 & w1_6fe8 & w1_6fe9 & w1_6fea & w1_6feb<L2> & w1_6fec & w1_6fed<L2> & w1_6fee & w1_6fef & w1_6ff0 & w1_6ff1 & w1_6ff2 & w1_6ff3 & w1_6ff4 & w1_6ff5 & w1_6ff6 & w1_6ff7 & w1_6ff8<L2> & w1_6ff9 & w1_6ffa & w1_6ffb & w1_6ffc<L2> & w1_6ffd & w1_6ffe & w1_6fff & w1_7000<L2> & w1_7001 & w1_7002 & w1_7003 & w1_7004<L2> & w1_7766 & w1_797f<L1> & w1_7980<L2> & w1_7981<L1> & w1_7982<L2>)
+@00138eec  b1.7ce7  GKO.QAB.QUAL_LAT1.BIT0.L2                    <= (w2_e684<L1> | (w1_7731 & w1_7ce7<L2>))
+@00162eec  b1.7ce7  GKO.QAB.QUAL_LAT1.BIT0.L2                    <= (w2_d7b0 | w2_d7b1<HOLD_LATHOLD_LATCH> | w2_d7b2 | w2_f3ec | w2_f3ed | w2_f3ee | w2_f3f0 | w2_f3f1<L2> | w2_f3f2<L2> | w2_f3f3 | w2_f3f7 | w2_f40c<L2> | w2_f40d<L1> | w2_f40e | w2_f410 | w2_f411 | w2_f412<L4> | w2_f413<L2> | w2_f417<L1> | w2_f44c | w2_f44d | w2_f44e | w2_f44f | w2_f450 | w2_f451 | w2_f452 | w2_f453 | w2_f46c<L1> | w2_f46d | w2_f46e | w2_f470 | w2_f471<L1> | w2_f472 | w2_f473 | w2_f48c<L2> | w2_f48d<L2> | w2_f48e<L1> | w2_f48f | (w2_d7b2 & w2_f42e<L1>) | (w2_f410 & w2_f48c<L2>) | (w2_f42f & w2_f44f) | (w2_f413<L2> & w2_f48f) | (w2_d7b1<HOLD_LATHOLD_LATCH> & w2_f40d<L1>) | (w2_d7b1<HOLD_LATHOLD_LATCH> & w2_f42d) | (w2_f431 & w2_f48d<L2>) | (w2_f411 & w2_f48d<L2>) | (w2_f430 & w2_f48c<L2>) | (w2_d7b0 & w2_f42c) | (w2_d7b0 & w2_f40c<L2>) | (w2_f40f & w2_f44f) | (w2_f433 & w2_f48f) | (w2_d7b2 & w2_f40e) | (w2_f412<L4> & w2_f48e<L1>) | (w2_f432 & w2_f48e<L1>) | (w1_6f88<L2> & w2_8194 & w2_f3e7))
+@0017ac08  b1.7ce7  GKO.QAB.QUAL_LAT1.BIT0.L2                    <= <whole-word copy>
+@00185b34  b1.7ce7  GKO.QAB.QUAL_LAT1.BIT0.L2                    <= ((~w1_7e84<L1> & ((~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7d08 & w2_a8da) | (~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cf5<L2> & w2_a8da) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))))) | (w1_7e42 & w2_a8da) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cf5<L2> & w2_a8da) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))))))) | (w1_7e8c & w2_a8da) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((w1_7d08 & w2_a8da) | (~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cf5<L2> & w2_a8da) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cf5<L2> & w2_a8da) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))))))))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7d08 & w2_a8da) | (~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cf5<L2> & w2_a8da) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))))) | (w1_7e42 & w2_a8da) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cf5<L2> & w2_a8da) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))))))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((w1_7d08 & w2_a8da) | (~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cf5<L2> & w2_a8da) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))))) | (w1_7e84<L1> & ~w2_a8da & ((~w1_7e84<L1> & ((~w1_7e84<L1> & ((w1_7cdd & w1_7e84<L1>) | (w1_7ce4 & w2_a8da))) | (w1_7cf5<L2> & w2_a8da) | (w1_7cdd & w1_7e84<L1> & ~w2_a8da))) | ...)))))))
+@001bc738  b1.7ce7  GKO.QAB.QUAL_LAT1.BIT0.L2                    <= <whole-word copy>

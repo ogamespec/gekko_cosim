@@ -1,0 +1,88 @@
+# GKO module PL0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 72 (init pass 2, per-cycle pass 70)
+#   of which 16 drive a named wire, 2 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00001088  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= (w0_8477 & w0_8e32)
+@00003108  b1.6deb  GKO.PL0.PLAA.CLK1                            <= (~w0_9a58<HOLD_LATHOLD_LATCH> & ~w0_9a60 & ~w0_9a64<L2> & ~w0_9a65 & ~w0_9a66 & w0_9a67)
+@003405e0  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= (~w1_793a<L2> & w1_7b5f & ~w2_a64b)
+@003474c0  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= 0
+@003476e4  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= f2_3438116
+@00348630  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= 0
+@0036e32c  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= (w1_6c85<L1> & ~w1_aef7)
+@0038102c  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= (w1_6cbf & ~w1_c717<L1> & ~w2_d29b)
+@00382d1c  b1.6deb  GKO.PL0.PLAA.CLK1                            <= (w1_6c97<L1> & ~w1_6cb8<L2> & ~w1_6cbd & ~w1_c75b)
+@003e7ca0  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= 0
+@003f4fd4  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= 0
+@003fcef0  b1.6deb  GKO.PL0.PLAA.CLK1                            <= f2_4181740
+@004b4050  b1.6ce5                                               <= f2_4931648
+@004b4094  b1.6ce9                                               <= f2_4931720
+@004b40f0  b1.6cea                                               <= f2_4931812
+@004b4150  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= f2_4931908
+@004b41a8  b1.6ce3                                               <= (w1_6ce3 ^ w1_6cec<L2>)
+@004b41c0  b1.6ce5                                               <= ((w1_6ce5 & ~(w1_6ce5 ^ w1_6ce6 ^ w1_6ce7<L2> ^ w1_6ce8<L2>)) | (w1_651a & ~w1_6c9f & f2_4931908 & (~w1_6519 | w1_6c9f | ~(w1_6518<L2> | w1_6c9f | ~w1_76d8 | ~(~w1_6517<L2> | w1_6c9f | ~(~w1_6516 | w1_6c9f | ~(~w1_6515<L1> | w1_6c9f | ~(w1_6514<L1> | w1_6c9f | ~w1_76d2 | ~(~w1_6513<L4> | w1_6c9f | ~(~w1_6512 | w1_6c9f | ~(~w1_6511 | w1_6c9f | ~(w1_6510 | w1_6c9f | ~w1_76ce | ~(~w1_650b | w1_6c9f | ~...)))))))))))))
+@004b41c4  b1.6ce6                                               <= (w1_6ce5 ^ w1_6ce6 ^ w1_6ce7<L2> ^ w1_6ce8<L2>)
+@004b4260  b1.6cd2                                               <= (w1_6ce3 & (w2_8023 | (w1_6ce5 ^ w1_6ce6 ^ w1_6ce7<L2> ^ w1_6ce8<L2>)))
+@004b4328  b1.6cf0                                               <= f2_4932380
+@004b43dc  b1.6ce6                                               <= (w1_6ce6 ^ w1_6cf2<L2>)
+@004b43f8  b1.6ce9                                               <= (w1_6ce7<L2> ^ w1_6ce9 ^ w1_6cea ^ w1_6ceb<CLK2>)
+@004b4464  b1.6cea                                               <= (w1_6ce6 & (w2_8023 | (w1_6ce7<L2> ^ w1_6ce9 ^ w1_6cea ^ w1_6ceb<CLK2>)))
+@004b44bc  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= f2_4932780
+@004b455c  b1.6cf3                                               <= f2_4932944
+@004b45c0  b1.6cf5                                               <= (w1_651b & ~w1_6c9f & f2_4932472 & (~w1_651a | w1_6c9f | ~(~w1_6519 | w1_6c9f | ~(w1_6518<L2> | w1_6c9f | ~w1_76d8 | ~(~w1_6517<L2> | w1_6c9f | ~(~w1_6516 | w1_6c9f | ~(~w1_6515<L1> | w1_6c9f | ~(w1_6514<L1> | w1_6c9f | ~w1_76d2 | ~(~w1_6513<L4> | w1_6c9f | ~(~w1_6512 | w1_6c9f | ~(~w1_6511 | w1_6c9f | ~(w1_6510 | w1_6c9f | ~w1_76ce | ~(~w1_650b | w1_6c9f | ~...)))))))))))) & (w1_6ce7<L2> ^ w1_6ce9 ^ w1_6cea ^ w1_6ceb<CLK2>))
+@004b462c  b1.6ce9                                               <= ((w1_6ceb<CLK2> & ~(w1_6ce8<L2> ^ w1_6ceb<CLK2> ^ w1_6cf0 ^ w1_6cf1<L2>)) | (~w1_651c<L2> & ~w1_6c9f & w1_76dc & f2_4933040 & (~w1_651b | w1_6c9f | ~(~w1_651a | w1_6c9f | ~(~w1_6519 | w1_6c9f | ~(w1_6518<L2> | w1_6c9f | ~w1_76d8 | ~(~w1_6517<L2> | w1_6c9f | ~(~w1_6516 | w1_6c9f | ~(~w1_6515<L1> | w1_6c9f | ~(w1_6514<L1> | w1_6c9f | ~w1_76d2 | ~(~w1_6513<L4> | w1_6c9f | ~(~w1_6512 | w1_6c9f | ~(~w1_6511 | w1_6c9f | ~...)))))))))))))
+@004b4630  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= (w1_6ce8<L2> ^ w1_6ceb<CLK2> ^ w1_6cf0 ^ w1_6cf1<L2>)
+@004b4684  b1.6cee                                               <= (~w1_66a2 & w1_6c9d & ~(~w1_6ce8<L2> & w1_7698 & ~w2_8023 & ~(w1_6ce8<L2> & (w2_8023 | (w1_6ce8<L2> ^ w1_6ceb<CLK2> ^ w1_6cf0 ^ w1_6cf1<L2>))) & ~(w1_6ce8<L2> ^ w1_6ceb<CLK2> ^ w1_6cf0 ^ w1_6cf1<L2>)))
+@004b469c  b1.6cf0                                               <= (w1_6ce8<L2> & (w2_8023 | (w1_6ce8<L2> ^ w1_6ceb<CLK2> ^ w1_6cf0 ^ w1_6cf1<L2>)))
+@004b46f4  b1.6cf5                                               <= <whole-word copy>
+@004b4754  b1.6cf6                                               <= f2_4933448
+@004b47b4  b1.6cf7                                               <= f2_4933544
+@004b47b8  b1.6cf8                                               <= (~w1_651c<L2> & ~w1_6c9f & w1_76dc & f2_4933040 & (~w1_651b | w1_6c9f | ~(~w1_651a | w1_6c9f | ~(~w1_6519 | w1_6c9f | ~(w1_6518<L2> | w1_6c9f | ~w1_76d8 | ~(~w1_6517<L2> | w1_6c9f | ~(~w1_6516 | w1_6c9f | ~(~w1_6515<L1> | w1_6c9f | ~(w1_6514<L1> | w1_6c9f | ~w1_76d2 | ~(~w1_6513<L4> | w1_6c9f | ~(~w1_6512 | w1_6c9f | ~(~w1_6511 | w1_6c9f | ~(w1_6510 | w1_6c9f | ~w1_76ce | ~...)))))))))))) & (w1_6ce8<L2> ^ w1_6ceb<CLK2> ^ w1_6cf0 ^ w1_6cf1<L2>))
+@004b480c  b1.6ceb  GKO.PL0.PLAA.CLK2                            <= (w1_6ceb<CLK2> ^ w1_6cf8)
+@004b4878  b1.6cef                                               <= (~w1_66a3 & w1_6c9d & ~(~w1_6ceb<CLK2> & w1_7698 & ~w2_8023 & ~(w1_6ceb<CLK2> & (w2_8023 | (w1_6cf1<L2> ^ w1_6cf2<L2> ^ w1_6cf3 ^ w1_6cf4<L2>))) & ~(w1_6cf1<L2> ^ w1_6cf2<L2> ^ w1_6cf3 ^ w1_6cf4<L2>)))
+@004b4894  b1.6cf3                                               <= (w1_6ceb<CLK2> & (w2_8023 | (w1_6cf1<L2> ^ w1_6cf2<L2> ^ w1_6cf3 ^ w1_6cf4<L2>)))
+@004b4944  b1.6cf8                                               <= f2_4933944
+@004b49a0  b1.6cf9                                               <= f2_4934040
+@004b49a8  b1.6cfa                                               <= (w1_651d & ~w1_6c9f & f2_4933544 & (w1_6cf1<L2> ^ w1_6cf2<L2> ^ w1_6cf3 ^ w1_6cf4<L2>) & (w1_651c<L2> | w1_6c9f | ~w1_76dc | ~(~w1_651b | w1_6c9f | ~(~w1_651a | w1_6c9f | ~(~w1_6519 | w1_6c9f | ~(w1_6518<L2> | w1_6c9f | ~w1_76d8 | ~(~w1_6517<L2> | w1_6c9f | ~(~w1_6516 | w1_6c9f | ~(~w1_6515<L1> | w1_6c9f | ~(w1_6514<L1> | w1_6c9f | ~w1_76d2 | ~(~w1_6513<L4> | w1_6c9f | ~(~w1_6512 | w1_6c9f | ~(~w1_6511 | w1_6c9f | ~...)))))))))))))
+@004b4a10  b1.6cf6                                               <= (w1_6cf4<L2> ^ w1_6cf6 ^ (w1_651d & ~w1_6c9f & f2_4933544 & (w1_6cf1<L2> ^ w1_6cf2<L2> ^ w1_6cf3 ^ w1_6cf4<L2>) & (w1_651c<L2> | w1_6c9f | ~w1_76dc | ~(~w1_651b | w1_6c9f | ~(~w1_651a | w1_6c9f | ~(~w1_6519 | w1_6c9f | ~(w1_6518<L2> | w1_6c9f | ~w1_76d8 | ~(~w1_6517<L2> | w1_6c9f | ~(~w1_6516 | w1_6c9f | ~(~w1_6515<L1> | w1_6c9f | ~(w1_6514<L1> | w1_6c9f | ~w1_76d2 | ~(~w1_6513<L4> | w1_6c9f | ~(~w1_6512 | w1_6c9f | ~...)))))))))))))
+@004b4a60  b1.6cfc                                               <= (~w1_66b0<L1> & w1_6c9d & ~(~w1_6cf2<L2> & w1_7698 & ~w2_8023 & ~(w1_6cf2<L2> & (w2_8023 | (w1_6cf4<L2> ^ w1_6cf6 ^ (w1_651d & ~w1_6c9f & f2_4933544 & (w1_6cf1<L2> ^ w1_6cf2<L2> ^ w1_6cf3 ^ w1_6cf4<L2>) & (w1_651c<L2> | w1_6c9f | ~w1_76dc | ~(~w1_651b | w1_6c9f | ~(~w1_651a | w1_6c9f | ~(~w1_6519 | w1_6c9f | ~(w1_6518<L2> | w1_6c9f | ~w1_76d8 | ~(~w1_6517<L2> | w1_6c9f | ~(~w1_6516 | w1_6c9f | ~...))))))))))) & ~(w1_6cf4<L2> ^ w1_6cf6 ^ (w1_651d & ~w1_6c9f & f2_4933544 & (w1_6cf1<L2> ^ w1_6cf2<L2> ^ w1_6cf3 ^ w1_6cf4<L2>) & (w1_651c<L2> | w1_6c9f | ~w1_76dc | ~(~w1_651b | w1_6c9f | ~(~w1_651a | w1_6c9f | ~(~w1_6519 | w1_6c9f | ~(w1_6518<L2> | w1_6c9f | ~w1_76d8 | ~(~w1_6517<L2> | w1_6c9f | ~(~w1_6516 | w1_6c9f | ~(~w1_6515<L1> | w1_6c9f | ~(w1_6514<L1> | w1_6c9f | ~w1_76d2 | ~...)))))))))))))
+@004b4aac  b1.6ce2                                               <= (w1_6cf2<L2> & (w2_8023 | (w1_6cf4<L2> ^ w1_6cf6 ^ (w1_651d & ~w1_6c9f & f2_4933544 & (w1_6cf1<L2> ^ w1_6cf2<L2> ^ w1_6cf3 ^ w1_6cf4<L2>) & (w1_651c<L2> | w1_6c9f | ~w1_76dc | ~(~w1_651b | w1_6c9f | ~(~w1_651a | w1_6c9f | ~(~w1_6519 | w1_6c9f | ~(w1_6518<L2> | w1_6c9f | ~w1_76d8 | ~(~w1_6517<L2> | w1_6c9f | ~(~w1_6516 | w1_6c9f | ~(~w1_6515<L1> | w1_6c9f | ~(w1_6514<L1> | w1_6c9f | ~w1_76d2 | ~...)))))))))))))
+@004b4acc  b1.6cf7                                               <= f2_4934336
+@004b4b30  b1.6cfa                                               <= <whole-word copy>
+@004b4b38  b1.6cfb                                               <= 0
+@004b4b74  b1.6cf6                                               <= (w1_6cfa | (w1_6cf7 & ~(w1_6cf7 ^ w1_6cf8)))
+@004b4b88  b1.6cf7                                               <= (w1_6cf6 ^ w1_6cfb)
+@004b4ba0  b1.6cf8                                               <= (w1_6cf7 ^ w1_6cf8)
+@004b4ba4  b1.6cf9                                               <= (w1_6cfa & (w1_6cf7 ^ w1_6cf8))
+@004b4bf4  b1.6cfd                                               <= (~w1_66b1 & w1_6c9d & ~(~w1_6cf7 & w1_7698 & ~w2_8023 & ~(w1_6cfa & (w1_6cf7 ^ w1_6cf8)) & ~(w1_6cf7 & (w2_8023 | (w1_6cfa & (w1_6cf7 ^ w1_6cf8))))))
+@004b4c10  b1.6cfb                                               <= (w1_6cf7 & (w2_8023 | (w1_6cfa & (w1_6cf7 ^ w1_6cf8))))
+@004b4c60  b1.6d00                                               <= f2_4934740
+@004b4cbc  b1.6d01                                               <= 0
+@004b4ce4  b1.6d00                                               <= (w1_6d00 ^ w1_6d01 ^ (~w1_651f & ~w1_6c9f & w1_76e0))
+@004b4d0c  b1.6cf8                                               <= (w1_6cf8 ^ w1_6cf9)
+@004b4d24  b1.6cf9                                               <= (w1_6d00 ^ w1_6d01 ^ (~w1_651f & ~w1_6c9f & w1_76e0))
+@004b4d28  b1.6d01                                               <= (w1_6d00 & (w1_6d00 ^ w1_6d01 ^ (~w1_651f & ~w1_6c9f & w1_76e0)))
+@004b4d78  b1.6cfe                                               <= (~w1_66b2 & w1_6c9d & ~(~w1_6cf8 & w1_7698 & ~w2_8023 & ~(w1_6cf8 & (w2_8023 | (w1_6d00 & (w1_6d00 ^ w1_6d01 ^ (~w1_651f & ~w1_6c9f & w1_76e0))))) & ~(w1_6d00 & (w1_6d00 ^ w1_6d01 ^ (~w1_651f & ~w1_6c9f & w1_76e0)))))
+@004b4d94  b1.6d02                                               <= (w1_6cf8 & (w2_8023 | (w1_6d00 & (w1_6d00 ^ w1_6d01 ^ (~w1_651f & ~w1_6c9f & w1_76e0)))))
+@004b4de4  b1.6d03                                               <= f2_4935128
+@004b4e1c  b1.6d03                                               <= (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f))
+@004b4e40  b1.6d00                                               <= (w1_6d00 ^ w1_6d01)
+@004b4e58  b1.6d01                                               <= (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f))
+@004b4eb0  b1.6cff                                               <= (~w1_66b3 & w1_6c9d & ~(~w1_6d00 & w1_7698 & ~w2_8023 & ~(w1_6d03 & (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f))) & ~(w1_6d00 & (w2_8023 | (w1_6d03 & (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f)))))))
+@004b4ec8  b1.6d05                                               <= (w1_6d00 & (w2_8023 | (w1_6d03 & (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f)))))
+@004b4f38  b1.6d06                                               <= (w1_6c9f | (f2_4935440 & ~(f2_4935440 ^ (~w1_651f & ~w1_6c9f & w1_6d00 & (w2_8023 | (w1_6d03 & (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f))))))))
+@004b4f40  b1.6d03                                               <= (w1_6d03 ^ (w1_6c9f & (f2_4935440 ^ (~w1_651f & ~w1_6c9f & w1_6d00 & (w2_8023 | (w1_6d03 & (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f))))))))
+@004b4f60  b1.6d07                                               <= (f2_4935440 ^ (~w1_651f & ~w1_6c9f & w1_6d00 & (w2_8023 | (w1_6d03 & (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f))))))
+@004b4fb0  b1.6d08                                               <= (~w1_66a4<L1> & w1_6c9d & ~(~w1_6d03 & w1_7698 & ~w2_8023 & ~(w1_6d03 & (w2_8023 | (f2_4935440 ^ (~w1_651f & ~w1_6c9f & w1_6d00 & (w2_8023 | (w1_6d03 & (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f)))))))) & ~(f2_4935440 ^ (~w1_651f & ~w1_6c9f & w1_6d00 & (w2_8023 | (w1_6d03 & (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f))))))))
+@004b4ff8  b1.6d0c                                               <= (w1_6d03 & (w2_8023 | (f2_4935440 ^ (~w1_651f & ~w1_6c9f & w1_6d00 & (w2_8023 | (w1_6d03 & (w1_6d03 ^ w1_6d04<L2> ^ (w1_6c86 | w1_6c9f))))))))

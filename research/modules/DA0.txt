@@ -1,0 +1,46 @@
+# GKO module DA0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 30 (init pass 28, per-cycle pass 2)
+#   of which 30 drive a named wire, 18 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@000198c4  b1.7830  GKO.DA0.DAAM.NAN6.CR.L2                      <= ((w0_9964<L2> & w1_6d8e<L2> & ((w0_997b & f1_104368) | (w0_995c<HOLD_LATHOLD_LATCH> & ~w0_995e<L1> & ~w0_997d & w0_997e<L2> & ~(~w0_997d & f1_104368) & (w0_9960 | w0_9961)) | (w0_995c<HOLD_LATHOLD_LATCH> & w0_995e<L1> & ~w0_9963 & w0_997b & ~w0_997d & w0_997e<L2> & ~(~w0_997d & f1_104368)))) | (w0_996e<L2> & ~w1_6d8e<L2> & ~(w0_996d & w1_6d8f)) | (w0_996e<L2> & w0_997b & w0_997d & w0_997e<L2> & ~w1_6d8e<L2> & ~(w0_996d & w1_6d8f)))
+@000955a0  b2.8c2f  GKO.DA0.DAAA4.NBN0.CR.L2                     <= f2_611592
+@000b1244  b2.cb3f  GKO.DA0.DAAM.NAN6.CR.L1                      <= <whole-word copy>
+@000b1dd0  b2.cc3f  GKO.DA0.DABI.NAN5.CR.L1                      <= <whole-word copy>
+@000b28e8  b2.cd3f  GKO.DA0.DACH.NAN4.CR.L1                      <= <whole-word copy>
+@000b4cc4  b2.c83f  GKO.DA0.DAAJ.NAN4.CR.L1                      <= f2_740544
+@000e03b4  b2.c53f  GKO.DA0.DAAF.NAN4.CR.L1                      <= (w1_7493<L1> & ~(w1_7493<L1> & ~(w1_7493<L1> & ~(w1_7493<L1> & ~(w0_a49a & w2_b5d7) & ~(w1_7493<L1> & ~(w0_a492 & w2_b5d7) & ~(w1_7493<L1> & ~(w0_a48a<HOLD_LATHOLD_LATCH> & w2_b5d7) & ~(w1_7493<L1> & ~(w1_7493<L1> & ~(w0_fb7b & w2_b5d7) & ~(w1_7493<L1> & ~(w0_13b7 & w2_b5d7) & ~(w1_7493<L1> & ~(w0_fb72 & w2_b5d7) & ~(w1_7493<L1> & ~(w0_1392 & w2_b5d7) & ~(w1_7493<L1> & ~(w0_138a & w2_b5d7) & ~(w1_7493<L1> & ~... & ~...)))))))))))))
+@00106ae8  b2.d73f  GKO.DA0.DA0_CRIT1.NAN1.CR.L1                 <= (w0_02b8 | (w2_85bf & ~w2_bfb6))
+@00119bbc  b2.d73f  GKO.DA0.DA0_CRIT1.NAN1.CR.L1                 <= (f2_1153544 | (~w1_7a3d & (w1_6fa6 | w1_75d4 | w1_75d8 | (w0_0298 & (~w1_7854<RRAM_0_HOLDL2> | w2_b86a)) | (w0_0297<L2> & ~w1_7079 & ~w1_7854<RRAM_0_HOLDL2> & ~w2_d35c))) | (~w1_7a3d & w1_7fd7) | (w1_7192 & ~w1_7a3d))
+@00122d08  b2.d73f  GKO.DA0.DA0_CRIT1.NAN1.CR.L1                 <= ((w2_d5c5 & w2_e52d) | (~w2_d5c5 & w2_e569))
+@00132a94  b2.ec7c  GKO.DA0.DAAI.NAN5.CR.L2                      <= (w2_d59c | (w2_d59c & ~w2_e4e1))
+@0013a5a4  b2.f07c  GKO.DA0.DA0_CRIT1.NAN1.CR.L2                 <= <whole-word copy>
+@0013e210  b2.f07c  GKO.DA0.DA0_CRIT1.NAN1.CR.L2                 <= f2_1303052
+@00147ff8  b2.f57c  GKO.DA0.DABI.NAN5.CR.L2                      <= (~w1_7fdb & (w2_d773 | (w1_7fb9 & (w0_6860<L2> | ~w1_7fb9))) & ~(~w1_7c24<L1> & (w2_d773 | (w1_7fb9 & (w0_6861 | ~w1_7fb9))) & ~(~w1_7c23 & (w2_d773 | (w1_7fb9 & (w0_6862 | ~w1_7fb9))) & ~(~w1_7c07 & (w2_d773 | (w1_7fb9 & (w0_6863 | ~w1_7fb9))) & ~(~w1_7bf2<L1> & (w2_d773 | (w1_7fb9 & (w0_6858<L2> | ~w1_7fb9))) & ~(~w1_79f5<L2> & (w2_d773 | (w1_7fb9 & (w0_6859 | ~w1_7fb9))) & ~(~w1_758e<L1> & (w2_d773 | (w1_7fb9 & (w0_685a | ~w1_7fb9))) & ~(~w2_d773 & ~(w1_7fb9 & (w0_6b85<L1> | ~w1_7fb9)) & (w2_d773 | (w1_7fb9 & (w0_685b | ~w1_7fb9)))))))))))
+@001506f8  b2.f87c  GKO.DA0.DAAL.NAN5.CR.L2                      <= w2_e4d9
+@00158be8  b2.fc30  GKO.DA0.DACH1.NAN6.CR.L2                     <= w2_e72d
+@0016dbd0  b3.cf3f  GKO.DA0.DADH.NAN3.CR.L1                      <= <whole-word copy>
+@0016ec90  b3.ce3f  GKO.DA0.DACH1.NAN6.CR.L1                     <= <whole-word copy>
+@0016fd4c  b3.cd3f  GKO.DA0.DACH.NAN4.CR.L1                      <= <whole-word copy>
+@00170e0c  b3.cc3f  GKO.DA0.DABI.NAN5.CR.L1                      <= <whole-word copy>
+@00171ec8  b3.cb3f  GKO.DA0.DAAM.NAN6.CR.L1                      <= <whole-word copy>
+@00172f88  b3.ca3f  GKO.DA0.DAAL.NAN5.CR.L1                      <= <whole-word copy>
+@00174044  b3.c93f  GKO.DA0.DAAJ1.NAN4.CR.L1                     <= <whole-word copy>
+@00175104  b3.c83f  GKO.DA0.DAAJ.NAN4.CR.L1                      <= <whole-word copy>
+@0017fbbc  b3.d030  GKO.DA0.DACH.NAN4.CR.L2                      <= <whole-word copy>
+@00181188  b7.f07c  GKO.DA0.DA0_CRIT1.NAN1.CR.L2                 <= <whole-word copy>
+@00183224  b2.ec7c  GKO.DA0.DAAI.NAN5.CR.L2                      <= <whole-word copy>
+@00188388  b2.f87c  GKO.DA0.DAAL.NAN5.CR.L2                      <= <whole-word copy>
+@00242598  b0.f57c  GKO.DA0.DABI.NAN5.CR.L2                      <= <whole-word copy>
+@00242c44  b0.f87c  GKO.DA0.DAAL.NAN5.CR.L2                      <= <whole-word copy>

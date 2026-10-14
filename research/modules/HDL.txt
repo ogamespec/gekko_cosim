@@ -1,0 +1,36 @@
+# GKO module HDL -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 20 (init pass 12, per-cycle pass 8)
+#   of which 20 drive a named wire, 11 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00143324  b2.f46c  GKO.HDL.HDLE.BIT0.L1                         <= (~w1_6f4a & ~w1_7775 & ~w2_d4a0 & (w1_7eeb<L2> | (w1_7fb9 & (w0_6950<L1> | ~w1_7fb9))))
+@00147c24  b2.f56c  GKO.HDL.SPARE0_REG_0.L1                      <= (~w1_7f04<L2> & ~w1_7ff9 & (w2_d770 | (w1_7fb9 & (w0_680c<L2> | ~w1_7fb9))))
+@0014ab5c  b2.f66c  GKO.HDL.HDLE.BIT1.L1                         <= (~w1_7ee5 & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_69a8<L1> | ~w1_7fb9))) & ~(~w1_7df0 & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_69a9 | ~w1_7fb9))) & ~(~w1_7bd6 & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_69aa | ~w1_7fb9))) & ~(~w1_79f7 & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_69ab | ~w1_7fb9))) & ~(~w1_79f6 & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_6b5c<L2> | ~w1_7fb9))) & ~(~w1_795c & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_6b5d<L2> | ~w1_7fb9))) & ~(~w1_791b & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_6b5e<L1> | ~w1_7fb9))) & ~(~w1_7912 & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_6b5f | ~w1_7fb9))) & ~(~w1_7911<RRAM_0_HOLDL2> & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_6b54<L2> | ~w1_7fb9))) & ~(~w1_7910 & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & (w0_6b55 | ~w1_7fb9))) & ~(~w1_790d<L1> & (w2_d79f<HOLD_LATHOLD_LATCH> | (w1_7fb9 & ...)) & ~(~w1_790c<L1> & (w2_d79f<HOLD_LATHOLD_LATCH> | ...) & ~(~w1_790a & ... & ~...)))))))))))))
+@0014ddd0  b2.f76c  GKO.HDL.HDLE.BIT2.L1                         <= w2_d7e6
+@001502d8  b2.f86c  GKO.HDL.HDLE.BIT3.L1                         <= w2_e4d9
+@001527e0  b2.f96c  GKO.HDL.HDLF.BIT0.L1                         <= w2_e6e3
+@00154be0  b2.fa6c  GKO.HDL.HDLF.BIT1.L1                         <= w2_e71f
+@00156fe0  b2.fb6c  GKO.HDL.HDLF.BIT2.L1                         <= w2_e727<L1>
+@001842b4  b2.f76c  GKO.HDL.HDLE.BIT2.L1                         <= <whole-word copy>
+@001846cc  b2.f86c  GKO.HDL.HDLE.BIT3.L1                         <= <whole-word copy>
+@001888c0  b2.f96c  GKO.HDL.HDLF.BIT0.L1                         <= <whole-word copy>
+@00188f28  b2.fa6c  GKO.HDL.HDLF.BIT1.L1                         <= <whole-word copy>
+@00242318  b0.f46c  GKO.HDL.HDLE.BIT0.L1                         <= <whole-word copy>
+@00242528  b0.f56c  GKO.HDL.SPARE0_REG_0.L1                      <= <whole-word copy>
+@0024278c  b0.f66c  GKO.HDL.HDLE.BIT1.L1                         <= <whole-word copy>
+@002429c8  b0.f76c  GKO.HDL.HDLE.BIT2.L1                         <= <whole-word copy>
+@00242c54  b0.f86c  GKO.HDL.HDLE.BIT3.L1                         <= <whole-word copy>
+@00242e0c  b0.f96c  GKO.HDL.HDLF.BIT0.L1                         <= <whole-word copy>
+@002430d8  b0.fa6c  GKO.HDL.HDLF.BIT1.L1                         <= <whole-word copy>
+@0044a7fc  b0.fb6c  GKO.HDL.HDLF.BIT2.L1                         <= ((f2_4499368 & f2_4499404) | (w1_e3a3 & f2_4499380))

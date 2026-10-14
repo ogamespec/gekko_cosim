@@ -1,0 +1,28 @@
+# GKO module FI1 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 12 (init pass 1, per-cycle pass 11)
+#   of which 12 drive a named wire, 12 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@0009ce90  b2.a460  GKO.FI1.FIRB.NCN3.CR.L2                      <= <whole-word copy>
+@002eccb0  b0.635c  GKO.FI1.FIRB.NBN1.L1                         <= <whole-word copy>
+@002eccb8  b0.6360  GKO.FI1.FIRC.NAN5.L2                         <= <whole-word copy>
+@002eccc0  b0.6364  GKO.FI1.FIRC.NAN4.L2                         <= <whole-word copy>
+@002eccd4  b0.6368  GKO.FI1.FIRC.NAN3.L2                         <= <whole-word copy>
+@002eccdc  b0.636c  GKO.FI1.FIRC.NAN2.L2                         <= <whole-word copy>
+@002ecce4  b0.6370  GKO.FI1.FIRC.NAN1.L2                         <= <whole-word copy>
+@002fa2f0  b0.6380  GKO.FI1.FIRC.NAN6.L2                         <= <whole-word copy>
+@002fa304  b0.638c  GKO.FI1.FIRC.NBN2.L2                         <= <whole-word copy>
+@002fa30c  b0.6388  GKO.FI1.FIRC.NBN1.L2                         <= <whole-word copy>
+@002fa310  b0.6384  GKO.FI1.FIRC.NBN0.L2                         <= <whole-word copy>
+@002fa314  b0.6390  GKO.FI1.FIRC.NBN6.L2                         <= <whole-word copy>

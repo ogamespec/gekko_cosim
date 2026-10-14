@@ -1,0 +1,19 @@
+# GKO module CR0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 3 (init pass 2, per-cycle pass 1)
+#   of which 3 drive a named wire, 2 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@0008f3cc  b2.8828  GKO.CR0.CRXR.NBN0.CR.L2                      <= <whole-word copy>
+@000acdc8  b2.ba93  GKO.CR0.CRXA.NAN2.CR.L1                      <= f2_708036
+@00234398  b0.6828  GKO.CR0.CRXA.NAN2.CR.L2                      <= <whole-word copy>

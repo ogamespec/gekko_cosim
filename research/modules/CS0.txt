@@ -1,0 +1,39 @@
+# GKO module CS0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 23 (init pass 21, per-cycle pass 2)
+#   of which 23 drive a named wire, 6 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00041548  b2.8193  GKO.CS0.CSRA.NBN1.CR.L1                      <= (w1_75f5<L2> & w1_7621)
+@00043998  b2.8393  GKO.CS0.CSRD.NBN1.CR.L1                      <= w1_7638<RRAM_0_HOLDL2>
+@00044384  b2.842c  GKO.CS0.CSRC.NBN1.CR.L2                      <= (w1_7633 & w1_7639<L1> & w1_763a<L2>)
+@0006d6e0  b2.8193  GKO.CS0.CSRA.NBN1.CR.L1                      <= f2_448220
+@0008e548  b2.842c  GKO.CS0.CSRC.NBN1.CR.L2                      <= <whole-word copy>
+@00096eb0  b2.9029  GKO.CS0.CSPMRGA.NBN1.CR.L2                   <= f2_618156
+@0009f964  b2.a82c  GKO.CS0.CSRD.NBN1.CR.L2                      <= <whole-word copy>
+@000a1678  b2.a293  GKO.CS0.CSPMRGE.NBN1.CR.L1                   <= f2_661108
+@000a5468  b2.b42c  GKO.CS0.CSRE.NAN3.CR.L2                      <= <whole-word copy>
+@000b7440  b2.9e93  GKO.CS0.CSPMRGF.NBN1.CR.L1                   <= (~w0_8956 & w0_8957 & ~w0_898e<L1>)
+@000bae14  b2.a493  GKO.CS0.CSRI.NBN1.CR.L1                      <= 0
+@000cac74  b2.a893  GKO.CS0.CSPMRGB.NAN4.CR.L1                   <= 0
+@000d0374  b2.9e93  GKO.CS0.CSPMRGF.NBN1.CR.L1                   <= 0
+@000d5888  b2.a893  GKO.CS0.CSPMRGB.NAN4.CR.L1                   <= 0
+@000ee558  b2.a893  GKO.CS0.CSPMRGB.NAN4.CR.L1                   <= 0
+@0010877c  b2.d82c  GKO.CS0.CSRF.NBN1.CR.L2                      <= (w0_9f4c & w2_bff2<L2>)
+@0011bb4c  b2.d82c  GKO.CS0.CSRF.NBN1.CR.L2                      <= 0
+@00158ae0  b2.fc2c  GKO.CS0.CSRG.NBN1.CR.L2                      <= w2_e72d
+@0015ed5c  b2.d82c  GKO.CS0.CSRF.NBN1.CR.L2                      <= (w1_7f5a & w2_823d & w2_e76c & w2_e76d & (w1_7ee9 & w2_e76c))
+@00176470  b7.e829  GKO.CS0.CSPMRGE.NBN1.CR.L2                   <= 0
+@0018993c  b2.fc2c  GKO.CS0.CSRG.NBN1.CR.L2                      <= <whole-word copy>
+@00235060  b0.842c  GKO.CS0.CSRC.NBN1.CR.L2                      <= <whole-word copy>
+@0023a89c  b0.b42c  GKO.CS0.CSRE.NAN3.CR.L2                      <= <whole-word copy>

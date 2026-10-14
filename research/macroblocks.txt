@@ -1,0 +1,289 @@
+# macroblock templates of model/COSIM.m2630opt.Jul1599 (region cycle2)
+# count	param_count	template
+2528	2321	ld(bank)
+1043	267	ld(bank) and
+627	0	rlwimi(16,0,15) and or
+601	0	clrlwi(31,0,0)
+378	285	and ld(bank)
+174	129	or ld(bank)
+158	1	ld(bank) andc or and
+104	17	or ld(bank) and
+88	52	ld(bank) and or
+83	8	ld(bank) or and
+75	0	li
+50	41	ld(bank) or
+41	38	xor ld(bank)
+30	0	and slwi(31,0,0)
+29	29	and and ld(bank) and
+24	25	ld(bank) or ld(bank) andc and
+23	0	clrlwi(31,0,0) and
+20	0	rlwimi(16,0,15) and
+19	16	or ld(bank) andc and
+19	0	or and and
+16	1	and andc ld(bank)
+16	1	xor or ld(bank)
+15	6	ld(bank) or or and
+13	0	or and
+12	0	srwi(16,0,0)
+12	9	and ld(bank) or
+12	0	orc and
+11	5	ld(bank) and and
+10	0	and and xori
+9	5	ld(bank) andc
+9	0	or or
+9	8	ld(bank) xor
+8	8	andc ld(bank)
+8	8	and or ld(bank)
+7	14	and ld(bank) ld(bank)
+7	7	and clrlwi(31,0,0) ld(bank)
+6	2	ld(bank) andc or
+6	0	or and or
+6	0	or or nor and andc or and andc and
+6	12	and andc ld(bank) ld(bank)
+5	0	clrlwi(31,0,0) and or
+5	0	and xori
+5	0	andc and or or
+5	5	andc ld(bank) andc
+5	5	and ld(bank) and
+5	0	or clrlwi(31,0,0)
+5	2	ld(bank) nor
+4	7	ld(bank) andc ld(bank)
+4	9	ld(bank) or ld(bank) andc ld(bank) and
+4	5	ld(bank) or andc ld(bank) and
+4	0	and clrlwi(31,0,0)
+4	6	or andc ld(bank) ld(bank)
+4	0	rlwimi(16,0,15)
+4	0	andc clrlwi(31,0,0)
+4	4	andc xori ld(bank)
+4	4	and or ld(bank) ld(bank)
+3	0	and and or
+3	0	and and and or
+3	3	andc ld(bank) and
+3	0	nor and or and and and
+3	3	xor ld(bank) xor
+3	0	orc and orc and
+3	0	and and and and and and and and and
+3	0	nor or and or or
+3	1	ld(bank) and nor
+3	3	or ld(bank) or
+3	1	xor nor ld(bank)
+3	1	and nor ld(bank)
+2	1	or ld(bank) nor
+2	0	clrlwi(31,0,0) or
+2	2	or or ld(bank)
+2	4	andc and ld(bank) ld(bank)
+2	0	or xori
+2	0	rlwimi(8,16,23) and or
+2	0	rlwimi(0,31,31) rlwinm(24,31,31)
+2	0	rlwimi(0,31,31) rlwinm(23,31,31)
+2	0	rlwimi(0,31,31) rlwinm(22,31,31)
+2	0	rlwimi(0,31,31) rlwinm(21,31,31)
+2	0	rlwimi(0,31,31) rlwinm(20,31,31)
+2	0	rlwimi(0,31,31) rlwinm(19,31,31)
+2	0	rlwimi(0,31,31) rlwinm(18,31,31)
+2	0	rlwimi(0,31,31) rlwinm(17,31,31)
+2	0	rlwimi(0,31,31) rlwinm(16,31,31)
+2	0	rlwimi(0,31,31) rlwinm(15,31,31)
+2	0	rlwimi(0,31,31) rlwinm(14,31,31)
+2	0	rlwimi(0,31,31) rlwinm(13,31,31)
+2	3	ld(bank) ld(bank) andc or and
+2	1	ld(bank) or and and
+2	2	or and ld(bank) and
+2	2	or or ld(bank) and
+2	3	ld(bank) or ld(bank)
+2	2	or ld(bank) and and
+2	2	and ld(bank) xor
+2	4	xor ld(bank) ld(bank)
+2	2	and ld(bank) xori
+2	0	and xori andc
+2	2	or and ld(bank)
+2	2	or nor ld(bank)
+2	0	and and and and and and and and
+2	0	and and
+2	2	ld(bank) clrlwi(31,0,0) andc
+2	2	ld(bank) nor and nor and
+2	0	xori xori clrlwi(31,0,0) xori
+2	0	xori clrlwi(31,0,0) xori
+2	1	ld(bank) or and or
+2	4	or ld(bank) ld(bank)
+2	2	xor andc ld(bank)
+2	3	xor and andc ld(bank) ld(bank)
+2	1	xor andc or ld(bank)
+2	0	xor clrlwi(31,0,0)
+1	0	rlwimi(16,0,15) and and or
+1	1	or ld(bank) nor nor and or
+1	2	or or ld(bank) nor nor and ld(bank) or
+1	1	or ld(bank) nor or
+1	0	xori xori
+1	1	xori nor ld(bank)
+1	2	andc ld(bank) ld(bank)
+1	2	ld(bank) andc or ld(bank)
+1	0	and clrlwi(31,0,0) and or
+1	1	nand or ld(bank)
+1	0	or nand or
+1	1	clrlwi(31,0,0) andc ld(bank) andc or
+1	1	clrlwi(31,0,0) andc and ld(bank)
+1	1	clrlwi(31,0,0) andc andc and or ld(bank)
+1	1	andc ld(bank) and or
+1	1	andc and and ld(bank)
+1	1	and ld(bank) and or
+1	1	nor andc ld(bank) nor and or
+1	1	andc ld(bank) andc and
+1	0	andc andc and and
+1	2	andc andc ld(bank) ld(bank)
+1	1	andc ld(bank) andc xori
+1	1	rlwimi(24,8,15) ld(bank)
+1	1	ld(bank) or or and or
+1	2	ld(bank) xor ld(bank)
+1	1	xor ld(bank) and or
+1	2	clrlwi(31,0,0) or ld(bank) andc and ld(bank) and and
+1	0	rlwimi(1,30,30) li rlwinm(26,31,31)
+1	0	rlwimi(1,30,30) rlwimi(0,31,31) rlwinm(25,31,31)
+1	0	rlwimi(1,30,30) li rlwinm(11,31,31)
+1	0	rlwimi(5,26,26) rlwimi(1,30,30) rlwinm(10,31,31)
+1	0	rlwimi(5,26,26) rlwimi(4,27,27) rlwinm(9,31,31)
+1	0	rlwimi(4,27,27) rlwimi(3,28,28) rlwinm(8,31,31)
+1	0	rlwimi(3,28,28) rlwimi(2,29,29) rlwinm(7,31,31)
+1	1	ld(bank) rlwimi(4,27,27) rlwinm(5,31,31)
+1	0	rlwimi(4,27,27) rlwinm(4,31,31)
+1	0	rlwimi(4,27,27) rlwinm(3,31,31)
+1	0	rlwimi(4,27,27) rlwinm(2,31,31)
+1	0	rlwimi(4,27,27) srwi(31,0,0)
+1	0	rlwimi(4,27,27) rlwimi(3,28,28) srwi(31,0,0)
+1	0	rlwimi(4,27,27) rlwimi(2,29,29) srwi(31,0,0)
+1	1	rlwimi(0,31,31) srwi(31,0,0) ld(bank)
+1	1	rlwimi(0,31,31) srwi(31,0,0) ld(bank) andc and
+1	1	ld(bank) xori or
+1	1	xori ld(bank)
+1	0	rlwimi(0,31,31) li rlwinm(31,31,31)
+1	0	rlwimi(0,31,31) li rlwinm(29,31,31)
+1	0	rlwimi(0,31,31) rlwinm(28,31,31)
+1	0	rlwimi(0,31,31) rlwinm(27,31,31)
+1	0	rlwimi(0,31,31) rlwinm(26,31,31)
+1	0	rlwimi(0,31,31) rlwinm(25,31,31)
+1	0	rlwimi(0,31,31) rlwinm(12,31,31)
+1	0	rlwimi(0,31,31) rlwinm(11,31,31)
+1	0	rlwimi(0,31,31) rlwinm(10,31,31)
+1	0	rlwimi(0,31,31) rlwinm(9,31,31)
+1	0	rlwimi(0,31,31) rlwinm(8,31,31)
+1	0	rlwimi(0,31,31) rlwinm(7,31,31)
+1	0	rlwimi(0,31,31) rlwinm(6,31,31)
+1	0	rlwimi(0,31,31) rlwinm(5,31,31)
+1	0	rlwimi(0,31,31) rlwinm(4,31,31)
+1	0	rlwimi(0,31,31) rlwinm(3,31,31)
+1	0	rlwimi(0,31,31) rlwinm(2,31,31)
+1	1	rlwimi(0,31,31) ld(bank)
+1	1	nor and ld(bank) or
+1	1	srwi(31,0,0) ld(bank) and
+1	1	srwi(31,0,0) and ld(bank) and
+1	1	rlwimi(24,8,31) ld(bank) and or
+1	0	or or nor and andc or andc and
+1	0	or nor and andc or and and
+1	0	or nor and andc or and and and
+1	0	nor and or and and
+1	0	or andc and
+1	1	and or or ld(bank) and
+1	0	or and andc and
+1	1	ld(bank) and xori or
+1	1	ld(bank) xor or and
+1	0	rlwimi(8,16,23) and
+1	0	rlwimi(16,0,15) rlwimi(8,16,23) and
+1	2	or rlwimi(16,8,31) ld(bank) or and andc or ld(bank) and
+1	2	ld(bank) or or ld(bank) and
+1	2	or ld(bank) ld(bank) and
+1	0	andc and
+1	2	ld(bank) and or ld(bank)
+1	1	nor ld(bank) nor
+1	2	ld(bank) or ld(bank) and
+1	1	or or nor ld(bank)
+1	1	xori ld(bank) andc and
+1	1	orc ld(bank) and
+1	1	and and ld(bank) or or
+1	1	or and or ld(bank)
+1	2	and and or ld(bank) ld(bank)
+1	1	ld(bank) or and and and
+1	1	ld(bank) andc and and or and
+1	3	ld(bank) or ld(bank) andc ld(bank) nor and or or or or or or
+1	1	or nand ld(bank)
+1	0	xor clrlwi(31,0,0) andc
+1	0	rlwimi(5,26,26) rlwinm(23,31,31)
+1	0	rlwimi(5,26,26) rlwinm(22,31,31)
+1	0	rlwimi(5,26,26) rlwinm(21,31,31)
+1	0	rlwimi(5,26,26) rlwinm(20,31,31)
+1	0	rlwimi(5,26,26) rlwinm(19,31,31)
+1	0	rlwimi(5,26,26) rlwinm(18,31,31)
+1	1	rlwimi(5,26,26) ld(bank)
+1	0	rlwimi(13,18,18) rlwimi(8,23,23) and or
+1	0	and rlwimi(0,31,31) rlwinm(31,31,31)
+1	0	and rlwimi(0,31,31) rlwinm(30,31,31)
+1	0	and rlwimi(0,31,31) rlwinm(29,31,31)
+1	0	and rlwimi(0,31,31) rlwinm(28,31,31)
+1	0	and rlwimi(0,31,31) rlwinm(27,31,31)
+1	0	and rlwinm(26,31,31)
+1	0	and rlwinm(25,31,31)
+1	0	and rlwinm(24,31,31)
+1	0	and rlwinm(23,31,31)
+1	0	and rlwinm(22,31,31)
+1	0	and rlwinm(21,31,31)
+1	0	and rlwinm(20,31,31)
+1	0	and rlwinm(19,31,31)
+1	0	and rlwimi(0,31,31) rlwinm(18,31,31)
+1	1	or ld(bank) nor or and or
+1	0	nor or and or andc or
+1	0	nor or and or and or andc or or or
+1	0	nor or and or and or
+1	0	nor or and or and or and or or
+1	0	nor and andc or or and or
+1	1	nor ld(bank) or or and or
+1	1	and xor ld(bank) or
+1	2	and ld(bank) ld(bank) and or
+1	1	ld(bank) or clrlwi(31,0,0) nor and
+1	1	ld(bank) nor and andc and
+1	1	or ld(bank) and andc and and and
+1	0	andc or andc or or or nor
+1	0	or or and
+1	1	or and nor ld(bank)
+1	0	clrlwi(31,0,0) andc and
+1	1	rlwimi(0,24,31) ld(bank)
+1	0	rlwimi(16,0,15) rlwimi(0,16,23) and
+1	0	rlwimi(0,16,23) srwi(16,0,0)
+1	1	xori xori xori xori clrlwi(31,0,0) ld(bank) or xori xori xori
+1	1	xori xori xori clrlwi(31,0,0) ld(bank) or xori xori
+1	1	xori clrlwi(31,0,0) ld(bank) or
+1	1	xori xori clrlwi(31,0,0) ld(bank) or xori
+1	1	and nand ld(bank) xori
+1	0	xori clrlwi(31,0,0)
+1	1	nand ld(bank) xori
+1	1	and nand xori ld(bank)
+1	0	xori and xori
+1	1	nand xori ld(bank)
+1	0	clrlwi(31,0,0) and andc andc andc andc andc andc
+1	0	clrlwi(31,0,0) clrlwi(31,0,0) and andc andc andc and andc
+1	1	ld(bank) or or
+1	1	and or ld(bank) or xori
+1	1	and xori ld(bank) or and or
+1	2	ld(bank) and ld(bank) or and nor and
+1	1	ld(bank) nor and nor and and
+1	1	nor ld(bank) or
+1	1	and ld(bank) or or
+1	1	or ld(bank) or or
+1	2	ld(bank) and ld(bank)
+1	1	ld(bank) orc nor orc nor
+1	1	ld(bank) orc nor nand nor
+1	1	ld(bank) nand nor nand nor
+1	1	or ld(bank) andc
+1	2	ld(bank) and xori ld(bank) nor and
+1	2	ld(bank) xori andc ld(bank)
+1	2	or ld(bank) andc ld(bank)
+1	2	ld(bank) ld(bank) xor or
+1	1	andc or ld(bank)
+1	0	clrlwi(31,0,0) xor
+1	2	and clrlwi(31,0,0) ld(bank) or ld(bank)
+1	1	xor and nor ld(bank)
+1	2	and ld(bank) ld(bank) or
+1	0	xor and or xor
+1	2	and andc clrlwi(31,0,0) ld(bank) ld(bank)
+1	0	rlwimi(16,0,15) rlwimi(24,8,31) xori
+1	2	or ld(bank) ld(bank) or
+1	1	or ld(bank) clrlwi(31,0,0) or
+1	0	orc or

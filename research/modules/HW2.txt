@@ -1,0 +1,24 @@
+# GKO module HW2 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 8 (init pass 8, per-cycle pass 0)
+#   of which 8 drive a named wire, 3 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00129c70  b2.e870  GKO.HW2.HW2Z.CR.L2                           <= (~w2_d83e & (~w2_d83e & (~w2_d83e & (w2_d83c | (~w2_d83e & (w2_d83e | (w1_769c & w1_7731))) | (w2_d83d & ~w2_d83e) | (w2_d584<L1> & ~w2_d83d)))))
+@00132944  b2.ec70  GKO.HW2.HW2Z_2.CR.L2                         <= (w2_e4dc<L2> | (~w2_e4e0<L2> & (w2_d25a | (w2_d25a & ~w2_e4dc<L2>))))
+@0013a54c  b2.f070  GKO.HW2.HWTC.CR.L2                           <= <whole-word copy>
+@00168104  b2.e870  GKO.HW2.HW2Z.CR.L2                           <= ((w2_823d & ~w2_b79e) | (w1_7f58 & w2_80ff & w2_823d & w2_d13a<L1> & (w0_970c & w1_742e<RRAM_0_HOLDL2>)))
+@001765a4  b7.e870  GKO.HW2.HW2Z.CR.L2                           <= f2_1533344
+@00181154  b7.f070  GKO.HW2.HWTC.CR.L2                           <= f2_1577296
+@00182798  b2.e870  GKO.HW2.HW2Z.CR.L2                           <= <whole-word copy>
+@001831fc  b2.ec70  GKO.HW2.HW2Z_2.CR.L2                         <= <whole-word copy>

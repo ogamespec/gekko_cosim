@@ -1,0 +1,149 @@
+# GKO module BA0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 133 (init pass 11, per-cycle pass 122)
+#   of which 55 drive a named wire, 123 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00007b20  b1.7009  GKO.BA0.BAAB.NBN1.CR.L2                      <= (w0_b973 ^ (~w0_b970 & ~(w0_b96b & w0_b96e & w0_b96f)))
+@00007b5c  b1.700c  GKO.BA0.BAFA.NBN1.CR.L1                      <= (~w0_b9f6 & ~(w0_b973 ^ (~w0_b970 & ~(w0_b96b & w0_b96e & w0_b96f))) & (w0_b9f9 | f1_31500))
+@00010d1c  b1.7409  GKO.BA0.BAAB.NBN1.CR.L1                      <= (w0_f061 | w0_f062 | w0_f063<L1> | w0_f064<L2> | w0_f065 | w0_f066 | w0_f067 | w0_f068<L1> | w0_f069 | w0_f06a | w0_f06b<L2> | w0_f070<L2> | w0_f071<L1> | w0_f089<L2> | w0_f08b | (w0_ed66 & w0_ed67))
+@00012194  b1.7509  GKO.BA0.BAAB1.NBN1.CR.L1                     <= <whole-word copy>
+@0001c5c0  b1.7009  GKO.BA0.BAAB.NBN1.CR.L2                      <= w0_b9e8
+@00029b34  b1.7409  GKO.BA0.BAAB.NBN1.CR.L1                      <= w0_9e16<L1>
+@0008c524  b1.7509  GKO.BA0.BAAB1.NBN1.CR.L1                     <= (w1_7509<L1> | w2_807b<L1>)
+@000aa640  b2.b509  GKO.BA0.BAAC1.NAN6.CR.L1                     <= f2_697916
+@000baad8  b2.a40b  GKO.BA0.BAAJ.NBN0.CR.L2                      <= (~w1_7ca6 & ~w1_7df6 & ~(w1_73e8 & (w0_9e40<L1> | w1_6e1e | w1_6e3c<L2> | ~w1_7df6)) & (w1_6d64<L1> | w1_7df6))
+@00131b04  b2.ec0b  GKO.BA0.BACB.NBN1.CR.L2                      <= w2_d59a
+@00140350  b2.f409  GKO.BA0.BAAC1.NAN6.CR.L2                     <= (~w1_6f4c<L2> & ~w1_7c35 & ~w1_7ccd<L1> & (w1_6fa5 | (w1_7fb9 & (w0_6999 | ~w1_7fb9))))
+@00245014  b0.02e8                                               <= <whole-word copy>
+@00245034  b0.02ec                                               <= <whole-word copy>
+@00245054  b0.02f0                                               <= <whole-word copy>
+@00245074  b0.02f4                                               <= <whole-word copy>
+@00245098  b0.02f8                                               <= <whole-word copy>
+@002450b8  b0.02fc                                               <= <whole-word copy>
+@002450d8  b0.0300                                               <= <whole-word copy>
+@0024511c  b0.0308                                               <= <whole-word copy>
+@0024513c  b0.030c                                               <= <whole-word copy>
+@0024515c  b0.0310                                               <= <whole-word copy>
+@002451c0  b0.031c                                               <= <whole-word copy>
+@002451e0  b0.0320                                               <= <whole-word copy>
+@00245224  b0.0328                                               <= <whole-word copy>
+@00245244  b0.032c                                               <= <whole-word copy>
+@00245264  b0.0330                                               <= <whole-word copy>
+@00245288  b0.0334                                               <= <whole-word copy>
+@002452a8  b0.0338                                               <= <whole-word copy>
+@002452c8  b0.033c                                               <= <whole-word copy>
+@002452e8  b0.0340                                               <= <whole-word copy>
+@0024530c  b0.0344                                               <= <whole-word copy>
+@0024532c  b0.0348                                               <= <whole-word copy>
+@0024534c  b0.034c                                               <= <whole-word copy>
+@0024536c  b0.0350                                               <= <whole-word copy>
+@00245390  b0.0354                                               <= <whole-word copy>
+@002453b0  b0.0358                                               <= <whole-word copy>
+@002453d0  b0.035c                                               <= <whole-word copy>
+@002453f0  b0.0360                                               <= <whole-word copy>
+@00245454  b0.036c                                               <= <whole-word copy>
+@00245474  b0.0370                                               <= <whole-word copy>
+@00245498  b0.0374                                               <= <whole-word copy>
+@002454b8  b0.0378                                               <= <whole-word copy>
+@002454d8  b0.037c                                               <= <whole-word copy>
+@0024553c  b0.0388                                               <= <whole-word copy>
+@0024555c  b0.038c                                               <= <whole-word copy>
+@0024557c  b0.0390                                               <= <whole-word copy>
+@002455a0  b0.0394                                               <= <whole-word copy>
+@002455c0  b0.0398                                               <= <whole-word copy>
+@002455e0  b0.039c                                               <= <whole-word copy>
+@00245604  b0.03a0                                               <= <whole-word copy>
+@00245624  b0.03a4                                               <= <whole-word copy>
+@00245644  b0.03a8                                               <= <whole-word copy>
+@00245664  b0.03ac                                               <= <whole-word copy>
+@00245688  b0.03b0                                               <= <whole-word copy>
+@002456a8  b0.03b4                                               <= <whole-word copy>
+@002456b0  b0.03b8                                               <= <whole-word copy>
+@002456c4  b0.05a8                                               <= <whole-word copy>
+@002456e4  b0.05c4                                               <= <whole-word copy>
+@002456ec  b0.05c0                                               <= <whole-word copy>
+@002456f0  b0.05bc                                               <= <whole-word copy>
+@002456f4  b0.05b8                                               <= <whole-word copy>
+@002456f8  b0.05b4                                               <= <whole-word copy>
+@002456fc  b0.05b0                                               <= <whole-word copy>
+@00245704  b0.05ac                                               <= <whole-word copy>
+@00245708  b0.05c8                                               <= <whole-word copy>
+@002459d0  b0.084c                                               <= <whole-word copy>
+@002459f0  b0.0868                                               <= <whole-word copy>
+@002459fc  b0.0860                                               <= <whole-word copy>
+@00245a04  b0.085c                                               <= <whole-word copy>
+@00245a08  b0.0858                                               <= <whole-word copy>
+@00245a0c  b0.0854                                               <= <whole-word copy>
+@00245a10  b0.0850                                               <= <whole-word copy>
+@00245a14  b0.086c                                               <= <whole-word copy>
+@00245a7c  b0.0914  GKO.BA0.BAAB1.NAN6.L1                        <= <whole-word copy>
+@00245a94  b0.0918  GKO.BA0.BAAB1.NAN3.L1                        <= <whole-word copy>
+@00245aa8  b0.091c  GKO.BA0.BAAB.NAN3.L1                         <= <whole-word copy>
+@00245af0  b0.0924  GKO.BA0.BAAB.NAN1.L1                         <= <whole-word copy>
+@00245b04  b0.0928  GKO.BA0.BAAB1.NAN1.L1                        <= <whole-word copy>
+@00245b14  b0.092c  GKO.BA0.BAAB1.NAN5.L1                        <= <whole-word copy>
+@00245b34  b0.0930  GKO.BA0.BAAB.NAN6.L1                         <= <whole-word copy>
+@00245b3c  b0.0934  GKO.BA0.BAAB1.NAN4.L1                        <= <whole-word copy>
+@00245b50  b0.094c  GKO.BA0.BAAB1.NAN7.L1                        <= <whole-word copy>
+@00245b74  b0.096c  GKO.BA0.BAAB.NAN4.L2                         <= <whole-word copy>
+@00245b7c  b0.0968  GKO.BA0.BAAB.NAN1.L2                         <= <whole-word copy>
+@00245b84  b0.0964  GKO.BA0.BAAB.NAN2.L2                         <= <whole-word copy>
+@00245b88  b0.0960  GKO.BA0.BAAB.NAN3.L2                         <= <whole-word copy>
+@00245b8c  b0.095c  GKO.BA0.BAAB.NAN7.L2                         <= <whole-word copy>
+@00245b90  b0.0958  GKO.BA0.BAAB.NAN0.L2                         <= <whole-word copy>
+@00245b94  b0.0954  GKO.BA0.BAAB.NAN6.L2                         <= <whole-word copy>
+@00245b98  b0.0950  GKO.BA0.BAAB.NAN5.L2                         <= <whole-word copy>
+@00245b9c  b0.0970                                               <= <whole-word copy>
+@00245cdc  b0.09f4                                               <= <whole-word copy>
+@00245d04  b0.0a14  GKO.BA0.BAAD.NAN0.L2                         <= <whole-word copy>
+@00245d0c  b0.0a10  GKO.BA0.BAAD.NAN7.L2                         <= <whole-word copy>
+@00245d10  b0.0a0c  GKO.BA0.BAAD.NAN6.L2                         <= <whole-word copy>
+@00245d14  b0.0a08  GKO.BA0.BAAD.NAN5.L2                         <= <whole-word copy>
+@00245d18  b0.0a04  GKO.BA0.BAAD.NAN4.L2                         <= <whole-word copy>
+@00245d1c  b0.0a00  GKO.BA0.BAAD.NAN3.L2                         <= <whole-word copy>
+@00245d20  b0.09fc  GKO.BA0.BAAD.NAN2.L2                         <= <whole-word copy>
+@00245d24  b0.09f8  GKO.BA0.BAAD.NAN1.L2                         <= <whole-word copy>
+@00245d3c  b0.0c1c  GKO.BA0.BADA.NAN3.L1                         <= <whole-word copy>
+@00245d64  b0.0c40  GKO.BA0.BAFA.NAN4.L1                         <= <whole-word copy>
+@00245d6c  b0.0c3c  GKO.BA0.BAFA.NAN3.L1                         <= <whole-word copy>
+@00245d70  b0.0c38  GKO.BA0.BAFA.NAN2.L1                         <= <whole-word copy>
+@00245d74  b0.0c34  GKO.BA0.BAFA.NAN7.L1                         <= <whole-word copy>
+@00245d78  b0.0c30  GKO.BA0.BAFA.NAN1.L1                         <= <whole-word copy>
+@00245d7c  b0.0c2c  GKO.BA0.BAFA.NAN0.L1                         <= <whole-word copy>
+@00245d84  b0.0c28                                               <= <whole-word copy>
+@00245d88  b0.0c24  GKO.BA0.BADA.NAN2.L1                         <= <whole-word copy>
+@00245d8c  b0.0c20  GKO.BA0.BADA.NAN0.L1                         <= <whole-word copy>
+@00245d90  b0.0c44  GKO.BA0.BAFA.NAN5.L1                         <= <whole-word copy>
+@00245da4  b0.0c48  GKO.BA0.BAFA.NAN6.L1                         <= <whole-word copy>
+@00245dc8  b0.0c68  GKO.BA0.BAFA.NAN7.L2                         <= <whole-word copy>
+@00245dd0  b0.0c64  GKO.BA0.BAFA.NAN6.L2                         <= <whole-word copy>
+@00245dd4  b0.0c60  GKO.BA0.BAFA.NAN5.L2                         <= <whole-word copy>
+@00245dd8  b0.0c5c  GKO.BA0.BAFA.NAN4.L2                         <= <whole-word copy>
+@00245ddc  b0.0c58  GKO.BA0.BAFA.NAN0.L2                         <= <whole-word copy>
+@00245de0  b0.0c54  GKO.BA0.BAFA.NAN3.L2                         <= <whole-word copy>
+@00245de4  b0.0c50  GKO.BA0.BAFA.NAN2.L2                         <= <whole-word copy>
+@00245de8  b0.0c4c  GKO.BA0.BAFA.NAN1.L2                         <= <whole-word copy>
+@00245dec  b0.0c6c                                               <= <whole-word copy>
+@00245f68  b0.0d0c                                               <= <whole-word copy>
+@00245fa0  b0.0d3c                                               <= <whole-word copy>
+@00245fa8  b0.0d38                                               <= <whole-word copy>
+@00245fac  b0.0d34                                               <= <whole-word copy>
+@00245fb0  b0.0d30                                               <= <whole-word copy>
+@00245fb4  b0.0d2c                                               <= <whole-word copy>
+@00245fb8  b0.0d28                                               <= <whole-word copy>
+@00245fc0  b0.0d20                                               <= <whole-word copy>
+@00245fc4  b0.0d1c                                               <= <whole-word copy>
+@00245fd0  b0.0d10                                               <= <whole-word copy>
+@00245fd4  b0.0d40                                               <= <whole-word copy>
+@00245fe8  b0.0d44                                               <= <whole-word copy>

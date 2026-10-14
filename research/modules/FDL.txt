@@ -1,0 +1,34 @@
+# GKO module FDL -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 18 (init pass 15, per-cycle pass 3)
+#   of which 18 drive a named wire, 9 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@0009a684  b2.a05c  GKO.FDL.FDLE.BIT1.L2                         <= <whole-word copy>
+@0009b048  b2.a15c  GKO.FDL.FDLE.BIT2.L2                         <= <whole-word copy>
+@0009c398  b2.a35c  GKO.FDL.FDLE.BIT0.L2                         <= f2_639892
+@0009ce98  b2.a45c  GKO.FDL.FDLF.BIT0.L2                         <= <whole-word copy>
+@0009d974  b2.a55c  GKO.FDL.SPARE0_REG_0.L2                      <= f2_645488
+@0009e524  b2.a65c  GKO.FDL.FDLF.BIT1.L2                         <= f2_648480
+@0009f088  b2.a75c  GKO.FDL.FDLF.BIT2.L2                         <= <whole-word copy>
+@0009fb7c  b2.a85c  GKO.FDL.FDLF.BIT3.L2                         <= <whole-word copy>
+@001593e0  b2.fc6c  GKO.FDL.SPARE0_REG_0.L1                      <= w2_e72f
+@0015b7d8  b2.fd6c  GKO.FDL.FDLF.BIT3.L1                         <= w2_e737
+@0015dbd8  b2.fe6c  GKO.FDL.FDLF.BIT2.L1                         <= w2_e73f<L1>
+@00189aa4  b2.fc6c  GKO.FDL.SPARE0_REG_0.L1                      <= <whole-word copy>
+@0018a0c4  b2.fd6c  GKO.FDL.FDLF.BIT3.L1                         <= <whole-word copy>
+@001a187c  b2.006d  GKO.FDL.FDLF.BIT0.L1                         <= w1_7e7d
+@001a2ba8  b2.016d  GKO.FDL.FDLE.BIT3.L1                         <= ((w1_7be3 & w2_a4e9) | (w1_7b5a<RAM_0_HOLDL2> & ~w2_a4e9))
+@002434cc  b0.fe6c  GKO.FDL.FDLF.BIT2.L1                         <= <whole-word copy>
+@00243924  b0.fd6c  GKO.FDL.FDLF.BIT3.L1                         <= <whole-word copy>
+@0034b984  b0.a25c  GKO.FDL.FDLE.BIT3.L2                         <= ((w1_9557 & f2_3454992) | (w1_6d24<L1> & f2_3454980))

@@ -360,6 +360,8 @@ class CPU:
         self.max_steps = 0
         self.ret_marker = RETURN_MARKER
         self.trace = None
+        self.hook = None           # optional per-instruction observer
+                                   # hook(cpu, ins) -- used by netlist_gt.py
         # call block: function descriptors (the bootstrap copies them into
         # slots 0x4C..0x194)
         for off, (entry, toc) in FUNCDESC.items():
@@ -631,6 +633,8 @@ class CPU:
                 self._hot_report(start, max_steps)
                 return "max_steps"
             ins = ins_list[i]
+            if self.hook is not None:
+                self.hook(self, ins)
             if (self.steps & 0xFFF) == 0:
                 self.hot[ins[0]] = self.hot.get(ins[0], 0) + 1
             self.tail.append(ins[0])

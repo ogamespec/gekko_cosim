@@ -1,0 +1,139 @@
+# GKO module LQ0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 123 (init pass 117, per-cycle pass 6)
+#   of which 63 drive a named wire, 52 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00092114  b2.8fec                                               <= <whole-word copy>
+@000921e4  b2.9010                                               <= <whole-word copy>
+@000922b8  b2.9034                                               <= <whole-word copy>
+@000922f4  b2.9038                                               <= <whole-word copy>
+@000922f8  b2.903c                                               <= <whole-word copy>
+@0009233c  b2.9044                                               <= <whole-word copy>
+@00092340  b2.9048                                               <= <whole-word copy>
+@00092344  b2.904c                                               <= <whole-word copy>
+@00092384  b2.9050                                               <= <whole-word copy>
+@00092388  b2.9054                                               <= <whole-word copy>
+@0009238c  b2.9058                                               <= <whole-word copy>
+@000923c8  b2.905c                                               <= <whole-word copy>
+@000923cc  b2.9060                                               <= <whole-word copy>
+@00092410  b2.9068                                               <= <whole-word copy>
+@000924e0  b2.908c                                               <= <whole-word copy>
+@000924e8  b2.9094                                               <= <whole-word copy>
+@00092528  b2.9098                                               <= <whole-word copy>
+@0009252c  b2.909c                                               <= <whole-word copy>
+@00092530  b2.90a0                                               <= <whole-word copy>
+@0009256c  b2.90a4  GKO.LQ0.LQ0_LQAD.NAN1.L2                     <= <whole-word copy>
+@00092570  b2.90a8  GKO.LQ0.LQ0_LQAD.NAN2.L2                     <= <whole-word copy>
+@00092574  b2.90ac  GKO.LQ0.LQ0_LQAD.NAN3.L2                     <= <whole-word copy>
+@000925b4  b2.90b0  GKO.LQ0.LQ0_LQAD.NAN4.L2                     <= <whole-word copy>
+@000925b8  b2.90b4  GKO.LQ0.LQ0_LQAD.NAN0.L2                     <= <whole-word copy>
+@000925bc  b2.90b8  GKO.LQ0.LQ0_LQAD.NAN5.L2                     <= <whole-word copy>
+@000925f8  b2.90bc  GKO.LQ0.LQ0_LQAD.NAN6.L2                     <= <whole-word copy>
+@000925fc  b2.90c0                                               <= <whole-word copy>
+@00092604  b2.90c4  GKO.LQ0.LQ0_LQAD1.NAN0.L2                    <= <whole-word copy>
+@00092640  b2.90c8                                               <= <whole-word copy>
+@00092644  b2.90cc  GKO.LQ0.LQ0_LQAE.NAN1.L2                     <= <whole-word copy>
+@00092648  b2.90d0  GKO.LQ0.LQ0_LQAE.NAN0.L2                     <= <whole-word copy>
+@00092688  b2.90d4  GKO.LQ0.LQ0_LQAE.NAN2.L2                     <= <whole-word copy>
+@0009268c  b2.90d8  GKO.LQ0.LQ0_LQAE.NAN3.L2                     <= <whole-word copy>
+@00092690  b2.90dc  GKO.LQ0.LQ0_LQAE.NAN4.L2                     <= <whole-word copy>
+@000926d0  b2.90e0  GKO.LQ0.LQ0_LQAE.NAN5.L2                     <= <whole-word copy>
+@000926d4  b2.90e4  GKO.LQ0.LQ0_LQAE.NAN6.L2                     <= <whole-word copy>
+@000926d8  b2.90e8  GKO.LQ0.LQ0_LQAE.NAN7.L2                     <= <whole-word copy>
+@00092718  b2.90ec                                               <= <whole-word copy>
+@0009271c  b2.90f0  GKO.LQ0.LQ0_LQAX.NAN1.L2                     <= <whole-word copy>
+@00092720  b2.90f4  GKO.LQ0.LQ0_LQAX.NAN0.L2                     <= <whole-word copy>
+@0009276c  b2.90f9                                               <= <whole-word copy>
+@00092774  b2.90f8  GKO.LQ0.LQ0_LQAX.NAN2.L2                     <= f2_599920
+@0009277c  b2.8369                                               <= f2_599928
+@00092784  b2.90fb                                               <= f2_599928
+@00092788  b2.90ff                                               <= f2_599928
+@000927c4  b2.9100                                               <= f2_599928
+@0009280c  b2.9108  GKO.LQ0.LQ0_LQAX.NAN1.L1                     <= f2_599928
+@00092814  b2.9110  GKO.LQ0.LQ0_LQAE.NAN7.L1                     <= f2_599928
+@00092854  b2.9118  GKO.LQ0.LQ0_LQAE.NAN5.L1                     <= f2_599928
+@00092858  b1.6f4e                                               <= f2_599928
+@00092898  b2.911c  GKO.LQ0.LQ0_LQAE.NAN4.L1                     <= f2_599928
+@0009289c  b2.9120  GKO.LQ0.LQ0_LQAE.NAN3.L1                     <= f2_599928
+@000928e0  b2.912c  GKO.LQ0.LQ0_LQAE.NAN1.L1                     <= f2_599928
+@00092924  b2.9130  GKO.LQ0.LQ0_LQAD.NAN0.L1                     <= f2_599928
+@00092928  b2.9134  GKO.LQ0.LQ0_LQAE.NAN0.L1                     <= f2_599928
+@0009292c  b2.83bb                                               <= f2_599928
+@00092968  b2.9138  GKO.LQ0.LQ0_LQAD1.NAN0.L1                    <= f2_599928
+@0009296c  b2.913c  GKO.LQ0.LQ0_LQAD.NAN6.L1                     <= f2_599928
+@00092970  b1.6f52                                               <= f2_599928
+@000929b4  b2.9144  GKO.LQ0.LQ0_LQAD.NAN4.L1                     <= f2_599928
+@000929b8  b2.9148  GKO.LQ0.LQ0_LQAD.NAN3.L1                     <= f2_599928
+@000929f4  b2.914c  GKO.LQ0.LQ0_LQAD.NAN2.L1                     <= f2_599928
+@000929f8  b2.9150  GKO.LQ0.LQ0_LQAD.NAN1.L1                     <= f2_599928
+@000929fc  b2.9154  GKO.LQ0.LQ0_LQXX.NAN4.L1                     <= f2_599928
+@00092a3c  b2.9158  GKO.LQ0.LQ0_LQXX.NAN3.L1                     <= f2_599928
+@00092a40  b2.915c  GKO.LQ0.LQ0_LQXX.NAN2.L1                     <= f2_599928
+@00092a44  b2.9160  GKO.LQ0.LQ0_LQXX.NAN1.L1                     <= f2_599928
+@00092a88  b2.9168  GKO.LQ0.LQ0_LQXX.NAN5.L1                     <= f2_599928
+@00092a8c  b2.916c                                               <= f2_599928
+@00092ac8  b2.9170                                               <= f2_599928
+@00092acc  b2.9174                                               <= f2_599928
+@00092ad0  b2.9178                                               <= f2_599928
+@00092b10  b2.917c                                               <= f2_599928
+@00092b5c  b2.9188                                               <= f2_599928
+@00092b68  b2.918a                                               <= f2_600928
+@00092bb0  b2.9194                                               <= f2_600928
+@00092bf0  b2.9198                                               <= f2_600928
+@00092bf4  b2.919c                                               <= f2_600928
+@00092bf8  b2.91a0                                               <= f2_600928
+@00092c38  b2.91a4                                               <= f2_600928
+@00092c3c  b2.91a8                                               <= f2_600928
+@00092c40  b2.91ac                                               <= f2_600928
+@00092c88  b2.91b0                                               <= f2_600928
+@00092c90  b2.8475                                               <= f2_601228
+@00092c94  b2.91b2                                               <= f2_601228
+@00092c98  b2.91b6                                               <= f2_601228
+@00092cd4  b2.91b8                                               <= f2_601228
+@00092cd8  b2.91bc                                               <= f2_601228
+@00092cdc  b2.91c0                                               <= f2_601228
+@00092d1c  b2.91c4  GKO.LQ0.LQ0_LQXX.NAN4.L2                     <= f2_601228
+@00092d20  b2.91c8  GKO.LQ0.LQ0_LQXX.NAN0.L2                     <= f2_601228
+@00092d60  b2.91cc  GKO.LQ0.LQ0_LQXX.NAN3.L2                     <= f2_601228
+@00092d64  b2.91d0  GKO.LQ0.LQ0_LQXX.NAN1.L2                     <= f2_601228
+@00092d68  b2.91d4  GKO.LQ0.LQ0_LQXX.NAN5.L2                     <= f2_601228
+@00092db8  b2.91d9                                               <= f2_601228
+@00092dc0  b2.91d8  GKO.LQ0.LQ0_LQXX.NAN2.L2                     <= f2_601532
+@00092dc8  b2.85f1                                               <= f2_601540
+@00092dcc  b2.91db                                               <= f2_601540
+@00092dd0  b2.91df                                               <= f2_601540
+@00092f40  b2.8646                                               <= f2_601916
+@00092f48  b2.8645                                               <= f2_601924
+@00092f4c  b2.9211                                               <= f2_601924
+@00092f50  b2.9215                                               <= f2_601924
+@00092ffc  b2.922b                                               <= f2_602096
+@000aaedc  b2.c090  GKO.LQ0.LQ0_LQAD.NBN0.CR.L2                  <= f2_700052
+@000af7e4  b2.c890  GKO.LQ0.LQ0_LQAD1.NAN2.CR.L2                 <= <whole-word copy>
+@00132cd8  b2.ec90  GKO.LQ0.LQ0_LQAE.NBN1.CR.L2                  <= (w2_e4e3 | (w2_a56b<HOLD_LATHOLD_LATCH> & ~w2_e4e4<L2>))
+@0014b1a8  b2.f692  GKO.LQ0.LQ0_LQXX.NAN6.CR.L1                  <= (~w1_7fef & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a6e<L2> | ~w1_7fb9))) & ~(~w1_7fdc & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a6f | ~w1_7fb9))) & ~(~w1_7fdb & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a64<L1> | ~w1_7fb9))) & ~(~w1_7c24<L1> & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a65 | ~w1_7fb9))) & ~(~w1_7c23 & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a66 | ~w1_7fb9))) & ~(~w1_7c07 & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a67 | ~w1_7fb9))) & ~(~w1_7bf2<L1> & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a5c<L2> | ~w1_7fb9))) & ~(~w1_79f5<L2> & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a5d<L2> | ~w1_7fb9))) & ~(~w1_75c4 & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a5e<L1> | ~w1_7fb9))) & ~(~w2_808f & (w2_a6eb<L2> | (w1_7fb9 & (w0_6a5f | ~w1_7fb9))) & ~(~w2_a6eb<L2> & ~(w1_7fb9 & (w0_6b74<L2> | ~w1_7fb9)) & (w2_a6eb<L2> | (w1_7fb9 & ...)) & ~(~w2_d79f<HOLD_LATHOLD_LATCH> & ~(w1_7fb9 & ...) & (w2_a6eb<L2> | ...) & ~(~w1_6d6a & ... & ~...)))))))))))))
+@00150ca0  b2.f892  GKO.LQ0.LQ0_LQAX.NAN5.CR.L1                  <= w2_e4db
+@00152c04  b2.f97c  GKO.LQ0.LQ0_LQXX.NAN6.CR.L2                  <= w2_e6e3
+@001531a8  b2.f992  GKO.LQ0.LQ0_LQAE.NBN1.CR.L1                  <= w2_e719
+@001555a8  b2.fa92  GKO.LQ0.LQ0_LQAD1.NAN2.CR.L1                 <= w2_e721
+@001579a8  b2.fb92  GKO.LQ0.LQ0_LQAD.NBN0.CR.L1                  <= w2_e729
+@0017563c  b3.c890  GKO.LQ0.LQ0_LQAD1.NAN2.CR.L2                 <= <whole-word copy>
+@00183284  b2.ec90  GKO.LQ0.LQ0_LQAE.NBN1.CR.L2                  <= <whole-word copy>
+@001888e4  b2.f97c  GKO.LQ0.LQ0_LQXX.NAN6.CR.L2                  <= <whole-word copy>
+@001a1b20  b2.0091  GKO.LQ0.LQ0_LQAX.NAN5.CR.L2                  <= <whole-word copy>
+@00236574  b0.9108  GKO.LQ0.LQ0_LQAX.NAN1.L1                     <= <whole-word copy>
+@002365a0  b0.9120  GKO.LQ0.LQ0_LQAE.NAN3.L1                     <= <whole-word copy>
+@002365a4  b0.911c  GKO.LQ0.LQ0_LQAE.NAN4.L1                     <= <whole-word copy>
+@002365a8  b0.9118  GKO.LQ0.LQ0_LQAE.NAN5.L1                     <= <whole-word copy>
+@002365b0  b0.9110  GKO.LQ0.LQ0_LQAE.NAN7.L1                     <= <whole-word copy>
+@00242e58  b0.f97c  GKO.LQ0.LQ0_LQXX.NAN6.CR.L2                  <= <whole-word copy>

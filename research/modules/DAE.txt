@@ -1,0 +1,98 @@
+# GKO module DAE -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 82 (init pass 82, per-cycle pass 0)
+#   of which 82 drive a named wire, 28 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@0009f95c  b2.a82e  GKO.DAE.ADDR_0_CSE.BIT1.L1                   <= <whole-word copy>
+@000a10f8  b2.aa2e  GKO.DAE.IN_CB.BIT0.L1                        <= <whole-word copy>
+@000a83b8  b2.bb2e  GKO.DAE.DMA_CSE.BIT3.L1                      <= f2_689068
+@000a933c  b2.b22e  GKO.DAE.LD_RID.BIT0.L1                       <= f2_693048
+@000afd4c  b2.c92e  GKO.DAE.BDT_DERR.BIT0.L1                     <= <whole-word copy>
+@000b282c  b2.cd2e  GKO.DAE.CBL1.BIT0.L1                         <= <whole-word copy>
+@000b3f64  b2.cf2e  GKO.DAE.BDT_DVAL.BIT0.L1                     <= <whole-word copy>
+@000b43ec  b2.be2e  GKO.DAE.LFCB_SEL.BIT0.L1                     <= f2_738280
+@000b5050  b2.b52e  GKO.DAE.DMA_WCNT.BIT1.L1                     <= f2_741452
+@000b55e8  b2.d12e  GKO.DAE.VALID2.BIT0.L1                       <= <whole-word copy>
+@000b5f3c  b2.c12e  GKO.DAE.DMA_CSE.BIT0.L1                      <= f2_745272
+@000b6114  b2.d22e  GKO.DAE.BCNT_CB.BIT0.L1                      <= <whole-word copy>
+@000b6124  b2.ca2e  GKO.DAE.SIZE_WIM.BIT5.L1                     <= f2_745760
+@000c8c84  b2.d32e  GKO.DAE.SIZE_WIM.BIT0.L1                     <= 0
+@000df754  b2.bd2e  GKO.DAE.DMA_CSE.BIT2.L1                      <= f2_915280
+@000f4a4c  b2.bd2e  GKO.DAE.DMA_CSE.BIT2.L1                      <= (w1_7f7a & w2_d4f7)
+@000f7e1c  b2.d52e  GKO.DAE.MISS_CSE.BIT2.L1                     <= (~w1_7df1 & ~w2_a5bb & (w2_8023 | (w2_a942 & ~w2_a943)))
+@00100e04  b2.d62e  GKO.DAE.BCNT.BIT1.L1                         <= (~w0_07e2 & ~w0_080e<L1> & ~w0_ae9a & ~w1_6f4f & ~w2_d0fa<HOLD_LATHOLD_LATCH> & (w2_d1f1<L2> | (w1_7fb9 & (w0_6ac2 | ~w1_7fb9))))
+@00102450  b2.bd2e  GKO.DAE.DMA_CSE.BIT2.L1                      <= (w0_d1b5 & w0_d1bb & w1_7092 & w1_7743 & (w0_d1b7<HOLD_LATHOLD_LATCH> | (w0_d1b5 & w0_d1b6 & w0_d1b7<HOLD_LATHOLD_LATCH>)) & (w0_d1b6 | w0_d1b7<HOLD_LATHOLD_LATCH>) & (w0_d1b5 | w0_d1b6))
+@00108050  b2.d72e  GKO.DAE.ST_RID.BIT2.L1                       <= ((~w2_bfc3 & (w0_a023 & w2_bfc3)) | (w1_7cc7 & w2_bfb6 & (w0_a023 & w2_bfc3) & (w1_778e<RRAM_0_HOLDL2> & ~w2_bfb6)))
+@001087c0  b2.d82e  GKO.DAE.SNP_CSE.BIT1.L1                      <= (w0_9f4e & w2_bff2<L2>)
+@00109cc8  b2.d92e  GKO.DAE.BIU_LF.BIT0.L1                       <= (w2_c01b & w2_c039 & (w0_a020 & w2_c007))
+@0010a864  b2.da2e  GKO.DAE.BCNT.BIT0.L1                         <= (w2_c01b & w2_c039 & w2_c03a<L1> & w2_c03b & w2_c053 & w2_c0a7 & (w0_a020 & w2_c007))
+@0010b590  b2.db2e  GKO.DAE.SNP_CSE.BIT2.L1                      <= (w1_7c53 & w2_c0b2 & w2_c0b3<HOLD_LATHOLD_LATCH> & w2_c0c9 & w2_c0ca)
+@0010c12c  b2.dc2e  GKO.DAE.ST_RID.BIT3.L1                       <= (w1_7c53 & w2_c0b2 & w2_c0b3<HOLD_LATHOLD_LATCH> & w2_c0c9 & w2_c0ca & w2_c0cb & w2_c0df & w2_c0fa & w2_c0fb<HOLD_LATHOLD_LATCH>)
+@0010db18  b2.dd2e  GKO.DAE.ANY_REQ.BIT0.L1                      <= 0
+@00114384  b2.de2e  GKO.DAE.SIZE_CI.BIT2.L1                      <= (w1_7548 & ~w1_7a3d & w2_cd7a)
+@00114ccc  b2.df2e  GKO.DAE.SPARE0_REG_0.L1                      <= (~w1_7a3d & w2_cd7a & (w1_7070<L2> | w1_7548 | (~w0_092c<L1> & ~(w1_784c & (w1_6d42 | w1_7e49<L2>)))))
+@00115618  b2.e02e  GKO.DAE.ST_UND_LDLF.BIT0.L1                  <= (w1_7a3d & w2_cd7a)
+@00115f70  b2.e12e  GKO.DAE.ANY_LD_SEL_LAT.BIT0.L1               <= (~w1_7a3d & (w1_7070<L2> | w1_7548 | (~w0_092c<L1> & ~(w1_784c & (w1_6d42 | w1_7e49<L2>)))))
+@001168bc  b2.e22e  GKO.DAE.STWX_INST.BIT0.L1                    <= (w1_7a3d & ~w1_7c68 & w2_cd7a)
+@00117208  b2.e32e  GKO.DAE.SIZE_CI.BIT0.L1                      <= <whole-word copy>
+@00117b50  b2.e42e  GKO.DAE.ADDR_1_CSE.BIT3.L1                   <= <whole-word copy>
+@00119984  b2.d72e  GKO.DAE.ST_RID.BIT2.L1                       <= (~w1_6f59 & ~(w1_6d8d & (w1_7a50 | (~w1_6d8d & ~w1_7c7a))) & (w1_7a50 | (~w1_6d8d & ~w1_7c7a)) & (w1_6d93<L1> | w1_6f59 | w1_7a50 | f0_1151816 | (~w1_6d8d & ~w1_7c7a)))
+@0011bbbc  b2.d82e  GKO.DAE.SNP_CSE.BIT1.L1                      <= f2_1162168
+@001219b8  b2.e72e  GKO.DAE.VALID1.BIT0.L1                       <= <whole-word copy>
+@00123498  b2.e52e  GKO.DAE.SIZE_WIM.BIT4.L1                     <= ((w2_d5c5 & w2_e6f5<LRU_INDEX_L2>) | (~w2_d5c5 & w2_e5a7))
+@00125dcc  b2.e62e  GKO.DAE.CBL0.BIT0.L1                         <= (w1_7768 & ((((~w2_b3b9 & ((w0_fe1e & ~w2_d5d0) | (w1_7768 & ((w1_7768 & (w2_b396<HOLD_LATHOLD_LATCH> | (((~w2_b3b9 & ...) | (w2_b396<HOLD_LATHOLD_LATCH> & w2_b3b9 & w2_d5d0)) & (~w1_7768 | ~w2_b396<HOLD_LATHOLD_LATCH> | ~(... | ...))))) | (((~w2_b3b9 & ((w1_7768 & ...) | (w0_fe1d & ~w2_d5d0))) | (w1_7768 & w2_b3b9 & w2_d5d0 & (w2_b396<HOLD_LATHOLD_LATCH> | (... & ...)))) & (~w1_7768 | ~w2_b3b9 | ~w2_d5d0 | ~(w2_b396<HOLD_LATHOLD_LATCH> | ((... | ...) & (~w1_7768 | ~w2_b396<HOLD_LATHOLD_LATCH> | ~...))))))))) | (w1_7768 & w2_b3b9 & w2_d5d0 & ((w1_7768 & (w2_b396<HOLD_LATHOLD_LATCH> | (((~w2_b3b9 & (w2_b396<HOLD_LATHOLD_LATCH> | (w0_fe1c & ~w2_d5d0))) | (w2_b396<HOLD_LATHOLD_LATCH> & w2_b3b9 & w2_d5d0)) & (~w1_7768 | ~w2_b396<HOLD_LATHOLD_LATCH> | ~(((... | ...) & (~w1_7768 | ~w2_af22 | ~w2_af8e<L1> | ~w2_b037 | ~w2_b396<HOLD_LATHOLD_LATCH> | ~w2_d5c8 | ~w2_d5ca | ~w2_d5cc | ~w2_d5ce | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~... | ~...)) | (w1_7768 & w2_b396<HOLD_LATHOLD_LATCH> & w2_d5ce & (... | ...))))))) | (((~w2_b3b9 & ((w1_7768 & (w2_b396<HOLD_LATHOLD_LATCH> | (... & ...))) | (w0_fe1d & ~w2_d5d0))) | (w1_7768 & w2_b3b9 & w2_d5d0 & (w2_b396<HOLD_LATHOLD_LATCH> | (((~w2_b3b9 & ...) | (w2_b396<HOLD_LATHOLD_LATCH> & w2_b3b9 & w2_d5d0)) & (~w1_7768 | ~w2_b396<HOLD_LATHOLD_LATCH> | ~(... | ...)))))) & (~w1_7768 | ~w2_b3b9 | ~w2_d5d0 | ~(w2_b396<HOLD_LATHOLD_LATCH> | (((~w2_b3b9 & (w2_b396<HOLD_LATHOLD_LATCH> | ...)) | (w2_b396<HOLD_LATHOLD_LATCH> & w2_b3b9 & w2_d5d0)) & (~w1_7768 | ~w2_b396<HOLD_LATHOLD_LATCH> | ~((... & ...) | (w1_7768 & w2_b396<HOLD_LATHOLD_LATCH> & w2_d5ce & ...)))))))))) & (~w1_7768 | ~w2_b3b9 | ~w2_d5d0 | ~((w1_7768 & (w2_b396<HOLD_LATHOLD_LATCH> | (((~w2_b3b9 & (w2_b396<HOLD_LATHOLD_LATCH> | (w0_fe1c & ~w2_d5d0))) | (w2_b396<HOLD_LATHOLD_LATCH> & w2_b3b9 & w2_d5d0)) & (~w1_7768 | ~w2_b396<HOLD_LATHOLD_LATCH> | ~((((~w2_b396<HOLD_LATHOLD_LATCH> & ...) | (w1_7768 & w2_b396<HOLD_LATHOLD_LATCH> & w2_d5ce & ...)) & (~w1_7768 | ~w2_af22 | ~w2_af8e<L1> | ~w2_b037 | ~w2_b396<HOLD_LATHOLD_LATCH> | ~w2_d5c8 | ~w2_d5ca | ~w2_d5cc | ~w2_d5ce | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...) | ~(... | ...))) | ...))))) | ...))) | ...))
+@00128b14  b2.e72e  GKO.DAE.VALID1.BIT0.L1                       <= 0
+@0012b5d8  b2.e92e  GKO.DAE.SIZE_WIM.BIT3.L1                     <= w2_8445
+@0012da1c  b2.ea2e  GKO.DAE.VALID0.BIT0.L1                       <= (w2_a91b | (w2_a91b & ~w2_d877<HOLD_LATHOLD_LATCH>))
+@0012fcc0  b2.eb2e  GKO.DAE.ST_GRAPH.BIT0.L1                     <= w2_b0c6<HOLD_LATHOLD_LATCH>
+@00131fd8  b2.ec2e  GKO.DAE.ADDR_1_CSE.BIT2.L1                   <= w2_b2b3
+@001341f0  b2.ed2e  GKO.DAE.ST_OR_TWC_SEL_L1_.BIT0.L1            <= w2_d262<HOLD_LATHOLD_LATCH>
+@0013684c  b2.ee2e  GKO.DAE.ADDR_0_CSE.BIT0.L1                   <= w2_d5c2<HOLD_LATHOLD_LATCH>
+@00138cf8  b2.ef2e  GKO.DAE.BIST_CSE.BIT1.L1                     <= w2_a5d2
+@0013c024  b2.f22e  GKO.DAE.SIZE_WIM.BIT2.L1                     <= (w2_e519 | w2_e559)
+@0013d308  b2.f32e  GKO.DAE.ST_RID.BIT0.L1                       <= w2_d74c
+@0013e068  b2.f02e  GKO.DAE.SIZE_CI.BIT1.L1                      <= f2_1302628
+@001413f8  b2.f42e  GKO.DAE.BIST_CSE.BIT2.L1                     <= (~w1_6f5b & ~w1_7cb1 & ~w2_d4a2<HOLD_LATHOLD_LATCH> & (w1_78be | (w1_7fb9 & (w0_6a52 | ~w1_7fb9))))
+@00146e30  b2.f52e  GKO.DAE.ADDR_1_CSE.BIT0.L1                   <= (~w2_d76e & ~(~w2_a8f3 & w2_d76e) & (w2_d76e | (w1_7fb9 & (w0_68d6 | ~w1_7fb9))))
+@00149f64  b2.f62e  GKO.DAE.ST_RID.BIT1.L1                       <= (~w1_7feb<L2> & (w2_d79e | (w1_7fb9 & (w0_6af2 | ~w1_7fb9))) & ~(~w1_7eec & (w2_d79e | (w1_7fb9 & (w0_6af3 | ~w1_7fb9))) & ~(~w1_7ee5 & (w2_d79e | (w1_7fb9 & (w0_6af4<L2> | ~w1_7fb9))) & ~(~w1_7df0 & (w2_d79e | (w1_7fb9 & (w0_6af5 | ~w1_7fb9))) & ~(~w1_7bd6 & (w2_d79e | (w1_7fb9 & (w0_6af6 | ~w1_7fb9))) & ~(~w1_79f7 & (w2_d79e | (w1_7fb9 & (w0_6af7 | ~w1_7fb9))) & ~(~w1_79f6 & (w2_d79e | (w1_7fb9 & (w0_6af8<L2> | ~w1_7fb9))) & ~(~w1_795c & (w2_d79e | (w1_7fb9 & (w0_6af9 | ~w1_7fb9))) & ~(~w1_791b & (w2_d79e | (w1_7fb9 & (w0_6afa | ~w1_7fb9))) & ~(~w1_7912 & (w2_d79e | (w1_7fb9 & (w0_6afb | ~w1_7fb9))) & ~(~w1_7911<RRAM_0_HOLDL2> & (w2_d79e | (w1_7fb9 & ...)) & ~(~w1_7910 & (w2_d79e | ...) & ~(~w1_790d<L1> & ... & ~...)))))))))))))
+@0014d514  b2.f72e  GKO.DAE.SIZE_WIM.BIT1.L1                     <= w2_d7e4
+@0014fa1c  b2.f82e  GKO.DAE.BCNT.BIT1.L2                         <= w2_d7ec
+@00151f24  b2.f92e  GKO.DAE.LD_RID.BIT3.L2                       <= w2_e5db
+@00154324  b2.fa2e  GKO.DAE.ADDR_0_CSE.BIT1.L2                   <= w2_e71d
+@00156724  b2.fb2e  GKO.DAE.ADDR_0_CSE.BIT0.L2                   <= w2_e725<L2>
+@00158b24  b2.fc2e  GKO.DAE.VALID3.BIT0.L2                       <= w2_e72d
+@0015af1c  b2.fd2e  GKO.DAE.LFCBL.BIT0.L2                        <= w2_e735
+@0015d31c  b2.fe2e  GKO.DAE.BCNT_CB.BIT0.L2                      <= w2_e73d
+@0016dab8  b3.cf2e  GKO.DAE.BDT_DVAL.BIT0.L1                     <= <whole-word copy>
+@0016eb74  b3.ce2e  GKO.DAE.BCNT_CB.BIT1.L1                      <= <whole-word copy>
+@0016fc34  b3.cd2e  GKO.DAE.CBL1.BIT0.L1                         <= <whole-word copy>
+@00170cf0  b3.cc2e  GKO.DAE.VALID3.BIT0.L1                       <= <whole-word copy>
+@00171db0  b3.cb2e  GKO.DAE.WCNT.BIT0.L1                         <= <whole-word copy>
+@00172e6c  b3.ca2e  GKO.DAE.SIZE_WIM.BIT5.L1                     <= <whole-word copy>
+@00173f2c  b3.c92e  GKO.DAE.BDT_DERR.BIT0.L1                     <= <whole-word copy>
+@00174fe8  b3.c82e  GKO.DAE.SIZE_WIM.BIT6.L1                     <= <whole-word copy>
+@00178290  b2.ea2e  GKO.DAE.VALID0.BIT0.L1                       <= (w1_7f51 & w2_a5b9 & ((w1_7f51 & w2_a5bb) | (~w1_7f51 & ((~w1_7f4c & ((~w1_7f51 & ((w1_7f4c & w2_8616) | (~w1_7f4c & ((w1_7f51 & w2_8611) | (~w1_7f51 & ((w1_7f4c & w2_85fe) | (~w1_7f4c & ...))))))) | (w1_7f51 & w2_a57b))) | (w1_7f4c & w2_a5ab)))))
+@0017c960  b3.d32e  GKO.DAE.SIZE_WIM.BIT0.L1                     <= 0
+@0017da20  b3.d22e  GKO.DAE.BCNT_CB.BIT0.L1                      <= <whole-word copy>
+@0017eadc  b3.d12e  GKO.DAE.VALID2.BIT0.L1                       <= <whole-word copy>
+@0017fb9c  b3.d02e  GKO.DAE.SIZE_WIM.BIT7.L1                     <= 0
+@00187ba8  b2.e92e  GKO.DAE.SIZE_WIM.BIT3.L1                     <= <whole-word copy>
+@001881c8  b2.ea2e  GKO.DAE.VALID0.BIT0.L1                       <= <whole-word copy>
+@0018930c  b2.fb2e  GKO.DAE.ADDR_0_CSE.BIT0.L2                   <= <whole-word copy>
+@00189934  b2.fc2e  GKO.DAE.VALID3.BIT0.L2                       <= <whole-word copy>
+@0018a50c  b2.fe2e  GKO.DAE.BCNT_CB.BIT0.L2                      <= <whole-word copy>
+@0018ab2c  b2.ff2e  GKO.DAE.DCOP_CBL.BIT0.L2                     <= <whole-word copy>
+@001a1418  b2.002f  GKO.DAE.ST_RID.BIT1.L2                       <= <whole-word copy>
+@001a272c  b2.012f  GKO.DAE.SIZE_WIM.BIT6.L2                     <= <whole-word copy>
+@001b4428  b2.d82e  GKO.DAE.SNP_CSE.BIT1.L1                      <= ((~w2_f3de & (w2_f3dd | (~w2_d76c & (w2_f3dc | (~w1_7be2 & ((~w2_f3de & ((~w2_d76c & ((~w1_7be2 & (... | ...)) | (w1_7066 & w2_d5c7 & w2_f3dc))) | (~w2_f3dd & ((~w2_d767 & (w2_d668 | ...)) | (w1_7066 & w2_d5c7 & w2_f3dc))) | (w1_7066 & w2_d5c7 & w2_d767 & w2_f3dc & w2_f3dd))) | (w2_d76c & w2_f3de & ((~w2_f3dd & ((~w2_d767 & (w2_d668 | ...)) | (w1_7066 & w2_d5c7 & w2_f3dc))) | (w1_7066 & w2_d5c7 & w2_d767 & w2_f3dc & w2_f3dd))))))))) | (w2_d76c & w2_f3dd & w2_f3de))

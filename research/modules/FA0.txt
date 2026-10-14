@@ -1,0 +1,26 @@
+# GKO module FA0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 10 (init pass 10, per-cycle pass 0)
+#   of which 10 drive a named wire, 3 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@000461f8  b2.8457  GKO.FA0.FAAA.NBN4.CR.L2                      <= f2_287220
+@00097d48  b2.8457  GKO.FA0.FAAA.NBN4.CR.L2                      <= <whole-word copy>
+@00097ebc  b2.9c5c  GKO.FA0.FACA.NBN7.CR.L2                      <= <whole-word copy>
+@0009a674  b2.a058  GKO.FA0.FAAG.NBN4.CR.L2                      <= <whole-word copy>
+@000d8fa4  b2.b893  GKO.FA0.FAAG.NBN4.CR.L1                      <= (w0_dd25<L2> & ~w1_7396)
+@0010c334  b2.dc58  GKO.FA0.FAAI.NBN7.CR.L2                      <= (w1_7c53 & w2_c0b2 & w2_c0b3<HOLD_LATHOLD_LATCH> & w2_c0c9 & w2_c0ca & w2_c0cb & w2_c0df & w2_c0fa & w2_c0fb<HOLD_LATHOLD_LATCH>)
+@00117ccc  b2.e457  GKO.FA0.FAAC.NBN4.CR.L2                      <= (w1_7549<L2> & ~w1_7a3d & w2_cd7a)
+@0014e798  b2.f792  GKO.FA0.FAAF.NBN4.CR.L1                      <= w2_d7e8
+@001b8224  b1.7d93  GKO.FA0.FAAJ.NBN2.CR.L1                      <= (w1_76f5<RRAM_0_HOLDL2> | w1_7d93<L1>)
+@001bbe40  b1.7d93  GKO.FA0.FAAJ.NBN2.CR.L1                      <= (w2_cd7a & ((w1_7ccf & w2_e6c1) | (w1_76b8 & ~w1_7ccf)))

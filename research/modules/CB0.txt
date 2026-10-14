@@ -1,0 +1,113 @@
+# GKO module CB0 -- recovered 2-value netlist
+# model: model/COSIM.m2630opt.Jul1599 (compiled PPC netlist)
+# statements: 97 (init pass 88, per-cycle pass 9)
+#   of which 49 drive a named wire, 20 are whole-word copies
+#
+# format: @<code addr>  b<bank>.<slot>  <signal name>  <=  <expression>
+#   b<bank>.<slot> : state wire; the 8 banks are the L1/L2 planes of the
+#      two-value simulation
+#   wN_MMMM        : the same wire read as an input
+#   fK_ADDR        : value assembled by bit packing / address arithmetic
+#   mem_rN[d]      : byte read through a non-bank pointer (array image)
+#   in_rN          : value entering the fragment in register rN
+#   &  |  ^  ~     : boolean operators (negation pushed to the literals)
+#   <whole-word copy> : lwz->stw of a word never modified in between
+#   '... N more...' : a wide clause elided by the printer (use --dump)
+#
+@00008938  b1.7093  GKO.CB0.BR0_INSTR.NBN1.CR.L1                 <= (~w0_c95c & ~w0_c95e<L1> & w0_c98c & ~w0_c98d<L2>)
+@0000cf94  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= (w0_e3b6 & w0_e7a3)
+@0000f3e4  b1.737b  GKO.CB0.CB0_BR0_ADDR_LO.NAN2.CR.L1           <= (w0_eecc<L1> & (~w0_ee86 | ~w0_eeaf | ~w0_eecc<L1>))
+@00011998  b1.747b  GKO.CB0.CBAA.NBN2.CR.L1                      <= 0
+@00013cdc  b1.767b  GKO.CB0.CBAB.NBN2.CR.L1                      <= (w0_6d64<L1> & w0_6d6c<L2>)
+@00013f50  b1.7693  GKO.CB0.CBAC.NBN2.CR.L1                      <= f1_81688
+@0001cfe0  b1.7093  GKO.CB0.BR0_INSTR.NBN1.CR.L1                 <= (w0_d59c & w1_70b0<L2>)
+@00026d50  b1.7a93  GKO.CB0.CBAD.NBN2.CR.L1                      <= (w0_eef2<L2> & ~w1_7375 & ((w1_7353 & w1_7355) | (w1_7353 & w1_7360) | (w1_7350 & w1_7351 & w1_7355) | (w1_7351 & w1_7353 & w1_7360) | (w1_7351 & w1_7352 & w1_7353) | (w1_7351 & w1_7353 & w1_7355) | (w1_7350 & w1_7351 & w1_7360) | (w1_7350 & w1_7351 & w1_7353) | (w1_7351 & w1_7353 & ((w1_734f & w1_735c) | (w1_734f & w1_735e<L1>) | (w1_735a & w1_735b & w1_735c) | (w1_7359 & w1_735a & w1_735c) | (w0_ed73 & w1_735c & w1_735e<L1>) | (w1_735a & w1_735c & w1_735e<L1>) | (w1_734f & w1_735a & w1_735c) | (w1_734f & w1_7359 & w1_735a) | (w0_ed72 & w1_735a & w1_735c) | (w1_7359 & w1_735a & w1_735e<L1>) | (w1_7359 & w1_735b & w1_735c & w1_735d<L2>))) | (w1_7355 & w1_7360 & ((w1_734f & w1_735c) | (w1_734f & w1_735e<L1>) | (w1_735a & w1_735b & w1_735c) | (w1_7359 & w1_735a & w1_735c) | (w0_ed73 & w1_735c & w1_735e<L1>) | (w1_735a & w1_735c & w1_735e<L1>) | (w1_734f & w1_735a & w1_735c) | (w1_734f & w1_7359 & w1_735a) | (w0_ed72 & w1_735a & w1_735c) | (w1_7359 & w1_735a & w1_735e<L1>) | (w1_7359 & w1_735b & w1_735c & w1_735d<L2>))) | (w1_7350 & w1_7352 & w1_7353 & w1_7354)))
+@0002a3f4  b1.747b  GKO.CB0.CBAA.NBN2.CR.L1                      <= (w0_fece ^ (w0_feca | w1_7473 | w1_7477 | (~w0_94f9 & ~w1_7470 & (w0_94f7 | w0_94f8<L1> | w0_94f9 | w0_9508<L1>))))
+@0002f340  b1.7693  GKO.CB0.CBAC.NBN2.CR.L1                      <= 0
+@000345cc  b1.7e93  GKO.CB0.CBAE.NBN2.CR.L1                      <= f2_214472
+@00034c8c  b1.7093  GKO.CB0.BR0_INSTR.NBN1.CR.L1                 <= f2_216200
+@00038ed8  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= (w0_ddd2 & ~w1_7275<RRAM_0_HOLDL2> & ~w1_7276 & ~w1_727b<L1> & ~w1_727e<RRAM_0_HOLDL2> & ~f1_233004)
+@0003f85c  b2.8019  GKO.CB0.CBAB.NBN2.CR.L2                      <= (w1_762a & w1_762e)
+@000401cc  b2.8093  GKO.CB0.CBAF.NBN2.CR.L1                      <= (w1_762f<RRAM_0_HOLDL2> & w1_7637)
+@0004c60c  b2.8493  GKO.CB0.CBAG.NBN1.CR.L1                      <= (w0_9742 & w1_6dd0<L1> & ~w1_6f5f & ~(~w1_6da8<L1> & ~f1_212732))
+@0004ef94  b1.7093  GKO.CB0.BR0_INSTR.NBN1.CR.L1                 <= ((w1_70bb & w1_7997<L1> & (~w1_70bb | ~w1_7997<L1>)) | (w1_70bc<L2> & w1_7998<RAM_0_HOLDL2> & (~w0_d5b4 | ~w1_70bb | ~w1_7997<L1> | ~(~w1_70bb | ~w1_7997<L1>))))
+@00077df8  b2.8019  GKO.CB0.CBAB.NBN2.CR.L2                      <= ((w0_9a5d<L2> & w2_8493<L1>) | (w0_9a39 & w2_8482<L2>))
+@0009222c  b2.901c  GKO.CB0.CBAS.NBN1.CR.L2                      <= <whole-word copy>
+@0009f2a4  b2.a793  GKO.CB0.CBAU.NBN1.CR.L1                      <= <whole-word copy>
+@000d31cc  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= 0
+@000f2a3c  b1.7693  GKO.CB0.CBAC.NBN2.CR.L1                      <= ((w0_72cb & w2_8618<L1>) | (w0_72ca & ((w1_76ef & w1_7725<L1>) | (w1_76ea & w2_8619))) | (w0_72c5 & w1_7743) | (w1_76aa & w1_7754))
+@000f62dc  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= (~w1_722c & ~w1_727b<L1> & w2_8285<L1> & ~w2_8559 & (w1_7ff1 | (w1_75aa & (w1_7ff6 ^ w1_7ffb ^ w2_8023)) | ~(w2_8023 | w2_85db)))
+@0010c06c  b2.dc1b  GKO.CB0.CBAK.NBN1.CR.L2                      <= <whole-word copy>
+@0010c07c  b2.dc1d  GKO.CB0.CBAV.NBN1.CR.L2                      <= <whole-word copy>
+@0014cea0  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= ((w2_b5d7 & w2_d7e1) | (~w2_d7e1 & ((w2_b5d7 & w2_d7e1) | (~w2_d7e1 & ((w2_b5d7 & w2_d7e1) | (~w2_d7e1 & ((~w2_d7e1 & ((w2_b5d7 & w2_d7e1) | (~w2_d7e1 & ((w2_b5d7 & w2_d7e1) | (~w2_d7e1 & (... | ...)))))) | (w2_b5d7 & w2_d7e1))))))))
+@0014fcb0  b2.f81a  GKO.CB0.CBAJ.NBN1.CR.L2                      <= w2_d7ec
+@0015ea34  b1.7093  GKO.CB0.BR0_INSTR.NBN1.CR.L1                 <= (w1_7093<L1> & w2_e76c)
+@0017692c  b1.7093  GKO.CB0.BR0_INSTR.NBN1.CR.L1                 <= (w1_70be | (~w2_ae25<L1> & (f2_1534068 | (w1_7769 & w2_d818))))
+@00176b20  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= ((w2_ae25<L1> & w2_d743) | (~w2_ae25<L1> & (w1_7769 & w2_e776)))
+@0017c7f4  b3.d41a  GKO.CB0.CBAI.NBN1.CR.L2                      <= <whole-word copy>
+@00180fe0  b7.f019  GKO.CB0.CBAC.NBN2.CR.L2                      <= 0
+@00184920  b1.7093  GKO.CB0.BR0_INSTR.NBN1.CR.L1                 <= ((~(~(w2_ae25<L1> & ((w0_ad19 & (w2_a833 ^ f3_1590936 ^ (~w0_ad19 & w0_c07e<L1>))) | (~w0_ad19 & ~(w2_a833 ^ f3_1590936)))) & ~(~w2_ae25<L1> & (w0_c07e<L1> | (w2_a83a<L2> ^ w2_a83b<HOLD_LATHOLD_LATCH> ^ w2_a841 ^ w2_a842 ^ w2_a843 ^ w2_a849 ^ w2_a84a ^ w2_a84b ^ w2_a85a ^ mem_r1590964[4294934528])))) & ~(w1_6df5 ^ f3_1590916) & ~(w1_6df6 ^ f0_1590896) & ~(w1_7260 ^ w2_a83b<HOLD_LATHOLD_LATCH>) & ~(w1_6df7 ^ mem_r1590936[4294934532]) & ~(w1_742a ^ w2_a84b) & ~(w1_7438 ^ w2_a85a) & ~(w1_7279 ^ w2_a842) & ~(w1_7277 ^ w2_a841) & ~(w1_6df8<L1> ^ f0_1590856) & ~(w2_a832<HOLD_LATHOLD_LATCH> ^ f3_1590888) & ~(w1_70d2 ^ w2_a833) & ~(w1_70d3 ^ w2_a83a<L2>) & ~(w1_727b<L1> ^ w2_a843) & ~(w1_7415<L1> ^ w2_a84a) & ~(w1_73db ^ w2_a849)) | (w0_6447 & w0_c07e<L1> & ~w1_7069 & ~mem_r1590936[4294934532] & ~mem_r1590964[4294934528] & ~f0_1590856 & ~f0_1590896 & ~f3_1590888 & ~f3_1590916 & ~f3_1590936 & ~(w2_a83a<L2> ^ mem_r1590964[4294934528]) & ~(w2_a83a<L2> ^ w2_a83b<HOLD_LATHOLD_LATCH> ^ mem_r1590964[4294934528]) & ~(w2_a83a<L2> ^ w2_a83b<HOLD_LATHOLD_LATCH> ^ w2_a841 ^ mem_r1590964[4294934528]) & ~(w2_a83a<L2> ^ w2_a83b<HOLD_LATHOLD_LATCH> ^ w2_a841 ^ w2_a842 ^ mem_r1590964[4294934528]) & ~(w2_a83a<L2> ^ w2_a83b<HOLD_LATHOLD_LATCH> ^ w2_a841 ^ w2_a842 ^ w2_a843 ^ mem_r1590964[4294934528]) & ~(w2_a83a<L2> ^ w2_a83b<HOLD_LATHOLD_LATCH> ^ w2_a841 ^ w2_a842 ^ w2_a843 ^ w2_a849 ^ mem_r1590964[4294934528]) & ~(w2_a83a<L2> ^ w2_a83b<HOLD_LATHOLD_LATCH> ^ w2_a841 ^ w2_a842 ^ w2_a843 ^ w2_a849 ^ w2_a84a ^ mem_r1590964[4294934528]) & ~(w2_a83a<L2> ^ w2_a83b<HOLD_LATHOLD_LATCH> ^ w2_a841 ^ w2_a842 ^ w2_a843 ^ w2_a849 ^ w2_a84a ^ w2_a84b ^ mem_r1590964[4294934528])))
+@00185064  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= ((w1_7453 & ~w2_b7ee) | (w2_b7ee & f1_1593320))
+@0019fe2c  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= <whole-word copy>
+@001a12e0  b2.001c  GKO.CB0.CBAL.NBN1.CR.L2                      <= (w1_7ce4 | w1_7ff0)
+@001a3004  b2.01be                                               <= (w1_7cf5<L2> | w1_7ff4)
+@001a3024  b2.01c9                                               <= (w1_7cf5<L2> | w1_7ff4)
+@001a3028  b2.01bf                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a3048  b2.01cf                                               <= (w1_7cf5<L2> | w1_7ff4)
+@001a304c  b2.01c4                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a3050  b2.01c0                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a3058  b2.01ca                                               <= (w1_7ff7 | w2_85b1)
+@001a3060  b2.01c5                                               <= (w1_7cf6 | w1_7ff5<L2>)
+@001a3084  b2.01d0                                               <= (w1_7cf6 | w1_7ff5<L2>)
+@001a3088  b2.01c6                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a30a8  b2.01d6                                               <= (w1_7cf6 | w1_7ff5<L2>)
+@001a30ac  b2.01cb                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a30b0  b2.01c7                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a30b8  b2.01d1                                               <= (w1_7ffc | w2_85b3)
+@001a30c0  b2.01cc                                               <= (w1_7cf7 | w1_7ff6)
+@001a30e4  b2.01d7                                               <= (w1_7cf7 | w1_7ff6)
+@001a30e8  b2.01cd                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a310c  b2.01dd                                               <= (w1_7cf7 | w1_7ff6)
+@001a3110  b2.01d2                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a3114  b2.01ce                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w1_7ff7 | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | w2_85ca | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a311c  b2.01d8                                               <= (w2_806b | w2_85ca)
+@001a3124  b2.01d3                                               <= (w1_7cf8 | w1_7ff7)
+@001a313c  b2.01de                                               <= (w1_7cf8 | w1_7ff7)
+@001a3140  b2.01d4                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7cf8 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w1_7ff7 | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | w2_85ca | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a315c  b2.01d9                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7cf8 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w1_7ff7 | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | w2_85ca | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a3160  b2.01d5                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7cf8 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w1_7ff7 | w1_7ffc | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | w2_85ca | w2_85cb | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a3168  b2.01df                                               <= (w2_806c | w2_85cb)
+@001a3170  b2.01da                                               <= (w1_7cf9 | w1_7ffc)
+@001a3188  b2.01db                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7cf8 | w1_7cf9 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w1_7ff7 | w1_7ffc | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | w2_85ca | w2_85cb | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a319c  b2.01e0                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7cf8 | w1_7cf9 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w1_7ff7 | w1_7ffc | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | w2_85ca | w2_85cb | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a31a0  b2.01dc                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7cf8 | w1_7cf9 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w1_7ff7 | w1_7ffc | w2_806b | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | w2_85ca | w2_85cb | w2_85d3 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a31a8  b2.01e1                                               <= (w1_7d08 | w2_806b)
+@001a31b8  b2.01e2                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7cf8 | w1_7cf9 | w1_7d08 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w1_7ff7 | w1_7ffc | w2_806b | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | w2_85ca | w2_85cb | w2_85d3 | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a31c4  b2.01e3                                               <= (w1_7cdc<L2> | w1_7cdd | w1_7cde | w1_7ce0 | w1_7ce1 | w1_7ce2 | w1_7ce4 | w1_7ce5 | w1_7ce7<L2> | w1_7ceb<L2> | w1_7cec | w1_7cf5<L2> | w1_7cf6 | w1_7cf7 | w1_7cf8 | w1_7cf9 | w1_7d08 | w1_7fea | w1_7feb<L2> | w1_7fec | w1_7fed<L2> | w1_7fee | w1_7fef | w1_7ff0 | w1_7ff1 | w1_7ff2<L1> | w1_7ff3 | w1_7ff4 | w1_7ff5<L2> | w1_7ff6 | w1_7ff7 | w1_7ffc | w2_806b | w2_806c | w2_8289 | w2_852c | w2_852d | w2_852e | w2_852f | w2_8559 | w2_855b | w2_856c | w2_856d | w2_8594 | w2_8599 | w2_85b1 | w2_85b3 | w2_85ca | w2_85cb | w2_85d3 | w2_85db | (w2_d33c & (w1_7cb0<L1> | w2_8289)) | (~w1_7cb0<L1> & ~w2_8289 & ((w1_7ca7 & ~w2_a4ea) | (w2_a4ea & w2_a6ca<HOLD_LATHOLD_LATCH>))))
+@001a3240  b1.7093  GKO.CB0.BR0_INSTR.NBN1.CR.L1                 <= 0
+@001a32a8  b2.020c                                               <= f0_1716900
+@001a32ac  b2.0208                                               <= f0_1716892
+@001a32b4  b2.0200                                               <= f0_1716876
+@001a32b8  b2.01fc                                               <= <whole-word copy>
+@001a32bc  b2.01f8                                               <= <whole-word copy>
+@001a32c0  b2.01f4                                               <= <whole-word copy>
+@001a32c4  b2.01f0                                               <= f0_1716844
+@001a32c8  b2.01ec                                               <= <whole-word copy>
+@001a32cc  b2.01e8                                               <= f0_1716828
+@001a32d0  b2.01e4                                               <= <whole-word copy>
+@001a32d4  b1.70c1                                               <= 0
+@001a32d8  b1.70be                                               <= 0
+@001a32e4  b2.0210                                               <= f0_1716960
+@001a3308  b2.021c                                               <= 0
+@001b3334  b1.7093  GKO.CB0.BR0_INSTR.NBN1.CR.L1                 <= ((~w2_f3dc & (w1_7066 | (~w2_d5c7 & w2_d668))) | (w1_7066 & w2_d5c7 & w2_f3dc))
+@001b8054  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= (w1_6dfc<L1> | w1_7d87)
+@001bc128  b1.727b  GKO.CB0.CB0_BR0_ADDR_HI.NBN1.CR.L1           <= (w0_ad3f & w1_7456)
+@002ef7d4  b0.1b9c  GKO.CB0.CBAK.NAN1.L1                         <= <whole-word copy>
+@002ef7ec  b0.1ba4  GKO.CB0.CBAG.NAN6.L1                         <= <whole-word copy>
+@002ef7f0  b0.1ba0  GKO.CB0.CBAK.NAN0.L1                         <= <whole-word copy>
+@002ef7f4  b0.1ba8  GKO.CB0.CBAG.NAN5.L1                         <= <whole-word copy>
+@002ef808  b0.1bac  GKO.CB0.CBAJ.NAN7.L1                         <= <whole-word copy>
+@002ef818  b0.1bb8  GKO.CB0.CBAJ.NAN4.L1                         <= <whole-word copy>
+@002ef820  b0.1bb4  GKO.CB0.CBAJ.NAN5.L1                         <= <whole-word copy>
+@002ef824  b0.1bb0  GKO.CB0.CBAJ.NAN6.L1                         <= <whole-word copy>
+@002ef828  b0.1bbc  GKO.CB0.CBAK.NAN1.L2                         <= <whole-word copy>
